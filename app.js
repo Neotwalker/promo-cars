@@ -4,7 +4,7 @@ const menuBtn=document.querySelector('.menu-toggle');
 const nav=document.querySelector('.main-nav');
 
 const onScroll=()=>{
-  body.classList.toggle('is-scrolled',window.scrollY>80);
+  body.classList.toggle('show-floating',window.scrollY>window.innerHeight*1.1);
   const section=document.querySelector('.workflow');
   if(!section||window.matchMedia('(max-width: 900px)').matches)return;
   const rect=section.getBoundingClientRect();
