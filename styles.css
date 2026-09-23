@@ -25,7 +25,7 @@ button,input,textarea{font:inherit}
 .menu-toggle span{display:block;height:1px;background:currentColor;margin:6px}
 .hero{position:relative;min-height:100vh;color:#fff;overflow:hidden}
 .hero-bg,.final-bg,.workflow-bg{position:absolute;inset:0;background-size:cover;background-position:center}
-.hero-bg{background-image:url('https://images.unsplash.com/photo-1562141961-b5d8f0db6a40?auto=format&fit=crop&w=2200&q=88');transform:scale(1.02)}
+.hero-bg{background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2200&q=88');transform:scale(1.02)}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,16,25,.68),rgba(8,16,25,.2) 55%,rgba(8,16,25,.18)),linear-gradient(0deg,rgba(0,0,0,.5),transparent 45%)}
 .hero-content{position:relative;z-index:2;min-height:100vh;padding:94px 20px 18px;display:flex;flex-direction:column;justify-content:space-between}
 .hero h1{margin:0;max-width:1080px;font-size:clamp(50px,6.15vw,112px);font-weight:400;line-height:.93;letter-spacing:-.055em}
