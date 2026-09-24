@@ -2,7 +2,7 @@ const nav=document.querySelector('.nav');
 const menu=document.querySelector('.menu');
 const floating=document.querySelector('.floating');
 const process=document.querySelector('.process');
-const cards=[...document.querySelectorAll('.step')];
+const cards=[...document.querySelectorAll('.step')];\nconst processTitle=document.querySelector('.process h2');
 
 menu?.addEventListener('click',()=>{
   const open=menu.getAttribute('aria-expanded')==='true';
@@ -19,6 +19,10 @@ function updateScroll(){
   const r=process.getBoundingClientRect();
   const max=process.offsetHeight-innerHeight;
   const p=max>0?Math.min(1,Math.max(0,-r.top/max)):0;
+  if(processTitle){
+    const fade=Math.min(1,Math.max(0,(p-.015)/.075));
+    processTitle.style.opacity=String(.28+.72*fade);
+  }
   const intro=.09,end=.93;
   const timeline=(p-intro)/(end-intro)*(cards.length-1);
   cards.forEach((card,i)=>{
