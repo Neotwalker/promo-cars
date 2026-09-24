@@ -654,7 +654,7 @@ a:focus-visible {
 
 .proof-item:hover {
   color:var(--white);
-  background:var(--ink);
+  background-color:#1b1f24;
 }
 
 .proof-item:hover .proof-index,
