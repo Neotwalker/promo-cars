@@ -24,12 +24,12 @@ function updateScroll(){
   const max=process.offsetHeight-innerHeight;
   const p=max>0?Math.min(1,Math.max(0,-r.top/max)):0;
   if(processTitle){
-    const fade=Math.min(1,Math.max(0,(p-.04)/.11));
-    processTitle.style.opacity=String(fade);
+    const fade=Math.min(1,Math.max(0,(p-.015)/.07));
+    processTitle.style.opacity=String(.34+.66*fade);
   }
-  const start=.08,end=.92;
+  const start=.07,end=.93;
   const local=Math.min(1,Math.max(0,(p-start)/(end-start)));
-  const timeline=-.75+local*5.5;
+  const timeline=-.8+local*((cards.length-1)+1.6);
   cards.forEach((card,i)=>{
     const d=i-timeline;
     const abs=Math.abs(d);
