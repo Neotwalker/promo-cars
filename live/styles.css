@@ -9,12 +9,15 @@
   --line-light:rgba(255,255,255,.16);
   --line-dark:rgba(16,18,22,.14);
   --text-muted:rgba(255,255,255,.58);
-  --motion-fast:160ms;
-  --motion-base:260ms;
-  --motion-slow:720ms;
+  --motion-active:160ms;
+  --motion-focus:280ms;
   --motion-hover:480ms;
+  --motion-slow:720ms;
+  --motion-fast:var(--motion-active);
+  --motion-base:var(--motion-focus);
   --ease-ui:cubic-bezier(.2,.75,.2,1);
-  --focus-ring:0 0 0 .3rem rgba(255,91,53,.28);
+  --ease-press:cubic-bezier(.3,0,.25,1);
+  --focus-ring:0 0 0 .3rem rgba(255,91,53,.24);
 }
 
 * {
@@ -126,15 +129,22 @@ a:focus-visible {
   border:1px solid rgba(255,255,255,.28);
   font-size:1.15rem;
   transition:
-    color var(--motion-fast) var(--ease-ui),
-    background var(--motion-fast) var(--ease-ui),
-    border-color var(--motion-fast) var(--ease-ui);
+    color var(--motion-hover) var(--ease-ui),
+    background var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    transform var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-focus) var(--ease-ui);
 }
 
 .header-action:hover {
   color:var(--ink);
   background:var(--white);
   border-color:var(--white);
+}
+.header-action:active {
+  transform:scale(.985);
+  transition-duration:var(--motion-active);
+  transition-timing-function:var(--ease-press);
 }
 
 .hero {
@@ -236,6 +246,10 @@ a:focus-visible {
   display:inline-flex;
   align-items:stretch;
   font-size:1.25rem;
+  transition:
+    transform var(--motion-hover) var(--ease-ui),
+    filter var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-focus) var(--ease-ui);
 }
 
 .button span {
@@ -254,7 +268,7 @@ a:focus-visible {
   border-left:0;
   font-size:1.8rem;
   font-style:normal;
-  transition:transform var(--motion-base) var(--ease-ui);
+  transition:transform var(--motion-hover) var(--ease-ui);
 }
 
 .button-primary {
@@ -273,6 +287,15 @@ a:focus-visible {
 
 .button:hover i {
   transform:translate(.3rem,-.3rem);
+}
+.button:active {
+  transform:scale(.985);
+  transition-duration:var(--motion-active);
+  transition-timing-function:var(--ease-press);
+}
+.button:active i {
+  transform:translate(0,0);
+  transition-duration:var(--motion-active);
 }
 
 .button-ghost:hover {
@@ -709,9 +732,11 @@ a:focus-visible {
   border:1px solid var(--line-dark);
   background:var(--white);
   transition:
-    color var(--motion-fast) var(--ease-ui),
-    background var(--motion-fast) var(--ease-ui),
-    border-color var(--motion-fast) var(--ease-ui);
+    color var(--motion-hover) var(--ease-ui),
+    background var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    transform var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-focus) var(--ease-ui);
 }
 
 .contact-phone span {
@@ -746,6 +771,15 @@ a:focus-visible {
 
 .contact-phone:hover i {
   transform:translate(.3rem,-.3rem);
+}
+.contact-phone:active {
+  transform:scale(.985);
+  transition-duration:var(--motion-active);
+  transition-timing-function:var(--ease-press);
+}
+.contact-phone:active i {
+  transform:translate(0,0);
+  transition-duration:var(--motion-active);
 }
 
 @keyframes vehicle-settle {
