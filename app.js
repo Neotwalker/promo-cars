@@ -1,7 +1,7 @@
 const nav=document.querySelector('.nav');
 const menu=document.querySelector('.menu');
 const floating=document.querySelector('.floating');
-const process=document.querySelector('.process');
+const process=document.querySelector('.process');\nconst footer=document.querySelector('footer');
 const cards=[...document.querySelectorAll('.step')];\nconst processTitle=document.querySelector('.process h2');
 
 menu?.addEventListener('click',()=>{
@@ -14,7 +14,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',
 }));
 
 function updateScroll(){
-  floating?.classList.toggle('show',scrollY>innerHeight*1.08 && scrollY<document.documentElement.scrollHeight-innerHeight*1.2);
+  const beforeFooter=!footer || footer.getBoundingClientRect().top>innerHeight*.92;\n  floating?.classList.toggle('show',scrollY>innerHeight*1.08 && beforeFooter);
   if(!process || innerWidth<=900)return;
   const r=process.getBoundingClientRect();
   const max=process.offsetHeight-innerHeight;
