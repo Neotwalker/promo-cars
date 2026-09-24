@@ -127,3 +127,9 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
 }
 
 .process-bottom,.final-bottom{display:none!important}
+
+@media(min-width:901px){
+  .calc-card{grid-template-columns:25% 75%}
+  .about{grid-template-columns:minmax(0,.86fr) minmax(0,1fr)}
+  .final-copy h2{font-size:3.9vw}
+}
