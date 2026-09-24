@@ -577,3 +577,22 @@ footer>div>span{color:#999;margin-bottom:4px}
     animation-timing-function:cubic-bezier(.16,.72,.18,1);
   }
 }
+
+
+/* Focused QA pass 01b — hero title proportion only */
+@media (min-width:1024px){
+  .hero-content{
+    padding-top:clamp(120px,7.45vw,150px);
+  }
+  .hero h1{
+    max-width:82vw;
+    font-size:clamp(66px,6.15vw,118px);
+    line-height:.93;
+  }
+}
+@media (min-width:1024px) and (max-width:1365px){
+  .hero h1{
+    font-size:clamp(66px,6vw,84px);
+    max-width:86vw;
+  }
+}
