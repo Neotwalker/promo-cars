@@ -27,3 +27,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
     target.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
+
+document.querySelectorAll('.round-btn').forEach(button=>{
+  button.addEventListener('click',()=>{
+    const active=button.classList.toggle('is-active');
+    button.setAttribute('aria-pressed',String(active));
+  });
+});
