@@ -12,6 +12,7 @@
   --motion-fast:160ms;
   --motion-base:260ms;
   --motion-slow:720ms;
+  --motion-hover:480ms;
   --ease-ui:cubic-bezier(.2,.75,.2,1);
   --focus-ring:0 0 0 .3rem rgba(255,91,53,.28);
 }
@@ -450,6 +451,7 @@ a:focus-visible {
 }
 
 .route-track {
+  --route-progress:61%;
   position:relative;
   height:1px;
   margin:2.6rem 1rem 1.8rem;
@@ -460,7 +462,7 @@ a:focus-visible {
   position:absolute;
   left:0;
   top:0;
-  width:61%;
+  width:var(--route-progress);
   height:1px;
   background:var(--signal);
   transform-origin:left center;
@@ -468,6 +470,7 @@ a:focus-visible {
 }
 
 .route-origin,
+.route-current,
 .route-destination {
   position:absolute;
   top:50%;
@@ -482,6 +485,15 @@ a:focus-visible {
 
 .route-origin {
   left:0;
+}
+
+.route-current {
+  left:var(--route-progress);
+  background:var(--signal);
+  box-shadow:
+    0 0 0 1px var(--signal),
+    0 0 0 .5rem rgba(255,91,53,.12);
+  transform:translateX(-50%);
 }
 
 .route-destination {
@@ -588,8 +600,8 @@ a:focus-visible {
   flex-direction:column;
   border-right:1px solid var(--line-dark);
   transition:
-    color var(--motion-base) var(--ease-ui),
-    background var(--motion-base) var(--ease-ui);
+    color var(--motion-hover) var(--ease-ui),
+    background var(--motion-hover) var(--ease-ui);
 }
 
 .proof-item:last-child {
@@ -603,11 +615,13 @@ a:focus-visible {
   align-items:center;
   color:var(--steel);
   font-size:.9rem;
+  transition:color var(--motion-hover) var(--ease-ui);
 }
 
 .proof-index i {
   height:1px;
   background:var(--line-dark);
+  transition:background var(--motion-hover) var(--ease-ui);
 }
 
 .proof-copy {
@@ -619,6 +633,7 @@ a:focus-visible {
   margin-bottom:2.2rem;
   color:var(--steel);
   font-size:.9rem;
+  transition:color var(--motion-hover) var(--ease-ui);
 }
 
 .proof-copy h3 {
@@ -634,6 +649,7 @@ a:focus-visible {
   margin:0;
   color:#646a70;
   font-size:1.25rem;
+  transition:color var(--motion-hover) var(--ease-ui);
 }
 
 .proof-item:hover {
@@ -1040,6 +1056,10 @@ a:focus-visible {
   .button i,
   .header-action,
   .proof-item,
+  .proof-index,
+  .proof-index i,
+  .proof-copy > span,
+  .proof-copy p,
   .contact-phone,
   .contact-phone i {
     transition:none;
