@@ -16,3 +16,8 @@ python3 -m http.server 8080
 ```
 
 После запуска сайт доступен по адресу `http://localhost:8080`.
+
+
+## Направление проекта
+
+Актуальные решения по структуре, визуальной системе, motion и приоритетам разработки: [docs/PROJECT-DIRECTION.md](docs/PROJECT-DIRECTION.md).
