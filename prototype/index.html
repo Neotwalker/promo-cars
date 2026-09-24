@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Сервис подбора и доставки автомобилей из Азии в Россию">
+  <title>Auto Import — автомобили из Азии</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Auto Import">
+      <span class="brand-mark"><i></i><i></i></span>
+      <span>AUTO<br><small>IMPORT</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Основная навигация">
+      <a href="#cars">Автомобили</a>
+      <a href="#route">Как это работает</a>
+      <a href="#calc">Расчёт</a>
+      <a href="#trust">Доверие</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="header-cta" href="#calc">Рассчитать</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">CHINA → RUSSIA / AUTO IMPORT</span>
+        <h1>Автомобиль уже выбран.<br><em>Остальное — маршрут.</em></h1>
+        <p>Подбор, проверка, выкуп, логистика, таможня и выдача — в одной понятной системе.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#calc"><span>Рассчитать автомобиль</span><i>↗</i></a>
+          <a class="btn btn-ghost" href="#cars"><span>Смотреть автомобили</span><i>→</i></a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Xiaomi SU7, маршрут Китай — Россия">
+        <div class="hero-data">
+          <span>LOT / CN-18402</span>
+          <span>STATUS / IN TRANSIT</span>
+          <span>ETA / 18–28 DAYS</span>
+        </div>
+        <div class="car-silhouette car-silhouette-large" aria-hidden="true">
+          <span class="car-body"></span>
+          <span class="wheel wheel-a"></span>
+          <span class="wheel wheel-b"></span>
+        </div>
+        <div class="hero-model">XIAOMI<br>SU7</div>
+        <div class="hero-route">
+          <span>CN</span><i></i><span>RU</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-strip" aria-label="Преимущества">
+      <article><span class="proof-label">01 / CONTRACT</span><strong>Договор</strong><p>Этапы сделки фиксируются заранее.</p></article>
+      <article><span class="proof-label">02 / CHECK</span><strong>Проверка</strong><p>Автомобиль проверяется до выкупа.</p></article>
+      <article><span class="proof-label">03 / CONTROL</span><strong>Статус</strong><p>Понятно, на каком этапе находится машина.</p></article>
+      <article><span class="proof-label">04 / DELIVERY</span><strong>До города</strong><p>Логистика планируется до конечной точки.</p></article>
+    </section>
+
+    <section class="section cars-section" id="cars">
+      <header class="section-head">
+        <span class="section-no">01</span>
+        <div>
+          <span class="eyebrow">CURRENT SELECTION</span>
+          <h2>Что можно<br>привезти сейчас</h2>
+        </div>
+        <p>Примеры направления и формата карточек. На финальном сайте здесь будут реальные автомобили, фото и актуальные данные.</p>
+      </header>
+
+      <div class="cars-grid">
+        <article class="vehicle-card">
+          <div class="vehicle-media vehicle-media-a">
+            <span class="media-status">AVAILABLE / CHINA</span>
+            <div class="car-silhouette"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
+          </div>
+          <div class="vehicle-info">
+            <div><span>XIAOMI SU7</span><small>EV / 2025</small></div>
+            <dl><div><dt>Состояние</dt><dd>Новый</dd></div><div><dt>Маршрут</dt><dd>Китай → Россия</dd></div><div><dt>Стоимость</dt><dd>По расчёту</dd></div></dl>
+            <a href="#calc">Рассчитать этот автомобиль →</a>
+          </div>
+        </article>
+
+        <article class="vehicle-card">
+          <div class="vehicle-media vehicle-media-b">
+            <span class="media-status">ON REQUEST</span>
+            <div class="car-silhouette"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
+          </div>
+          <div class="vehicle-info">
+            <div><span>ZEEKR 001</span><small>EV / 2025</small></div>
+            <dl><div><dt>Состояние</dt><dd>Новый / б/у</dd></div><div><dt>Маршрут</dt><dd>Китай → Россия</dd></div><div><dt>Стоимость</dt><dd>По расчёту</dd></div></dl>
+            <a href="#calc">Рассчитать этот автомобиль →</a>
+          </div>
+        </article>
+
+        <article class="vehicle-card">
+          <div class="vehicle-media vehicle-media-c">
+            <span class="media-status">AVAILABLE / CHINA</span>
+            <div class="car-silhouette"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
+          </div>
+          <div class="vehicle-info">
+            <div><span>LI AUTO L6</span><small>EREV / 2025</small></div>
+            <dl><div><dt>Состояние</dt><dd>Новый</dd></div><div><dt>Маршрут</dt><dd>Китай → Россия</dd></div><div><dt>Стоимость</dt><dd>По расчёту</dd></div></dl>
+            <a href="#calc">Рассчитать этот автомобиль →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="route-section" id="route" data-route-section>
+      <div class="route-sticky">
+        <header class="route-head">
+          <span class="section-no">02</span>
+          <div><span class="eyebrow">ROUTE / CN-18402</span><h2>Путь автомобиля</h2></div>
+          <div class="route-progress"><span data-route-counter>01 / 08</span><i><b data-route-progress></b></i></div>
+        </header>
+
+        <div class="route-layout">
+          <ol class="route-steps" data-route-steps>
+            <li class="is-active"><span>01</span><b>Подбор</b></li>
+            <li><span>02</span><b>Проверка</b></li>
+            <li><span>03</span><b>Выкуп</b></li>
+            <li><span>04</span><b>Страхование</b></li>
+            <li><span>05</span><b>Граница</b></li>
+            <li><span>06</span><b>Таможня</b></li>
+            <li><span>07</span><b>ЭПТС</b></li>
+            <li><span>08</span><b>Выдача</b></li>
+          </ol>
+
+          <div class="route-stage">
+            <div class="route-stage-media">
+              <div class="car-silhouette route-car"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
+              <span class="route-stage-status" data-route-status>STATUS / SEARCH</span>
+            </div>
+            <div class="route-stage-copy">
+              <span class="eyebrow" data-route-code>STEP / 01</span>
+              <h3 data-route-title>Подбираем автомобиль</h3>
+              <p data-route-text>Сверяем модель, бюджет и требования. Формируем несколько вариантов для проверки.</p>
+              <div class="route-meta">
+                <span data-route-meta-a>OUTPUT / SHORTLIST</span>
+                <span data-route-meta-b>NEXT / CHECK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section calc-section" id="calc">
+      <header class="section-head">
+        <span class="section-no">03</span>
+        <div><span class="eyebrow">COST CONFIGURATOR</span><h2>Соберите<br>свой расчёт</h2></div>
+        <p>Это не точная смета. Прототип показывает будущую логику конфигуратора: параметры слева, структура стоимости справа.</p>
+      </header>
+
+      <div class="calc-panel">
+        <div class="calc-controls">
+          <fieldset>
+            <legend>01 / Автомобиль</legend>
+            <div class="choice-row" data-choice="model">
+              <button class="choice is-active" data-value="Xiaomi SU7">Xiaomi SU7</button>
+              <button class="choice" data-value="Zeekr 001">Zeekr 001</button>
+              <button class="choice" data-value="Li Auto L6">Li Auto L6</button>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>02 / Тип</legend>
+            <div class="choice-row" data-choice="power">
+              <button class="choice is-active" data-value="EV">EV</button>
+              <button class="choice" data-value="Hybrid">Hybrid</button>
+              <button class="choice" data-value="ICE">ICE</button>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>03 / Бюджет</legend>
+            <div class="choice-row" data-choice="budget">
+              <button class="choice" data-value="до 3 млн">до 3 млн</button>
+              <button class="choice is-active" data-value="3–5 млн">3–5 млн</button>
+              <button class="choice" data-value="5+ млн">5+ млн</button>
+            </div>
+          </fieldset>
+
+          <label class="city-field"><span>04 / Город доставки</span><input type="text" value="Москва" data-city></label>
+        </div>
+
+        <aside class="calc-output">
+          <div class="calc-car">
+            <span>SELECTED</span>
+            <strong data-selected-model>Xiaomi SU7</strong>
+            <small><span data-selected-power>EV</span> · <span data-selected-budget>3–5 млн</span> · <span data-selected-city>Москва</span></small>
+          </div>
+          <dl>
+            <div><dt>AUTO PRICE</dt><dd>по подбору</dd></div>
+            <div><dt>LOGISTICS</dt><dd>по маршруту</dd></div>
+            <div><dt>CUSTOMS</dt><dd>calculating</dd></div>
+            <div><dt>RECYCLE FEE</dt><dd>calculating</dd></div>
+            <div class="total"><dt>ESTIMATED TOTAL</dt><dd>индивидуально</dd></div>
+          </dl>
+          <p>Финальная стоимость зависит от автомобиля, курса, пошлин и города доставки.</p>
+          <button class="btn btn-primary"><span>Получить точную смету</span><i>↗</i></button>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section trust-section" id="trust">
+      <header class="section-head">
+        <span class="section-no">04</span>
+        <div><span class="eyebrow">LIVE / TRUST</span><h2>Процесс<br>вживую</h2></div>
+        <p>В финальной версии этот блок заполняется реальными видео, фотографиями, документами и отзывами.</p>
+      </header>
+
+      <div class="bento">
+        <article class="bento-card bento-video"><span>VIDEO REPORT</span><strong>Осмотр автомобиля<br>на площадке</strong><button aria-label="Воспроизвести">▶</button></article>
+        <article class="bento-card bento-doc"><span>DOCUMENT</span><strong>ЭПТС</strong><div class="doc-lines"><i></i><i></i><i></i><i></i></div></article>
+        <article class="bento-card bento-metric"><span>STATUS</span><strong>CHECKED</strong><small>До выкупа</small></article>
+        <article class="bento-card bento-delivery"><span>DELIVERY</span><strong>Граница → город клиента</strong><div class="mini-route"><i></i><i></i><i></i></div></article>
+        <article class="bento-card bento-review"><span>CLIENT STORY</span><blockquote>«Понимал, где машина и что происходит на каждом этапе»</blockquote><small>Кейс клиента / placeholder</small></article>
+      </div>
+    </section>
+
+    <section class="section safety-section">
+      <header class="section-head">
+        <span class="section-no">05</span>
+        <div><span class="eyebrow">SECURITY</span><h2>Безопасность<br>сделки</h2></div>
+        <p>Блок отвечает не на «почему мы хорошие», а на конкретные страхи клиента перед покупкой автомобиля за рубежом.</p>
+      </header>
+
+      <div class="safety-layout">
+        <div class="document-preview">
+          <span>CONTRACT / PREVIEW</span>
+          <h3>Договор</h3>
+          <div class="doc-lines doc-lines-large"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <button class="btn btn-ghost"><span>Посмотреть договор</span><i>→</i></button>
+        </div>
+        <div class="safety-points">
+          <article><span>01</span><h3>Проверка до покупки</h3><p>Состояние и документы автомобиля проверяются до перевода основной суммы.</p></article>
+          <article><span>02</span><h3>Страхование</h3><p>Риски логистики описываются заранее, а условия фиксируются в документах.</p></article>
+          <article><span>03</span><h3>Статусы по этапам</h3><p>Клиент понимает, где автомобиль и какой шаг выполняется сейчас.</p></article>
+          <article><span>04</span><h3>Документы</h3><p>Таможня, ЭПТС и комплект документов включены в маршрут сделки.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cases-section">
+      <header class="section-head">
+        <span class="section-no">06</span>
+        <div><span class="eyebrow">CLIENT STORIES</span><h2>Кейсы вместо<br>безликих отзывов</h2></div>
+        <p>Каждая история связывает клиента, автомобиль, маршрут и результат. Здесь позже будут реальные кейсы.</p>
+      </header>
+
+      <div class="cases-grid">
+        <article class="case-card case-card-main"><div class="case-media"><div class="car-silhouette"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div></div><div class="case-copy"><span>CASE / 01</span><h3>Xiaomi SU7 → Москва</h3><p>Маршрут, сроки, выдача и короткая цитата клиента.</p></div></article>
+        <article class="case-card"><div class="case-copy"><span>CASE / 02</span><h3>Zeekr 001 → Казань</h3><p>Фото, итог сделки и ссылка на видео.</p></div></article>
+        <article class="case-card"><div class="case-copy"><span>CASE / 03</span><h3>Li Auto L6 → Екатеринбург</h3><p>Короткий формат для второй истории.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq">
+      <header class="section-head">
+        <span class="section-no">07</span>
+        <div><span class="eyebrow">FAQ</span><h2>До заявки<br>должно быть понятно всё</h2></div>
+        <p>FAQ закрывает практические вопросы, а не повторяет рекламные тезисы.</p>
+      </header>
+
+      <div class="faq-list">
+        <article class="faq-item"><button aria-expanded="false"><span>Сколько стоит привезти автомобиль?</span><i>+</i></button><div><p>Точная сумма зависит от конкретного автомобиля, курса, таможенных платежей и города доставки. На сайте показывается предварительная структура, точная смета рассчитывается отдельно.</p></div></article>
+        <article class="faq-item"><button aria-expanded="false"><span>Какие сроки доставки?</span><i>+</i></button><div><p>Срок зависит от маршрута, этапа выкупа, границы и таможни. В финальной версии сайта сроки будут привязаны к выбранному маршруту.</p></div></article>
+        <article class="faq-item"><button aria-expanded="false"><span>Как проходит оплата?</span><i>+</i></button><div><p>Этапность платежей должна быть отражена в договоре и понятна клиенту до начала сделки.</p></div></article>
+        <article class="faq-item"><button aria-expanded="false"><span>Кто отвечает за повреждение в пути?</span><i>+</i></button><div><p>Условия страхования и ответственности фиксируются заранее и показываются в разделе безопасности сделки.</p></div></article>
+        <article class="faq-item"><button aria-expanded="false"><span>Можно доставить автомобиль в мой город?</span><i>+</i></button><div><p>Маршрут может включать доставку по России до города клиента. Конкретная логистика рассчитывается вместе со сметой.</p></div></article>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="final-status"><span>ROUTE / 100%</span><b>READY FOR HANDOVER</b></div>
+      <div class="final-copy">
+        <span class="eyebrow">CHINA → RUSSIA / COMPLETE</span>
+        <h2>Следующий автомобиль<br><em>может быть вашим.</em></h2>
+        <p>Выберите модель или начните с бюджета. Остальное соберём в понятный маршрут и расчёт.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#calc"><span>Рассчитать автомобиль</span><i>↗</i></a>
+          <a class="btn btn-dark-ghost" href="#cars"><span>Подобрать модель</span><i>→</i></a>
+        </div>
+      </div>
+      <div class="final-car">
+        <div class="car-silhouette car-silhouette-large"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>AUTO IMPORT</span><span>CHINA → RUSSIA</span></footer>
+  <script src="./app.js"></script>
+</body>
+</html>
