@@ -10,7 +10,7 @@
 <body>
 <header class="header" id="top">
   <a class="logo" href="#top" aria-label="Парадайз Авто">
-    <span class="logo-symbol"><i></i><i></i></span>
+    <span class="logo-symbol" aria-hidden="true"><i></i><i></i></span>
     <span class="logo-copy">ПАРАДАЙЗ<br><small>АВТО</small></span>
   </a>
   <nav class="nav" aria-label="Навигация">
@@ -23,7 +23,7 @@
   <div class="header-right">
     <a class="header-phone" href="tel:+79089744977">+7 (908) 974-49-77</a>
     <a class="pill pill-white pill-small" href="#calc">Оставить заявку</a>
-    <button class="menu" type="button" aria-label="Меню" aria-expanded="false"><i></i><i></i></button>
+    <button class="menu" type="button" aria-label="Открыть меню" aria-expanded="false"><i></i><i></i></button>
   </div>
 </header>
 
@@ -32,27 +32,42 @@
     <div class="hero-image" aria-hidden="true"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-content">
-      <h1>Привезём автомобиль<br>из Азии на <span>30% выгоднее</span><br><span>российского рынка</span></h1>
+      <h1 class="hero-title">Привезём автомобиль<br>из Азии на <span>30% выгоднее</span><br><span>российского рынка</span></h1>
       <p class="hero-note">Япония, Китай и Корея. Сравним варианты, проверим автомобиль<br>и рассчитаем полную стоимость с доставкой.</p>
       <a class="pill pill-white hero-cta" href="#calc">Рассчитать стоимость</a>
     </div>
   </section>
 
   <section class="logos" aria-label="Марки автомобилей">
-    <img src="https://cdn.simpleicons.org/mercedes/8f8f8f" alt="Mercedes-Benz">
-    <img src="https://cdn.simpleicons.org/toyota/8f8f8f" alt="Toyota">
-    <img src="https://cdn.simpleicons.org/hyundai/8f8f8f" alt="Hyundai">
-    <img src="https://cdn.simpleicons.org/honda/8f8f8f" alt="Honda">
-    <img src="https://cdn.simpleicons.org/renault/8f8f8f" alt="Renault">
-    <span class="daihatsu-mark" aria-label="Daihatsu">D</span>
-    <img src="https://cdn.simpleicons.org/suzuki/8f8f8f" alt="Suzuki">
-    <img src="https://cdn.simpleicons.org/volkswagen/8f8f8f" alt="Volkswagen">
-    <img src="https://cdn.simpleicons.org/audi/8f8f8f" alt="Audi">
+    <div class="logos-track">
+      <div class="logos-set">
+        <img src="https://cdn.simpleicons.org/mercedes/8f8f8f" alt="Mercedes-Benz">
+        <img src="https://cdn.simpleicons.org/toyota/8f8f8f" alt="Toyota">
+        <img src="https://cdn.simpleicons.org/hyundai/8f8f8f" alt="Hyundai">
+        <img src="https://cdn.simpleicons.org/honda/8f8f8f" alt="Honda">
+        <img src="https://cdn.simpleicons.org/renault/8f8f8f" alt="Renault">
+        <span class="daihatsu-mark" aria-label="Daihatsu">D</span>
+        <img src="https://cdn.simpleicons.org/suzuki/8f8f8f" alt="Suzuki">
+        <img src="https://cdn.simpleicons.org/volkswagen/8f8f8f" alt="Volkswagen">
+        <img src="https://cdn.simpleicons.org/audi/8f8f8f" alt="Audi">
+      </div>
+      <div class="logos-set" aria-hidden="true">
+        <img src="https://cdn.simpleicons.org/mercedes/8f8f8f" alt="">
+        <img src="https://cdn.simpleicons.org/toyota/8f8f8f" alt="">
+        <img src="https://cdn.simpleicons.org/hyundai/8f8f8f" alt="">
+        <img src="https://cdn.simpleicons.org/honda/8f8f8f" alt="">
+        <img src="https://cdn.simpleicons.org/renault/8f8f8f" alt="">
+        <span class="daihatsu-mark">D</span>
+        <img src="https://cdn.simpleicons.org/suzuki/8f8f8f" alt="">
+        <img src="https://cdn.simpleicons.org/volkswagen/8f8f8f" alt="">
+        <img src="https://cdn.simpleicons.org/audi/8f8f8f" alt="">
+      </div>
+    </div>
   </section>
 
   <section class="benefits" id="benefits">
     <div class="benefits-left">
-      <h2>Почему клиенты<br>выбирают <span>Парадайз Авто</span></h2>
+      <h2 class="reveal-heading">Почему клиенты<br>выбирают <span>Парадайз Авто</span></h2>
       <div class="countries"><span class="country-flag flag-jp" aria-label="Япония"></span><span class="country-flag flag-cn" aria-label="Китай">★</span><span class="country-flag flag-kr" aria-label="Корея"></span><p>Работаем только с проверенными<br>аукционами в Японии, Китае и Корее</p></div>
     </div>
     <div class="benefits-right">
@@ -69,7 +84,7 @@
     <div class="process-sticky">
       <div class="process-image" aria-hidden="true"></div>
       <div class="process-dark" aria-hidden="true"></div>
-      <h2>Как мы работаем</h2>
+      <h2 class="reveal-heading">Как мы работаем</h2>
       <div class="steps" aria-live="polite">
         <article class="step" data-step="0"><span class="step-icon">◈</span><small>Шаг 1</small><h3>Определяем<br>параметры</h3><p>Обсуждаем бюджет, модель, год выпуска и другие пожелания к автомобилю.</p></article>
         <article class="step" data-step="1"><span class="step-icon">□</span><small>Шаг 2</small><h3>Заключаем<br>договор</h3><p>Фиксируем стоимость услуг, условия работы и порядок оплаты.</p></article>
@@ -77,27 +92,28 @@
         <article class="step" data-step="3"><span class="step-icon">◇</span><small>Шаг 4</small><h3>Перевозка<br>и растаможка</h3><p>Организуем перевозку, таможенное оформление и подготовку документов.</p></article>
         <article class="step" data-step="4"><span class="step-icon">⌁</span><small>Шаг 5</small><h3>Доставка</h3><p>Доставляем автомобиль в ваш город и передаём его вместе с комплектом документов.</p></article>
       </div>
-      <div class="process-bottom"><a class="pill pill-white" href="#calc">Рассчитать стоимость</a><span class="round">≡</span></div>
     </div>
   </section>
 
   <section class="cars" id="cars">
-    <div class="section-heading"><span>[ Привезённые авто ]</span><h2>Примеры автомобилей,<br>которые мы <em>доставили<br>нашим клиентам</em></h2></div>
+    <div class="section-heading">
+      <span>[ Привезённые авто ]</span>
+      <h2 class="reveal-heading">Примеры автомобилей,<br>которые мы <em>доставили<br>нашим клиентам</em></h2>
+    </div>
     <div class="cars-grid">
-      <article class="car"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Black_Toyota_Crown_Front.jpg/1280px-Black_Toyota_Crown_Front.jpg" alt="Toyota Crown"><div><h3>Toyota Crown</h3><p><b>Год выпуска:</b> 2022<br><b>Пробег:</b> 5 000 км</p><small>Корея → Большой Камень<br>Срок доставки: 25 дней<br>Стоимость автомобиля: 8 100 000 ₽</small></div></article>
-      <article class="car"><img src="https://www.storage.importautos.com.au/md/global/images/MXPL10G-1060876/680485_41054d41f1.jpg" alt="Toyota Sienta"><div><h3>Toyota Sienta</h3><p><b>Год выпуска:</b> 2022<br><b>Пробег:</b> 23 000 км</p><small>Япония → Красноярск<br>Срок доставки: 21 день<br>Стоимость автомобиля: 1 245 000 ₽</small></div></article>
-      <article class="car"><img src="https://storage.vancar.kr/Products/23300/23262_255362_1bd984d6d2.jpg" alt="Hyundai Sonata"><div><h3>Hyundai Sonata</h3><p><b>Год выпуска:</b> 2021<br><b>Пробег:</b> 82 000 км</p><small>Корея → Набережные Челны<br>Срок доставки: 29 дней<br>Стоимость автомобиля: 1 860 000 ₽</small></div></article>
-      <article class="car"><img src="https://d2s8i866417m9.cloudfront.net/photo/46993292/photo/medium-b1639de7b8bc5e3f17525bde387fe6a5.jpg" alt="Subaru XV"><div><h3>Subaru XV 2.0</h3><p><b>Год выпуска:</b> 2021<br><b>Пробег:</b> 25 000 км</p><small>Япония → Киселёвск<br>Срок доставки: 53 дня<br>Стоимость автомобиля: 1 855 000 ₽</small></div></article>
-      <article class="car"><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/85951253/5364865291.jpg" alt="Toyota Aqua"><div><h3>Toyota Aqua</h3><p><b>Год выпуска:</b> 2021<br><b>Пробег:</b> 77 000 км</p><small>Япония → Магадан<br>Срок доставки: 46 дней<br>Стоимость автомобиля: 1 150 000 ₽</small></div></article>
-      <article class="car"><img src="https://fastly-production.24c.in/hello-ar/dev/uploads/69ddc842b273cc036c3f3e6f/c6f4651e-3a46-41c0-b2bf-576f5396f7bf/slot/1C8A6979.JPG?auto=format&dpr=2&w=700" alt="Mazda CX-3"><div><h3>Mazda CX-3</h3><p><b>Год выпуска:</b> 2021<br><b>Пробег:</b> 31 000 км</p><small>Япония → Благовещенск<br>Срок доставки: 44 дня<br>Стоимость автомобиля: 1 520 000 ₽</small></div></article>
-      
+      <article class="car"><div class="car-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Black_Toyota_Crown_Front.jpg/1280px-Black_Toyota_Crown_Front.jpg" alt="Toyota Crown"></div><div><h3>Toyota Crown</h3><p><b>Год выпуска:</b> 2022<br><b>Пробег:</b> 5 000 км</p><small>Корея → Большой Камень<br>Срок доставки: 25 дней<br>Стоимость автомобиля: 8 100 000 ₽</small></div></article>
+      <article class="car"><div class="car-media"><img src="https://www.storage.importautos.com.au/md/global/images/MXPL10G-1060876/680485_41054d41f1.jpg" alt="Toyota Sienta"></div><div><h3>Toyota Sienta</h3><p><b>Год выпуска:</b> 2022<br><b>Пробег:</b> 23 000 км</p><small>Япония → Красноярск<br>Срок доставки: 21 день<br>Стоимость автомобиля: 1 245 000 ₽</small></div></article>
+      <article class="car"><div class="car-media"><img src="https://storage.vancar.kr/Products/23300/23262_255362_1bd984d6d2.jpg" alt="Hyundai Sonata"></div><div><h3>Hyundai Sonata</h3><p><b>Год выпуска:</b> 2021<br><b>Пробег:</b> 82 000 км</p><small>Корея → Набережные Челны<br>Срок доставки: 29 дней<br>Стоимость автомобиля: 1 860 000 ₽</small></div></article>
+      <article class="car"><div class="car-media"><img src="https://d2s8i866417m9.cloudfront.net/photo/46993292/photo/medium-b1639de7b8bc5e3f17525bde387fe6a5.jpg" alt="Subaru XV"></div><div><h3>Subaru XV 2.0</h3><p><b>Год выпуска:</b> 2021<br><b>Пробег:</b> 25 000 км</p><small>Япония → Киселёвск<br>Срок доставки: 53 дня<br>Стоимость автомобиля: 1 855 000 ₽</small></div></article>
+      <article class="car"><div class="car-media"><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/85951253/5364865291.jpg" alt="Toyota Aqua"></div><div><h3>Toyota Aqua</h3><p><b>Год выпуска:</b> 2021<br><b>Пробег:</b> 77 000 км</p><small>Япония → Магадан<br>Срок доставки: 46 дней<br>Стоимость автомобиля: 1 150 000 ₽</small></div></article>
+      <article class="car"><div class="car-media"><img src="https://fastly-production.24c.in/hello-ar/dev/uploads/69ddc842b273cc036c3f3e6f/c6f4651e-3a46-41c0-b2bf-576f5396f7bf/slot/1C8A6979.JPG?auto=format&dpr=2&w=700" alt="Mazda CX-3"></div><div><h3>Mazda CX-3</h3><p><b>Год выпуска:</b> 2021<br><b>Пробег:</b> 31 000 км</p><small>Япония → Благовещенск<br>Срок доставки: 44 дня<br>Стоимость автомобиля: 1 520 000 ₽</small></div></article>
     </div>
   </section>
 
   <section class="calculator" id="calc">
-    <h2>Расскажите, какой автомобиль<br>вы ищете, и мы <span>рассчитаем</span><br>стоимость его привоза</h2>
+    <h2 class="reveal-heading">Расскажите, какой автомобиль<br>вы ищете, и мы <span>рассчитаем</span><br>стоимость его привоза</h2>
     <div class="calc-card">
-      <aside class="manager"><div class="manager-avatar">М</div><b>Максим</b><small>Эксперт Парадайз Авто</small><p>Ответьте на несколько вопросов. Это займёт меньше минуты.</p></aside>
+      <aside class="manager"><div class="manager-avatar"></div><b>Максим</b><small>Эксперт Парадайз Авто</small><p>Ответьте на несколько вопросов. Это займёт меньше минуты.</p></aside>
       <form class="quiz" id="quiz">
         <div class="quiz-page is-active"><h3>Какой автомобиль вы рассматриваете?</h3><p>Можно указать несколько моделей, если пока выбираете между вариантами.</p><textarea placeholder="Например: Mazda 3, Toyota Yaris Cross, Kia K5"></textarea></div>
         <div class="quiz-page"><h3>Какой ориентировочный бюджет?</h3><p>Укажите общий бюджет с доставкой</p><input type="text" placeholder="Например: до 2 000 000 ₽"></div>
@@ -110,7 +126,9 @@
 
   <section class="about" id="about">
     <div class="about-photo"><img src="https://images.pexels.com/photos/9878896/pexels-photo-9878896.jpeg?cs=srgb&fm=jpg&w=1400" alt="Специалист рядом с автомобилем"></div>
-    <div class="about-copy"><span class="eyebrow">[ Работаем с 2018 года ]</span><h2>Компания, созданная<br>людьми, <em>которые любят<br>автомобили</em></h2>
+    <div class="about-copy">
+      <span class="eyebrow">[ Работаем с 2018 года ]</span>
+      <h2 class="reveal-heading">Компания, созданная<br>людьми, <em>которые любят<br>автомобили</em></h2>
       <div class="about-points">
         <article><span>◉</span><div><h3>Страховка</h3><p>Гарантируем компенсацию потерь на всех этапах перевозки авто</p></div></article>
         <article><span>✳</span><div><h3>Подготовка</h3><p>Каждый автомобиль проходит комплексную мойку и подготовку перед выдачей</p></div></article>
@@ -120,7 +138,7 @@
   </section>
 
   <section class="reviews" id="reviews">
-    <div class="reviews-top"><h2><span>Нас рекомендуют друзьям</span><br>и возвращаются<br>за следующим<br>автомобилем</h2><div><p>Большая часть клиентов приходит к нам по совету знакомых</p><button class="pill pill-black" type="button">Больше отзывов</button></div></div>
+    <div class="reviews-top"><h2 class="reveal-heading"><span>Нас рекомендуют друзьям</span><br>и возвращаются<br>за следующим<br>автомобилем</h2><div><p>Большая часть клиентов приходит к нам по совету знакомых</p><button class="pill pill-black" type="button">Больше отзывов</button></div></div>
     <div class="review-wall">
       <article class="review tall"><header><b>Алёна</b><span>★★★★★</span></header><p>Хочу от всей души поблагодарить за помощь в покупке нашей машины. Все вопросы были учтены, автомобиль доставили быстро. Отдельное спасибо за понятные ответы на каждом этапе.</p><div class="review-photo"></div></article>
       <article class="review"><header><b>Евгений Чумаченко</b><span>★★★★★</span></header><p>Уже не первый раз заказываю автомобиль через ребят. В работе отмечу скорость и полную прозрачность.</p></article>
@@ -135,7 +153,7 @@
   </section>
 
   <section class="faq" id="faq">
-    <h2>Ответы на вопросы</h2>
+    <h2 class="reveal-heading">Ответы на вопросы</h2>
     <div class="faq-list">
       <details><summary>Сколько стоит привезти автомобиль?</summary><p>Цена зависит от страны, модели, стоимости покупки, курса валют, логистики и таможенных платежей. Точный расчёт делаем под конкретный автомобиль.</p></details>
       <details><summary>Сколько времени занимает доставка?</summary><p>Обычно 20–40 дней в зависимости от страны покупки и региона доставки.</p></details>
@@ -150,8 +168,7 @@
 
   <section class="final">
     <div class="final-image"></div><div class="final-overlay"></div>
-    <div class="final-copy"><h2>Ваш следующий<br>автомобиль может быть<br>ближе, чем кажется</h2><p>Подберём автомобиль в Японии, Китае или Корее, проверим его<br>перед покупкой и организуем доставку до вашего города.</p><a class="pill pill-white" href="#calc">Подобрать автомобиль</a></div>
-    <div class="final-bottom"><a class="pill pill-white" href="#calc">Рассчитать стоимость</a><span class="round light">≡</span></div>
+    <div class="final-copy"><h2 class="reveal-heading">Ваш следующий<br>автомобиль может быть<br>ближе, чем кажется</h2><p>Подберём автомобиль в Японии, Китае или Корее, проверим его<br>перед покупкой и организуем доставку до вашего города.</p><a class="pill pill-white" href="#calc">Подобрать автомобиль</a></div>
   </section>
 </main>
 
@@ -163,7 +180,21 @@
   <a class="pill pill-black footer-cta" href="#calc">Рассчитать стоимость</a>
 </footer>
 
-<div class="floating"><a href="#calc">Рассчитать стоимость</a><button type="button">≡</button></div>
+<div class="floating" aria-label="Быстрые действия">
+  <a href="#calc">Рассчитать стоимость</a>
+  <button class="floating-toggle" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+</div>
+<div class="floating-menu" aria-hidden="true">
+  <nav>
+    <a href="#process">Как мы работаем</a>
+    <a href="#cars">Привезённые авто</a>
+    <a href="#about">О компании</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>
