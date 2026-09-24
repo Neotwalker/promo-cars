@@ -22,3 +22,8 @@ python3 -m http.server 8080
 ```
 
 Файлы проекта: `index.html`, `styles.css`, `app.js`.
+
+
+## Направление проекта
+
+Актуальные решения по структуре, визуальной системе, motion и приоритетам разработки: [docs/PROJECT-DIRECTION.md](docs/PROJECT-DIRECTION.md).
