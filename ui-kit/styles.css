@@ -715,3 +715,69 @@ code,.mono{
 @media(prefers-reduced-motion:reduce){
   .motion-marquee-track{transform:none!important}
 }
+
+
+/* Marquee v4 — MA-style measured group + dynamic clones */
+.motion-marquee{
+  display:block;
+  width:100%;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+  cursor:grab;
+  touch-action:pan-y;
+  user-select:none;
+}
+.motion-marquee.is-dragging{cursor:grabbing}
+.motion-marquee-track{
+  display:flex;
+  align-items:center;
+  width:max-content;
+  will-change:transform;
+  animation:none!important;
+}
+.motion-marquee-set{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  gap:2.6rem;
+  padding:2rem 2.6rem;
+  white-space:nowrap;
+}
+.motion-marquee-set span{
+  font-size:2.1rem;
+  font-weight:600;
+}
+.motion-marquee-set i{
+  font-style:normal;
+  color:var(--signal);
+}
+
+/* Burger interaction — no tilt on hover */
+.round-btn{
+  transform:none!important;
+}
+.round-btn:hover{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+  transform:none!important;
+}
+.round-btn:hover span:first-child,
+.round-btn:hover span:last-child{
+  transform:none;
+}
+.round-btn:active{
+  transform:scale(.94)!important;
+}
+.round-btn.is-active{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+  transform:none!important;
+}
+.round-btn.is-active span:first-child{
+  transform:translateY(.3rem) rotate(45deg);
+}
+.round-btn.is-active span:last-child{
+  transform:translateY(-.3rem) rotate(-45deg);
+}
