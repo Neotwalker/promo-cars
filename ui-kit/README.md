@@ -1,18 +1,20 @@
-# Paradise Auto — Redesign v2 UI Kit
+# UI Kit
 
-## Концепция
+Интерфейсная система для проекта.
 
-**Transit Control** — автомобиль не как предмет в салоне, а как объект маршрута.
+## Состав
 
-Визуальный язык строится вокруг:
-- маршрутов и этапов;
-- статусов сделки;
-- координат, ETA, lot/id;
-- крупных фотографий автомобилей;
-- контраста редакционной типографики и моноширинных данных;
-- signal-orange как функционального акцента.
-
-Это сознательно уводит дизайн от исходного автомобильного референса.
+- цветовые токены;
+- типографическая шкала;
+- 12-колоночная сетка;
+- spacing-система;
+- кнопки и controls;
+- состояния hover / active / focus;
+- формы;
+- карточки;
+- marquee;
+- motion-паттерны;
+- адаптивные правила.
 
 ## Масштабирование
 
@@ -24,11 +26,11 @@ html {
 }
 ```
 
-На дизайн-базе 1920 px: `1rem = 10px`.
+На ширине 1920 px: `1rem = 10px`.
 
-До 1024 px desktop-композиция масштабируется целиком, а ниже включается отдельный tablet/mobile layout.
+Ниже 1024 px используется отдельная tablet/mobile-композиция.
 
-## Базовые токены
+## Токены
 
 - Ink — `#101216`
 - Paper — `#F2EFE9`
@@ -37,28 +39,9 @@ html {
 - Signal — `#FF5B35`
 - Night — `#0B151D`
 
-Grid: 12 колонок.
-
-Основные композиции: 5/7, 7/5, 4/8.
-
 ## Motion
 
-Motion должен объяснять структуру:
-- masked text reveal;
-- continuous route marquee;
-- scroll progress;
-- status transitions;
-- без декоративных случайных fade-in.
-
-## Следующий этап
-
-После утверждения UI kit:
-1. новый hero;
-2. benefits / trust;
-3. process / route;
-4. delivered cars;
-5. calculator;
-6. about;
-7. reviews;
-8. FAQ;
-9. final CTA / footer.
+- masked reveal;
+- continuous marquee;
+- route/status transitions;
+- reduced-motion support.
