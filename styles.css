@@ -114,3 +114,14 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
 .daihatsu-mark{display:inline-grid;place-items:center;color:#9a9a9a;font-weight:900;font-style:italic;font-family:Arial,sans-serif;line-height:1;transform:skew(-10deg);opacity:.72}
 @media(min-width:901px){.daihatsu-mark{width:7vw;font-size:2.35vw}}
 @media(max-width:900px){.daihatsu-mark{min-width:42px;font-size:25px}}
+
+.country-flag{display:inline-grid;place-items:center;flex:0 0 auto;border-radius:50%;width:1.9vw;height:1.9vw;overflow:hidden;font-size:.8vw;font-weight:700}
+.flag-jp{background:radial-gradient(circle at 50% 50%,#d71920 0 28%,#fff 30% 100%);border:1px solid rgba(0,0,0,.06)}
+.flag-cn{background:#d71920;color:#ffd700;font-size:.72vw;line-height:1}
+.flag-kr{background:conic-gradient(from 45deg,#d92635 0 25%,#1857a4 25% 50%,#1857a4 50% 75%,#d92635 75% 100%);border:5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+.manager-avatar{font-size:0;background:#b49a88 url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=160&q=80') center/cover no-repeat}
+.review-photo.p4{background-image:url('https://www.storage.importautos.com.au/md/global/images/MXPL10G-1060876/680485_41054d41f1.jpg')}
+@media(max-width:900px){
+  .country-flag{width:24px;height:24px;font-size:10px}
+  .flag-cn{font-size:9px}.flag-kr{border-width:5px}
+}
