@@ -138,3 +138,12 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   .step{width:19.3vw;height:45vh}
   .step small{bottom:35%}
 }
+
+@media(min-width:901px){
+  .car{grid-template-columns:.95fr 1.05fr}
+  .car>div{position:relative;min-width:0}
+  .car small{position:absolute;left:0;right:0;bottom:.55vw;margin:0}
+}
+@media(max-width:560px){
+  .car small{position:static}
+}
