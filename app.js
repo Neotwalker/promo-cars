@@ -57,7 +57,6 @@ function updateScroll(){
     const d=i-timeline;
     const y=d*105;
     card.style.transform=`translate(-50%,calc(-50% + ${y}vh))`;
-    card.classList.toggle('is-onscreen',Math.abs(d)<1.08);
   });
 }
 addEventListener('scroll',updateScroll,{passive:true});
