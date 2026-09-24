@@ -265,3 +265,18 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   .header{opacity:0}
   .hero-content>h1,.hero-note,.hero-cta{opacity:0}
 }
+
+/* Desktop hero: exact visual frame extracted from the supplied reference recording.
+   Live header/nav/CTA remain above it as invisible hit targets. */
+@media (min-width:901px){
+  .hero-image{
+    background-image:url('assets/hero-ref.webp')!important;
+    background-size:cover!important;
+    background-position:center!important;
+    transform:none!important;
+    filter:none!important;
+  }
+  .hero-overlay{display:none!important}
+  .header{opacity:0}
+  .hero-content>h1,.hero-note,.hero-cta{opacity:0}
+}
