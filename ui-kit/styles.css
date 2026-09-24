@@ -448,3 +448,221 @@ code,.mono{
   .motion-marquee{animation:none}
   .kit-reveal{clip-path:none;transform:none}
 }
+
+/* Interaction system */
+:root{
+  --motion-fast:160ms;
+  --motion-base:260ms;
+  --motion-slow:520ms;
+  --ease-ui:cubic-bezier(.2,.75,.2,1);
+  --ease-press:cubic-bezier(.3,0,.7,1);
+  --focus-ring:0 0 0 .3rem rgba(255,91,53,.24);
+}
+:where(a,button,input){
+  -webkit-tap-highlight-color:transparent;
+}
+:where(a,button,input):focus{outline:none}
+:where(a,button,input):focus-visible{
+  outline:.2rem solid var(--signal);
+  outline-offset:.3rem;
+}
+.kit-nav a{
+  position:relative;
+  transition:color var(--motion-fast) ease;
+}
+.kit-nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:100%;
+  bottom:-.8rem;
+  height:1px;
+  background:var(--signal);
+  transition:right var(--motion-base) var(--ease-ui);
+}
+.kit-nav a:hover{color:#fff}
+.kit-nav a:hover::after,
+.kit-nav a:focus-visible::after{right:0}
+.kit-nav a:active{color:var(--signal)}
+
+.brand{
+  transition:opacity var(--motion-fast) ease,transform var(--motion-base) var(--ease-ui);
+}
+.brand:hover{transform:translateY(-.15rem)}
+.brand:active{transform:translateY(0) scale(.985)}
+.brand:focus-visible{outline-color:#fff}
+
+.btn{
+  position:relative;
+  transition:transform var(--motion-fast) var(--ease-ui),filter var(--motion-fast) ease;
+}
+.btn span,.btn i{
+  transition:
+    background var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    transform var(--motion-base) var(--ease-ui);
+}
+.btn:hover{transform:translateY(-.25rem)}
+.btn:hover i{transform:translate(.18rem,-.18rem)}
+.btn:active{transform:translateY(0) scale(.985)}
+.btn:active i{transform:translate(0,0)}
+.btn-primary:hover{filter:saturate(1.06) brightness(.96)}
+.btn-primary:active{filter:brightness(.9)}
+.btn-ghost:hover span,.btn-ghost:hover i{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-ghost:active span,.btn-ghost:active i{background:#272b31}
+.btn:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.btn:focus-visible span,.btn:focus-visible i{border-color:var(--signal)}
+
+.round-btn{
+  transition:
+    transform var(--motion-base) var(--ease-ui),
+    background var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
+}
+.round-btn span{transition:transform var(--motion-base) var(--ease-ui)}
+.round-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:rotate(6deg)}
+.round-btn:hover span:first-child{transform:translateX(.2rem)}
+.round-btn:hover span:last-child{transform:translateX(-.2rem)}
+.round-btn:active{transform:scale(.92)}
+.round-btn.is-active{background:var(--signal);color:#fff;border-color:var(--signal);transform:rotate(45deg)}
+.round-btn.is-active span:first-child{transform:translateY(.3rem) rotate(90deg)}
+.round-btn.is-active span:last-child{transform:translateY(-.3rem)}
+.round-btn:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+.status{
+  transition:
+    border-color var(--motion-fast) ease,
+    background var(--motion-fast) ease,
+    transform var(--motion-fast) var(--ease-ui);
+}
+.status:hover{border-color:rgba(16,18,22,.4);background:rgba(16,18,22,.04);transform:translateY(-.1rem)}
+.status-live:hover{border-color:rgba(43,187,105,.45);background:rgba(43,187,105,.06)}
+
+.form-specimen input,
+.field-state-grid input{
+  transition:
+    border-color var(--motion-fast) ease,
+    background var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+.form-specimen input:hover{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.035)}
+.form-specimen input:focus,
+.form-specimen input:focus-visible{
+  border-color:var(--signal);
+  box-shadow:0 0 0 .3rem rgba(255,91,53,.13);
+  background:rgba(255,255,255,.045);
+  outline:none;
+}
+
+.interaction-specimen{
+  margin:0 0 6rem;
+  padding:2.4rem;
+  display:grid;
+  grid-template-columns:3fr 9fr;
+  gap:4rem;
+  border:1px solid var(--line);
+  background:var(--white);
+}
+.interaction-copy>.mono{font-size:1.05rem;color:var(--steel)}
+.interaction-copy h3{margin:2.2rem 0 1.4rem;font-size:3.4rem;line-height:1;letter-spacing:-.045em;font-weight:400}
+.interaction-copy p{max-width:38rem;margin:0;font-size:1.35rem;color:#62686e}
+.state-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+}
+.state-sample{
+  min-width:0;
+  padding:1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:2.6rem;
+  border:1px solid var(--line);
+}
+.state-sample>.mono,.field-state-grid .mono{font-size:.95rem;color:var(--steel)}
+.state-sample .btn{width:100%;margin-top:auto}
+.state-sample .btn span{min-width:0;flex:1;padding-inline:1.2rem}
+.state-sample .btn i{flex:0 0 5.2rem}
+
+/* static visual state samples */
+.state-demo.state-hover{
+  transform:translateY(-.25rem);
+  filter:saturate(1.06) brightness(.96);
+}
+.state-demo.state-hover i{transform:translate(.18rem,-.18rem)}
+.state-demo.state-active{
+  transform:scale(.985);
+  filter:brightness(.9);
+}
+.state-demo.state-focus{
+  box-shadow:var(--focus-ring);
+}
+.state-demo.state-focus span,.state-demo.state-focus i{border-color:var(--signal)}
+
+.field-state-grid{
+  grid-column:2;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+}
+.field-state-grid label{
+  padding:1.5rem;
+  border:1px solid var(--line);
+}
+.field-state-grid label>span{display:block;margin-bottom:1.4rem}
+.field-state-grid input{
+  width:100%;
+  height:5.2rem;
+  padding:0 1.3rem;
+  border:1px solid var(--line);
+  border-radius:0;
+  background:var(--paper);
+  color:var(--ink);
+}
+.field-state-grid label.state-hover input{
+  border-color:rgba(16,18,22,.48);
+  background:#fff;
+}
+.field-state-grid label.state-focus input{
+  border-color:var(--signal);
+  box-shadow:var(--focus-ring);
+  background:#fff;
+}
+
+.route-card,.metric-card,.glass-card,.car-card{
+  transition:
+    transform var(--motion-base) var(--ease-ui),
+    box-shadow var(--motion-base) var(--ease-ui),
+    border-color var(--motion-fast) ease;
+}
+.route-card:hover,.metric-card:hover,.glass-card:hover,.car-card:hover{
+  transform:translateY(-.45rem);
+  box-shadow:0 1.8rem 4rem rgba(16,18,22,.08);
+}
+.route-card:hover,.car-card:hover{border-color:rgba(16,18,22,.3)}
+.glass-card:hover{border-color:rgba(255,255,255,.32)}
+.car-media img{
+  transition:transform var(--motion-slow) var(--ease-ui),filter var(--motion-base) ease;
+}
+.car-card:hover .car-media img{transform:scale(1.025);filter:saturate(.9)}
+
+.hero-concept-copy .btn:focus-visible{box-shadow:0 0 0 .3rem rgba(255,255,255,.18),0 0 0 .5rem var(--signal)}
+
+@media(max-width:1023px){
+  .interaction-specimen{grid-template-columns:1fr;gap:3rem}
+  .field-state-grid{grid-column:auto}
+}
+@media(max-width:700px){
+  .state-grid,.field-state-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .state-grid,.field-state-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,
+  .route-card,.metric-card,.glass-card,.car-card,.car-media img,.kit-nav a::after{
+    transition:none!important;
+  }
+}
