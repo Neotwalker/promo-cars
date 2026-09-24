@@ -6,6 +6,7 @@
   <meta name="description" content="Подбор и доставка автомобилей из Китая и других стран Азии в Россию">
   <title>Auto Import — автомобили из Азии</title>
   <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -287,6 +288,128 @@
             </a>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="journey-section" id="journey" aria-labelledby="journey-title" data-journey>
+      <div class="journey-sticky">
+        <header class="journey-heading">
+          <div>
+            <p class="journey-kicker">04 / ROUTE</p>
+            <h2 id="journey-title">Путь автомобиля<br>до выдачи.</h2>
+          </div>
+
+          <div class="journey-progress" aria-label="Прогресс маршрута">
+            <span data-journey-counter>01 / 08</span>
+            <div aria-hidden="true"><i data-journey-progress></i></div>
+          </div>
+        </header>
+
+        <div class="journey-layout">
+          <ol class="journey-steps" aria-label="Этапы доставки">
+            <li class="is-active">
+              <button type="button" data-journey-step="0" aria-current="step">
+                <span>01</span><strong>Подбор</strong><small>SEARCH</small>
+              </button>
+            </li>
+            <li>
+              <button type="button" data-journey-step="1">
+                <span>02</span><strong>Проверка</strong><small>CHECK</small>
+              </button>
+            </li>
+            <li>
+              <button type="button" data-journey-step="2">
+                <span>03</span><strong>Выкуп</strong><small>PURCHASE</small>
+              </button>
+            </li>
+            <li>
+              <button type="button" data-journey-step="3">
+                <span>04</span><strong>Страхование</strong><small>INSURANCE</small>
+              </button>
+            </li>
+            <li>
+              <button type="button" data-journey-step="4">
+                <span>05</span><strong>Граница</strong><small>TRANSIT</small>
+              </button>
+            </li>
+            <li>
+              <button type="button" data-journey-step="5">
+                <span>06</span><strong>Таможня</strong><small>CUSTOMS</small>
+              </button>
+            </li>
+            <li>
+              <button type="button" data-journey-step="6">
+                <span>07</span><strong>ЭПТС</strong><small>DOCUMENTS</small>
+              </button>
+            </li>
+            <li>
+              <button type="button" data-journey-step="7">
+                <span>08</span><strong>Выдача</strong><small>HANDOVER</small>
+              </button>
+            </li>
+          </ol>
+
+          <div class="journey-stage">
+            <div class="journey-visual">
+              <div class="journey-visual-meta">
+                <span>ROUTE / EXAMPLE</span>
+                <span data-journey-status>STATUS / SEARCH</span>
+              </div>
+
+              <div class="journey-map" aria-hidden="true">
+                <div class="journey-map-line">
+                  <i class="journey-map-fill" data-journey-map-fill></i>
+                  <span class="journey-node journey-node-1"></span>
+                  <span class="journey-node journey-node-2"></span>
+                  <span class="journey-node journey-node-3"></span>
+                  <span class="journey-node journey-node-4"></span>
+                  <span class="journey-node journey-node-5"></span>
+                  <span class="journey-node journey-node-6"></span>
+                  <span class="journey-node journey-node-7"></span>
+                  <span class="journey-node journey-node-8"></span>
+                  <span class="journey-marker" data-journey-marker></span>
+                </div>
+                <span class="journey-map-origin">CN</span>
+                <span class="journey-map-destination">RU</span>
+              </div>
+
+              <div class="journey-car-wrap">
+                <div class="car-visual journey-car" aria-hidden="true">
+                  <span class="car-visual-shadow"></span>
+                  <span class="car-visual-roof"></span>
+                  <span class="car-visual-body"></span>
+                  <span class="car-visual-light"></span>
+                  <span class="car-visual-wheel car-visual-wheel-front"></span>
+                  <span class="car-visual-wheel car-visual-wheel-rear"></span>
+                </div>
+              </div>
+
+              <div class="journey-stage-number" aria-hidden="true" data-journey-number>01</div>
+            </div>
+
+            <article class="journey-detail" aria-live="polite">
+              <div class="journey-detail-head">
+                <span data-journey-code>STEP / 01</span>
+                <span>DATA / EXAMPLE</span>
+              </div>
+
+              <div class="journey-detail-copy">
+                <h3 data-journey-title>Подбираем автомобиль</h3>
+                <p data-journey-text>Сверяем модель, бюджет и требования. Формируем варианты, которые можно проверить до покупки.</p>
+              </div>
+
+              <dl class="journey-detail-meta">
+                <div><dt>Результат</dt><dd data-journey-output>Shortlist</dd></div>
+                <div><dt>Следующий шаг</dt><dd data-journey-next>Проверка</dd></div>
+              </dl>
+
+              <a class="journey-action" href="#contact">
+                <span>Рассчитать свой маршрут</span>
+                <i aria-hidden="true">↗</i>
+              </a>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
