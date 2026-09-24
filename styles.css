@@ -133,3 +133,8 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   .about{grid-template-columns:minmax(0,.86fr) minmax(0,1fr)}
   .final-copy h2{font-size:3.9vw}
 }
+
+@media(min-width:901px){
+  .step{width:19.3vw;height:45vh}
+  .step small{bottom:35%}
+}
