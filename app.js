@@ -6,6 +6,7 @@ const floatingMenu=document.querySelector('.floating-menu');
 const process=document.querySelector('.process');
 const footer=document.querySelector('footer');
 const cards=[...document.querySelectorAll('.step')];
+const processTitle=document.querySelector('.process-title');
 
 function setTopMenu(open){
   menu?.setAttribute('aria-expanded',String(open));
@@ -48,6 +49,7 @@ function updateScroll(){
 
   if(!process || innerWidth<=1023)return;
   const rect=process.getBoundingClientRect();
+  if(processTitle && rect.top<innerHeight*.78) processTitle.classList.add('is-visible');
   const travel=process.offsetHeight-innerHeight;
   const p=travel>0?Math.min(1,Math.max(0,-rect.top/travel)):0;
   const start=.04,end=.96;
