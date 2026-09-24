@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Paradise Auto — UI kit / redesign v2">
+  <title>Paradise Auto — UI Kit v2</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="kit-header">
+    <a class="brand" href="#top" aria-label="Paradise Auto UI kit">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
+      <span>PARADISE<br><small>AUTO / UI KIT 02</small></span>
+    </a>
+    <nav class="kit-nav" aria-label="Разделы UI kit">
+      <a href="#foundation">Foundation</a>
+      <a href="#type">Type</a>
+      <a href="#components">Components</a>
+      <a href="#motion">Motion</a>
+      <a href="#art">Art direction</a>
+    </nav>
+    <div class="viewport-readout"><span>FLUID</span><b id="viewportWidth">0000</b></div>
+  </header>
+
+  <main id="top">
+    <section class="intro">
+      <div class="intro-meta mono">SYSTEM / 02 — TRANSIT GRID</div>
+      <h1>Не автосалон.<br><span>Система доставки автомобиля.</span></h1>
+      <div class="intro-bottom">
+        <p>Новая визуальная система строится вокруг маршрута, контроля сделки и движения автомобиля из Азии в Россию. Не повторяем референс — берём только уровень динамики и цельности.</p>
+        <div class="scale-demo">
+          <span class="mono">DESIGN BASE</span>
+          <strong>1920</strong>
+          <i></i>
+          <span class="mono">TABLET CUT</span>
+          <strong>1024</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="kit-section" id="foundation">
+      <header class="section-head">
+        <span class="section-no mono">01</span>
+        <h2>Foundation</h2>
+        <p>Одна координатная система для desktop. Размеры элементов задаются в rem, а сам rem масштабируется от ширины viewport.</p>
+      </header>
+
+      <div class="token-grid colors">
+        <article class="swatch swatch-ink"><span>INK</span><code>#101216</code></article>
+        <article class="swatch swatch-paper"><span>PAPER</span><code>#F2EFE9</code></article>
+        <article class="swatch swatch-fog"><span>FOG</span><code>#D8D6D0</code></article>
+        <article class="swatch swatch-steel"><span>STEEL</span><code>#7D8791</code></article>
+        <article class="swatch swatch-signal"><span>SIGNAL</span><code>#FF5B35</code></article>
+        <article class="swatch swatch-night"><span>NIGHT</span><code>#0B151D</code></article>
+      </div>
+
+      <div class="foundation-row">
+        <article class="grid-card">
+          <div class="grid-title"><span class="mono">GRID</span><b>12 columns</b></div>
+          <div class="grid-demo" aria-label="12 column grid">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p>Базовый gutter — 2.0rem. Поля — 2.4rem. Основные композиции: 5/7, 7/5 и 4/8.</p>
+        </article>
+        <article class="spacing-card">
+          <span class="mono">SPACING</span>
+          <div><i style="--w:2rem"></i><b>2</b></div>
+          <div><i style="--w:4rem"></i><b>4</b></div>
+          <div><i style="--w:8rem"></i><b>8</b></div>
+          <div><i style="--w:12rem"></i><b>12</b></div>
+          <div><i style="--w:18rem"></i><b>18</b></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="kit-section" id="type">
+      <header class="section-head">
+        <span class="section-no mono">02</span>
+        <h2>Typography</h2>
+        <p>Крупная редакционная типографика для смыслов и моноширинная служебная типографика для данных, маршрутов и статусов.</p>
+      </header>
+
+      <div class="type-specimens">
+        <article class="type-display">
+          <span class="mono">DISPLAY / 12.8rem / 0.90</span>
+          <div>Автомобиль<br>уже в пути.</div>
+        </article>
+        <article class="type-h1">
+          <span class="mono">H1 / 8.8rem / 0.94</span>
+          <div>Подбираем там,<br><em>где выбор больше.</em></div>
+        </article>
+        <article class="type-h2">
+          <span class="mono">H2 / 5.6rem / 0.98</span>
+          <div>Проверяем до покупки.<br>Считаем до оплаты.</div>
+        </article>
+        <article class="type-body">
+          <span class="mono">BODY / 1.8rem / 1.40</span>
+          <p>Показываем историю автомобиля, фиксируем этапы сделки и заранее считаем логистику до вашего города.</p>
+        </article>
+        <article class="type-data">
+          <span class="mono">DATA / MONO / 1.4rem</span>
+          <code>JP / YOKOHAMA → RU / VLADIVOSTOK<br>ETA 26 DAYS · LOT 184-02 · STATUS: IN TRANSIT</code>
+        </article>
+      </div>
+    </section>
+
+    <section class="kit-section" id="components">
+      <header class="section-head">
+        <span class="section-no mono">03</span>
+        <h2>Components</h2>
+        <p>Компоненты не выглядят как типовой лендинг. Визуальный язык — интерфейс маршрута, бирки, статусы и крупные медиа.</p>
+      </header>
+
+      <div class="button-row">
+        <button class="btn btn-primary"><span>Рассчитать автомобиль</span><i>↗</i></button>
+        <button class="btn btn-ghost"><span>Смотреть привезённые</span><i>→</i></button>
+        <button class="round-btn" aria-label="Открыть меню"><span></span><span></span></button>
+        <span class="status status-live"><i></i>На связи</span>
+        <span class="status">Договор / 01</span>
+      </div>
+
+      <div class="component-grid">
+        <article class="route-card">
+          <header><span class="mono">ROUTE / 184-02</span><b>26 дней</b></header>
+          <div class="route-line"><i></i><i></i><i></i></div>
+          <div class="route-points"><span>YOKOHAMA<small>JP</small></span><span>VLADIVOSTOK<small>RU</small></span><span>CHELYABINSK<small>RU</small></span></div>
+          <footer><span>TOYOTA CROWN</span><b>2 980 000 ₽</b></footer>
+        </article>
+
+        <article class="metric-card">
+          <span class="mono">METRIC / 01</span>
+          <strong>30%</strong>
+          <p>средняя разница с предложениями на российском рынке</p>
+        </article>
+
+        <article class="glass-card">
+          <span class="mono">STEP 02 / CHECK</span>
+          <div class="glass-icon">◎</div>
+          <h3>Проверяем<br>до покупки</h3>
+          <p>История, аукционный лист, кузов, пробег и документы — до перевода денег.</p>
+        </article>
+
+        <article class="car-card">
+          <div class="car-media">
+            <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1000&q=82" alt="Автомобиль">
+            <span class="media-tag mono">DELIVERED / 042</span>
+          </div>
+          <div class="car-info">
+            <h3>Toyota Crown</h3>
+            <dl>
+              <div><dt>Год</dt><dd>2022</dd></div>
+              <div><dt>Пробег</dt><dd>25 000 км</dd></div>
+              <div><dt>Маршрут</dt><dd>Япония → Челябинск</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+
+      <div class="form-specimen">
+        <div>
+          <span class="mono">FORM / INPUTS</span>
+          <h3>Запрос на подбор</h3>
+        </div>
+        <label><span>Автомобиль</span><input type="text" placeholder="Toyota Crown, Kia K5..."></label>
+        <label><span>Бюджет</span><input type="text" placeholder="до 3 000 000 ₽"></label>
+        <label><span>Город</span><input type="text" placeholder="Челябинск"></label>
+        <button class="btn btn-primary"><span>Отправить запрос</span><i>↗</i></button>
+      </div>
+    </section>
+
+    <section class="kit-section" id="motion">
+      <header class="section-head">
+        <span class="section-no mono">04</span>
+        <h2>Motion</h2>
+        <p>Движение объясняет путь автомобиля. Никаких случайных fade-in: reveal, route progress, marquee и крупные смены состояния.</p>
+      </header>
+
+      <div class="motion-stage">
+        <div class="motion-marquee">
+          <div><span>ПОДБОР</span><i>→</i><span>ПРОВЕРКА</span><i>→</i><span>ПОКУПКА</span><i>→</i><span>ЛОГИСТИКА</span><i>→</i><span>ВЫДАЧА</span><i>→</i></div>
+          <div aria-hidden="true"><span>ПОДБОР</span><i>→</i><span>ПРОВЕРКА</span><i>→</i><span>ПОКУПКА</span><i>→</i><span>ЛОГИСТИКА</span><i>→</i><span>ВЫДАЧА</span><i>→</i></div>
+        </div>
+        <div class="motion-demo">
+          <span class="mono">REVEAL SAMPLE</span>
+          <h3 class="kit-reveal">Сначала смысл.<br><em>Потом движение.</em></h3>
+        </div>
+      </div>
+    </section>
+
+    <section class="kit-section art-section" id="art">
+      <header class="section-head">
+        <span class="section-no mono">05</span>
+        <h2>Art direction</h2>
+        <p>Направление нового сайта: «Transit Control». Не копируем автосалон из референса. Визуализируем маршрут и контроль сделки.</p>
+      </header>
+
+      <article class="hero-concept">
+        <div class="hero-concept-copy">
+          <span class="mono">JP / KR / CN → RU</span>
+          <h3>Вы выбираете<br>автомобиль.<br><em>Остальное — маршрут.</em></h3>
+          <p>Подбор, проверка, выкуп, логистика и выдача — в одной понятной системе.</p>
+          <button class="btn btn-primary"><span>Рассчитать маршрут</span><i>↗</i></button>
+        </div>
+        <div class="hero-concept-visual">
+          <div class="route-code">184<span>/</span>02</div>
+          <div class="orbit orbit-a"></div>
+          <div class="orbit orbit-b"></div>
+          <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1400&q=88" alt="Автомобиль в новой арт-дирекции">
+          <div class="arrival-board mono"><span>STATUS</span><b>ARRIVING</b><small>ETA / 26 DAYS</small></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="kit-footer">
+    <span>PARADISE AUTO / REDESIGN V2</span>
+    <span class="mono">UI KIT 02 · 2026</span>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
