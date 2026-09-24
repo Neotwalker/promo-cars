@@ -1280,6 +1280,50 @@ a:focus-visible {
   box-shadow:0 0 0 1px rgba(255,255,255,.25);
 }
 
+.journey-node {
+  transition:
+    transform var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    background-color var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-hover) var(--ease-ui);
+}
+
+.journey-node::after {
+  content:"";
+  position:absolute;
+  inset:.08rem;
+  border-radius:50%;
+  background:var(--signal);
+  transform:scale(0);
+  transition:transform 360ms var(--ease-ui);
+}
+
+.journey-node.is-complete {
+  border-color:#182129;
+  box-shadow:0 0 0 1px rgba(255,91,53,.72);
+}
+
+.journey-node.is-complete::after {
+  transform:scale(1);
+}
+
+.journey-node.is-current {
+  z-index:2;
+  transform:scale(1.15);
+  box-shadow:
+    0 0 0 1px var(--signal),
+    0 0 0 .45rem rgba(255,91,53,.12);
+}
+
+.journey-node.is-current::before {
+  content:"";
+  position:absolute;
+  inset:-.65rem;
+  border:1px solid rgba(255,91,53,.46);
+  border-radius:50%;
+  animation:journey-node-pulse 1.5s var(--ease-ui) infinite;
+}
+
 .journey-node-1 { left:0; }
 .journey-node-2 { left:14.285%; }
 .journey-node-3 { left:28.57%; }
@@ -1362,6 +1406,29 @@ a:focus-visible {
   font-size:.85rem;
 }
 
+.journey-detail-head,
+.journey-detail-copy,
+.journey-detail-meta {
+  transition:
+    opacity var(--motion-active) var(--ease-press),
+    transform var(--motion-active) var(--ease-press);
+}
+
+.journey-detail.is-leaving .journey-detail-head,
+.journey-detail.is-leaving .journey-detail-copy,
+.journey-detail.is-leaving .journey-detail-meta {
+  opacity:0;
+  transform:translateY(-.7rem);
+}
+
+.journey-detail.is-entering .journey-detail-head,
+.journey-detail.is-entering .journey-detail-copy,
+.journey-detail.is-entering .journey-detail-meta {
+  opacity:0;
+  transform:translateY(.9rem);
+  transition:none;
+}
+
 .journey-detail-copy {
   margin-top:8rem;
 }
@@ -1372,7 +1439,6 @@ a:focus-visible {
   line-height:.95;
   letter-spacing:-.052em;
   font-weight:400;
-  transition:opacity var(--motion-focus) var(--ease-ui);
 }
 
 .journey-detail-copy p {
@@ -1380,7 +1446,6 @@ a:focus-visible {
   margin:0;
   color:rgba(255,255,255,.52);
   font-size:1.35rem;
-  transition:opacity var(--motion-focus) var(--ease-ui);
 }
 
 .journey-detail-meta {
@@ -1434,6 +1499,18 @@ a:focus-visible {
 
 .journey-action:active {
   transition-duration:var(--motion-active);
+}
+
+@keyframes journey-node-pulse {
+  0% {
+    opacity:.72;
+    transform:scale(.72);
+  }
+  72%,
+  100% {
+    opacity:0;
+    transform:scale(1.55);
+  }
 }
 
 @media (max-width:1023px) {
@@ -2010,7 +2087,8 @@ a:focus-visible {
   }
 
   .vehicle-shell,
-  .route-progress {
+  .route-progress,
+  .journey-node.is-current::before {
     animation:none;
   }
 
@@ -2029,10 +2107,13 @@ a:focus-visible {
   .journey-progress i,
   .journey-steps button,
   .journey-map-fill,
+  .journey-node,
+  .journey-node::after,
   .journey-marker,
   .journey-car,
-  .journey-detail-copy h3,
-  .journey-detail-copy p,
+  .journey-detail-head,
+  .journey-detail-copy,
+  .journey-detail-meta,
   .journey-stage-number,
   .journey-action,
   .journey-action i,
