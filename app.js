@@ -25,7 +25,7 @@ function updateScroll(){
     const d=i-timeline;
     const abs=Math.abs(d);
     const y=d*92;
-    let opacity=Math.max(0,1-abs*3.15);
+    let opacity=Math.max(0,1-abs*2.1);
     if(p<intro || p>end) opacity=0;
     card.style.opacity=opacity.toFixed(3);
     card.style.transform=`translate(-50%,calc(-50% + ${y}vh)) scale(${1-Math.min(abs,.6)*.025})`;
