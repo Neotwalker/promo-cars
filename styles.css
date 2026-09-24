@@ -110,3 +110,7 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   summary{padding:1.65vw 0}
   .final-image{background-size:72% auto;background-position:92% 78%}
 }
+
+.daihatsu-mark{display:inline-grid;place-items:center;color:#9a9a9a;font-weight:900;font-style:italic;font-family:Arial,sans-serif;line-height:1;transform:skew(-10deg);opacity:.72}
+@media(min-width:901px){.daihatsu-mark{width:7vw;font-size:2.35vw}}
+@media(max-width:900px){.daihatsu-mark{min-width:42px;font-size:25px}}
