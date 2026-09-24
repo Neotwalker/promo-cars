@@ -218,3 +218,36 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   .final-image{background-size:72% auto;background-position:94% 72%}
   footer{min-height:calc(285*var(--u));padding:calc(62*var(--u)) calc(17*var(--u)) calc(22*var(--u));gap:calc(42*var(--u));font-size:calc(7*var(--u))}
 }
+
+/* Exact visual assets extracted from the supplied reference recording */
+.process-image{
+  background-image:url('assets/process-bg.webp')!important;
+  background-size:cover!important;
+  background-position:center!important;
+  filter:none!important;
+}
+.process-image:after{display:none!important}
+.car-photo{
+  width:100%;
+  height:100%;
+  background-image:url('assets/cars-sprite.webp');
+  background-repeat:no-repeat;
+  background-size:100% 600%;
+  background-position-x:center;
+}
+.car-photo-1{background-position-y:0%}
+.car-photo-2{background-position-y:20%}
+.car-photo-3{background-position-y:40%}
+.car-photo-4{background-position-y:60%}
+.car-photo-5{background-position-y:80%}
+.car-photo-6{background-position-y:100%}
+.final-image{
+  background-image:url('assets/final-car.webp')!important;
+  background-repeat:no-repeat!important;
+  background-size:auto 90%!important;
+  background-position:100% 100%!important;
+  background-color:#07101a!important;
+}
+.final-overlay{
+  background:linear-gradient(90deg,#07101a 0%,rgba(7,16,26,.96) 23%,rgba(7,16,26,.48) 45%,rgba(7,16,26,.08) 72%,rgba(7,16,26,.05) 100%)!important;
+}
