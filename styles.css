@@ -505,3 +505,75 @@ footer>div>span{color:#999;margin-bottom:4px}
     min-height:520px!important;
   }
 }
+
+
+/* Focused QA pass 01 — hero + header only */
+@media (min-width:1024px){
+  .header{
+    height:clamp(76px,4.8vw,96px);
+    padding-inline:clamp(22px,1.55vw,32px);
+    grid-template-columns:minmax(220px,1fr) auto minmax(330px,1fr);
+  }
+  .logo{gap:clamp(9px,.65vw,13px)}
+  .logo-symbol{gap:3px}
+  .logo-symbol i{
+    width:clamp(34px,2.05vw,42px);
+    height:clamp(13px,.78vw,16px);
+  }
+  .logo-symbol i:last-child{width:clamp(16px,.95vw,20px)}
+  .logo-copy{
+    font-size:clamp(12px,.82vw,16px);
+    line-height:.8;
+  }
+  .logo-copy small{font-size:clamp(9px,.58vw,11px)}
+  .nav{
+    gap:clamp(26px,2.15vw,44px);
+    font-size:clamp(13px,.9vw,17px);
+  }
+  .header-right{gap:clamp(14px,1vw,20px)}
+  .header-phone{font-size:clamp(13px,.9vw,17px)}
+  .pill-small{
+    min-height:clamp(38px,2.35vw,47px);
+    padding-inline:clamp(22px,1.6vw,32px);
+    font-size:clamp(12px,.8vw,15px);
+  }
+
+  .hero-content{
+    padding:clamp(118px,7vw,142px) clamp(22px,1.55vw,32px) clamp(24px,1.7vw,34px);
+  }
+  .hero h1{
+    max-width:88vw;
+    font-size:clamp(68px,7vw,142px);
+    line-height:.92;
+    letter-spacing:-.058em;
+  }
+  .hero-note{
+    max-width:760px;
+    font-size:clamp(12px,.85vw,16px);
+    line-height:1.38;
+  }
+  .hero-cta{
+    bottom:clamp(18px,1.25vw,25px);
+    min-height:clamp(40px,2.45vw,49px);
+    padding-inline:clamp(26px,1.8vw,36px);
+    font-size:clamp(12px,.78vw,15px);
+  }
+}
+
+@media (min-width:1024px) and (max-width:1365px){
+  .header{
+    grid-template-columns:minmax(190px,1fr) auto minmax(270px,1fr);
+  }
+  .nav{gap:clamp(18px,1.7vw,28px)}
+  .hero h1{
+    font-size:clamp(68px,6.6vw,90px);
+    max-width:92vw;
+  }
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero-title{
+    animation-duration:1.35s;
+    animation-timing-function:cubic-bezier(.16,.72,.18,1);
+  }
+}
