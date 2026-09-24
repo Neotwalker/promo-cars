@@ -705,3 +705,13 @@ code,.mono{
 @media(prefers-reduced-motion:reduce){
   .motion-marquee-track{animation:none}
 }
+
+
+/* Marquee v3 — position is driven continuously by JS, no CSS cycle reset */
+.motion-marquee-track{
+  animation:none!important;
+  transform:translate3d(0,0,0);
+}
+@media(prefers-reduced-motion:reduce){
+  .motion-marquee-track{transform:none!important}
+}
