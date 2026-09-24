@@ -19,17 +19,16 @@ function updateScroll(){
   const r=process.getBoundingClientRect();
   const max=process.offsetHeight-innerHeight;
   const p=max>0?Math.min(1,Math.max(0,-r.top/max)):0;
-  const intro=.055,end=.945;
+  const intro=.09,end=.93;
   const timeline=(p-intro)/(end-intro)*(cards.length-1);
   cards.forEach((card,i)=>{
     const d=i-timeline;
-    const y=d*73;
     const abs=Math.abs(d);
-    let opacity=Math.max(0,1-abs*1.05);
-    if(p<intro) opacity=0;
-    if(p>end && i===cards.length-1) opacity=Math.max(0,1-(p-end)*18);
+    const y=d*92;
+    let opacity=Math.max(0,1-abs*3.15);
+    if(p<intro || p>end) opacity=0;
     card.style.opacity=opacity.toFixed(3);
-    card.style.transform=`translate(-50%,calc(-50% + ${y}vh)) scale(${1-Math.min(abs,.8)*.035})`;
+    card.style.transform=`translate(-50%,calc(-50% + ${y}vh)) scale(${1-Math.min(abs,.6)*.025})`;
   });
 }
 addEventListener('scroll',updateScroll,{passive:true});
