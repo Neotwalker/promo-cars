@@ -280,3 +280,32 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   .header{opacity:0}
   .hero-content>h1,.hero-note,.hero-cta{opacity:0}
 }
+
+/* Reference palette and exact process-card surfaces */
+:root{
+  --bg:#f3f0f4;
+  --paper:#fbf8fc;
+  --muted:#9b989d;
+  --line:#ded9df;
+}
+body{background:var(--bg)}
+.benefits-right{background:var(--paper)}
+.review{background:#fbf8fc}
+
+@media (min-width:901px){
+  .process{height:520vh!important}
+  .step{
+    background-image:url('assets/process-cards.webp')!important;
+    background-repeat:no-repeat!important;
+    background-size:100% 500%!important;
+    background-color:transparent!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  .step[data-step="0"]{background-position:0 0}
+  .step[data-step="1"]{background-position:0 25%}
+  .step[data-step="2"]{background-position:0 50%}
+  .step[data-step="3"]{background-position:0 75%}
+  .step[data-step="4"]{background-position:0 100%}
+  .step>*{opacity:0!important}
+}
