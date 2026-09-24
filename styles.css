@@ -125,3 +125,5 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   .country-flag{width:24px;height:24px;font-size:10px}
   .flag-cn{font-size:9px}.flag-kr{border-width:5px}
 }
+
+.process-bottom,.final-bottom{display:none!important}
