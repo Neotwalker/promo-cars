@@ -103,3 +103,10 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   .calculator>h2{font-size:3.9vw}
   .about-photo img{object-position:center 38%}
 }
+
+@media (min-width:901px){
+  .process h2{font-size:11.4vw}
+  .faq h2{font-size:3.8vw}
+  summary{padding:1.65vw 0}
+  .final-image{background-size:72% auto;background-position:92% 78%}
+}
