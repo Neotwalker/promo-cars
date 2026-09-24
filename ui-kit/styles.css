@@ -8,6 +8,15 @@
   --white:#FCFBF8;
   --line:rgba(16,18,22,.14);
   --line-dark:rgba(255,255,255,.15);
+  --motion-active:160ms;
+  --motion-focus:280ms;
+  --motion-hover:480ms;
+  --motion-slow:720ms;
+  --motion-fast:var(--motion-active);
+  --motion-base:var(--motion-focus);
+  --ease-ui:cubic-bezier(.2,.75,.2,1);
+  --ease-press:cubic-bezier(.3,0,.25,1);
+  --focus-ring:0 0 0 .3rem rgba(255,91,53,.24);
 }
 *{box-sizing:border-box}
 html{
@@ -450,14 +459,6 @@ code,.mono{
 }
 
 /* Interaction system */
-:root{
-  --motion-fast:160ms;
-  --motion-base:260ms;
-  --motion-slow:520ms;
-  --ease-ui:cubic-bezier(.2,.75,.2,1);
-  --ease-press:cubic-bezier(.3,0,.7,1);
-  --focus-ring:0 0 0 .3rem rgba(255,91,53,.24);
-}
 :where(a,button,input){
   -webkit-tap-highlight-color:transparent;
 }
@@ -468,7 +469,7 @@ code,.mono{
 }
 .kit-nav a{
   position:relative;
-  transition:color var(--motion-fast) ease;
+  transition:color var(--motion-hover) var(--ease-ui);
 }
 .kit-nav a::after{
   content:"";
@@ -478,35 +479,41 @@ code,.mono{
   bottom:-.8rem;
   height:1px;
   background:var(--signal);
-  transition:right var(--motion-base) var(--ease-ui);
+  transition:right var(--motion-hover) var(--ease-ui);
 }
 .kit-nav a:hover{color:#fff}
 .kit-nav a:hover::after,
 .kit-nav a:focus-visible::after{right:0}
-.kit-nav a:active{color:var(--signal)}
+.kit-nav a:active{color:var(--signal);transition-duration:var(--motion-active)}
 
 .brand{
-  transition:opacity var(--motion-fast) ease,transform var(--motion-base) var(--ease-ui);
+  transition:
+    opacity var(--motion-hover) var(--ease-ui),
+    transform var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-focus) var(--ease-ui);
 }
 .brand:hover{transform:translateY(-.15rem)}
-.brand:active{transform:translateY(0) scale(.985)}
+.brand:active{transform:translateY(0) scale(.985);transition-duration:var(--motion-active)}
 .brand:focus-visible{outline-color:#fff}
 
 .btn{
   position:relative;
-  transition:transform var(--motion-fast) var(--ease-ui),filter var(--motion-fast) ease;
+  transition:
+    transform var(--motion-hover) var(--ease-ui),
+    filter var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-focus) var(--ease-ui);
 }
 .btn span,.btn i{
   transition:
-    background var(--motion-fast) ease,
-    color var(--motion-fast) ease,
-    border-color var(--motion-fast) ease,
-    transform var(--motion-base) var(--ease-ui);
+    background var(--motion-hover) var(--ease-ui),
+    color var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    transform var(--motion-hover) var(--ease-ui);
 }
 .btn:hover{transform:translateY(-.25rem)}
 .btn:hover i{transform:translate(.18rem,-.18rem)}
-.btn:active{transform:translateY(0) scale(.985)}
-.btn:active i{transform:translate(0,0)}
+.btn:active{transform:translateY(0) scale(.985);transition-duration:var(--motion-active);transition-timing-function:var(--ease-press)}
+.btn:active i{transform:translate(0,0);transition-duration:var(--motion-active)}
 .btn-primary:hover{filter:saturate(1.06) brightness(.96)}
 .btn-primary:active{filter:brightness(.9)}
 .btn-ghost:hover span,.btn-ghost:hover i{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -516,26 +523,37 @@ code,.mono{
 
 .round-btn{
   transition:
-    transform var(--motion-base) var(--ease-ui),
-    background var(--motion-fast) ease,
-    color var(--motion-fast) ease,
-    border-color var(--motion-fast) ease;
+    transform var(--motion-hover) var(--ease-ui),
+    background var(--motion-hover) var(--ease-ui),
+    color var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-focus) var(--ease-ui);
 }
-.round-btn span{transition:transform var(--motion-base) var(--ease-ui)}
-.round-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:rotate(6deg)}
-.round-btn:hover span:first-child{transform:translateX(.2rem)}
-.round-btn:hover span:last-child{transform:translateX(-.2rem)}
-.round-btn:active{transform:scale(.92)}
-.round-btn.is-active{background:var(--signal);color:#fff;border-color:var(--signal);transform:rotate(45deg)}
-.round-btn.is-active span:first-child{transform:translateY(.3rem) rotate(90deg)}
-.round-btn.is-active span:last-child{transform:translateY(-.3rem)}
+.round-btn span{transition:transform var(--motion-hover) var(--ease-ui)}
+.round-btn:hover{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+}
+.round-btn:active{
+  transform:scale(.94);
+  transition-duration:var(--motion-active);
+  transition-timing-function:var(--ease-press);
+}
+.round-btn.is-active{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+}
+.round-btn.is-active span:first-child{transform:translateY(.3rem) rotate(45deg)}
+.round-btn.is-active span:last-child{transform:translateY(-.3rem) rotate(-45deg)}
 .round-btn:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 
 .status{
   transition:
-    border-color var(--motion-fast) ease,
-    background var(--motion-fast) ease,
-    transform var(--motion-fast) var(--ease-ui);
+    border-color var(--motion-hover) var(--ease-ui),
+    background var(--motion-hover) var(--ease-ui),
+    transform var(--motion-hover) var(--ease-ui);
 }
 .status:hover{border-color:rgba(16,18,22,.4);background:rgba(16,18,22,.04);transform:translateY(-.1rem)}
 .status-live:hover{border-color:rgba(43,187,105,.45);background:rgba(43,187,105,.06)}
@@ -543,9 +561,9 @@ code,.mono{
 .form-specimen input,
 .field-state-grid input{
   transition:
-    border-color var(--motion-fast) ease,
-    background var(--motion-fast) ease,
-    box-shadow var(--motion-fast) ease;
+    border-color var(--motion-hover) var(--ease-ui),
+    background var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-focus) var(--ease-ui);
 }
 .form-specimen input:hover{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.035)}
 .form-specimen input:focus,
@@ -633,9 +651,9 @@ code,.mono{
 
 .route-card,.metric-card,.glass-card,.car-card{
   transition:
-    transform var(--motion-base) var(--ease-ui),
-    box-shadow var(--motion-base) var(--ease-ui),
-    border-color var(--motion-fast) ease;
+    transform var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui);
 }
 .route-card:hover,.metric-card:hover,.glass-card:hover,.car-card:hover{
   transform:translateY(-.45rem);
@@ -644,7 +662,9 @@ code,.mono{
 .route-card:hover,.car-card:hover{border-color:rgba(16,18,22,.3)}
 .glass-card:hover{border-color:rgba(255,255,255,.32)}
 .car-media img{
-  transition:transform var(--motion-slow) var(--ease-ui),filter var(--motion-base) ease;
+  transition:
+    transform var(--motion-slow) var(--ease-ui),
+    filter var(--motion-hover) var(--ease-ui);
 }
 .car-card:hover .car-media img{transform:scale(1.025);filter:saturate(.9)}
 
@@ -663,7 +683,7 @@ code,.mono{
 @media(prefers-reduced-motion:reduce){
   .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,
   .route-card,.metric-card,.glass-card,.car-card,.car-media img,.kit-nav a::after{
-    transition:none!important;
+    transition:none;
   }
 }
 
@@ -750,34 +770,4 @@ code,.mono{
 .motion-marquee-set i{
   font-style:normal;
   color:var(--signal);
-}
-
-/* Burger interaction — no tilt on hover */
-.round-btn{
-  transform:none!important;
-}
-.round-btn:hover{
-  background:var(--ink);
-  color:#fff;
-  border-color:var(--ink);
-  transform:none!important;
-}
-.round-btn:hover span:first-child,
-.round-btn:hover span:last-child{
-  transform:none;
-}
-.round-btn:active{
-  transform:scale(.94)!important;
-}
-.round-btn.is-active{
-  background:var(--ink);
-  color:#fff;
-  border-color:var(--ink);
-  transform:none!important;
-}
-.round-btn.is-active span:first-child{
-  transform:translateY(.3rem) rotate(45deg);
-}
-.round-btn.is-active span:last-child{
-  transform:translateY(-.3rem) rotate(-45deg);
 }
