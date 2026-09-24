@@ -12,6 +12,8 @@
   const progressBar = root.querySelector('[data-journey-progress]');
   const mapFill = root.querySelector('[data-journey-map-fill]');
   const marker = root.querySelector('[data-journey-marker]');
+  const nodes = [...root.querySelectorAll('.journey-node')];
+  const detail = root.querySelector('.journey-detail');
   const status = root.querySelector('[data-journey-status]');
   const number = root.querySelector('[data-journey-number]');
   const code = root.querySelector('[data-journey-code]');
@@ -84,8 +86,42 @@
 
   let activeIndex = -1;
   let ticking = false;
+  let detailTimer = 0;
 
   const clamp = value => Math.min(1, Math.max(0, value));
+
+  const writeDetail = (state, displayNumber) => {
+    code.textContent = 'STEP / ' + displayNumber;
+    title.textContent = state.title;
+    text.textContent = state.text;
+    output.textContent = state.output;
+    next.textContent = state.next;
+  };
+
+  const transitionDetail = (state, displayNumber, immediate = false) => {
+    window.clearTimeout(detailTimer);
+
+    if (immediate || reducedMotionQuery.matches) {
+      detail.classList.remove('is-leaving','is-entering');
+      writeDetail(state, displayNumber);
+      return;
+    }
+
+    detail.classList.remove('is-entering');
+    detail.classList.add('is-leaving');
+
+    detailTimer = window.setTimeout(() => {
+      writeDetail(state, displayNumber);
+      detail.classList.remove('is-leaving');
+      detail.classList.add('is-entering');
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          detail.classList.remove('is-entering');
+        });
+      });
+    }, 140);
+  };
 
   const renderState = index => {
     const safeIndex = Math.min(states.length - 1, Math.max(0, index));
@@ -94,6 +130,7 @@
       return;
     }
 
+    const isInitial = activeIndex === -1;
     activeIndex = safeIndex;
     const state = states[safeIndex];
 
@@ -110,16 +147,17 @@
       }
     });
 
+    nodes.forEach((node, nodeIndex) => {
+      node.classList.toggle('is-complete', nodeIndex <= safeIndex);
+      node.classList.toggle('is-current', nodeIndex === safeIndex);
+    });
+
     const displayNumber = String(safeIndex + 1).padStart(2, '0');
 
     counter.textContent = displayNumber + ' / 08';
     status.textContent = state.status;
     number.textContent = displayNumber;
-    code.textContent = 'STEP / ' + displayNumber;
-    title.textContent = state.title;
-    text.textContent = state.text;
-    output.textContent = state.output;
-    next.textContent = state.next;
+    transitionDetail(state, displayNumber, isInitial);
   };
 
   const renderProgress = progress => {
