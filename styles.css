@@ -90,3 +90,14 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
   .countries>span{line-height:1;filter:saturate(.95)}
   .car-empty{background:#f7f6f4}
 }
+
+@media (min-width:901px){
+  .benefits h2{font-size:3.9vw}
+  .section-heading h2{font-size:3.25vw}
+  .about{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .about h2{font-size:3.65vw}
+  .reviews h2{font-size:3.7vw}
+  .faq h2{font-size:3.55vw}
+  .calculator>h2{font-size:3.9vw}
+  .about-photo img{object-position:center 38%}
+}
