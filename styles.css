@@ -251,3 +251,17 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
 .final-overlay{
   background:linear-gradient(90deg,#07101a 0%,rgba(7,16,26,.96) 23%,rgba(7,16,26,.48) 45%,rgba(7,16,26,.08) 72%,rgba(7,16,26,.05) 100%)!important;
 }
+
+/* Desktop hero locked to the supplied reference frame. Invisible live controls remain clickable above it. */
+@media (min-width:901px){
+  .hero-image{
+    background-image:url('assets/hero-ref.webp')!important;
+    background-size:cover!important;
+    background-position:center!important;
+    transform:none!important;
+    filter:none!important;
+  }
+  .hero-overlay{display:none!important}
+  .header{opacity:0}
+  .hero-content>h1,.hero-note,.hero-cta{opacity:0}
+}
