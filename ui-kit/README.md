@@ -1,0 +1,47 @@
+# UI Kit
+
+Интерфейсная система для проекта.
+
+## Состав
+
+- цветовые токены;
+- типографическая шкала;
+- 12-колоночная сетка;
+- spacing-система;
+- кнопки и controls;
+- состояния hover / active / focus;
+- формы;
+- карточки;
+- marquee;
+- motion-паттерны;
+- адаптивные правила.
+
+## Масштабирование
+
+Desktop использует единую координатную систему:
+
+```css
+html {
+  font-size: clamp(5.33px, calc(100vw / 192), 11.5px);
+}
+```
+
+На ширине 1920 px: `1rem = 10px`.
+
+Ниже 1024 px используется отдельная tablet/mobile-композиция.
+
+## Токены
+
+- Ink — `#101216`
+- Paper — `#F2EFE9`
+- Fog — `#D8D6D0`
+- Steel — `#7D8791`
+- Signal — `#FF5B35`
+- Night — `#0B151D`
+
+## Motion
+
+- masked reveal;
+- continuous marquee;
+- route/status transitions;
+- reduced-motion support.
