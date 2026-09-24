@@ -151,3 +151,9 @@ footer{position:relative;min-height:285px;padding:62px 10px 22px;display:grid;gr
 @media(min-width:901px){
   .manager p{background:#29292d;padding:1.05vw .9vw;margin:1.35vw -.35vw 0;line-height:1.38}
 }
+
+@media(min-width:901px){
+  .benefits-left{top:19vh}
+  .stat{height:min(18.6vw,34.3vh)}
+  .car{height:min(18.6vw,34vh)}
+}
