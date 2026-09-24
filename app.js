@@ -23,16 +23,16 @@ function updateScroll(){
     const fade=Math.min(1,Math.max(0,(p-.015)/.075));
     processTitle.style.opacity=String(.28+.72*fade);
   }
-  const intro=.09,end=.93;
-  const timeline=(p-intro)/(end-intro)*(cards.length-1);
+  const start=.035,end=.965;
+  const local=Math.min(1,Math.max(0,(p-start)/(end-start)));
+  const timeline=-.75+local*((cards.length-1)+1.5);
   cards.forEach((card,i)=>{
     const d=i-timeline;
     const abs=Math.abs(d);
     const y=d*92;
-    let opacity=Math.max(0,1-abs*2.1);
-    if(p<intro || p>end) opacity=0;
+    const opacity=Math.max(0,1-abs*1.55);
     card.style.opacity=opacity.toFixed(3);
-    card.style.transform=`translate(-50%,calc(-50% + ${y}vh)) scale(${1-Math.min(abs,.6)*.025})`;
+    card.style.transform=`translate(-50%,calc(-50% + ${y}vh)) scale(${1-Math.min(abs,.75)*.02})`;
   });
 }
 addEventListener('scroll',updateScroll,{passive:true});
