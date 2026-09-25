@@ -63,7 +63,7 @@
   padding: 2.4rem;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1100px) {
   .card {
     padding: 1.8rem;
   }
@@ -172,7 +172,7 @@ html {
 
 ## Tablet/mobile
 
-Ниже 1024px — отдельная композиция.
+До 1100px — отдельная tablet/mobile композиция.
 
 Это не «уменьшенный desktop».
 
