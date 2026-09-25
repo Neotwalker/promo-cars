@@ -25,7 +25,7 @@
 }
 
 html {
-  font-size:clamp(5.33px,calc(100vw / 192),11.5px);
+  font-size:clamp(8px,calc(100vw / 192),11.5px);
   scroll-behavior:smooth;
 }
 
