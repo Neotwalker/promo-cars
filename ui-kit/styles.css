@@ -347,7 +347,7 @@ code,.mono{
 }
 .case-card-media{
   position:relative;
-  min-height:24rem;
+  min-height:20rem;
   overflow:hidden;
   background:
     radial-gradient(circle at 68% 24%,rgba(255,255,255,.4),transparent 26%),
@@ -364,14 +364,14 @@ code,.mono{
   right:-.8rem;
   bottom:-.6rem;
   color:rgba(16,18,22,.07);
-  font-size:10rem;
+  font-size:8rem;
   line-height:.8;
   letter-spacing:-.08em;
   font-weight:700;
   transition:transform var(--motion-slow) var(--ease-ui);
 }
 .case-card:hover .case-card-mark{transform:translateX(-.5rem)}
-.case-card-body{padding:2rem}
+.case-card-body{padding:1.7rem}
 .case-card-body header{
   display:flex;
   justify-content:space-between;
@@ -379,8 +379,8 @@ code,.mono{
   gap:2rem;
 }
 .case-card-body h3{
-  margin:3rem 0 1rem;
-  font-size:3.2rem;
+  margin:2.2rem 0 .8rem;
+  font-size:2.7rem;
   line-height:.96;
   letter-spacing:-.045em;
   font-weight:400;
@@ -389,7 +389,7 @@ code,.mono{
   max-width:48rem;
   margin:0;
   color:var(--steel);
-  font-size:1.25rem;
+  font-size:1.15rem;
 }
 
 .document-card-specimen{margin-top:2rem}
