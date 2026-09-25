@@ -89,6 +89,11 @@
   let detailTimer = 0;
 
   const clamp = value => Math.min(1, Math.max(0, value));
+  const journeySegments = Math.max(1, nodes.length - 1);
+
+  nodes.forEach((node, nodeIndex) => {
+    node.style.left = ((nodeIndex / journeySegments) * 100) + '%';
+  });
 
   const writeDetail = (state, displayNumber) => {
     code.textContent = 'STEP / ' + displayNumber;

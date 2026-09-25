@@ -1372,6 +1372,7 @@ main > section[id],
 }
 
 .journey-node {
+  margin-left:-.5rem;
   transition:
     transform var(--motion-hover) var(--ease-ui),
     border-color var(--motion-hover) var(--ease-ui),
@@ -1414,15 +1415,6 @@ main > section[id],
   border-radius:50%;
   animation:journey-node-pulse 1.5s var(--ease-ui) infinite;
 }
-
-.journey-node-1 { left:0; }
-.journey-node-2 { left:14.285%; }
-.journey-node-3 { left:28.57%; }
-.journey-node-4 { left:42.855%; }
-.journey-node-5 { left:57.14%; }
-.journey-node-6 { left:71.425%; }
-.journey-node-7 { left:85.71%; }
-.journey-node-8 { right:0; }
 
 .journey-marker {
   z-index:3;
