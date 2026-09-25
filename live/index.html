@@ -413,6 +413,103 @@
       </div>
     </section>
 
+    <section class="configurator-section" id="configurator" aria-labelledby="configurator-title" data-configurator>
+      <header class="configurator-heading">
+        <div>
+          <p class="configurator-kicker">05 / COST CONFIGURATOR</p>
+          <h2 id="configurator-title">Соберите<br>свой расчёт.</h2>
+        </div>
+
+        <p>Выберите основные параметры. Здесь не будет выдуманной «точной цены»: блок показывает структуру будущего расчёта и передаёт параметры в запрос.</p>
+      </header>
+
+      <div class="configurator-panel">
+        <form class="configurator-controls" aria-label="Параметры предварительного расчёта">
+          <div class="configurator-selected">
+            <span>SELECTED / VEHICLE</span>
+            <strong data-config-selected-model>Xiaomi SU7</strong>
+            <small><span data-config-selected-power>EV</span> · <span data-config-selected-condition>Новый</span></small>
+          </div>
+
+          <fieldset class="configurator-group" data-config-group="model">
+            <legend><span>01</span> Автомобиль</legend>
+            <div class="configurator-options">
+              <button class="choice-chip" type="button" aria-pressed="true" data-value="Xiaomi SU7">Xiaomi SU7</button>
+              <button class="choice-chip" type="button" aria-pressed="false" data-value="Zeekr 001">Zeekr 001</button>
+              <button class="choice-chip" type="button" aria-pressed="false" data-value="Li Auto L6">Li Auto L6</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="configurator-group" data-config-group="power">
+            <legend><span>02</span> Тип</legend>
+            <div class="configurator-options">
+              <button class="choice-chip" type="button" aria-pressed="true" data-value="EV">EV</button>
+              <button class="choice-chip" type="button" aria-pressed="false" data-value="Hybrid">HYBRID</button>
+              <button class="choice-chip" type="button" aria-pressed="false" data-value="ICE">ICE</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="configurator-group" data-config-group="condition">
+            <legend><span>03</span> Состояние</legend>
+            <div class="configurator-options">
+              <button class="choice-chip" type="button" aria-pressed="true" data-value="Новый">Новый</button>
+              <button class="choice-chip" type="button" aria-pressed="false" data-value="С пробегом">С пробегом</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="configurator-group" data-config-group="budget">
+            <legend><span>04</span> Бюджет</legend>
+            <div class="configurator-options">
+              <button class="choice-chip" type="button" aria-pressed="false" data-value="до 3 млн ₽">до 3 млн</button>
+              <button class="choice-chip" type="button" aria-pressed="true" data-value="3–5 млн ₽">3–5 млн</button>
+              <button class="choice-chip" type="button" aria-pressed="false" data-value="5+ млн ₽">5+ млн</button>
+            </div>
+          </fieldset>
+
+          <label class="configurator-city">
+            <span><i>05</i> Город доставки</span>
+            <input type="text" value="Москва" autocomplete="address-level2" data-config-city>
+          </label>
+        </form>
+
+        <aside class="configurator-output" aria-live="polite">
+          <div class="configurator-output-head">
+            <div>
+              <span>COST / PRELIMINARY</span>
+              <strong data-config-output-model>Xiaomi SU7</strong>
+            </div>
+            <span class="configurator-status"><i aria-hidden="true"></i><span data-config-status>PRELIMINARY</span></span>
+          </div>
+
+          <div class="configurator-route" aria-label="Выбранный маршрут">
+            <span>CN</span>
+            <i aria-hidden="true"></i>
+            <span data-config-output-city>Москва</span>
+          </div>
+
+          <dl class="configurator-breakdown">
+            <div><dt>AUTO PRICE</dt><dd>после подбора</dd></div>
+            <div><dt>LOGISTICS</dt><dd>по маршруту</dd></div>
+            <div><dt>CUSTOMS</dt><dd>по параметрам авто</dd></div>
+            <div><dt>RECYCLE FEE</dt><dd>по параметрам авто</dd></div>
+            <div class="configurator-total"><dt>YOUR BUDGET</dt><dd data-config-output-budget>3–5 млн ₽</dd></div>
+          </dl>
+
+          <div class="configurator-summary">
+            <span>CONFIG / SUMMARY</span>
+            <p><strong data-config-summary-model>Xiaomi SU7</strong> · <span data-config-summary-power>EV</span> · <span data-config-summary-condition>Новый</span> · <span data-config-summary-city>Москва</span></p>
+          </div>
+
+          <p class="configurator-note">Финальная стоимость зависит от конкретного автомобиля, курса, таможенных платежей и конечного маршрута. Точная смета рассчитывается отдельно.</p>
+
+          <a class="button button-primary configurator-action" href="#contact">
+            <span>Получить точную смету</span>
+            <i aria-hidden="true">↗</i>
+          </a>
+        </aside>
+      </div>
+    </section>
+
     <section class="contact-strip" id="contact" aria-labelledby="contact-title">
       <div>
         <p class="contact-kicker">START / REQUEST</p>
