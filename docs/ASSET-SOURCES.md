@@ -16,17 +16,18 @@
 
 **Source:** generated project asset  
 **Asset:** futuristic neon concrete garage / showroom stage  
-**File:** `live/assets/hero/nexroute-garage-bg.avif`  
+**File:** `live/assets/hero/nexroute-garage-bg-1254.webp`  
 **Master generation:** 1254 × 1254  
-**Live derivative:** 768 × 768 AVIF  
+**Live derivative:** 1254 × 1254 WebP, quality 88  
 **Added:** 2026-09-25
 
 Implementation notes:
 - background only; no vehicle is baked into the current Hero asset;
 - near-square composition is intentional because the Hero media frame stays close to square across the main responsive states;
 - the open central stage is reserved for the future vehicle-selection loop;
-- current live derivative is intentionally lightweight for preview/prototyping;
-- before final commercial handoff, replace it with a higher-quality optimized export from the approved master if needed.
+- current live asset uses the full generated resolution rather than the earlier 768 px preview derivative;
+- use the 1254 px WebP as the current visual-quality baseline;
+- if the Hero media frame later exceeds roughly 800 CSS px on high-DPI displays, prepare a dedicated 1800–2200 px 2x master rather than upscaling this file.
 
 ### Previous Hero video candidates
 
