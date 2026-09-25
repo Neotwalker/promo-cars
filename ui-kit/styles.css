@@ -329,6 +329,69 @@ code,.mono{
 
 
 
+
+.case-card-specimen{margin-top:2rem}
+.case-card{
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--paper);
+  transition:
+    transform var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-hover) var(--ease-ui);
+}
+.case-card:hover{
+  transform:translateY(-.4rem);
+  border-color:rgba(16,18,22,.28);
+  box-shadow:0 2rem 4rem rgba(16,18,22,.08);
+}
+.case-card-media{
+  position:relative;
+  min-height:24rem;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 68% 24%,rgba(255,255,255,.4),transparent 26%),
+    linear-gradient(145deg,#d2d8da,#a5afb3);
+}
+.case-card-route{
+  position:absolute;
+  top:1.6rem;
+  left:1.6rem;
+  font:500 .9rem ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+.case-card-mark{
+  position:absolute;
+  right:-.8rem;
+  bottom:-.6rem;
+  color:rgba(16,18,22,.07);
+  font-size:10rem;
+  line-height:.8;
+  letter-spacing:-.08em;
+  font-weight:700;
+  transition:transform var(--motion-slow) var(--ease-ui);
+}
+.case-card:hover .case-card-mark{transform:translateX(-.5rem)}
+.case-card-body{padding:2rem}
+.case-card-body header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:2rem;
+}
+.case-card-body h3{
+  margin:3rem 0 1rem;
+  font-size:3.2rem;
+  line-height:.96;
+  letter-spacing:-.045em;
+  font-weight:400;
+}
+.case-card-body p{
+  max-width:48rem;
+  margin:0;
+  color:var(--steel);
+  font-size:1.25rem;
+}
+
 .document-card-specimen{margin-top:2rem}
 .document-card{
   min-height:42rem;
@@ -861,7 +924,7 @@ code,.mono{
   .state-grid,.field-state-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
-  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.document-card,.document-card-sheet,.media-card,.media-card-frame,
+  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.case-card,.case-card-mark,.document-card,.document-card-sheet,.media-card,.media-card-frame,
   .route-card,.metric-card,.glass-card,.car-card,.car-media img,.kit-nav a::after{
     transition:none;
   }
