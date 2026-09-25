@@ -3306,6 +3306,12 @@ a:focus-visible {
 .final-secondary {
   color:var(--white);
   border-color:rgba(255,255,255,.2);
+  transition:
+    color var(--motion-hover) var(--ease-ui),
+    background var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    transform var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-focus) var(--ease-ui);
 }
 
 .final-secondary:hover {
@@ -3911,6 +3917,7 @@ a:focus-visible {
 
   .button i,
   .header-action,
+  .final-secondary,
   .proof-item,
   .proof-index,
   .proof-index i,
