@@ -327,6 +327,88 @@ code,.mono{
 .car-info dd{margin:0;font-size:1.45rem}
 
 
+
+.media-card-specimen{
+  margin-top:2rem;
+}
+.media-card{
+  min-height:34rem;
+  padding:2rem;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--paper);
+  transition:
+    transform var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    box-shadow var(--motion-hover) var(--ease-ui);
+}
+.media-card:hover{
+  transform:translateY(-.4rem);
+  border-color:rgba(16,18,22,.28);
+  box-shadow:0 2rem 4rem rgba(16,18,22,.08);
+}
+.media-card-dark{
+  color:#fff;
+  border-color:rgba(255,255,255,.14);
+  background:var(--night);
+}
+.media-card-dark:hover{border-color:rgba(255,255,255,.3)}
+.media-card-head{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  gap:2rem;
+  color:var(--steel);
+  font-size:.9rem;
+}
+.media-card-dark .media-card-head{color:rgba(255,255,255,.42)}
+.media-card-state{white-space:nowrap}
+.media-card-visual{
+  position:relative;
+  flex:1;
+  min-height:18rem;
+  margin:2rem 0;
+  overflow:hidden;
+  background:linear-gradient(145deg,#313b43,#172029);
+}
+.media-card-frame{
+  position:absolute;
+  inset:18% 11%;
+  border:1px solid rgba(255,255,255,.16);
+  transition:transform var(--motion-slow) var(--ease-ui);
+}
+.media-card:hover .media-card-frame{transform:scale(1.025)}
+.media-card-mark{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:4.8rem;
+  height:4.8rem;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  font-size:1.2rem;
+}
+.media-card-copy h3{
+  margin:0 0 1rem;
+  font-size:3rem;
+  line-height:1;
+  letter-spacing:-.04em;
+  font-weight:400;
+}
+.media-card-copy p{
+  max-width:42rem;
+  margin:0;
+  color:var(--steel);
+  font-size:1.25rem;
+}
+.media-card-dark .media-card-copy p{color:rgba(255,255,255,.48)}
+
 .choice-specimen{
   margin-top:2rem;
   padding:2.4rem;
@@ -718,7 +800,7 @@ code,.mono{
   .state-grid,.field-state-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
-  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,
+  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.media-card,.media-card-frame,
   .route-card,.metric-card,.glass-card,.car-card,.car-media img,.kit-nav a::after{
     transition:none;
   }
