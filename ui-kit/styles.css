@@ -326,6 +326,40 @@ code,.mono{
 .car-info dt{font:500 1.05rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--steel)}
 .car-info dd{margin:0;font-size:1.45rem}
 
+
+.choice-specimen{
+  margin-top:2rem;
+  padding:2.4rem;
+  display:grid;
+  grid-template-columns:1.3fr 3fr;
+  gap:2rem;
+  align-items:end;
+  border:1px solid var(--line);
+  background:var(--white);
+}
+.choice-specimen>div:first-child .mono{font-size:1rem;color:var(--steel)}
+.choice-specimen h3{margin:1rem 0 0;font-size:3.4rem;font-weight:400}
+.choice-chip-row{display:flex;flex-wrap:wrap;gap:.8rem}
+.choice-chip{
+  min-height:4.6rem;
+  padding:0 1.5rem;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--ink);
+  cursor:pointer;
+  font:500 1.05rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  transition:
+    color var(--motion-hover) var(--ease-ui),
+    background var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    transform var(--motion-active) var(--ease-press),
+    box-shadow var(--motion-focus) var(--ease-ui);
+}
+.choice-chip:hover{border-color:rgba(16,18,22,.42)}
+.choice-chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.choice-chip:active{transform:scale(.975)}
+.choice-chip:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
 .form-specimen{
   margin-top:2rem;
   padding:2.4rem;
@@ -434,6 +468,7 @@ code,.mono{
   .component-grid{grid-template-columns:1fr}
   .route-card,.metric-card,.glass-card,.car-card{grid-column:auto}
   .car-card{grid-template-columns:1fr 1fr}
+  .choice-specimen{grid-template-columns:1fr}
   .form-specimen{grid-template-columns:1fr 1fr}
   .form-specimen>div{grid-column:1/-1}.form-specimen .btn{justify-self:start}
   .motion-demo h3{font-size:5.6rem}
@@ -448,6 +483,8 @@ code,.mono{
   .type-display div{font-size:5rem}.type-h1 div{font-size:4.6rem}
   .button-row{align-items:stretch}.btn{width:100%}.btn span{flex:1}
   .car-card{grid-template-columns:1fr}.car-media{min-height:32rem}
+  .choice-chip-row{display:grid;grid-template-columns:1fr}
+  .choice-chip{width:100%}
   .form-specimen{grid-template-columns:1fr}.form-specimen .btn{width:100%}
   .motion-demo h3{font-size:4.6rem}
   .hero-concept-copy h3{font-size:4.6rem}
@@ -681,7 +718,7 @@ code,.mono{
   .state-grid,.field-state-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
-  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,
+  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,
   .route-card,.metric-card,.glass-card,.car-card,.car-media img,.kit-nav a::after{
     transition:none;
   }
