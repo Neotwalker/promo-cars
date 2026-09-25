@@ -253,6 +253,7 @@ code,.mono{
 .btn-primary{background:var(--signal);color:#fff}
 .btn-primary span,.btn-primary i{border-color:var(--signal)}
 .btn-ghost{color:var(--ink)}
+.btn-ghost-inverse{color:#fff}
 .round-btn{
   width:5.2rem;height:5.2rem;border-radius:50%;border:1px solid var(--line);background:transparent;display:grid;place-content:center;gap:.5rem;cursor:pointer
 }
@@ -692,7 +693,8 @@ code,.mono{
 .hero-concept-copy h3{margin:8rem 0 0;font-size:7.4rem;line-height:.93;letter-spacing:-.06em;font-weight:400}
 .hero-concept-copy h3 em{font-style:normal;color:rgba(255,255,255,.3)}
 .hero-concept-copy p{max-width:46rem;margin:auto 0 3rem;font-size:1.5rem;color:rgba(255,255,255,.62)}
-.hero-concept-copy .btn{align-self:flex-start}
+.hero-concept-actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:stretch;align-self:flex-start}
+.hero-concept-actions .btn span{min-width:18rem}
 .hero-concept-visual{position:relative;overflow:hidden;background:#171b20}
 .hero-concept-visual img{position:absolute;inset:17% -6% auto 8%;width:98%;height:70%;object-fit:cover;filter:saturate(.55) contrast(1.06)}
 .route-code{
@@ -822,7 +824,9 @@ code,.mono{
 .btn-primary:hover{filter:saturate(1.06) brightness(.96)}
 .btn-primary:active{filter:brightness(.9)}
 .btn-ghost:hover span,.btn-ghost:hover i{background:var(--ink);color:#fff;border-color:var(--ink)}
-.btn-ghost:active span,.btn-ghost:active i{background:#272b31}
+.btn-ghost:active span,.btn-ghost:active i{background:#272b31;color:#fff;border-color:#272b31}
+.btn-ghost-inverse:hover span,.btn-ghost-inverse:hover i{background:#fff;color:var(--ink);border-color:#fff}
+.btn-ghost-inverse:active span,.btn-ghost-inverse:active i{background:#e7e4de;color:var(--ink);border-color:#e7e4de}
 .btn:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .btn:focus-visible span,.btn:focus-visible i{border-color:var(--signal)}
 

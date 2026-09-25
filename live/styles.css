@@ -260,6 +260,15 @@ a:focus-visible {
   border:1px solid currentColor;
 }
 
+.button span,
+.button i {
+  transition:
+    background var(--motion-hover) var(--ease-ui),
+    color var(--motion-hover) var(--ease-ui),
+    border-color var(--motion-hover) var(--ease-ui),
+    transform var(--motion-hover) var(--ease-ui);
+}
+
 .button i {
   width:5.4rem;
   display:grid;
@@ -268,7 +277,6 @@ a:focus-visible {
   border-left:0;
   font-size:1.8rem;
   font-style:normal;
-  transition:transform var(--motion-hover) var(--ease-ui);
 }
 
 .button-primary {
@@ -282,24 +290,64 @@ a:focus-visible {
 }
 
 .button-ghost {
-  color:rgba(255,255,255,.82);
+  color:var(--ink);
+}
+
+.button-ghost-inverse {
+  color:var(--white);
 }
 
 .button:hover i {
   transform:translate(.3rem,-.3rem);
 }
+
 .button:active {
   transform:scale(.985);
   transition-duration:var(--motion-active);
   transition-timing-function:var(--ease-press);
 }
+
+.button:active span,
 .button:active i {
-  transform:translate(0,0);
   transition-duration:var(--motion-active);
+  transition-timing-function:var(--ease-press);
 }
 
-.button-ghost:hover {
+.button:active i {
+  transform:translate(0,0);
+}
+
+.button-ghost:hover span,
+.button-ghost:hover i {
   color:var(--white);
+  background:var(--ink);
+  border-color:var(--ink);
+}
+
+.button-ghost:active span,
+.button-ghost:active i {
+  color:var(--white);
+  background:#272b31;
+  border-color:#272b31;
+}
+
+.button-ghost-inverse:hover span,
+.button-ghost-inverse:hover i {
+  color:var(--ink);
+  background:var(--white);
+  border-color:var(--white);
+}
+
+.button-ghost-inverse:active span,
+.button-ghost-inverse:active i {
+  color:var(--ink);
+  background:#e7e4de;
+  border-color:#e7e4de;
+}
+
+.button:focus-visible span,
+.button:focus-visible i {
+  border-color:var(--signal);
 }
 
 .hero-stage {
@@ -3303,23 +3351,6 @@ a:focus-visible {
   gap:1rem;
 }
 
-.final-secondary {
-  color:var(--white);
-  border-color:rgba(255,255,255,.2);
-  transition:
-    color var(--motion-hover) var(--ease-ui),
-    background var(--motion-hover) var(--ease-ui),
-    border-color var(--motion-hover) var(--ease-ui),
-    transform var(--motion-hover) var(--ease-ui),
-    box-shadow var(--motion-focus) var(--ease-ui);
-}
-
-.final-secondary:hover {
-  color:var(--ink);
-  background:var(--white);
-  border-color:var(--white);
-}
-
 .final-phone {
   margin-top:2rem;
   max-width:48rem;
@@ -3917,7 +3948,6 @@ a:focus-visible {
 
   .button i,
   .header-action,
-  .final-secondary,
   .proof-item,
   .proof-index,
   .proof-index i,
