@@ -251,3 +251,102 @@
   renderProgress(0);
   requestScrollUpdate();
 })();
+
+
+(() => {
+  const root = document.querySelector('[data-configurator]');
+
+  if (!root || root.dataset.ready === 'true') {
+    return;
+  }
+
+  root.dataset.ready = 'true';
+
+  const groups = [...root.querySelectorAll('[data-config-group]')];
+  const cityInput = root.querySelector('[data-config-city]');
+  const output = root.querySelector('.configurator-output');
+  const status = root.querySelector('[data-config-status]');
+
+  const targets = {
+    model:[
+      root.querySelector('[data-config-selected-model]'),
+      root.querySelector('[data-config-output-model]'),
+      root.querySelector('[data-config-summary-model]')
+    ],
+    power:[
+      root.querySelector('[data-config-selected-power]'),
+      root.querySelector('[data-config-summary-power]')
+    ],
+    condition:[
+      root.querySelector('[data-config-selected-condition]'),
+      root.querySelector('[data-config-summary-condition]')
+    ],
+    budget:[
+      root.querySelector('[data-config-output-budget]')
+    ],
+    city:[
+      root.querySelector('[data-config-output-city]'),
+      root.querySelector('[data-config-summary-city]')
+    ]
+  };
+
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let calculationTimer = 0;
+
+  const setText = (key, value) => {
+    targets[key].forEach(target => {
+      if (target) {
+        target.textContent = value;
+      }
+    });
+  };
+
+  const showCalculationState = () => {
+    window.clearTimeout(calculationTimer);
+
+    if (reducedMotionQuery.matches) {
+      output.classList.remove('is-calculating');
+      status.lastChild.textContent = ' PRELIMINARY';
+      return;
+    }
+
+    output.classList.add('is-calculating');
+    status.lastChild.textContent = ' RECALCULATING';
+
+    calculationTimer = window.setTimeout(() => {
+      output.classList.remove('is-calculating');
+      status.lastChild.textContent = ' PRELIMINARY';
+    }, 360);
+  };
+
+  groups.forEach(group => {
+    group.addEventListener('click', event => {
+      const button = event.target.closest('.choice-chip');
+
+      if (!button || !group.contains(button)) {
+        return;
+      }
+
+      group.querySelectorAll('.choice-chip').forEach(option => {
+        option.setAttribute('aria-pressed', option === button ? 'true' : 'false');
+      });
+
+      setText(group.dataset.configGroup, button.dataset.value);
+      showCalculationState();
+    });
+  });
+
+  cityInput.addEventListener('input', () => {
+    const value = cityInput.value.trim() || 'Город';
+    setText('city', value);
+    showCalculationState();
+  });
+
+  reducedMotionQuery.addEventListener('change', () => {
+    if (reducedMotionQuery.matches) {
+      window.clearTimeout(calculationTimer);
+      output.classList.remove('is-calculating');
+      status.lastChild.textContent = ' PRELIMINARY';
+    }
+  });
+})();
