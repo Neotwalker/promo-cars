@@ -1832,9 +1832,6 @@ a:focus-visible {
   justify-content:space-between;
   gap:2rem;
   align-items:start;
-  transition:
-    opacity var(--motion-focus) var(--ease-ui),
-    transform var(--motion-focus) var(--ease-ui);
 }
 
 .configurator-output-head > div > span {
@@ -1879,9 +1876,6 @@ a:focus-visible {
   align-items:center;
   color:rgba(255,255,255,.5);
   font-size:.9rem;
-  transition:
-    opacity var(--motion-focus) var(--ease-ui),
-    transform var(--motion-focus) var(--ease-ui);
 }
 
 .configurator-route i {
@@ -1891,9 +1885,6 @@ a:focus-visible {
 
 .configurator-breakdown {
   margin:0 0 3rem;
-  transition:
-    opacity var(--motion-focus) var(--ease-ui),
-    transform var(--motion-focus) var(--ease-ui);
 }
 
 .configurator-breakdown div {
@@ -1935,9 +1926,6 @@ a:focus-visible {
   padding:1.6rem 0;
   border-top:1px solid var(--line-light);
   border-bottom:1px solid var(--line-light);
-  transition:
-    opacity var(--motion-focus) var(--ease-ui),
-    transform var(--motion-focus) var(--ease-ui);
 }
 
 .configurator-summary > span {
@@ -1965,14 +1953,6 @@ a:focus-visible {
 
 .configurator-action {
   align-self:flex-start;
-}
-
-.configurator-output.is-calculating .configurator-output-head,
-.configurator-output.is-calculating .configurator-route,
-.configurator-output.is-calculating .configurator-breakdown,
-.configurator-output.is-calculating .configurator-summary {
-  opacity:.42;
-  transform:translateY(.4rem);
 }
 
 @media (max-width:1023px) {
@@ -2536,10 +2516,6 @@ a:focus-visible {
   .journey-action i,
   .choice-chip,
   .configurator-city input,
-  .configurator-output-head,
-  .configurator-route,
-  .configurator-breakdown,
-  .configurator-summary,
   .contact-phone,
   .contact-phone i {
     transition:none;
