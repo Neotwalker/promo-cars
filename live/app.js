@@ -301,6 +301,84 @@
     });
   };
 
+  const compactOptionsQuery = window.matchMedia('(max-width: 640px)');
+  const compactOptionLimit = 6;
+  const overflowSync = [];
+
+  groups.forEach(group => {
+    const optionsContainer = group.querySelector('.configurator-options');
+    const options = [...group.querySelectorAll('.choice-chip')];
+
+    if (!optionsContainer || options.length <= compactOptionLimit) {
+      return;
+    }
+
+    const containerId = 'config-options-' + group.dataset.configGroup;
+    optionsContainer.id = containerId;
+
+    const moreButton = document.createElement('button');
+    moreButton.type = 'button';
+    moreButton.className = 'configurator-more';
+    moreButton.setAttribute('aria-controls', containerId);
+    moreButton.setAttribute('aria-expanded', 'false');
+    moreButton.innerHTML = '<span>Показать ещё</span><b></b>';
+    group.append(moreButton);
+
+    const syncOverflow = () => {
+      const compact = compactOptionsQuery.matches;
+      const expanded = moreButton.getAttribute('aria-expanded') === 'true';
+
+      if (!compact) {
+        options.forEach(option => { option.hidden = false; });
+        moreButton.hidden = true;
+        moreButton.setAttribute('aria-expanded', 'false');
+        return;
+      }
+
+      moreButton.hidden = false;
+
+      if (expanded) {
+        options.forEach(option => { option.hidden = false; });
+        moreButton.querySelector('span').textContent = 'Свернуть';
+        moreButton.querySelector('b').textContent = '−';
+        return;
+      }
+
+      const selected = options.find(option => option.getAttribute('aria-pressed') === 'true');
+      const visible = options.slice(0, compactOptionLimit);
+
+      if (selected && options.indexOf(selected) >= compactOptionLimit) {
+        visible[visible.length - 1] = selected;
+      }
+
+      const visibleSet = new Set(visible);
+      options.forEach(option => { option.hidden = !visibleSet.has(option); });
+
+      const hiddenCount = options.length - visibleSet.size;
+      moreButton.querySelector('span').textContent = 'Показать ещё';
+      moreButton.querySelector('b').textContent = '+' + hiddenCount;
+    };
+
+    moreButton.addEventListener('click', () => {
+      const expanded = moreButton.getAttribute('aria-expanded') === 'true';
+      moreButton.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      syncOverflow();
+    });
+
+    overflowSync.push(syncOverflow);
+    syncOverflow();
+  });
+
+  const syncAllOverflow = () => {
+    overflowSync.forEach(sync => sync());
+  };
+
+  if (typeof compactOptionsQuery.addEventListener === 'function') {
+    compactOptionsQuery.addEventListener('change', syncAllOverflow);
+  } else {
+    compactOptionsQuery.addListener(syncAllOverflow);
+  }
+
   groups.forEach(group => {
     group.addEventListener('click', event => {
       const button = event.target.closest('.choice-chip');
