@@ -4111,6 +4111,278 @@ main > section[id],
   }
 }
 
+@media (max-width:820px) and (orientation:landscape) {
+  main > section[id],
+  #route-card {
+    scroll-margin-top:7rem;
+  }
+
+  .site-header {
+    height:5.6rem;
+    padding:0 1.5rem;
+  }
+
+  .hero {
+    padding:5.6rem 1.5rem 1.5rem;
+  }
+
+  .hero-grid {
+    inset:5.6rem 1.5rem 1.5rem;
+    background-size:25% 100%,100% 5.5rem;
+  }
+
+  .hero-copy {
+    min-height:0;
+    padding-top:3rem;
+  }
+
+  .hero h1 {
+    max-width:68rem;
+    margin-top:2.5rem;
+    font-size:5.4rem;
+    line-height:.88;
+  }
+
+  .hero-copy-bottom {
+    margin-top:3rem;
+    padding-bottom:2rem;
+    gap:1.6rem;
+  }
+
+  .hero-description {
+    max-width:48rem;
+    font-size:1.2rem;
+  }
+
+  .hero-actions {
+    display:flex;
+    justify-content:flex-start;
+    gap:1rem;
+  }
+
+  .button {
+    width:auto;
+    min-height:4.8rem;
+  }
+
+  .button span {
+    min-width:15rem;
+    padding-inline:1.4rem;
+  }
+
+  .button i {
+    width:4.8rem;
+  }
+
+  .hero-stage {
+    min-height:32rem;
+  }
+
+  .route-card {
+    min-height:14rem;
+  }
+
+  .journey-sticky,
+  .configurator-section,
+  .trust-section,
+  .safety-section,
+  .reviews-section,
+  .faq-section {
+    padding-top:6rem;
+    padding-bottom:6rem;
+  }
+
+  .journey-heading h2,
+  .configurator-heading h2,
+  .trust-heading h2,
+  .safety-heading h2,
+  .reviews-heading h2,
+  .faq-heading h2 {
+    font-size:5rem;
+  }
+
+  .journey-steps button {
+    min-height:6.8rem;
+  }
+
+  .configurator-heading,
+  .trust-heading,
+  .safety-heading,
+  .reviews-heading,
+  .faq-heading {
+    margin-bottom:4rem;
+  }
+}
+
+@media (min-width:641px) and (max-width:820px) and (orientation:landscape) {
+  .journey-stage {
+    min-height:52rem;
+    grid-template-columns:7fr 5fr;
+  }
+
+  .journey-visual {
+    min-height:0;
+    border-right:1px solid var(--line-light);
+    border-bottom:0;
+  }
+
+  .journey-map {
+    top:21%;
+  }
+
+  .journey-car-wrap {
+    left:5%;
+    right:5%;
+    height:54%;
+  }
+
+  .journey-stage-number {
+    font-size:14rem;
+  }
+
+  .journey-detail {
+    min-height:0;
+    padding:1.6rem;
+  }
+
+  .journey-detail-copy {
+    margin-top:3rem;
+  }
+
+  .journey-detail-copy h3 {
+    font-size:3.6rem;
+  }
+
+  .final-cta {
+    min-height:100svh;
+    padding:5.6rem 1.5rem 1.5rem;
+    grid-template-columns:7fr 5fr;
+  }
+
+  .final-cta-copy {
+    min-height:0;
+  }
+
+  .final-cta h2 {
+    margin-top:3.5rem;
+    font-size:4.8rem;
+  }
+
+  .final-cta-copy > p {
+    margin-top:2rem;
+    font-size:1.15rem;
+  }
+
+  .final-actions {
+    padding-top:2rem;
+  }
+
+  .final-stage {
+    min-height:0;
+  }
+}
+
+@media (min-width:700px) and (max-width:820px) and (orientation:landscape) {
+  .configurator-panel {
+    grid-template-columns:7fr 5fr;
+  }
+
+  .configurator-controls,
+  .configurator-output {
+    padding:1.6rem;
+  }
+
+  .configurator-selected {
+    min-height:11rem;
+  }
+
+  .configurator-selected strong,
+  .configurator-output-head strong {
+    font-size:3.6rem;
+  }
+
+  .configurator-output {
+    min-height:0;
+  }
+
+  .safety-layout {
+    grid-template-columns:5fr 7fr;
+  }
+
+  .safety-document {
+    min-height:48rem;
+  }
+
+  .safety-point {
+    gap:1.4rem;
+    padding:1.8rem 0;
+  }
+}
+
+@media (max-width:640px) and (orientation:landscape) {
+  .hero h1 {
+    font-size:4.8rem;
+  }
+
+  .hero-actions {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .button span {
+    min-width:0;
+  }
+
+  .journey-sticky {
+    padding-inline:1.5rem;
+  }
+
+  .journey-heading h2,
+  .configurator-heading h2,
+  .trust-heading h2,
+  .safety-heading h2,
+  .reviews-heading h2,
+  .faq-heading h2 {
+    font-size:4.4rem;
+  }
+
+  .journey-visual {
+    min-height:32rem;
+  }
+
+  .journey-detail {
+    min-height:34rem;
+  }
+
+  .final-cta {
+    padding-top:5.6rem;
+    padding-bottom:5rem;
+  }
+
+  .final-cta-copy {
+    min-height:0;
+  }
+
+  .final-cta h2 {
+    margin-top:3.5rem;
+    font-size:4.6rem;
+  }
+
+  .final-actions {
+    padding-top:3rem;
+  }
+
+  .final-stage {
+    min-height:32rem;
+  }
+}
+
+@media (min-width:560px) and (max-width:640px) and (orientation:landscape) {
+  .reviews-wall {
+    column-count:2;
+  }
+}
+
 @media (prefers-reduced-motion:reduce) {
   html {
     scroll-behavior:auto;
