@@ -154,7 +154,7 @@ Desktop использует fluid-rem систему проекта.
 
 ```css
 html {
-  font-size: clamp(8px, calc(100vw / 192), 11.5px);
+  font-size: clamp(9px, calc(100vw / 192), 11.5px);
 }
 ```
 

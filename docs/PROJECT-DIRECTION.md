@@ -70,7 +70,7 @@ UI-kit является основой сайта.
 
 ```css
 html {
-  font-size: clamp(8px, calc(100vw / 192), 11.5px);
+  font-size: clamp(9px, calc(100vw / 192), 11.5px);
 }
 ```
 
