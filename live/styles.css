@@ -2873,6 +2873,23 @@ a:focus-visible {
   }
 }
 
+@media (max-width:820px) {
+  .safety-point {
+    min-height:0;
+    grid-template-columns:1fr;
+    gap:2rem;
+    padding:2.4rem 0;
+  }
+
+  .safety-point:hover {
+    padding-left:0;
+  }
+
+  .safety-point-status {
+    width:max-content;
+  }
+}
+
 @media (max-width:640px) {
   .safety-section {
     padding:8rem 1.5rem;
@@ -2895,20 +2912,6 @@ a:focus-visible {
     font-size:4rem;
   }
 
-  .safety-point {
-    min-height:0;
-    grid-template-columns:1fr;
-    gap:2rem;
-    padding:2.4rem 0;
-  }
-
-  .safety-point:hover {
-    padding-left:0;
-  }
-
-  .safety-point-status {
-    width:max-content;
-  }
 }
 
 
