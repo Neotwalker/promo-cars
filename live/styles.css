@@ -3170,21 +3170,11 @@ a:focus-visible {
 }
 
 .faq-answer {
-  display:grid;
-  grid-template-rows:0fr;
-  opacity:0;
-  transition:
-    grid-template-rows var(--motion-hover) var(--ease-ui),
-    opacity var(--motion-focus) var(--ease-ui);
-}
-
-.faq-item[open] .faq-answer {
-  grid-template-rows:1fr;
-  opacity:1;
-}
-
-.faq-answer > div {
   overflow:hidden;
+}
+
+.faq-item.is-closing summary i::after {
+  transform:translate(-50%,-50%) rotate(90deg);
 }
 
 .faq-answer p {
@@ -3739,8 +3729,7 @@ a:focus-visible {
   .faq-item summary,
   .faq-item summary i::before,
   .faq-item summary i::after,
-  .faq-answer,
-  .contact-phone,
+    .contact-phone,
   .contact-phone i {
     transition:none;
   }
