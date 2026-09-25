@@ -2829,13 +2829,13 @@ a:focus-visible {
 }
 
 
-.cases-section {
-  padding:11rem 2.4rem 11rem;
+.reviews-section {
+  padding:10rem 2.4rem 11rem;
   background:var(--white);
   border-bottom:1px solid var(--line-dark);
 }
 
-.cases-heading {
+.reviews-heading {
   display:grid;
   grid-template-columns:7fr 5fr;
   gap:2rem;
@@ -2843,48 +2843,47 @@ a:focus-visible {
   margin-bottom:5rem;
 }
 
-.cases-kicker,
-.case-media-meta,
-.case-title > div > span,
-.case-status,
-.case-meta,
-.case-note {
+.reviews-kicker,
+.review-card header,
+.review-label,
+.reviews-note {
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   letter-spacing:.025em;
 }
 
-.cases-kicker {
-  margin:0 0 2.4rem;
+.reviews-kicker {
+  margin:0 0 2rem;
   color:var(--steel);
   font-size:1rem;
 }
 
-.cases-heading h2 {
+.reviews-heading h2 {
   margin:0;
-  font-size:7.2rem;
-  line-height:.9;
-  letter-spacing:-.058em;
+  font-size:6.4rem;
+  line-height:.92;
+  letter-spacing:-.055em;
   font-weight:400;
 }
 
-.cases-heading > p {
+.reviews-heading > p {
   justify-self:end;
   max-width:50rem;
   margin:0;
   color:#60666c;
-  font-size:1.45rem;
+  font-size:1.35rem;
 }
 
-.cases-grid {
-  display:grid;
-  grid-template-columns:7fr 5fr;
-  grid-template-rows:1fr 1fr;
-  gap:2rem;
+.reviews-wall {
+  column-count:3;
+  column-gap:1.2rem;
 }
 
-.case-card {
-  min-width:0;
-  overflow:hidden;
+.review-card {
+  width:100%;
+  margin:0 0 1.2rem;
+  padding:1.6rem;
+  display:inline-block;
+  break-inside:avoid;
   border:1px solid var(--line-dark);
   background:var(--paper);
   transition:
@@ -2893,282 +2892,131 @@ a:focus-visible {
     box-shadow var(--motion-hover) var(--ease-ui);
 }
 
-.case-card:hover {
-  transform:translateY(-.45rem);
+.review-card:hover {
+  transform:translateY(-.3rem);
   border-color:rgba(16,18,22,.28);
-  box-shadow:0 2.4rem 5rem rgba(16,18,22,.08);
+  box-shadow:0 1.6rem 3.2rem rgba(16,18,22,.06);
 }
 
-.case-card-featured {
-  grid-row:1 / -1;
-}
-
-.case-media {
-  position:relative;
-  min-height:23rem;
-  overflow:hidden;
-  border-bottom:1px solid var(--line-dark);
-}
-
-.case-card-featured .case-media {
-  min-height:34rem;
-}
-
-.case-media-silver {
-  background:
-    radial-gradient(circle at 72% 20%,rgba(255,255,255,.42),transparent 25%),
-    linear-gradient(145deg,#d4dade,#a8b1b5);
-}
-
-.case-media-warm {
-  background:
-    radial-gradient(circle at 74% 18%,rgba(255,255,255,.34),transparent 26%),
-    linear-gradient(145deg,#d9d0c4,#aca094);
-}
-
-.case-media-green {
-  background:
-    radial-gradient(circle at 74% 18%,rgba(255,255,255,.34),transparent 26%),
-    linear-gradient(145deg,#cdd6d0,#9eaaa2);
-}
-
-.case-media-meta {
-  position:absolute;
-  z-index:5;
-  top:1.6rem;
-  left:1.6rem;
-  right:1.6rem;
+.review-card header {
   display:flex;
   justify-content:space-between;
-  gap:2rem;
-  color:#535a60;
-  font-size:.82rem;
-}
-
-.case-car {
-  position:absolute;
-  left:4%;
-  right:4%;
-  bottom:6%;
-  height:64%;
-  transition:transform var(--motion-slow) var(--ease-ui);
-}
-
-.case-card:hover .case-car {
-  transform:scale(1.025) translateY(-.3rem);
-}
-
-.case-car .car-visual {
-  inset:0;
-}
-
-.case-media-code {
-  position:absolute;
-  right:-1rem;
-  bottom:-1rem;
-  color:rgba(16,18,22,.06);
-  font-size:10rem;
-  line-height:.8;
-  letter-spacing:-.08em;
-  font-weight:700;
-}
-
-.case-card-featured .case-media-code {
-  font-size:14rem;
-}
-
-.case-route {
-  position:absolute;
-  z-index:4;
-  left:2rem;
-  right:2rem;
-  top:6rem;
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  gap:1.2rem;
-  align-items:center;
-  font:500 .85rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  color:#50575d;
-}
-
-.case-route > div {
-  position:relative;
-  height:1px;
-  background:rgba(16,18,22,.18);
-}
-
-.case-route i {
-  display:block;
-  width:100%;
-  height:1px;
-  background:var(--signal);
-}
-
-.case-route b {
-  position:absolute;
-  right:0;
-  top:50%;
-  width:1rem;
-  height:1rem;
-  border-radius:50%;
-  background:var(--signal);
-  transform:translate(50%,-50%);
-  box-shadow:0 0 0 .4rem rgba(255,91,53,.12);
-}
-
-.case-body {
-  padding:1.7rem;
-}
-
-.case-title {
-  display:flex;
-  justify-content:space-between;
-  gap:2rem;
+  gap:1.6rem;
   align-items:start;
 }
 
-.case-title > div > span {
+.review-card header > div {
+  min-width:0;
+}
+
+.review-card header strong,
+.review-card header span {
   display:block;
-  margin-bottom:1rem;
+}
+
+.review-card header strong {
+  margin-bottom:.45rem;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:1.35rem;
+  line-height:1.15;
+  letter-spacing:-.015em;
+  font-weight:500;
+}
+
+.review-card header > div > span {
   color:var(--steel);
-  font-size:.85rem;
-}
-
-.case-title h3 {
-  margin:0;
-  font-size:3.15rem;
-  line-height:.96;
-  letter-spacing:-.045em;
-  font-weight:400;
-}
-
-.case-card-secondary .case-title h3 {
-  font-size:2.55rem;
-}
-
-.case-status {
-  display:flex;
-  align-items:center;
-  gap:.7rem;
-  padding:.65rem .8rem;
-  border:1px solid var(--line-dark);
-  color:#596168;
   font-size:.78rem;
+}
+
+.review-label {
+  color:var(--signal);
+  font-size:.72rem;
   white-space:nowrap;
 }
 
-.case-status i {
-  width:.6rem;
-  height:.6rem;
-  border-radius:50%;
-  background:var(--signal);
+.review-card > p {
+  margin:2.2rem 0 0;
+  color:#25292d;
+  font-size:1.28rem;
+  line-height:1.42;
 }
 
-.case-card blockquote {
-  margin:3rem 0 2rem;
-  max-width:58rem;
-  font-size:2.05rem;
-  line-height:1.08;
-  letter-spacing:-.03em;
+.review-thumbs {
+  display:flex;
+  gap:.6rem;
+  margin-top:1.6rem;
 }
 
-.case-meta {
-  margin:0 0 1.7rem;
-}
-
-.case-meta div {
-  padding:.85rem 0;
-  display:grid;
-  grid-template-columns:10rem 1fr;
-  border-top:1px solid var(--line-dark);
-}
-
-.case-meta dt {
-  color:var(--steel);
-  font-size:.85rem;
-}
-
-.case-meta dd {
-  margin:0;
-  font-size:.95rem;
-  text-transform:uppercase;
-}
-
-.case-summary {
-  max-width:43rem;
-  margin:2.4rem 0 1.8rem;
-  color:#646a70;
-  font-size:1.15rem;
-}
-
-.case-note {
+.review-thumb {
+  width:5.2rem;
+  aspect-ratio:1.25;
   display:block;
-  padding-top:1rem;
-  border-top:1px solid var(--line-dark);
+  overflow:hidden;
+  border:1px solid var(--line-dark);
+  background:#cfd5d7;
+  transition:transform var(--motion-hover) var(--ease-ui);
+}
+
+.review-card:hover .review-thumb {
+  transform:translateY(-.15rem);
+}
+
+.review-thumb-dark {
+  background:linear-gradient(145deg,#36414a,#11181e);
+}
+
+.review-thumb-light {
+  background:linear-gradient(145deg,#dfe3e4,#a9b1b5);
+}
+
+.review-thumb-green {
+  background:linear-gradient(145deg,#c8d2cb,#829187);
+}
+
+.review-thumb-warm {
+  background:linear-gradient(145deg,#ded2c4,#a59280);
+}
+
+.reviews-note {
+  margin:2.4rem 0 0;
   color:var(--steel);
-  font-size:.78rem;
+  font-size:.75rem;
 }
 
 @media (max-width:1023px) {
-  .cases-section {
+  .reviews-section {
     padding:8rem 2rem;
   }
 
-  .cases-heading {
+  .reviews-heading {
     grid-template-columns:1fr;
     gap:3rem;
   }
 
-  .cases-heading > p {
+  .reviews-heading > p {
     justify-self:start;
   }
 
-  .cases-grid {
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:auto;
-  }
-
-  .case-card-featured {
-    grid-column:1 / -1;
-    grid-row:auto;
+  .reviews-wall {
+    column-count:2;
   }
 }
 
 @media (max-width:640px) {
-  .cases-section {
+  .reviews-section {
     padding:7rem 1.5rem;
   }
 
-  .cases-heading h2 {
+  .reviews-heading h2 {
     font-size:4.8rem;
   }
 
-  .cases-grid {
-    grid-template-columns:1fr;
+  .reviews-wall {
+    column-count:1;
   }
 
-  .case-card-featured,
-  .case-card-secondary {
-    grid-column:1;
-  }
-
-  .case-media,
-  .case-card-featured .case-media {
-    min-height:24rem;
-  }
-
-  .case-title {
-    display:block;
-  }
-
-  .case-status {
-    width:max-content;
-    margin-top:1.5rem;
-  }
-
-  .case-card blockquote {
-    margin-top:2.8rem;
-    font-size:1.9rem;
+  .review-card {
+    padding:1.5rem;
   }
 }
 
@@ -3670,8 +3518,8 @@ a:focus-visible {
   .safety-sheet,
   .safety-document footer a,
   .safety-point,
-  .case-card,
-  .case-car,
+  .review-card,
+  .review-thumb,
   .contact-phone,
   .contact-phone i {
     transition:none;
