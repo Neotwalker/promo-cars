@@ -4383,6 +4383,91 @@ main > section[id],
   }
 }
 
+@media (hover:none) {
+  .header-action:hover:not(:active) {
+    color:inherit;
+    background:transparent;
+    border-color:rgba(255,255,255,.28);
+  }
+
+  .button:hover:not(:active) i {
+    transform:none;
+  }
+
+  .button-ghost:hover:not(:active) span,
+  .button-ghost:hover:not(:active) i {
+    color:inherit;
+    background:transparent;
+    border-color:currentColor;
+  }
+
+  .proof-item:hover {
+    color:inherit;
+    background-color:transparent;
+  }
+
+  .proof-item:hover .proof-index,
+  .proof-item:hover .proof-copy > span {
+    color:var(--steel);
+  }
+
+  .proof-item:hover .proof-copy p {
+    color:#646a70;
+  }
+
+  .proof-item:hover .proof-index i {
+    background:var(--line-dark);
+  }
+
+  .cars-heading-copy a:hover:not(:active),
+  .car-action:hover:not(:active),
+  .journey-action:hover:not(:active),
+  .safety-document footer a:hover:not(:active),
+  .faq-aside > a:hover:not(:active),
+  .faq-item summary:hover:not(:active),
+  .final-phone:hover:not(:active) {
+    color:inherit;
+    padding-left:0;
+  }
+
+  .car-action:hover:not(:active) i,
+  .journey-action:hover:not(:active) i {
+    transform:none;
+  }
+
+  .car-card:hover,
+  .trust-card:hover,
+  .review-card:hover {
+    transform:none;
+    border-color:var(--line-dark);
+    box-shadow:none;
+  }
+
+  .car-card:hover .car-visual,
+  .trust-card-video:hover .trust-video-car,
+  .review-card:hover .review-thumb {
+    transform:none;
+  }
+
+  .trust-card-video:hover {
+    border-color:rgba(255,255,255,.14);
+  }
+
+  .trust-card-document:hover .trust-document-sheet,
+  .safety-document:hover .safety-sheet {
+    transform:none;
+  }
+
+  .trust-card-handover:hover .trust-handover-line i {
+    transform:none;
+  }
+
+  .safety-point:hover {
+    padding-left:0;
+    background-color:transparent;
+  }
+}
+
 @media (prefers-reduced-motion:reduce) {
   html {
     scroll-behavior:auto;

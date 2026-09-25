@@ -767,6 +767,45 @@ code,.mono{
   .hero-concept-copy,.hero-concept-visual{min-height:0}
 }
 
+@media(hover:none){
+  .kit-nav a:hover{color:inherit}
+  .kit-nav a:hover::after{right:100%}
+  .brand:hover:not(:active){transform:none}
+
+  .btn:hover:not(:active){transform:none;filter:none}
+  .btn:hover:not(:active) i{transform:none}
+  .btn-primary:hover:not(:active){filter:none}
+  .btn-ghost:hover:not(:active) span,
+  .btn-ghost:hover:not(:active) i{background:transparent;color:inherit;border-color:currentColor}
+
+  .round-btn:hover:not(:active){background:transparent;color:inherit;border-color:var(--line)}
+  .status:hover{border-color:var(--line);background:transparent;transform:none}
+  .status-live:hover{border-color:rgba(43,187,105,.32);background:transparent}
+  .choice-chip:hover:not(:active){border-color:var(--line)}
+
+  .faq-item summary:hover:not(:active){color:inherit;padding-left:0}
+  .review-card:hover,
+  .document-card:hover,
+  .media-card:hover,
+  .route-card:hover,
+  .metric-card:hover,
+  .glass-card:hover,
+  .car-card:hover{
+    transform:none;
+    box-shadow:none;
+  }
+  .review-card:hover,
+  .document-card:hover,
+  .route-card:hover,
+  .car-card:hover{border-color:var(--line)}
+  .media-card-dark:hover,
+  .glass-card:hover{border-color:var(--line-dark)}
+  .review-card:hover .review-thumb,
+  .document-card:hover .document-card-sheet,
+  .media-card:hover .media-card-frame,
+  .car-card:hover .car-media img{transform:none;filter:none}
+}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .motion-marquee{animation:none}
