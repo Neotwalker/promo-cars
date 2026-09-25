@@ -762,6 +762,11 @@ code,.mono{
   .motion-demo h3{font-size:4.6rem}
   .hero-concept-copy h3{font-size:4.6rem}
 }
+@media(min-width:821px) and (max-width:1100px) and (orientation:landscape){
+  .hero-concept{grid-template-columns:5fr 7fr;min-height:76rem}
+  .hero-concept-copy,.hero-concept-visual{min-height:0}
+}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .motion-marquee{animation:none}
