@@ -463,10 +463,7 @@ main > section[id],
   z-index:1;
   inset:0;
   overflow:hidden;
-  background:
-    #121920
-    url("https://images.pexels.com/videos/16815345/pexels-photo-16815345.jpeg?auto=compress&dpr=1&h=900&w=1600")
-    center / cover no-repeat;
+  background:#121920;
 }
 
 .hero-media::after {
@@ -474,25 +471,19 @@ main > section[id],
   position:absolute;
   inset:0;
   background:
-    linear-gradient(180deg,rgba(5,10,14,.12),rgba(5,10,14,.08) 45%,rgba(5,10,14,.54)),
-    linear-gradient(90deg,rgba(11,17,23,.28),transparent 46%);
+    linear-gradient(180deg,rgba(5,10,14,.08),rgba(5,10,14,.04) 46%,rgba(5,10,14,.42)),
+    linear-gradient(90deg,rgba(11,17,23,.22),transparent 48%);
   pointer-events:none;
 }
 
-.hero-media-video {
+.hero-media-image {
   width:100%;
   height:100%;
   display:block;
   object-fit:cover;
   object-position:center;
-  opacity:1;
-  filter:saturate(.72) contrast(1.08) brightness(.78);
-  transform:scale(1.012);
-  transition:opacity 520ms var(--ease-ui);
-}
-
-.hero-media.is-loop-resetting .hero-media-video {
-  opacity:0;
+  filter:saturate(.88) contrast(1.03) brightness(.82);
+  transform:scale(1.006);
 }
 
 .route-card {
@@ -4059,10 +4050,6 @@ main > section[id],
     min-height:43rem;
   }
 
-  .hero-media-video {
-    object-position:58% center;
-  }
-
   .stage-meta {
     top:1.4rem;
     left:1.4rem;
@@ -4677,7 +4664,6 @@ main > section[id],
   .button,
   .button span,
   .button i,
-  .hero-media-video,
   .header-action,
   .proof-item,
   .proof-index,
