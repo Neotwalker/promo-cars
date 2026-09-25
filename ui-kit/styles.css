@@ -820,7 +820,8 @@ code,.mono{
 .btn:hover{transform:translateY(-.25rem)}
 .btn:hover i{transform:translate(.18rem,-.18rem)}
 .btn:active{transform:translateY(0) scale(.985);transition-duration:var(--motion-active);transition-timing-function:var(--ease-press)}
-.btn:active i{transform:translate(0,0);transition-duration:var(--motion-active)}
+.btn:active span,.btn:active i{transition-duration:var(--motion-active);transition-timing-function:var(--ease-press)}
+.btn:active i{transform:translate(0,0)}
 .btn-primary:hover{filter:saturate(1.06) brightness(.96)}
 .btn-primary:active{filter:brightness(.9)}
 .btn-ghost:hover span,.btn-ghost:hover i{background:var(--ink);color:#fff;border-color:var(--ink)}

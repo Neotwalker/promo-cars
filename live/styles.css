@@ -3946,6 +3946,8 @@ a:focus-visible {
     animation:none;
   }
 
+  .button,
+  .button span,
   .button i,
   .header-action,
   .proof-item,
