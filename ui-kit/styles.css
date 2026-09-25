@@ -94,6 +94,7 @@ code,.mono{
   color:#fff;
   background:rgba(16,18,22,.92);
   border-bottom:1px solid var(--line-dark);
+  -webkit-backdrop-filter:blur(18px);
   backdrop-filter:blur(18px);
 }
 .brand{
