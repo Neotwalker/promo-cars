@@ -3659,7 +3659,12 @@ a:focus-visible {
   }
 
   .hero-copy-bottom {
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
+    gap:3rem;
+  }
+
+  .hero-actions {
+    justify-content:flex-start;
   }
 
   .hero-stage {
