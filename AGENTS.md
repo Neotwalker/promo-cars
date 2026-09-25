@@ -4,8 +4,10 @@
 
 Перед изменениями сайта читать:
 1. `docs/PROJECT-DIRECTION.md`
-2. `docs/SITE-STORYBOARD.md`
-3. `docs/DEVELOPMENT-GUIDELINES.md`
+2. `docs/BRAND-CONCEPTS.md`
+3. `docs/SITE-STORYBOARD.md`
+4. `docs/DEVELOPMENT-GUIDELINES.md`
+5. `docs/ASSET-SOURCES.md` — если изменение затрагивает фото, видео, иконки или другие внешние assets.
 
 ## Source of truth
 
@@ -13,8 +15,10 @@
 - `/prototype/` — структурный прототип, не финальный production-код.
 - `/live/` — рабочая финальная версия сайта.
 - `docs/PROJECT-DIRECTION.md` — принципы проекта.
+- `docs/BRAND-CONCEPTS.md` — утверждённый бренд NEXROUTE AUTO, tone of voice и art direction.
 - `docs/SITE-STORYBOARD.md` — архитектура страницы.
 - `docs/DEVELOPMENT-GUIDELINES.md` — правила качества кода.
+- `docs/ASSET-SOURCES.md` — происхождение и лицензирование внешних media-assets.
 
 ## Обязательные правила
 

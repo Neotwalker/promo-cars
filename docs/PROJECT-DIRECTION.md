@@ -18,6 +18,8 @@
 
 Подробная концепция, tone of voice и asset direction: [BRAND-CONCEPTS.md](BRAND-CONCEPTS.md).
 
+Источники, лицензии и технические заметки по внешним media-assets: [ASSET-SOURCES.md](ASSET-SOURCES.md).
+
 Сайт должен:
 - выглядеть дорого и современно;
 - не быть копией исходного референса;
