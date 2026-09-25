@@ -384,19 +384,10 @@ code,.mono{
   transform:translate(-50%,-50%) rotate(0deg);
 }
 .faq-answer{
-  display:grid;
-  grid-template-rows:0fr;
-  opacity:0;
-  transition:
-    grid-template-rows var(--motion-hover) var(--ease-ui),
-    opacity var(--motion-focus) var(--ease-ui);
-}
-.faq-item[open] .faq-answer{
-  grid-template-rows:1fr;
-  opacity:1;
-}
-.faq-answer>div{
   overflow:hidden;
+}
+.faq-item.is-closing summary i::after{
+  transform:translate(-50%,-50%) rotate(90deg);
 }
 .faq-answer p{
   max-width:56rem;
@@ -993,7 +984,7 @@ code,.mono{
   .state-grid,.field-state-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
-  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.faq-item summary,.faq-item summary i::before,.faq-item summary i::after,.faq-answer,.review-card,.review-thumb,.document-card,.document-card-sheet,.media-card,.media-card-frame,
+  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.faq-item summary,.faq-item summary i::before,.faq-item summary i::after,.review-card,.review-thumb,.document-card,.document-card-sheet,.media-card,.media-card-frame,
   .route-card,.metric-card,.glass-card,.car-card,.car-media img,.kit-nav a::after{
     transition:none;
   }
