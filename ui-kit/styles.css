@@ -346,6 +346,8 @@ code,.mono{
   align-items:center;
   list-style:none;
   cursor:pointer;
+  -webkit-user-select:none;
+  user-select:none;
   font-size:1.55rem;
   transition:
     color var(--motion-hover) var(--ease-ui),
