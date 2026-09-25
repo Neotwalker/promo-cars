@@ -2516,10 +2516,6 @@ a:focus-visible {
   .journey-action i,
   .choice-chip,
   .configurator-city input,
-  .configurator-output-head,
-  .configurator-route,
-  .configurator-breakdown,
-  .configurator-summary,
   .contact-phone,
   .contact-phone i {
     transition:none;
