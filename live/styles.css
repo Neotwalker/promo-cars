@@ -3227,96 +3227,339 @@ a:focus-visible {
   }
 }
 
-.contact-strip {
-  min-height:38rem;
-  padding:6rem 2.4rem;
+
+.final-cta {
+  min-height:calc(100vh - 8rem);
+  padding:2.4rem;
   display:grid;
-  grid-template-columns:5fr 3fr 4fr;
+  grid-template-columns:7fr 5fr;
   gap:2rem;
-  align-items:end;
-  background:var(--paper);
-  border-bottom:1px solid var(--line-dark);
+  color:var(--white);
+  background:var(--night);
+  border-bottom:1px solid var(--line-light);
 }
 
-.contact-kicker {
-  margin:0 0 2.5rem;
-  color:var(--steel);
-  font-size:1rem;
+.final-cta-copy {
+  min-width:0;
+  padding:2rem 0 1rem;
+  display:flex;
+  flex-direction:column;
 }
 
-.contact-strip h2 {
-  margin:0;
-  font-size:5.8rem;
-  line-height:.92;
-  letter-spacing:-.055em;
+.final-cta-meta,
+.final-stage-meta,
+.final-stage-bottom,
+.final-route,
+.final-phone span {
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.025em;
+}
+
+.final-cta-meta {
+  display:flex;
+  justify-content:space-between;
+  gap:2rem;
+  padding-bottom:1.8rem;
+  border-bottom:1px solid var(--line-light);
+  color:rgba(255,255,255,.42);
+  font-size:.85rem;
+}
+
+.final-status {
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+}
+
+.final-status i {
+  width:.65rem;
+  height:.65rem;
+  border-radius:50%;
+  background:var(--signal);
+  box-shadow:0 0 0 .35rem rgba(255,91,53,.1);
+}
+
+.final-cta h2 {
+  margin:8rem 0 0;
+  max-width:78rem;
+  font-size:9rem;
+  line-height:.87;
+  letter-spacing:-.065em;
   font-weight:400;
 }
 
-.contact-strip > p {
-  max-width:37rem;
-  margin:0;
-  color:#63696f;
+.final-cta-copy > p {
+  max-width:48rem;
+  margin:5rem 0 0;
+  color:rgba(255,255,255,.5);
   font-size:1.4rem;
 }
 
-.contact-phone {
-  min-height:10rem;
-  padding:1.8rem 2rem;
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:.6rem 2rem;
-  align-items:center;
-  border:1px solid var(--line-dark);
+.final-actions {
+  margin-top:auto;
+  padding-top:5rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+
+.final-secondary {
+  color:var(--white);
+  border-color:rgba(255,255,255,.2);
+}
+
+.final-secondary:hover {
+  color:var(--ink);
   background:var(--white);
+  border-color:var(--white);
+}
+
+.final-phone {
+  margin-top:2rem;
+  max-width:48rem;
+  padding:1.5rem 0 0;
+  display:flex;
+  justify-content:space-between;
+  gap:2rem;
+  align-items:end;
+  border-top:1px solid var(--line-light);
   transition:
     color var(--motion-hover) var(--ease-ui),
-    background var(--motion-hover) var(--ease-ui),
-    border-color var(--motion-hover) var(--ease-ui),
-    transform var(--motion-hover) var(--ease-ui),
-    box-shadow var(--motion-focus) var(--ease-ui);
+    padding-left var(--motion-hover) var(--ease-ui);
 }
 
-.contact-phone span {
-  align-self:end;
-  color:var(--steel);
-  font-size:1.1rem;
+.final-phone:hover {
+  color:var(--signal);
+  padding-left:.6rem;
 }
 
-.contact-phone strong {
-  grid-column:1;
-  font-size:2.3rem;
+.final-phone span {
+  color:rgba(255,255,255,.36);
+  font-size:.8rem;
+}
+
+.final-phone strong {
+  font-size:1.45rem;
   font-weight:400;
 }
 
-.contact-phone i {
-  grid-column:2;
-  grid-row:1 / span 2;
-  font-size:2rem;
-  font-style:normal;
-  transition:transform var(--motion-base) var(--ease-ui);
+.final-stage {
+  position:relative;
+  min-width:0;
+  overflow:hidden;
+  border:1px solid var(--line-light);
+  background:
+    radial-gradient(circle at 62% 28%,rgba(125,135,145,.18),transparent 24%),
+    linear-gradient(145deg,#182129,#10171d);
 }
 
-.contact-phone:hover {
+.final-stage::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(to right,rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:8rem 100%,100% 8rem;
+  pointer-events:none;
+}
+
+.final-stage-meta {
+  position:absolute;
+  z-index:4;
+  top:1.8rem;
+  left:1.8rem;
+  right:1.8rem;
+  display:flex;
+  justify-content:space-between;
+  gap:2rem;
+  color:rgba(255,255,255,.4);
+  font-size:.82rem;
+}
+
+.final-route {
+  position:absolute;
+  z-index:5;
+  left:6%;
+  right:6%;
+  top:20%;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:1.2rem;
+  align-items:center;
+  color:rgba(255,255,255,.42);
+  font-size:.82rem;
+}
+
+.final-route > div {
+  position:relative;
+  height:1px;
+  background:rgba(255,255,255,.14);
+}
+
+.final-route i {
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:1px;
+  background:var(--signal);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform 1.1s var(--ease-ui);
+}
+
+.final-route b {
+  position:absolute;
+  left:0;
+  top:50%;
+  width:1.3rem;
+  height:1.3rem;
+  border-radius:50%;
+  background:var(--signal);
+  transform:translate(-50%,-50%);
+  box-shadow:
+    0 0 0 1px var(--signal),
+    0 0 0 .55rem rgba(255,91,53,.12);
+  transition:left 1.1s var(--ease-ui);
+}
+
+.final-car-wrap {
+  position:absolute;
+  z-index:2;
+  left:3%;
+  right:3%;
+  bottom:10%;
+  height:58%;
+  opacity:0;
+  transform:translate3d(4rem,1.5rem,0);
+  transition:
+    opacity var(--motion-slow) var(--ease-ui),
+    transform 1.1s var(--ease-ui);
+}
+
+.final-car-wrap .car-visual {
+  inset:0;
+}
+
+.final-stage-bottom {
+  position:absolute;
+  z-index:5;
+  left:1.8rem;
+  right:1.8rem;
+  bottom:1.8rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:2rem;
+  color:rgba(255,255,255,.38);
+  font-size:.82rem;
+}
+
+.final-stage-bottom strong {
   color:var(--white);
-  background:var(--ink);
-  border-color:var(--ink);
+  font-size:1rem;
+  font-weight:500;
 }
 
-.contact-phone:hover span {
-  color:rgba(255,255,255,.5);
+.final-stage-code {
+  position:absolute;
+  z-index:0;
+  right:-2rem;
+  bottom:-2rem;
+  color:rgba(255,255,255,.035);
+  font-size:24rem;
+  line-height:.72;
+  letter-spacing:-.08em;
+  font-weight:700;
 }
 
-.contact-phone:hover i {
-  transform:translate(.3rem,-.3rem);
+.final-cta.is-visible .final-route i {
+  transform:scaleX(1);
 }
-.contact-phone:active {
-  transform:scale(.985);
-  transition-duration:var(--motion-active);
-  transition-timing-function:var(--ease-press);
+
+.final-cta.is-visible .final-route b {
+  left:100%;
 }
-.contact-phone:active i {
-  transform:translate(0,0);
-  transition-duration:var(--motion-active);
+
+.final-cta.is-visible .final-car-wrap {
+  opacity:1;
+  transform:translate3d(0,1.5rem,0);
+}
+
+@media (max-width:1023px) {
+  .final-cta {
+    min-height:auto;
+    padding:8rem 2rem;
+    grid-template-columns:1fr;
+  }
+
+  .final-cta-copy {
+    min-height:58rem;
+  }
+
+  .final-cta h2 {
+    font-size:7.2rem;
+  }
+
+  .final-stage {
+    min-height:62rem;
+  }
+}
+
+@media (max-width:640px) {
+  .final-cta {
+    padding:7rem 1.5rem;
+  }
+
+  .final-cta-copy {
+    min-height:52rem;
+  }
+
+  .final-cta-meta {
+    display:block;
+  }
+
+  .final-status {
+    margin-top:1rem;
+  }
+
+  .final-cta h2 {
+    margin-top:6rem;
+    font-size:5.2rem;
+  }
+
+  .final-cta-copy > p {
+    margin-top:3rem;
+  }
+
+  .final-actions {
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .final-phone {
+    display:block;
+  }
+
+  .final-phone strong {
+    display:block;
+    margin-top:.8rem;
+  }
+
+  .final-stage {
+    min-height:46rem;
+  }
+
+  .final-car-wrap {
+    left:0;
+    right:0;
+    height:48%;
+  }
+
+  .final-stage-code {
+    font-size:14rem;
+  }
 }
 
 @keyframes vehicle-settle {
@@ -3455,13 +3698,6 @@ a:focus-visible {
     grid-column:auto;
   }
 
-  .contact-strip {
-    grid-template-columns:1fr 1fr;
-  }
-
-  .contact-strip > div {
-    grid-column:1 / -1;
-  }
 }
 
 @media (max-width:640px) {
@@ -3660,24 +3896,6 @@ a:focus-visible {
     margin-top:4rem;
   }
 
-  .contact-strip {
-    min-height:auto;
-    padding:6rem 1.5rem;
-    grid-template-columns:1fr;
-    gap:4rem;
-  }
-
-  .contact-strip > div {
-    grid-column:auto;
-  }
-
-  .contact-strip h2 {
-    font-size:4.6rem;
-  }
-
-  .contact-phone strong {
-    font-size:1.9rem;
-  }
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -3731,8 +3949,10 @@ a:focus-visible {
   .faq-item summary,
   .faq-item summary i::before,
   .faq-item summary i::after,
-    .contact-phone,
-  .contact-phone i {
+  .final-phone,
+  .final-route i,
+  .final-route b,
+  .final-car-wrap {
     transition:none;
   }
 }
