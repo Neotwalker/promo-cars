@@ -750,6 +750,7 @@ code,.mono{
   .hero-concept-visual{min-height:56rem}
 }
 @media(max-width:640px){
+  .brand{min-height:4.4rem}
   .intro h1{font-size:5.4rem}
   .token-grid.colors{grid-template-columns:repeat(2,1fr)}
   .grid-demo{gap:.8rem}

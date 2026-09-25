@@ -1714,6 +1714,11 @@ main > section[id],
   .journey-detail-copy h3 {
     font-size:3.8rem;
   }
+
+  .journey-action {
+    min-height:4.4rem;
+    align-items:center;
+  }
 }
 
 
@@ -2963,6 +2968,11 @@ main > section[id],
     font-size:4rem;
   }
 
+  .safety-document footer a {
+    min-height:4.4rem;
+    align-items:center;
+  }
+
 }
 
 @media (max-width:430px) and (orientation:portrait) {
@@ -3451,6 +3461,11 @@ main > section[id],
   .faq-answer p {
     font-size:1.2rem;
   }
+
+  .faq-aside > a {
+    min-height:4.4rem;
+    align-items:center;
+  }
 }
 
 
@@ -3936,6 +3951,10 @@ main > section[id],
     padding:0 1.5rem;
   }
 
+  .brand {
+    min-height:4.4rem;
+  }
+
   .brand-mark i {
     width:2.6rem;
   }
@@ -3945,7 +3964,7 @@ main > section[id],
   }
 
   .header-action {
-    min-height:3.8rem;
+    min-height:4.4rem;
     padding:0 1rem;
     font-size:1rem;
   }
@@ -4124,6 +4143,11 @@ main > section[id],
   .car-info dl,
   .car-card-compact .car-info dl {
     margin-top:4rem;
+  }
+
+  .car-action {
+    min-height:4.4rem;
+    align-items:center;
   }
 
 }
