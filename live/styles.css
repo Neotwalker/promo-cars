@@ -1976,6 +1976,11 @@ main > section[id],
   background:linear-gradient(90deg,var(--signal),rgba(255,255,255,.18));
 }
 
+.configurator-route span:last-child,
+.configurator-summary p {
+  overflow-wrap:anywhere;
+}
+
 .configurator-breakdown {
   margin:0 0 3rem;
 }
@@ -2115,6 +2120,11 @@ main > section[id],
 
   .configurator-output {
     min-height:52rem;
+  }
+
+  .configurator-route span:last-child {
+    max-width:14rem;
+    text-align:right;
   }
 }
 
