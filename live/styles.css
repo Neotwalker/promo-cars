@@ -92,6 +92,21 @@ main > section[id],
   scroll-margin-top:10rem;
 }
 
+.skip-link {
+  position:fixed;
+  z-index:100;
+  top:1.2rem;
+  left:1.2rem;
+  padding:1rem 1.4rem;
+  color:var(--white);
+  background:var(--signal);
+  transform:translateY(-180%);
+}
+
+.skip-link:focus-visible {
+  transform:translateY(0);
+}
+
 .site-header {
   position:fixed;
   z-index:50;
