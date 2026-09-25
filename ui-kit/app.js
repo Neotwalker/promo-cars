@@ -238,3 +238,112 @@ document.querySelectorAll('[data-stage-marquee]').forEach(viewport=>{
   ensureCoverage();
   requestAnimationFrame(animate);
 });
+
+(() => {
+  const items = [...document.querySelectorAll('.faq-item')];
+
+  if (!items.length) {
+    return;
+  }
+
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const duration = 480;
+  const easing = 'cubic-bezier(.2,.75,.2,1)';
+
+  items.forEach(item => {
+    if (item.dataset.faqReady === 'true') {
+      return;
+    }
+
+    const summary = item.querySelector('summary');
+    const answer = item.querySelector('.faq-answer');
+
+    if (!summary || !answer) {
+      return;
+    }
+
+    item.dataset.faqReady = 'true';
+
+    let animation = null;
+    let targetOpen = item.open;
+
+    const clearAnimation = () => {
+      animation = null;
+      answer.style.height = '';
+      answer.style.opacity = '';
+      answer.style.overflow = '';
+      item.classList.remove('is-closing');
+    };
+
+    const finishImmediately = open => {
+      animation?.cancel();
+      animation = null;
+      targetOpen = open;
+      item.open = open;
+      clearAnimation();
+    };
+
+    const animateTo = open => {
+      if (reducedMotionQuery.matches || typeof answer.animate !== 'function') {
+        finishImmediately(open);
+        return;
+      }
+
+      const currentHeight = answer.getBoundingClientRect().height;
+
+      if (animation) {
+        animation.cancel();
+        animation = null;
+      }
+
+      targetOpen = open;
+
+      if (open && !item.open) {
+        item.open = true;
+      }
+
+      item.classList.toggle('is-closing', !open);
+
+      const endHeight = open ? answer.scrollHeight : 0;
+      const startHeight = open && currentHeight === 0 ? 0 : currentHeight;
+
+      answer.style.height = startHeight + 'px';
+      answer.style.opacity = open && startHeight === 0 ? '0' : getComputedStyle(answer).opacity;
+      answer.style.overflow = 'hidden';
+
+      animation = answer.animate(
+        [
+          {height:startHeight + 'px', opacity:open && startHeight === 0 ? 0 : 1},
+          {height:endHeight + 'px', opacity:open ? 1 : 0}
+        ],
+        {
+          duration,
+          easing,
+          fill:'forwards'
+        }
+      );
+
+      animation.onfinish = () => {
+        if (!targetOpen) {
+          item.open = false;
+        }
+        clearAnimation();
+      };
+
+      animation.oncancel = () => {
+        animation = null;
+      };
+    };
+
+    summary.addEventListener('click', event => {
+      event.preventDefault();
+      animateTo(!targetOpen);
+    });
+
+    reducedMotionQuery.addEventListener('change', () => {
+      if (animation) {
+        finishImmediately(targetOpen);
+      }
+    });
+  });
+})();
