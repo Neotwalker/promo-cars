@@ -49,6 +49,11 @@ a:focus-visible {
   box-shadow:var(--focus-ring);
 }
 
+main > section[id],
+#route-card {
+  scroll-margin-top:10rem;
+}
+
 .site-header {
   position:fixed;
   z-index:50;
@@ -3658,6 +3663,11 @@ a:focus-visible {
 }
 
 @media (max-width:1100px) {
+  main > section[id],
+  #route-card {
+    scroll-margin-top:9rem;
+  }
+
   html {
     font-size:10px;
   }
@@ -3781,6 +3791,11 @@ a:focus-visible {
 }
 
 @media (max-width:640px) {
+  main > section[id],
+  #route-card {
+    scroll-margin-top:8rem;
+  }
+
   .site-header {
     height:6.4rem;
     padding:0 1.5rem;
