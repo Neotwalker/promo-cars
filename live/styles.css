@@ -49,6 +49,44 @@ a:focus-visible {
   box-shadow:var(--focus-ring);
 }
 
+[data-arrow] {
+  position:relative;
+  display:inline-grid;
+  place-items:center;
+  font-size:0;
+  line-height:0;
+  vertical-align:middle;
+}
+
+[data-arrow]::before {
+  content:"";
+  width:1.35rem;
+  height:1.35rem;
+  display:block;
+  background:currentColor;
+  -webkit-mask-position:center;
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-size:contain;
+  mask-position:center;
+  mask-repeat:no-repeat;
+  mask-size:contain;
+}
+
+[data-arrow="ne"]::before {
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 13L13 3M6 3H13V10' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 13L13 3M6 3H13V10' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+}
+
+[data-arrow="down"]::before {
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 2V14M3.5 9.5L8 14L12.5 9.5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 2V14M3.5 9.5L8 14L12.5 9.5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+}
+
+[data-arrow="up"]::before {
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 14V2M3.5 6.5L8 2L12.5 6.5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 14V2M3.5 6.5L8 2L12.5 6.5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+}
+
 main > section[id],
 #route-card {
   scroll-margin-top:10rem;
