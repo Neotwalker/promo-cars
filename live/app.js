@@ -306,16 +306,16 @@
 
     if (reducedMotionQuery.matches) {
       output.classList.remove('is-calculating');
-      status.lastChild.textContent = ' PRELIMINARY';
+      status.textContent = 'PRELIMINARY';
       return;
     }
 
     output.classList.add('is-calculating');
-    status.lastChild.textContent = ' RECALCULATING';
+    status.textContent = 'RECALCULATING';
 
     calculationTimer = window.setTimeout(() => {
       output.classList.remove('is-calculating');
-      status.lastChild.textContent = ' PRELIMINARY';
+      status.textContent = 'PRELIMINARY';
     }, 360);
   };
 
@@ -346,7 +346,7 @@
     if (reducedMotionQuery.matches) {
       window.clearTimeout(calculationTimer);
       output.classList.remove('is-calculating');
-      status.lastChild.textContent = ' PRELIMINARY';
+      status.textContent = 'PRELIMINARY';
     }
   });
 })();
