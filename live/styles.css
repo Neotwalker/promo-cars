@@ -2045,7 +2045,7 @@ a:focus-visible {
 .trust-card-head,
 .trust-status-line,
 .trust-delivery-route,
-.trust-review footer {
+.trust-card-review footer {
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   letter-spacing:.025em;
 }
