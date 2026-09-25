@@ -1904,45 +1904,44 @@ main > section[id],
   box-shadow:var(--focus-ring);
 }
 
-.configurator-more {
+.choice-select-shell {
+  position:relative;
   width:100%;
-  min-height:4.4rem;
-  margin-top:1rem;
-  padding:0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1.2rem;
-  border:0;
-  border-top:1px solid var(--line-dark);
+}
+
+.choice-select-shell::after {
+  content:"";
+  position:absolute;
+  right:1.6rem;
+  top:50%;
+  width:.8rem;
+  height:.8rem;
+  border-right:1px solid var(--ink);
+  border-bottom:1px solid var(--ink);
+  transform:translateY(-70%) rotate(45deg);
+  pointer-events:none;
+}
+
+.choice-select {
+  width:100%;
+  height:5.2rem;
+  padding:0 4.2rem 0 1.4rem;
+  appearance:none;
+  -webkit-appearance:none;
+  border:1px solid var(--line-dark);
+  border-radius:0;
   background:transparent;
-  color:#535a61;
-  cursor:pointer;
-  font:500 .9rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  text-align:left;
-  transition:
-    color var(--motion-hover) var(--ease-ui),
-    border-color var(--motion-hover) var(--ease-ui),
-    box-shadow var(--motion-focus) var(--ease-ui);
-}
-
-.configurator-more b {
-  color:var(--signal);
-  font-size:1.2rem;
-  font-weight:500;
-}
-
-.configurator-more:hover {
   color:var(--ink);
-  border-color:rgba(16,18,22,.34);
+  font:500 1rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 
-.configurator-more:focus-visible {
+.choice-select:focus-visible {
   outline:0;
+  border-color:var(--signal);
   box-shadow:var(--focus-ring);
 }
 
-.configurator-more[hidden] {
+.choice-select-shell[hidden] {
   display:none;
 }
 
@@ -4707,11 +4706,6 @@ main > section[id],
     padding-left:0;
     background-color:transparent;
   }
-
-  .configurator-more:hover:not(:active) {
-    color:#535a61;
-    border-color:var(--line-dark);
-  }
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -4753,7 +4747,6 @@ main > section[id],
   .journey-action,
   .journey-action i,
   .choice-chip,
-  .configurator-more,
   .configurator-city input,
   .trust-card,
   .trust-video-car,

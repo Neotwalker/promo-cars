@@ -303,7 +303,7 @@
 
   const compactOptionsQuery = window.matchMedia('(max-width: 640px)');
   const compactOptionLimit = 6;
-  const overflowSync = [];
+  const compactChoiceSync = [];
 
   groups.forEach(group => {
     const optionsContainer = group.querySelector('.configurator-options');
@@ -313,70 +313,59 @@
       return;
     }
 
-    const containerId = 'config-options-' + group.dataset.configGroup;
-    optionsContainer.id = containerId;
+    const selectShell = document.createElement('div');
+    selectShell.className = 'choice-select-shell';
 
-    const moreButton = document.createElement('button');
-    moreButton.type = 'button';
-    moreButton.className = 'configurator-more';
-    moreButton.setAttribute('aria-controls', containerId);
-    moreButton.setAttribute('aria-expanded', 'false');
-    moreButton.innerHTML = '<span>Показать ещё</span><b></b>';
-    group.append(moreButton);
+    const select = document.createElement('select');
+    select.className = 'choice-select';
+    select.setAttribute('aria-label', group.querySelector('legend')?.textContent.trim() || 'Выбор параметра');
 
-    const syncOverflow = () => {
-      const compact = compactOptionsQuery.matches;
-      const expanded = moreButton.getAttribute('aria-expanded') === 'true';
-
-      if (!compact) {
-        options.forEach(option => { option.hidden = false; });
-        moreButton.hidden = true;
-        moreButton.setAttribute('aria-expanded', 'false');
-        return;
-      }
-
-      moreButton.hidden = false;
-
-      if (expanded) {
-        options.forEach(option => { option.hidden = false; });
-        moreButton.querySelector('span').textContent = 'Свернуть';
-        moreButton.querySelector('b').textContent = '−';
-        return;
-      }
-
-      const selected = options.find(option => option.getAttribute('aria-pressed') === 'true');
-      const visible = options.slice(0, compactOptionLimit);
-
-      if (selected && options.indexOf(selected) >= compactOptionLimit) {
-        visible[visible.length - 1] = selected;
-      }
-
-      const visibleSet = new Set(visible);
-      options.forEach(option => { option.hidden = !visibleSet.has(option); });
-
-      const hiddenCount = options.length - visibleSet.size;
-      moreButton.querySelector('span').textContent = 'Показать ещё';
-      moreButton.querySelector('b').textContent = '+' + hiddenCount;
-    };
-
-    moreButton.addEventListener('click', () => {
-      const expanded = moreButton.getAttribute('aria-expanded') === 'true';
-      moreButton.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      syncOverflow();
+    options.forEach(button => {
+      const option = document.createElement('option');
+      option.value = button.dataset.value;
+      option.textContent = button.textContent.trim();
+      option.selected = button.getAttribute('aria-pressed') === 'true';
+      select.append(option);
     });
 
-    overflowSync.push(syncOverflow);
-    syncOverflow();
+    selectShell.append(select);
+    group.append(selectShell);
+
+    const syncCompactChoice = () => {
+      const compact = compactOptionsQuery.matches;
+      optionsContainer.hidden = compact;
+      selectShell.hidden = !compact;
+
+      if (compact) {
+        const selected = options.find(option => option.getAttribute('aria-pressed') === 'true');
+        if (selected) {
+          select.value = selected.dataset.value;
+        }
+      }
+    };
+
+    select.addEventListener('change', () => {
+      const selectedButton = options.find(option => option.dataset.value === select.value);
+
+      options.forEach(option => {
+        option.setAttribute('aria-pressed', option === selectedButton ? 'true' : 'false');
+      });
+
+      setText(group.dataset.configGroup, select.value);
+    });
+
+    compactChoiceSync.push(syncCompactChoice);
+    syncCompactChoice();
   });
 
-  const syncAllOverflow = () => {
-    overflowSync.forEach(sync => sync());
+  const syncAllCompactChoices = () => {
+    compactChoiceSync.forEach(sync => sync());
   };
 
   if (typeof compactOptionsQuery.addEventListener === 'function') {
-    compactOptionsQuery.addEventListener('change', syncAllOverflow);
+    compactOptionsQuery.addEventListener('change', syncAllCompactChoices);
   } else {
-    compactOptionsQuery.addListener(syncAllOverflow);
+    compactOptionsQuery.addListener(syncAllCompactChoices);
   }
 
   groups.forEach(group => {
@@ -392,6 +381,11 @@
       });
 
       setText(group.dataset.configGroup, button.dataset.value);
+
+      const select = group.querySelector('.choice-select');
+      if (select) {
+        select.value = button.dataset.value;
+      }
     });
   });
 
