@@ -471,3 +471,45 @@
     });
   });
 })();
+
+
+(() => {
+  const root = document.querySelector('[data-final-cta]');
+
+  if (!root || root.dataset.ready === 'true') {
+    return;
+  }
+
+  root.dataset.ready = 'true';
+
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const reveal = () => {
+    root.classList.add('is-visible');
+  };
+
+  if (reducedMotionQuery.matches || typeof IntersectionObserver === 'undefined') {
+    reveal();
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) {
+      return;
+    }
+
+    reveal();
+    observer.disconnect();
+  }, {
+    threshold:.28
+  });
+
+  observer.observe(root);
+
+  reducedMotionQuery.addEventListener('change', event => {
+    if (event.matches) {
+      reveal();
+      observer.disconnect();
+    }
+  });
+})();
