@@ -330,9 +330,9 @@ code,.mono{
 
 
 
-.case-card-specimen{margin-top:2rem}
-.case-card{
-  overflow:hidden;
+.review-card-specimen{margin-top:2rem;max-width:48rem}
+.review-card{
+  padding:1.6rem;
   border:1px solid var(--line);
   background:var(--paper);
   transition:
@@ -340,57 +340,50 @@ code,.mono{
     border-color var(--motion-hover) var(--ease-ui),
     box-shadow var(--motion-hover) var(--ease-ui);
 }
-.case-card:hover{
-  transform:translateY(-.4rem);
+.review-card:hover{
+  transform:translateY(-.3rem);
   border-color:rgba(16,18,22,.28);
-  box-shadow:0 2rem 4rem rgba(16,18,22,.08);
+  box-shadow:0 1.6rem 3.2rem rgba(16,18,22,.06);
 }
-.case-card-media{
-  position:relative;
-  min-height:20rem;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 68% 24%,rgba(255,255,255,.4),transparent 26%),
-    linear-gradient(145deg,#d2d8da,#a5afb3);
-}
-.case-card-route{
-  position:absolute;
-  top:1.6rem;
-  left:1.6rem;
-  font:500 .9rem ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-.case-card-mark{
-  position:absolute;
-  right:-.8rem;
-  bottom:-.6rem;
-  color:rgba(16,18,22,.07);
-  font-size:8rem;
-  line-height:.8;
-  letter-spacing:-.08em;
-  font-weight:700;
-  transition:transform var(--motion-slow) var(--ease-ui);
-}
-.case-card:hover .case-card-mark{transform:translateX(-.5rem)}
-.case-card-body{padding:1.7rem}
-.case-card-body header{
+.review-card header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  gap:2rem;
+  gap:1.6rem;
+  align-items:start;
 }
-.case-card-body h3{
-  margin:2.2rem 0 .8rem;
-  font-size:2.7rem;
-  line-height:.96;
-  letter-spacing:-.045em;
-  font-weight:400;
+.review-card header strong{
+  display:block;
+  margin-bottom:.45rem;
+  font-size:1.35rem;
+  font-weight:500;
 }
-.case-card-body p{
-  max-width:48rem;
-  margin:0;
+.review-card header>div>span{
   color:var(--steel);
-  font-size:1.15rem;
+  font:500 .78rem ui-monospace,SFMono-Regular,Menlo,monospace;
 }
+.review-label{
+  color:var(--signal);
+  font:500 .72rem ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+.review-card>p{
+  margin:2.2rem 0 0;
+  font-size:1.28rem;
+  line-height:1.42;
+}
+.review-thumbs{
+  display:flex;
+  gap:.6rem;
+  margin-top:1.6rem;
+}
+.review-thumb{
+  width:5.2rem;
+  aspect-ratio:1.25;
+  display:block;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,#dfe3e4,#a9b1b5);
+  transition:transform var(--motion-hover) var(--ease-ui);
+}
+.review-card:hover .review-thumb{transform:translateY(-.15rem)}
 
 .document-card-specimen{margin-top:2rem}
 .document-card{
@@ -924,7 +917,7 @@ code,.mono{
   .state-grid,.field-state-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
-  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.case-card,.case-card-mark,.document-card,.document-card-sheet,.media-card,.media-card-frame,
+  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.review-card,.review-thumb,.document-card,.document-card-sheet,.media-card,.media-card-frame,
   .route-card,.metric-card,.glass-card,.car-card,.car-media img,.kit-nav a::after{
     transition:none;
   }
