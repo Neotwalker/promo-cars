@@ -463,7 +463,10 @@ main > section[id],
   z-index:1;
   inset:0;
   overflow:hidden;
-  background:#121920;
+  background:
+    #121920
+    url("https://images.pexels.com/videos/16815345/pexels-photo-16815345.jpeg?auto=compress&dpr=1&h=900&w=1600")
+    center / cover no-repeat;
 }
 
 .hero-media::after {
@@ -482,8 +485,14 @@ main > section[id],
   display:block;
   object-fit:cover;
   object-position:center;
+  opacity:1;
   filter:saturate(.72) contrast(1.08) brightness(.78);
   transform:scale(1.012);
+  transition:opacity 520ms var(--ease-ui);
+}
+
+.hero-media.is-loop-resetting .hero-media-video {
+  opacity:0;
 }
 
 .route-card {
@@ -4051,7 +4060,7 @@ main > section[id],
   }
 
   .hero-media-video {
-    object-position:54% center;
+    object-position:58% center;
   }
 
   .stage-meta {
@@ -4668,6 +4677,7 @@ main > section[id],
   .button,
   .button span,
   .button i,
+  .hero-media-video,
   .header-action,
   .proof-item,
   .proof-index,
