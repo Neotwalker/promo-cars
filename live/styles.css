@@ -3036,14 +3036,14 @@ a:focus-visible {
 
 .case-title h3 {
   margin:0;
-  font-size:3.8rem;
+  font-size:3.15rem;
   line-height:.96;
   letter-spacing:-.045em;
   font-weight:400;
 }
 
 .case-card-secondary .case-title h3 {
-  font-size:3rem;
+  font-size:2.55rem;
 }
 
 .case-status {
@@ -3077,9 +3077,9 @@ a:focus-visible {
 }
 
 .case-meta div {
-  padding:1.1rem 0;
+  padding:.85rem 0;
   display:grid;
-  grid-template-columns:12rem 1fr;
+  grid-template-columns:10rem 1fr;
   border-top:1px solid var(--line-dark);
 }
 
