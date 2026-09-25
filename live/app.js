@@ -81,7 +81,7 @@
     }
   ];
 
-  const desktopQuery = window.matchMedia('(min-width: 1024px)');
+  const desktopQuery = window.matchMedia('(min-width: 1101px)');
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   let activeIndex = -1;
