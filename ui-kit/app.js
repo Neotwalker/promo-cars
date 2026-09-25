@@ -267,20 +267,39 @@ document.querySelectorAll('[data-stage-marquee]').forEach(viewport=>{
     let animation = null;
     let targetOpen = item.open;
 
-    const clearAnimation = () => {
-      animation = null;
+    const setClosedStyles = () => {
+      answer.style.height = '0px';
+      answer.style.opacity = '0';
+      answer.style.overflow = 'hidden';
+    };
+
+    const clearOpenStyles = () => {
       answer.style.height = '';
       answer.style.opacity = '';
       answer.style.overflow = '';
-      item.classList.remove('is-closing');
     };
 
+    if (item.open) {
+      clearOpenStyles();
+    } else {
+      setClosedStyles();
+    }
+
     const finishImmediately = open => {
-      animation?.cancel();
+      const running = animation;
       animation = null;
+      running?.cancel();
+
       targetOpen = open;
-      item.open = open;
-      clearAnimation();
+      item.classList.remove('is-closing');
+
+      if (open) {
+        item.open = true;
+        clearOpenStyles();
+      } else {
+        setClosedStyles();
+        item.open = false;
+      }
     };
 
     const animateTo = open => {
@@ -289,31 +308,41 @@ document.querySelectorAll('[data-stage-marquee]').forEach(viewport=>{
         return;
       }
 
-      const currentHeight = answer.getBoundingClientRect().height;
+      const currentHeight = item.open ? answer.getBoundingClientRect().height : 0;
+      const currentOpacity = item.open
+        ? Math.max(0, Math.min(1, Number.parseFloat(getComputedStyle(answer).opacity) || 1))
+        : 0;
 
       if (animation) {
-        animation.cancel();
+        const running = animation;
         animation = null;
+        running.cancel();
       }
 
       targetOpen = open;
 
       if (open && !item.open) {
+        setClosedStyles();
         item.open = true;
       }
 
       item.classList.toggle('is-closing', !open);
 
       const endHeight = open ? answer.scrollHeight : 0;
-      const startHeight = open && currentHeight === 0 ? 0 : currentHeight;
+      const startHeight = currentHeight;
+      const startOpacity = open && startHeight === 0 ? 0 : currentOpacity;
 
       answer.style.height = startHeight + 'px';
-      answer.style.opacity = open && startHeight === 0 ? '0' : getComputedStyle(answer).opacity;
+      answer.style.opacity = String(startOpacity);
       answer.style.overflow = 'hidden';
 
-      animation = answer.animate(
+      // Force layout after the first closed → open transition so the browser
+      // starts from the prepared zero-height state instead of flashing content.
+      void answer.offsetHeight;
+
+      const running = answer.animate(
         [
-          {height:startHeight + 'px', opacity:open && startHeight === 0 ? 0 : 1},
+          {height:startHeight + 'px', opacity:startOpacity},
           {height:endHeight + 'px', opacity:open ? 1 : 0}
         ],
         {
@@ -323,15 +352,29 @@ document.querySelectorAll('[data-stage-marquee]').forEach(viewport=>{
         }
       );
 
-      animation.onfinish = () => {
-        if (!targetOpen) {
+      animation = running;
+
+      running.onfinish = () => {
+        if (animation !== running) {
+          return;
+        }
+
+        animation = null;
+        item.classList.remove('is-closing');
+
+        if (targetOpen) {
+          item.open = true;
+          clearOpenStyles();
+        } else {
+          setClosedStyles();
           item.open = false;
         }
-        clearAnimation();
       };
 
-      animation.oncancel = () => {
-        animation = null;
+      running.oncancel = () => {
+        if (animation === running) {
+          animation = null;
+        }
       };
     };
 
