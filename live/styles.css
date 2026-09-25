@@ -3121,6 +3121,8 @@ a:focus-visible {
   align-items:center;
   list-style:none;
   cursor:pointer;
+  -webkit-user-select:none;
+  user-select:none;
   font-size:2rem;
   letter-spacing:-.025em;
   transition:
