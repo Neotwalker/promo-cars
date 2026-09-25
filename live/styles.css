@@ -965,14 +965,14 @@ a:focus-visible {
 
 .car-title h3 {
   margin:0;
-  font-size:3.8rem;
+  font-size:3.1rem;
   line-height:.96;
   letter-spacing:-.045em;
   font-weight:400;
 }
 
 .car-card-compact .car-title h3 {
-  font-size:3rem;
+  font-size:2.55rem;
 }
 
 .car-status {
@@ -1453,9 +1453,9 @@ a:focus-visible {
 }
 
 .journey-detail-meta div {
-  padding:1.1rem 0;
+  padding:.85rem 0;
   display:grid;
-  grid-template-columns:12rem 1fr;
+  grid-template-columns:10rem 1fr;
   border-top:1px solid var(--line-light);
 }
 
@@ -2830,7 +2830,7 @@ a:focus-visible {
 
 
 .cases-section {
-  padding:13rem 2.4rem 14rem;
+  padding:11rem 2.4rem 11rem;
   background:var(--white);
   border-bottom:1px solid var(--line-dark);
 }
@@ -2840,7 +2840,7 @@ a:focus-visible {
   grid-template-columns:7fr 5fr;
   gap:2rem;
   align-items:end;
-  margin-bottom:7rem;
+  margin-bottom:5rem;
 }
 
 .cases-kicker,
@@ -2905,13 +2905,13 @@ a:focus-visible {
 
 .case-media {
   position:relative;
-  min-height:32rem;
+  min-height:23rem;
   overflow:hidden;
   border-bottom:1px solid var(--line-dark);
 }
 
 .case-card-featured .case-media {
-  min-height:48rem;
+  min-height:34rem;
 }
 
 .case-media-silver {
@@ -2950,7 +2950,7 @@ a:focus-visible {
   left:4%;
   right:4%;
   bottom:6%;
-  height:72%;
+  height:64%;
   transition:transform var(--motion-slow) var(--ease-ui);
 }
 
@@ -2967,14 +2967,14 @@ a:focus-visible {
   right:-1rem;
   bottom:-1rem;
   color:rgba(16,18,22,.06);
-  font-size:14rem;
+  font-size:10rem;
   line-height:.8;
   letter-spacing:-.08em;
   font-weight:700;
 }
 
 .case-card-featured .case-media-code {
-  font-size:20rem;
+  font-size:14rem;
 }
 
 .case-route {
@@ -3017,7 +3017,7 @@ a:focus-visible {
 }
 
 .case-body {
-  padding:2.2rem;
+  padding:1.7rem;
 }
 
 .case-title {
@@ -3065,15 +3065,15 @@ a:focus-visible {
 }
 
 .case-card blockquote {
-  margin:5rem 0 3rem;
-  max-width:62rem;
-  font-size:2.5rem;
+  margin:3rem 0 2rem;
+  max-width:58rem;
+  font-size:2.05rem;
   line-height:1.08;
   letter-spacing:-.03em;
 }
 
 .case-meta {
-  margin:0 0 2.5rem;
+  margin:0 0 1.7rem;
 }
 
 .case-meta div {
@@ -3096,14 +3096,14 @@ a:focus-visible {
 
 .case-summary {
   max-width:43rem;
-  margin:4rem 0 3rem;
+  margin:2.4rem 0 1.8rem;
   color:#646a70;
-  font-size:1.25rem;
+  font-size:1.15rem;
 }
 
 .case-note {
   display:block;
-  padding-top:1.3rem;
+  padding-top:1rem;
   border-top:1px solid var(--line-dark);
   color:var(--steel);
   font-size:.78rem;
@@ -3111,7 +3111,7 @@ a:focus-visible {
 
 @media (max-width:1023px) {
   .cases-section {
-    padding:10rem 2rem;
+    padding:8rem 2rem;
   }
 
   .cases-heading {
@@ -3136,7 +3136,7 @@ a:focus-visible {
 
 @media (max-width:640px) {
   .cases-section {
-    padding:8rem 1.5rem;
+    padding:7rem 1.5rem;
   }
 
   .cases-heading h2 {
@@ -3154,7 +3154,7 @@ a:focus-visible {
 
   .case-media,
   .case-card-featured .case-media {
-    min-height:31rem;
+    min-height:24rem;
   }
 
   .case-title {
@@ -3167,8 +3167,8 @@ a:focus-visible {
   }
 
   .case-card blockquote {
-    margin-top:4rem;
-    font-size:2.1rem;
+    margin-top:2.8rem;
+    font-size:1.9rem;
   }
 }
 
