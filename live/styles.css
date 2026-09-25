@@ -3831,17 +3831,6 @@ main > section[id],
   }
 }
 
-@keyframes vehicle-settle {
-  from {
-    opacity:0;
-    transform:translate3d(3rem,2.5rem,0);
-  }
-  to {
-    opacity:1;
-    transform:translate3d(0,1.5rem,0);
-  }
-}
-
 @keyframes route-load {
   from {
     transform:scaleX(0);
