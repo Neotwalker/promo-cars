@@ -330,6 +330,82 @@ code,.mono{
 
 
 
+
+.faq-item-specimen{margin-top:2rem}
+.faq-item{
+  border-top:1px solid var(--line);
+}
+.faq-item:last-child{
+  border-bottom:1px solid var(--line);
+}
+.faq-item summary{
+  min-height:6rem;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:2rem;
+  align-items:center;
+  list-style:none;
+  cursor:pointer;
+  font-size:1.55rem;
+  transition:
+    color var(--motion-hover) var(--ease-ui),
+    padding-left var(--motion-hover) var(--ease-ui);
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{
+  color:var(--signal);
+  padding-left:.5rem;
+}
+.faq-item summary:focus-visible{
+  outline:none;
+  box-shadow:var(--focus-ring);
+}
+.faq-item summary i{
+  position:relative;
+  width:2.4rem;
+  height:2.4rem;
+}
+.faq-item summary i::before,
+.faq-item summary i::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:1.4rem;
+  height:1px;
+  background:currentColor;
+  transform:translate(-50%,-50%);
+  transition:transform var(--motion-hover) var(--ease-ui);
+}
+.faq-item summary i::after{
+  transform:translate(-50%,-50%) rotate(90deg);
+}
+.faq-item[open] summary i::after{
+  transform:translate(-50%,-50%) rotate(0deg);
+}
+.faq-answer{
+  display:grid;
+  grid-template-rows:0fr;
+  opacity:0;
+  transition:
+    grid-template-rows var(--motion-hover) var(--ease-ui),
+    opacity var(--motion-focus) var(--ease-ui);
+}
+.faq-item[open] .faq-answer{
+  grid-template-rows:1fr;
+  opacity:1;
+}
+.faq-answer>div{
+  overflow:hidden;
+}
+.faq-answer p{
+  max-width:56rem;
+  margin:0;
+  padding:0 0 2rem;
+  color:var(--steel);
+  font-size:1.25rem;
+}
+
 .review-card-specimen{margin-top:2rem;max-width:48rem}
 .review-card{
   padding:1.6rem;
@@ -917,7 +993,7 @@ code,.mono{
   .state-grid,.field-state-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
-  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.review-card,.review-thumb,.document-card,.document-card-sheet,.media-card,.media-card-frame,
+  .btn,.btn span,.btn i,.round-btn,.round-btn span,.brand,.status,.choice-chip,.faq-item summary,.faq-item summary i::before,.faq-item summary i::after,.faq-answer,.review-card,.review-thumb,.document-card,.document-card-sheet,.media-card,.media-card-frame,
   .route-card,.metric-card,.glass-card,.car-card,.car-media img,.kit-nav a::after{
     transition:none;
   }
