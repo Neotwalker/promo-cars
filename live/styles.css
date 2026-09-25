@@ -3020,6 +3020,221 @@ a:focus-visible {
   }
 }
 
+
+.faq-section {
+  padding:11rem 2.4rem 12rem;
+  background:var(--paper);
+  border-bottom:1px solid var(--line-dark);
+}
+
+.faq-heading {
+  display:grid;
+  grid-template-columns:7fr 5fr;
+  gap:2rem;
+  align-items:end;
+  margin-bottom:6rem;
+}
+
+.faq-kicker,
+.faq-aside > span {
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.025em;
+}
+
+.faq-kicker {
+  margin:0 0 2rem;
+  color:var(--steel);
+  font-size:1rem;
+}
+
+.faq-heading h2 {
+  margin:0;
+  font-size:6.8rem;
+  line-height:.9;
+  letter-spacing:-.058em;
+  font-weight:400;
+}
+
+.faq-heading > p {
+  justify-self:end;
+  max-width:50rem;
+  margin:0;
+  color:#60666c;
+  font-size:1.4rem;
+}
+
+.faq-layout {
+  display:grid;
+  grid-template-columns:4fr 8fr;
+  gap:2rem;
+}
+
+.faq-aside {
+  padding-top:2rem;
+  border-top:1px solid var(--line-dark);
+}
+
+.faq-aside > span {
+  color:var(--signal);
+  font-size:.82rem;
+}
+
+.faq-aside > p {
+  max-width:35rem;
+  margin:3rem 0;
+  color:#646a70;
+  font-size:1.2rem;
+}
+
+.faq-aside > a {
+  max-width:35rem;
+  padding:1.3rem 0;
+  display:flex;
+  justify-content:space-between;
+  gap:2rem;
+  border-top:1px solid var(--line-dark);
+  border-bottom:1px solid var(--line-dark);
+  font-size:1.15rem;
+  transition:
+    color var(--motion-hover) var(--ease-ui),
+    padding-left var(--motion-hover) var(--ease-ui);
+}
+
+.faq-aside > a:hover {
+  color:var(--signal);
+  padding-left:.5rem;
+}
+
+.faq-item {
+  border-top:1px solid var(--line-dark);
+}
+
+.faq-item:last-child {
+  border-bottom:1px solid var(--line-dark);
+}
+
+.faq-item summary {
+  min-height:7.2rem;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:2rem;
+  align-items:center;
+  list-style:none;
+  cursor:pointer;
+  font-size:2rem;
+  letter-spacing:-.025em;
+  transition:
+    color var(--motion-hover) var(--ease-ui),
+    padding-left var(--motion-hover) var(--ease-ui);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display:none;
+}
+
+.faq-item summary:hover {
+  color:var(--signal);
+  padding-left:.6rem;
+}
+
+.faq-item summary:focus-visible {
+  outline:0;
+  box-shadow:var(--focus-ring);
+}
+
+.faq-item summary i {
+  position:relative;
+  width:2.8rem;
+  height:2.8rem;
+}
+
+.faq-item summary i::before,
+.faq-item summary i::after {
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:1.6rem;
+  height:1px;
+  background:currentColor;
+  transform:translate(-50%,-50%);
+  transition:transform var(--motion-hover) var(--ease-ui);
+}
+
+.faq-item summary i::after {
+  transform:translate(-50%,-50%) rotate(90deg);
+}
+
+.faq-item[open] summary i::after {
+  transform:translate(-50%,-50%) rotate(0deg);
+}
+
+.faq-answer {
+  display:grid;
+  grid-template-rows:0fr;
+  opacity:0;
+  transition:
+    grid-template-rows var(--motion-hover) var(--ease-ui),
+    opacity var(--motion-focus) var(--ease-ui);
+}
+
+.faq-item[open] .faq-answer {
+  grid-template-rows:1fr;
+  opacity:1;
+}
+
+.faq-answer > div {
+  overflow:hidden;
+}
+
+.faq-answer p {
+  max-width:68rem;
+  margin:0;
+  padding:0 0 2.4rem;
+  color:#646a70;
+  font-size:1.3rem;
+  line-height:1.45;
+}
+
+@media (max-width:1023px) {
+  .faq-section {
+    padding:9rem 2rem;
+  }
+
+  .faq-heading {
+    grid-template-columns:1fr;
+    gap:3rem;
+  }
+
+  .faq-heading > p {
+    justify-self:start;
+  }
+
+  .faq-layout {
+    grid-template-columns:1fr;
+    gap:4rem;
+  }
+}
+
+@media (max-width:640px) {
+  .faq-section {
+    padding:7rem 1.5rem;
+  }
+
+  .faq-heading h2 {
+    font-size:4.8rem;
+  }
+
+  .faq-item summary {
+    min-height:6.5rem;
+    font-size:1.65rem;
+  }
+
+  .faq-answer p {
+    font-size:1.2rem;
+  }
+}
+
 .contact-strip {
   min-height:38rem;
   padding:6rem 2.4rem;
@@ -3520,6 +3735,11 @@ a:focus-visible {
   .safety-point,
   .review-card,
   .review-thumb,
+  .faq-aside > a,
+  .faq-item summary,
+  .faq-item summary i::before,
+  .faq-item summary i::after,
+  .faq-answer,
   .contact-phone,
   .contact-phone i {
     transition:none;
