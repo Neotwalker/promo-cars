@@ -2607,6 +2607,52 @@ main > section[id],
   }
 }
 
+@media (max-width:430px) and (orientation:portrait) {
+  .trust-section {
+    padding-top:7rem;
+    padding-bottom:7rem;
+  }
+
+  .trust-heading {
+    margin-bottom:4.5rem;
+  }
+
+  .trust-card {
+    min-height:24rem;
+    margin-bottom:1.2rem;
+    padding:1.6rem;
+  }
+
+  .trust-card-video {
+    min-height:46rem;
+  }
+
+  .trust-video-stage {
+    inset:4.6rem 1.3rem 12rem;
+  }
+
+  .trust-card-document {
+    min-height:36rem;
+  }
+
+  .trust-document-sheet {
+    margin:2.2rem 0 1.5rem;
+    padding:1.6rem;
+  }
+
+  .trust-card-review {
+    min-height:28rem;
+  }
+
+  .trust-card-review blockquote {
+    font-size:2.1rem;
+  }
+
+  .trust-handover-visual {
+    margin:1.4rem 0;
+  }
+}
+
 
 .safety-section {
   padding:13rem 2.4rem 14rem;
@@ -2919,6 +2965,67 @@ main > section[id],
 
 }
 
+@media (max-width:430px) and (orientation:portrait) {
+  .safety-section {
+    padding-top:7rem;
+    padding-bottom:7rem;
+  }
+
+  .safety-heading {
+    margin-bottom:4.5rem;
+  }
+
+  .safety-document {
+    min-height:46rem;
+    padding:1.4rem;
+  }
+
+  .safety-sheet {
+    margin:2rem 0;
+    padding:1.6rem;
+  }
+
+  .safety-sheet > strong {
+    margin:3rem 0 3.5rem;
+    font-size:3.8rem;
+  }
+
+  .safety-sheet-lines {
+    padding-top:2.5rem;
+  }
+
+  .safety-sheet-lines i {
+    margin-top:1rem;
+  }
+
+  .safety-point {
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:1.4rem;
+    padding:2rem 0;
+  }
+
+  .safety-point-index {
+    grid-column:1;
+    grid-row:1;
+  }
+
+  .safety-point-status {
+    grid-column:2;
+    grid-row:1;
+    align-self:start;
+  }
+
+  .safety-point-copy {
+    grid-column:1 / -1;
+    grid-row:2;
+  }
+
+  .safety-point-copy h3 {
+    margin-bottom:1rem;
+    font-size:2.9rem;
+  }
+}
+
 
 .reviews-section {
   padding:10rem 2.4rem 11rem;
@@ -3108,6 +3215,34 @@ main > section[id],
 
   .review-card {
     padding:1.5rem;
+  }
+}
+
+@media (max-width:430px) and (orientation:portrait) {
+  .reviews-section {
+    padding-top:6rem;
+    padding-bottom:6rem;
+  }
+
+  .reviews-heading {
+    margin-bottom:3.5rem;
+  }
+
+  .review-card {
+    margin-bottom:1rem;
+    padding:1.3rem;
+  }
+
+  .review-card > p {
+    margin-top:1.6rem;
+  }
+
+  .review-thumbs {
+    margin-top:1.2rem;
+  }
+
+  .review-thumb {
+    width:4.8rem;
   }
 }
 
