@@ -50,6 +50,7 @@ button{cursor:pointer}
 a{color:inherit}
 img,video{display:block;max-width:100%}
 p,h1,h2,h3,h4,dl,dd{margin:0}
+html [hidden]{display:none}
 :focus-visible{outline:2px solid var(--color-signal)}
 
 /* 03 — TYPOGRAPHY */
