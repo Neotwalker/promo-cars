@@ -1,7 +1,7 @@
 (() => {
-  document.querySelectorAll('.toast__close').forEach((button) => {
+  document.querySelectorAll('[data-toast-close]').forEach((button) => {
     button.addEventListener('click', () => {
-      button.closest('.toast')?.remove();
+      button.closest('[data-toast-item]')?.remove();
     });
   });
 })();

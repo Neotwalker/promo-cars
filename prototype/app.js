@@ -132,10 +132,10 @@
       const toast = document.createElement('article');
       toast.className = 'toast toast--' + type;
       toast.dataset.toast = type;
-      toast.innerHTML = '<strong></strong><span></span><button class="toast__close" type="button" aria-label="Закрыть">×</button>';
+      toast.innerHTML = '<strong></strong><span></span><button class="toast__close" data-toast-close type="button" aria-label="Закрыть">×</button>';
       toast.querySelector('strong').textContent = title;
       toast.querySelector('span').textContent = message;
-      toast.querySelector('.toast__close').addEventListener('click', () => toast.remove());
+      toast.querySelector('[data-toast-close]').addEventListener('click', () => toast.remove());
       stack.append(toast);
 
       const announcement = title + ' ' + message;
@@ -176,9 +176,9 @@
     };
 
     const clearFieldError = (input, defaultMessage) => {
-      const field = input.closest('.field');
+      const field = input.closest('[data-field]');
       field?.classList.remove('field--error');
-      const message = field?.querySelector('.field__message');
+      const message = field?.querySelector('[data-field-message]');
       if (message && defaultMessage !== undefined) message.textContent = defaultMessage;
     };
 
@@ -266,7 +266,7 @@
 
     root.querySelectorAll('[data-config-choice]').forEach((group) => {
       group.addEventListener('click', (event) => {
-        const button = event.target.closest('.choice-chip');
+        const button = event.target.closest('[data-value]');
         if (!button) return;
 
         const key = group.dataset.configChoice;
@@ -311,9 +311,9 @@
       const step = list[current];
 
       if (step === 'model' && !state.model && !refs.model.value.trim()) {
-        const field = refs.model.closest('.field');
+        const field = refs.model.closest('[data-field]');
         field.classList.add('field--error');
-        field.querySelector('.field__message').textContent = 'Укажите модель или выберите «нужен подбор».';
+        field.querySelector('[data-field-message]').textContent = 'Укажите модель или выберите «нужен подбор».';
         refs.model.focus();
         return false;
       }
@@ -327,9 +327,9 @@
         return choiceError('budget','Выберите бюджет или вариант «Нужен ориентир».');
       }
       if (step === 'city' && !refs.city.value.trim()) {
-        const field = refs.city.closest('.field');
+        const field = refs.city.closest('[data-field]');
         field.classList.add('field--error');
-        field.querySelector('.field__message').textContent = 'Укажите город получения.';
+        field.querySelector('[data-field-message]').textContent = 'Укажите город получения.';
         refs.city.focus();
         return false;
       }
@@ -352,7 +352,7 @@
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const contact = refs.contact.value.trim();
-      const contactField = refs.contact.closest('.field');
+      const contactField = refs.contact.closest('[data-field]');
 
       if (!state.channel) {
         choiceError('channel','Выберите телефон или Telegram.');
@@ -361,7 +361,7 @@
 
       if (!contact) {
         contactField.classList.add('field--error');
-        contactField.querySelector('.field__message').textContent = 'Укажите контакт.';
+        contactField.querySelector('[data-field-message]').textContent = 'Укажите контакт.';
         refs.contact.focus();
         return;
       }
@@ -393,10 +393,10 @@
   function initCars() {
     document.querySelectorAll('[data-car-select]').forEach((button) => {
       button.addEventListener('click', () => {
-        document.querySelectorAll('.car-card').forEach((card) => {
+        document.querySelectorAll('[data-car]').forEach((card) => {
           card.classList.remove('car-card--selected');
         });
-        button.closest('.car-card')?.classList.add('car-card--selected');
+        button.closest('[data-car]')?.classList.add('car-card--selected');
         window.dispatchEvent(new CustomEvent('nexroute:select-car', {
           detail:{ model:button.dataset.carSelect, condition:'Новый' }
         }));
@@ -420,7 +420,8 @@
   function initCases() {
     document.querySelectorAll('[data-case-toggle]').forEach((button) => {
       button.addEventListener('click', () => {
-        const details = button.parentElement.querySelector('.case-card__details');
+        const item = button.closest('[data-case]');
+        const details = item?.querySelector('[data-case-details]');
         if (!details) return;
         details.hidden = !details.hidden;
         button.setAttribute('aria-expanded', String(!details.hidden));
@@ -445,9 +446,9 @@
       const input = event.target;
 
       if (input.matches('input[name="model"],input[name="city"],input[name="contact"]')) {
-        const field = input.closest('.field');
+        const field = input.closest('[data-field]');
         field?.classList.remove('field--error');
-        const message = field?.querySelector('.field__message');
+        const message = field?.querySelector('[data-field-message]');
         if (message && input.name !== 'model') message.textContent = '';
       }
 
@@ -462,8 +463,8 @@
 
       ['model','city','contact'].forEach((name) => {
         const input = form.elements[name];
-        const field = input.closest('.field');
-        const message = field.querySelector('.field__message');
+        const field = input.closest('[data-field]');
+        const message = field.querySelector('[data-field-message]');
 
         if (!input.value.trim()) {
           field.classList.add('field--error');

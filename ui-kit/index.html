@@ -65,15 +65,15 @@
           </div>
 
           <div class="kit-grid kit-grid--two">
-            <label class="field">
+            <label class="field" data-field>
               <span class="field__label">Марка или модель</span>
               <input class="field__control" type="text" placeholder="Например, Zeekr 007">
-              <small class="field__message">Введите любую марку или модель.</small>
+              <small class="field__message" data-field-message>Введите любую марку или модель.</small>
             </label>
-            <label class="field field--error">
+            <label class="field field--error" data-field>
               <span class="field__label">Город получения</span>
               <input class="field__control" type="text" aria-invalid="true" value="">
-              <small class="field__message">Укажите город.</small>
+              <small class="field__message" data-field-message>Укажите город.</small>
             </label>
           </div>
 
@@ -103,9 +103,9 @@
       <div class="container">
         <p class="eyebrow">04 / States</p>
         <div class="kit-grid kit-grid--three">
-          <article class="toast toast--success" role="status"><strong>Заявка отправлена.</strong><span>Параметры переданы.</span></article>
-          <article class="toast toast--error" role="alert"><strong>Не удалось отправить заявку.</strong><span>Попробуйте ещё раз.</span><button class="toast__close" type="button" aria-label="Закрыть">×</button></article>
-          <article class="toast toast--info" role="status"><strong>Данные сохранены.</strong><span>Можно продолжить с того же места.</span></article>
+          <article class="toast toast--success" data-toast-item role="status"><strong>Заявка отправлена.</strong><span>Параметры переданы.</span></article>
+          <article class="toast toast--error" data-toast-item role="alert"><strong>Не удалось отправить заявку.</strong><span>Попробуйте ещё раз.</span><button class="toast__close" data-toast-close type="button" aria-label="Закрыть">×</button></article>
+          <article class="toast toast--info" data-toast-item role="status"><strong>Данные сохранены.</strong><span>Можно продолжить с того же места.</span></article>
         </div>
       </div>
     </section>

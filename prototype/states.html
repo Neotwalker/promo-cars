@@ -81,10 +81,10 @@
               <section class="configurator__step">
                 <p class="eyebrow">Шаг 1</p>
                 <h2 class="type-h3">Какой автомобиль рассматриваете?</h2>
-                <label class="field">
+                <label class="field" data-field>
                   <span class="field__label">Марка или модель</span>
                   <input class="field__control" value="Zeekr 001 AWD">
-                  <small class="field__message">Можно указать любую марку или модель.</small>
+                  <small class="field__message" data-field-message>Можно указать любую марку или модель.</small>
                 </label>
                 <div class="choice-group">
                   <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Zeekr 001</button>
@@ -162,10 +162,10 @@
               <section class="configurator__step">
                 <p class="eyebrow">Шаг 5</p>
                 <h2 class="type-h3">Где будете получать автомобиль?</h2>
-                <label class="field">
+                <label class="field" data-field>
                   <span class="field__label">Город получения</span>
                   <input class="field__control" value="Москва">
-                  <small class="field__message">Региональная доставка будет отдельной строкой.</small>
+                  <small class="field__message" data-field-message>Региональная доставка будет отдельной строкой.</small>
                 </label>
               </section>
               <div class="configurator__actions">
@@ -203,10 +203,10 @@
                   <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Telegram</button>
                 </div>
                 <small class="configurator__choice-message"></small>
-                <label class="field">
+                <label class="field" data-field>
                   <span class="field__label">Телефон или username в Telegram</span>
                   <input class="field__control" value="@nexroute_demo">
-                  <small class="field__message">Контакт нужен только для отправки расчёта.</small>
+                  <small class="field__message" data-field-message>Контакт нужен только для отправки расчёта.</small>
                 </label>
               </section>
               <div class="configurator__actions">
@@ -226,10 +226,10 @@
                   <button class="choice-chip" type="button" aria-pressed="false">5 500 000–6 500 000 ₽</button>
                 </div>
                 <small class="configurator__choice-message">Выберите бюджет или вариант «Нужен ориентир».</small>
-                <label class="field field--error">
+                <label class="field field--error" data-field>
                   <span class="field__label">Город получения</span>
                   <input class="field__control" aria-invalid="true" value="">
-                  <small class="field__message">Укажите город получения.</small>
+                  <small class="field__message" data-field-message>Укажите город получения.</small>
                 </label>
               </section>
               <div class="configurator__actions">
@@ -256,7 +256,7 @@
         <p class="eyebrow">Proof · closed / open</p>
         <div class="states-component-row">
           <article class="states-component states-component--wide" data-state="proof-closed">
-            <article class="case-card">
+            <article class="case-card" data-case>
               <div class="case-card__media"><span>Zeekr 001 AWD · Москва</span></div>
               <div class="case-card__body">
                 <p class="eyebrow">2025 · VIN ····4K2</p>
@@ -265,7 +265,7 @@
                 <blockquote>«Перед выкупом получил видео осмотра, дальше смотрел статус по маршруту.»</blockquote>
                 <span>Алексей · Москва</span>
                 <button class="button button--ghost" type="button" aria-expanded="false">Посмотреть кейс</button>
-                <div class="case-card__details" hidden>
+                <div class="case-card__details" data-case-details hidden>
                   <p>Видео осмотра · сверка комплектации · инвойс · страхование · таможенные документы · ЭПТС · фото выдачи.</p>
                 </div>
               </div>
@@ -273,7 +273,7 @@
           </article>
 
           <article class="states-component states-component--wide" data-state="proof-open">
-            <article class="case-card">
+            <article class="case-card" data-case>
               <div class="case-card__media"><span>Zeekr 001 AWD · Москва</span></div>
               <div class="case-card__body">
                 <p class="eyebrow">2025 · VIN ····4K2</p>
@@ -282,7 +282,7 @@
                 <blockquote>«Перед выкупом получил видео осмотра, дальше смотрел статус по маршруту.»</blockquote>
                 <span>Алексей · Москва</span>
                 <button class="button button--ghost" type="button" aria-expanded="true">Скрыть детали</button>
-                <div class="case-card__details">
+                <div class="case-card__details" data-case-details>
                   <p>Видео осмотра · сверка комплектации · инвойс · страхование · таможенные документы · ЭПТС · фото выдачи.</p>
                 </div>
               </div>
@@ -318,21 +318,21 @@
         <div class="states-component-row">
           <article class="states-component states-component--narrow" data-state="form-default">
             <form class="lead-form">
-              <label class="field">
+              <label class="field" data-field>
                 <span class="field__label">Марка или модель</span>
                 <input class="field__control" value="Zeekr 001 AWD">
-                <small class="field__message">Можно написать «нужен подбор».</small>
+                <small class="field__message" data-field-message>Можно написать «нужен подбор».</small>
               </label>
-              <label class="field">
+              <label class="field" data-field>
                 <span class="field__label">Город получения</span>
                 <input class="field__control" value="Москва">
-                <small class="field__message"></small>
+                <small class="field__message" data-field-message></small>
               </label>
               <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="state-default-channel" checked> Телефон</label><label><input type="radio" name="state-default-channel"> Telegram</label></fieldset>
-              <label class="field">
+              <label class="field" data-field>
                 <span class="field__label">Телефон или username в Telegram</span>
                 <input class="field__control" value="+7 999 000-00-00">
-                <small class="field__message"></small>
+                <small class="field__message" data-field-message></small>
               </label>
               <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox"> <span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message"></small></div>
               <button class="button button--primary" type="button">Получить расчёт</button>
@@ -341,21 +341,21 @@
 
           <article class="states-component states-component--narrow" data-state="form-error">
             <form class="lead-form">
-              <label class="field">
+              <label class="field" data-field>
                 <span class="field__label">Марка или модель</span>
                 <input class="field__control" value="Zeekr 001 AWD">
-                <small class="field__message">Можно написать «нужен подбор».</small>
+                <small class="field__message" data-field-message>Можно написать «нужен подбор».</small>
               </label>
-              <label class="field field--error">
+              <label class="field field--error" data-field>
                 <span class="field__label">Город получения</span>
                 <input class="field__control" aria-invalid="true" value="">
-                <small class="field__message">Укажите город.</small>
+                <small class="field__message" data-field-message>Укажите город.</small>
               </label>
               <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="state-error-channel" checked> Телефон</label><label><input type="radio" name="state-error-channel"> Telegram</label></fieldset>
-              <label class="field field--error">
+              <label class="field field--error" data-field>
                 <span class="field__label">Телефон или username в Telegram</span>
                 <input class="field__control" aria-invalid="true" value="">
-                <small class="field__message">Укажите контакт.</small>
+                <small class="field__message" data-field-message>Укажите контакт.</small>
               </label>
               <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox"> <span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message">Подтвердите согласие на обработку персональных данных.</small></div>
               <button class="button button--primary" type="button">Получить расчёт</button>
@@ -364,15 +364,15 @@
 
           <article class="states-component states-component--narrow" data-state="form-success">
             <form class="lead-form">
-              <label class="field">
+              <label class="field" data-field>
                 <span class="field__label">Марка или модель</span>
                 <input class="field__control" value="Zeekr 001 AWD">
-                <small class="field__message">Можно написать «нужен подбор».</small>
+                <small class="field__message" data-field-message>Можно написать «нужен подбор».</small>
               </label>
-              <label class="field">
+              <label class="field" data-field>
                 <span class="field__label">Город получения</span>
                 <input class="field__control" value="Москва">
-                <small class="field__message"></small>
+                <small class="field__message" data-field-message></small>
               </label>
               <div class="lead-form__success" tabindex="-1">
                 <h2 class="type-h3">Заявка принята.</h2>
@@ -390,9 +390,9 @@
         <div class="states-component-row">
           <article class="states-component states-component--wide" data-state="toast-variants">
             <div class="states-toast-row">
-              <article class="toast toast--success" role="status"><strong>Заявка отправлена.</strong><span>Параметры переданы.</span></article>
-              <article class="toast toast--error" role="alert"><strong>Не удалось отправить заявку.</strong><span>Проверьте соединение и попробуйте ещё раз.</span><button class="toast__close" type="button" aria-label="Закрыть">×</button></article>
-              <article class="toast toast--info" role="status"><strong>Данные сохранены.</strong><span>Можно продолжить расчёт.</span></article>
+              <article class="toast toast--success" data-toast-item role="status"><strong>Заявка отправлена.</strong><span>Параметры переданы.</span></article>
+              <article class="toast toast--error" data-toast-item role="alert"><strong>Не удалось отправить заявку.</strong><span>Проверьте соединение и попробуйте ещё раз.</span><button class="toast__close" data-toast-close type="button" aria-label="Закрыть">×</button></article>
+              <article class="toast toast--info" data-toast-item role="status"><strong>Данные сохранены.</strong><span>Можно продолжить расчёт.</span></article>
             </div>
           </article>
         </div>
