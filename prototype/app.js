@@ -25,9 +25,8 @@
     if (!root) return;
 
     const stages = [...root.querySelectorAll('[data-journey-step]')];
+    const stageItems = [...root.querySelectorAll('[data-journey-item]')];
     const refs = {
-      progress: root.querySelector('[data-journey-progress]'),
-      marker: root.querySelector('[data-journey-marker]'),
       index: root.querySelector('[data-journey-index]'),
       title: root.querySelector('[data-journey-title]'),
       copy: root.querySelector('[data-journey-copy]'),
@@ -47,8 +46,10 @@
 
       stages.forEach((stage, i) => {
         const active = i === safeIndex;
-        stage.classList.toggle('journey__stage--active', active);
-        stage.classList.toggle('journey__stage--complete', i < safeIndex);
+        const completed = i < safeIndex;
+        const stageItem = stageItems[i];
+        stageItem?.classList.toggle('journey__stage-item--active', active);
+        stageItem?.classList.toggle('journey__stage-item--complete', completed);
         if (active) stage.setAttribute('aria-current', 'step');
         else stage.removeAttribute('aria-current');
       });
@@ -59,10 +60,6 @@
       refs.result.textContent = item[3];
       refs.status.textContent = item[4];
       refs.next.textContent = item[5];
-
-      const progress = safeIndex / (journeyData.length - 1) * 100;
-      refs.progress.style.width = progress + '%';
-      refs.marker.style.left = progress + '%';
 
       if (window.innerWidth <= 720 && refs.stages) {
         const activeStage = stages[safeIndex];
