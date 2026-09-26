@@ -1,4 +1,4 @@
-/* 01 — TOKENS */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");\n\n/* 01 — TOKENS */
 :root {
   --color-ink:#101216;
   --color-paper:#f2efe9;
@@ -100,14 +100,14 @@ p,h1,h2,h3,h4,dl,dd{margin:0}
 
 .accordion{border-top:1px solid var(--color-line)}
 .accordion:last-child{border-bottom:1px solid var(--color-line)}
-.accordion__trigger{list-style:none;padding:var(--space-4) 0;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);font-size:20px;font-weight:500;cursor:pointer}
+.accordion__trigger{list-style:none;padding:var(--space-4) 0;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);font-size:24px;line-height:30px;font-weight:600;cursor:pointer}
 .accordion__trigger::-webkit-details-marker{display:none}
 .accordion__trigger::after{content:"+";font-size:24px;font-weight:400}
 .accordion[open] .accordion__trigger::after{content:"−"}
 .accordion__content{padding:0 0 var(--space-4);max-width:760px;color:#5b6066}
 
 .toast{position:relative;min-width:280px;max-width:420px;padding:var(--space-3) var(--space-6) var(--space-3) var(--space-3);border:1px solid var(--color-line);border-radius:var(--radius-sm);background:var(--color-white);box-shadow:0 18px 55px rgba(16,18,22,.16);display:flex;flex-direction:column;gap:4px}
-.toast strong{font-size:15px;line-height:20px}
+.toast strong{font-size:16px;line-height:24px}
 .toast span{font-size:14px;line-height:20px;color:#62676d}
 .toast--success{border-left:3px solid #2f7d55}
 .toast--error{border-left:3px solid #b83c27}
