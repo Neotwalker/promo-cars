@@ -1,4 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");\n\n/* 01 — TOKENS */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* 01 — TOKENS */
 :root {
   --color-ink:#101216;
   --color-paper:#f2efe9;
