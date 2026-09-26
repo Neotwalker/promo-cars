@@ -74,25 +74,178 @@
 
     <section class="states-group states-group--paper">
       <div class="container">
-        <p class="eyebrow">Configurator · actual steps</p>
+        <p class="eyebrow">Configurator · actual component states</p>
         <div class="states-component-row">
-          <article class="states-component states-component--narrow">
-            <div class="configurator__form"><section class="configurator__step"><p class="eyebrow">Шаг 1</p><h2 class="type-h3">Какой автомобиль рассматриваете?</h2><label class="field"><span class="field__label">Марка или модель</span><input class="field__control" value="Zeekr 001 AWD"><small class="field__message">Можно указать любую марку или модель.</small></label><div class="choice-group"><button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Zeekr 001</button><button class="choice-chip" type="button">Xiaomi SU7</button><button class="choice-chip" type="button">Li Auto L6</button></div></section></div>
+          <article class="states-component states-component--narrow" data-state="config-model">
+            <form class="configurator__form">
+              <section class="configurator__step">
+                <p class="eyebrow">Шаг 1</p>
+                <h2 class="type-h3">Какой автомобиль рассматриваете?</h2>
+                <label class="field">
+                  <span class="field__label">Марка или модель</span>
+                  <input class="field__control" value="Zeekr 001 AWD">
+                  <small class="field__message">Можно указать любую марку или модель.</small>
+                </label>
+                <div class="choice-group">
+                  <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Zeekr 001</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">Xiaomi SU7</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">Li Auto L6</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">Нужен подбор</button>
+                </div>
+              </section>
+              <div class="configurator__actions">
+                <button class="button button--ghost" type="button" disabled>Назад</button>
+                <button class="button button--primary" type="button">Далее</button>
+              </div>
+            </form>
           </article>
-          <article class="states-component states-component--narrow">
-            <div class="configurator__form"><section class="configurator__step"><p class="eyebrow">Шаг 2</p><h2 class="type-h3">Состояние автомобиля</h2><div class="choice-group"><button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Новый</button><button class="choice-chip" type="button">С пробегом</button></div></section></div>
+
+          <article class="states-component states-component--narrow" data-state="config-condition">
+            <form class="configurator__form">
+              <section class="configurator__step">
+                <p class="eyebrow">Шаг 2</p>
+                <h2 class="type-h3">Состояние автомобиля</h2>
+                <div class="choice-group">
+                  <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Новый</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">С пробегом</button>
+                </div>
+                <small class="configurator__choice-message"></small>
+              </section>
+              <div class="configurator__actions">
+                <button class="button button--ghost" type="button">Назад</button>
+                <button class="button button--primary" type="button">Далее</button>
+              </div>
+            </form>
           </article>
-          <article class="states-component states-component--narrow">
-            <div class="configurator__form"><section class="configurator__step"><p class="eyebrow">Шаг 4</p><h2 class="type-h3">Бюджет под ключ</h2><div class="choice-group"><button class="choice-chip" type="button">До 5 500 000 ₽</button><button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">5 500 000–6 500 000 ₽</button></div></section></div>
+
+          <article class="states-component states-component--narrow" data-state="config-power">
+            <form class="configurator__form">
+              <section class="configurator__step">
+                <p class="eyebrow">Шаг 3</p>
+                <h2 class="type-h3">Тип силовой установки</h2>
+                <div class="choice-group">
+                  <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Электромобиль</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">Гибрид / EREV</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">Не принципиально</button>
+                </div>
+                <small class="configurator__choice-message"></small>
+              </section>
+              <div class="configurator__actions">
+                <button class="button button--ghost" type="button">Назад</button>
+                <button class="button button--primary" type="button">Далее</button>
+              </div>
+            </form>
           </article>
-          <article class="states-component states-component--narrow">
-            <aside class="configurator__summary"><p class="eyebrow">Ваш расчёт</p><h2 class="type-h3">Zeekr 001 AWD</h2><p>Новый · Электромобиль · Москва</p><dl class="configurator__breakdown"><div><dt>Автомобиль</dt><dd>4 820 000 ₽</dd></div><div><dt>Логистика Китай → Россия</dt><dd>355 000 ₽</dd></div><div><dt>Таможня и оформление</dt><dd>930 000 ₽</dd></div><div><dt>Утильсбор</dt><dd>3 400 ₽</dd></div><div><dt>Доставка до Москвы</dt><dd>61 600 ₽</dd></div><div><dt>Сервис NEXROUTE</dt><dd>320 000 ₽</dd></div></dl><div class="configurator__total"><span>Итого</span><strong>6 490 000 ₽ под ключ</strong></div></aside>
+
+          <article class="states-component states-component--narrow" data-state="config-budget">
+            <form class="configurator__form">
+              <section class="configurator__step">
+                <p class="eyebrow">Шаг 4</p>
+                <h2 class="type-h3">Бюджет под ключ</h2>
+                <div class="choice-group">
+                  <button class="choice-chip" type="button" aria-pressed="false">До 5 500 000 ₽</button>
+                  <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">5 500 000–6 500 000 ₽</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">От 6 500 000 ₽</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">Нужен ориентир</button>
+                </div>
+                <small class="configurator__choice-message"></small>
+              </section>
+              <div class="configurator__actions">
+                <button class="button button--ghost" type="button">Назад</button>
+                <button class="button button--primary" type="button">Далее</button>
+              </div>
+            </form>
           </article>
-          <article class="states-component states-component--narrow">
-            <div class="configurator__form"><section class="configurator__step"><p class="eyebrow">Шаг 6</p><h2 class="type-h3">Куда отправить подборку и расчёт?</h2><div class="choice-group"><button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Telegram</button><button class="choice-chip" type="button">Телефон</button></div><label class="field"><span class="field__label">Телефон или username</span><input class="field__control" value="@nexroute_demo"><small class="field__message">Контакт нужен только для отправки расчёта.</small></label></section></div>
+
+          <article class="states-component states-component--narrow" data-state="config-city">
+            <form class="configurator__form">
+              <section class="configurator__step">
+                <p class="eyebrow">Шаг 5</p>
+                <h2 class="type-h3">Где будете получать автомобиль?</h2>
+                <label class="field">
+                  <span class="field__label">Город получения</span>
+                  <input class="field__control" value="Москва">
+                  <small class="field__message">Региональная доставка будет отдельной строкой.</small>
+                </label>
+              </section>
+              <div class="configurator__actions">
+                <button class="button button--ghost" type="button">Назад</button>
+                <button class="button button--primary" type="button">Далее</button>
+              </div>
+            </form>
           </article>
-          <article class="states-component states-component--narrow">
-            <div class="configurator__success"><h2 class="type-h3">Расчёт отправлен.</h2><p>Мы получили параметры автомобиля и свяжемся с вами в выбранном канале.</p></div>
+
+          <article class="states-component states-component--narrow" data-state="config-summary">
+            <aside class="configurator__summary" aria-label="Итог расчёта">
+              <p class="eyebrow">Ваш расчёт</p>
+              <h2 class="type-h3">Zeekr 001 AWD</h2>
+              <p>Новый · Электромобиль · Москва</p>
+              <dl class="configurator__breakdown">
+                <div><dt>Автомобиль</dt><dd>4 820 000 ₽</dd></div>
+                <div><dt>Логистика Китай → Россия</dt><dd>355 000 ₽</dd></div>
+                <div><dt>Таможня и оформление</dt><dd>930 000 ₽</dd></div>
+                <div><dt>Утильсбор</dt><dd>3 400 ₽</dd></div>
+                <div><dt>Доставка до Москвы</dt><dd>61 600 ₽</dd></div>
+                <div><dt>Сервис NEXROUTE</dt><dd>320 000 ₽</dd></div>
+              </dl>
+              <div class="configurator__total"><span>Итого</span><strong>6 490 000 ₽ под ключ</strong></div>
+              <p class="type-small">Ориентир доставки: 30–38 дней.</p>
+            </aside>
+          </article>
+
+          <article class="states-component states-component--narrow" data-state="config-contact">
+            <form class="configurator__form">
+              <section class="configurator__step">
+                <p class="eyebrow">Шаг 6</p>
+                <h2 class="type-h3">Куда отправить подборку и расчёт?</h2>
+                <div class="choice-group">
+                  <button class="choice-chip" type="button" aria-pressed="false">Телефон</button>
+                  <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Telegram</button>
+                </div>
+                <small class="configurator__choice-message"></small>
+                <label class="field">
+                  <span class="field__label">Телефон или username в Telegram</span>
+                  <input class="field__control" value="@nexroute_demo">
+                  <small class="field__message">Контакт нужен только для отправки расчёта.</small>
+                </label>
+              </section>
+              <div class="configurator__actions">
+                <button class="button button--ghost" type="button">Назад</button>
+                <button class="button button--primary" type="button">Получить расчёт</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="states-component states-component--narrow" data-state="config-validation">
+            <form class="configurator__form">
+              <section class="configurator__step">
+                <p class="eyebrow">Validation</p>
+                <h2 class="type-h3">Проверьте обязательные параметры</h2>
+                <div class="choice-group">
+                  <button class="choice-chip" type="button" aria-pressed="false">До 5 500 000 ₽</button>
+                  <button class="choice-chip" type="button" aria-pressed="false">5 500 000–6 500 000 ₽</button>
+                </div>
+                <small class="configurator__choice-message">Выберите бюджет или вариант «Нужен ориентир».</small>
+                <label class="field field--error">
+                  <span class="field__label">Город получения</span>
+                  <input class="field__control" aria-invalid="true" value="">
+                  <small class="field__message">Укажите город получения.</small>
+                </label>
+              </section>
+              <div class="configurator__actions">
+                <button class="button button--ghost" type="button">Назад</button>
+                <button class="button button--primary" type="button">Далее</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="states-component states-component--narrow" data-state="config-success">
+            <form class="configurator__form">
+              <div class="configurator__success" tabindex="-1">
+                <h2 class="type-h3">Расчёт отправлен.</h2>
+                <p>Мы получили параметры автомобиля и свяжемся с вами в выбранном канале.</p>
+              </div>
+            </form>
           </article>
         </div>
       </div>
@@ -100,26 +253,146 @@
 
     <section class="states-group">
       <div class="container">
-        <p class="eyebrow">Proof / FAQ / Form / Toast · actual components</p>
+        <p class="eyebrow">Proof · closed / open</p>
         <div class="states-component-row">
-          <article class="states-component states-component--wide">
-            <article class="case-card"><div class="case-card__media"><span>Zeekr 001 AWD · Москва</span></div><div class="case-card__body"><p class="eyebrow">2025 · VIN ····4K2</p><h2 class="type-h3">6 490 000 ₽ · 34 дня</h2><blockquote>«Перед выкупом получил видео осмотра, дальше смотрел статус по маршруту.»</blockquote><button class="button button--ghost" type="button" aria-expanded="true">Скрыть детали</button><div class="case-card__details"><p>Видео осмотра · сверка комплектации · инвойс · страхование · таможенные документы · ЭПТС · фото выдачи.</p></div></div></article>
+          <article class="states-component states-component--wide" data-state="proof-closed">
+            <article class="case-card">
+              <div class="case-card__media"><span>Zeekr 001 AWD · Москва</span></div>
+              <div class="case-card__body">
+                <p class="eyebrow">2025 · VIN ····4K2</p>
+                <h2 class="type-h3">6 490 000 ₽ · 34 дня</h2>
+                <p>Клиент искал 001 на полном приводе и не хотел менять комплектацию.</p>
+                <blockquote>«Перед выкупом получил видео осмотра, дальше смотрел статус по маршруту.»</blockquote>
+                <span>Алексей · Москва</span>
+                <button class="button button--ghost" type="button" aria-expanded="false">Посмотреть кейс</button>
+                <div class="case-card__details" hidden>
+                  <p>Видео осмотра · сверка комплектации · инвойс · страхование · таможенные документы · ЭПТС · фото выдачи.</p>
+                </div>
+              </div>
+            </article>
           </article>
-          <article class="states-component states-component--narrow">
-            <details class="accordion" open><summary class="accordion__trigger">Какие автомобили можно привезти?</summary><div class="accordion__content"><p>Любую доступную марку или модель. Cars — витрина, а не закрытый каталог.</p></div></details>
+
+          <article class="states-component states-component--wide" data-state="proof-open">
+            <article class="case-card">
+              <div class="case-card__media"><span>Zeekr 001 AWD · Москва</span></div>
+              <div class="case-card__body">
+                <p class="eyebrow">2025 · VIN ····4K2</p>
+                <h2 class="type-h3">6 490 000 ₽ · 34 дня</h2>
+                <p>Клиент искал 001 на полном приводе и не хотел менять комплектацию.</p>
+                <blockquote>«Перед выкупом получил видео осмотра, дальше смотрел статус по маршруту.»</blockquote>
+                <span>Алексей · Москва</span>
+                <button class="button button--ghost" type="button" aria-expanded="true">Скрыть детали</button>
+                <div class="case-card__details">
+                  <p>Видео осмотра · сверка комплектации · инвойс · страхование · таможенные документы · ЭПТС · фото выдачи.</p>
+                </div>
+              </div>
+            </article>
           </article>
-          <article class="states-component states-component--narrow">
+        </div>
+      </div>
+    </section>
+
+    <section class="states-group states-group--paper">
+      <div class="container">
+        <p class="eyebrow">FAQ · closed / open</p>
+        <div class="states-component-row">
+          <article class="states-component states-component--narrow" data-state="faq-closed">
+            <details class="accordion">
+              <summary class="accordion__trigger">Какие автомобили можно привезти?</summary>
+              <div class="accordion__content"><p>Любую доступную марку или модель. Cars — витрина, а не закрытый каталог.</p></div>
+            </details>
+          </article>
+          <article class="states-component states-component--narrow" data-state="faq-open">
+            <details class="accordion" open>
+              <summary class="accordion__trigger">Какие автомобили можно привезти?</summary>
+              <div class="accordion__content"><p>Любую доступную марку или модель. Cars — витрина, а не закрытый каталог.</p></div>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="states-group">
+      <div class="container">
+        <p class="eyebrow">Final Form · default / error / success</p>
+        <div class="states-component-row">
+          <article class="states-component states-component--narrow" data-state="form-default">
             <form class="lead-form">
-              <label class="field field--error"><span class="field__label">Город получения</span><input class="field__control" aria-invalid="true"><small class="field__message">Укажите город.</small></label>
-              <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox"> <span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message">Подтвердите согласие.</small></div>
+              <label class="field">
+                <span class="field__label">Марка или модель</span>
+                <input class="field__control" value="Zeekr 001 AWD">
+                <small class="field__message">Можно написать «нужен подбор».</small>
+              </label>
+              <label class="field">
+                <span class="field__label">Город получения</span>
+                <input class="field__control" value="Москва">
+                <small class="field__message"></small>
+              </label>
+              <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="state-default-channel" checked> Телефон</label><label><input type="radio" name="state-default-channel"> Telegram</label></fieldset>
+              <label class="field">
+                <span class="field__label">Телефон или username в Telegram</span>
+                <input class="field__control" value="+7 999 000-00-00">
+                <small class="field__message"></small>
+              </label>
+              <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox"> <span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message"></small></div>
               <button class="button button--primary" type="button">Получить расчёт</button>
             </form>
           </article>
-          <article class="states-component states-component--wide">
+
+          <article class="states-component states-component--narrow" data-state="form-error">
+            <form class="lead-form">
+              <label class="field">
+                <span class="field__label">Марка или модель</span>
+                <input class="field__control" value="Zeekr 001 AWD">
+                <small class="field__message">Можно написать «нужен подбор».</small>
+              </label>
+              <label class="field field--error">
+                <span class="field__label">Город получения</span>
+                <input class="field__control" aria-invalid="true" value="">
+                <small class="field__message">Укажите город.</small>
+              </label>
+              <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="state-error-channel" checked> Телефон</label><label><input type="radio" name="state-error-channel"> Telegram</label></fieldset>
+              <label class="field field--error">
+                <span class="field__label">Телефон или username в Telegram</span>
+                <input class="field__control" aria-invalid="true" value="">
+                <small class="field__message">Укажите контакт.</small>
+              </label>
+              <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox"> <span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message">Подтвердите согласие на обработку персональных данных.</small></div>
+              <button class="button button--primary" type="button">Получить расчёт</button>
+            </form>
+          </article>
+
+          <article class="states-component states-component--narrow" data-state="form-success">
+            <form class="lead-form">
+              <label class="field">
+                <span class="field__label">Марка или модель</span>
+                <input class="field__control" value="Zeekr 001 AWD">
+                <small class="field__message">Можно написать «нужен подбор».</small>
+              </label>
+              <label class="field">
+                <span class="field__label">Город получения</span>
+                <input class="field__control" value="Москва">
+                <small class="field__message"></small>
+              </label>
+              <div class="lead-form__success" tabindex="-1">
+                <h2 class="type-h3">Заявка принята.</h2>
+                <p>Мы получили модель, город и выбранный способ связи. Следующий шаг — уточнить автомобиль и собрать расчёт по вашему маршруту.</p>
+              </div>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="states-group states-group--paper">
+      <div class="container">
+        <p class="eyebrow">Toast · success / error / info</p>
+        <div class="states-component-row">
+          <article class="states-component states-component--wide" data-state="toast-variants">
             <div class="states-toast-row">
-              <article class="toast toast--success"><strong>Заявка отправлена.</strong><span>Параметры переданы.</span></article>
-              <article class="toast toast--error"><strong>Не удалось отправить заявку.</strong><span>Проверьте соединение и попробуйте ещё раз.</span><button class="toast__close" type="button" aria-label="Закрыть">×</button></article>
-              <article class="toast toast--info"><strong>Данные сохранены.</strong><span>Можно продолжить расчёт.</span></article>
+              <article class="toast toast--success" role="status"><strong>Заявка отправлена.</strong><span>Параметры переданы.</span></article>
+              <article class="toast toast--error" role="alert"><strong>Не удалось отправить заявку.</strong><span>Проверьте соединение и попробуйте ещё раз.</span><button class="toast__close" type="button" aria-label="Закрыть">×</button></article>
+              <article class="toast toast--info" role="status"><strong>Данные сохранены.</strong><span>Можно продолжить расчёт.</span></article>
             </div>
           </article>
         </div>
