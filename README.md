@@ -1,29 +1,22 @@
 # NEXROUTE AUTO — promo-cars
 
-UX-прототип продаваемого шаблона для компании по подбору и доставке автомобилей из Китая в Россию.
+Browser UX prototype for the NEXROUTE AUTO landing page.
 
-## Актуальная структура
+## Structure
 
-- `ui-kit/` — design tokens, spacing, типографика, базовые BEM-компоненты и их состояния.
-- `prototype/` — текущий UX-прототип. Собирается поверх `ui-kit/`.
-- `live/` — предыдущая опубликованная рабочая версия. На UX-этапе не переписывается.
-- `docs/UX-PROTOTYPE-RULES.md` — локальный контракт Этапа 4 для кодовых агентов.
-- `docs/ASSET-SOURCES.md` — происхождение и статус media-assets.
+- `ui-kit/` — shared UI foundation.
+- `prototype/` — current UX prototype and state specimens.
+- `live/` — previous published working version.
 
-Корневой legacy-сайт «Парадайз Авто» удалён, чтобы не существовало второй активной реализации и конкурирующих CSS/JS.
+Project requirements, copy, UX rules, audit decisions and roadmap are maintained only in the Google Doc:
+https://docs.google.com/document/d/1vOxjsTpT_bfsAy59QfsvZNIHXELEyXVkDiyQpjj9pMU/edit
 
-## Порядок работы
-
-1. Сначала `ui-kit/`: tokens → base → typography → layout primitives → reusable components → states/accessibility.
-2. Затем `prototype/`: секции, UX-сценарии, интерактивность, states, responsive.
-3. После UX-утверждения — visual-polish и только затем перенос решений в `live/`.
-
-## Локальный запуск
+## Local preview
 
 ```bash
 python3 -m http.server 8080
 ```
 
-UI-kit: `http://localhost:8080/ui-kit/`  
-Prototype: `http://localhost:8080/prototype/`  
-States: `http://localhost:8080/prototype/states.html`
+- UI kit: `http://localhost:8080/ui-kit/`
+- Prototype: `http://localhost:8080/prototype/`
+- States: `http://localhost:8080/prototype/states.html`
