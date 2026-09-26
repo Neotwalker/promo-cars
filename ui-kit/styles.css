@@ -73,7 +73,7 @@ html [hidden]{display:none}
 .button{min-height:var(--control-h);padding:0 var(--space-4);border:1px solid transparent;border-radius:var(--radius-xs);display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);font-size:16px;line-height:20px;font-weight:500;text-decoration:none;transition:background-color .18s var(--ease),color .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)}
 .button--primary{background:var(--color-ink);color:var(--color-white)}
 .button--primary:hover{background:#282b31}
-.button--secondary{background:var(--color-white);border-color:var(--color-line)}
+.button--secondary{background:var(--color-white);color:var(--color-ink);border-color:var(--color-line)}
 .button--secondary:hover{border-color:rgba(16,18,22,.34)}
 .button--ghost{background:transparent;border-color:var(--color-line)}
 .button:active{transform:translateY(1px)}
