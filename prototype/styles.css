@@ -126,11 +126,6 @@
 .states-header{position:sticky;top:0;z-index:10;background:var(--color-white);border-bottom:1px solid var(--color-line)}
 .states-header .container{min-height:64px;display:flex;align-items:center;justify-content:space-between}.states-header a{text-decoration:none}
 .states-group{padding:80px 0;background:var(--color-ink);color:white}.states-group--paper{background:var(--color-paper);color:var(--color-ink)}
-.states-scroll{display:flex;gap:24px;overflow-x:auto;padding:32px 0 12px;scroll-snap-type:x proximity}
-.state-card{flex:0 0 360px;min-height:230px;padding:24px;border:1px solid var(--color-line-inverse);background:#171c21;display:flex;flex-direction:column;gap:12px;scroll-snap-align:start}
-.state-card>span{color:var(--color-signal);font-size:14px}.state-card h2{margin:0;font-size:24px;line-height:30px}.state-card p{color:rgba(252,251,248,.64)}
-.state-card--light{background:var(--color-white);border-color:var(--color-line)}.state-card--light p{color:#60666c}
-.state-card--success{background:#edf6f0;color:var(--color-ink);border-color:#7fb497}.state-card--success p{color:#466252}
 .states-grid{margin-top:32px;display:grid;gap:32px}.states-toast-row{display:flex;gap:16px;flex-wrap:wrap}
 
 /* 04 — RESPONSIVE */
