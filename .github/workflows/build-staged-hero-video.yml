@@ -1,0 +1,39 @@
+name: Build staged Hero video
+
+on:
+  push:
+    branches:
+      - asset-staging/video-hero
+    paths:
+      - ".github/workflows/build-staged-hero-video.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild and verify video
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat             tmp/video-hero/part1.b64             tmp/video-hero/part2.b64             tmp/video-hero/part3.b64             tmp/video-hero/part4.b64             tmp/video-hero/part5a.b64             tmp/video-hero/part5b.b64             tmp/video-hero/part6.b64             | base64 --decode > live/assets/hero/nexroute-selection-preview.mp4
+
+          test "$(wc -c < live/assets/hero/nexroute-selection-preview.mp4)" -eq 77199
+          echo "fba2718c849619b6d3a590239ceea1c5f1bc74b1fa148eb59fb835994c20d98d  live/assets/hero/nexroute-selection-preview.mp4" | sha256sum -c -
+          test "$(git hash-object live/assets/hero/nexroute-selection-preview.mp4)" = "fbadfa8f4259b21e1346ff20eb9b3f8c74ad5c4d"
+
+      - name: Commit staged video
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add live/assets/hero/nexroute-selection-preview.mp4
+          git commit -m "Build staged Hero video"
+          git push
