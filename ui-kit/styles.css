@@ -48,7 +48,6 @@ button{cursor:pointer}
 a{color:inherit}
 img,video{display:block;max-width:100%}
 p,h1,h2,h3,h4,dl,dd{margin:0}
-[hidden]{display:none!important}
 :focus-visible{outline:2px solid var(--color-signal)}
 
 /* 03 — TYPOGRAPHY */
@@ -130,7 +129,7 @@ p,h1,h2,h3,h4,dl,dd{margin:0}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .button,.field__control,.choice-chip{transition:none}
 }
 
 /* UI-KIT SHOWCASE ONLY */
