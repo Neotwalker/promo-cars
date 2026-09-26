@@ -15,19 +15,18 @@
 **Status:** active in live Hero.
 
 **Source:** generated project asset  
-**Asset:** futuristic neon concrete garage / showroom stage  
-**File:** `live/assets/hero/nexroute-garage-bg-1254.webp`  
+**Asset:** dark industrial automotive terminal / showroom stage  
+**File:** `live/assets/hero/nexroute-garage-stage-v2.avif`  
 **Master generation:** 1254 × 1254  
-**Live derivative:** 1254 × 1254 WebP, quality 88  
-**Added:** 2026-09-25
+**Live derivative:** 1254 × 1254 AVIF  
+**Added:** 2026-09-26
 
 Implementation notes:
-- background only; no vehicle is baked into the current Hero asset;
-- near-square composition is intentional because the Hero media frame stays close to square across the main responsive states;
-- the open central stage is reserved for the future vehicle-selection loop;
-- current live asset uses the full generated resolution rather than the earlier 768 px preview derivative;
-- use the 1254 px WebP as the current visual-quality baseline;
-- if the Hero media frame later exceeds roughly 800 CSS px on high-DPI displays, prepare a dedicated 1800–2200 px 2x master rather than upscaling this file.
+- approved background-only stage for the NEXROUTE Hero;
+- graphite concrete and black metal replace the previous blue-neon treatment;
+- orange remains a restrained signal accent;
+- central stage stays empty for the future vehicle-selection loop;
+- square master is intentional for responsive near-square Hero crops.
 
 ### Previous Hero video candidates
 
