@@ -74,14 +74,14 @@
 
           <div class="journey__progress" aria-hidden="true"><span data-journey-progress></span><i data-journey-marker></i></div>
           <ol class="journey__stages" data-journey-stages>
-            <li class="journey__stage journey__stage--active" data-journey-step="0"><span>01</span><b>Подбор</b></li>
-            <li class="journey__stage" data-journey-step="1"><span>02</span><b>Проверка</b></li>
-            <li class="journey__stage" data-journey-step="2"><span>03</span><b>Выкуп</b></li>
-            <li class="journey__stage" data-journey-step="3"><span>04</span><b>Страхование</b></li>
-            <li class="journey__stage" data-journey-step="4"><span>05</span><b>Граница</b></li>
-            <li class="journey__stage" data-journey-step="5"><span>06</span><b>Таможня</b></li>
-            <li class="journey__stage" data-journey-step="6"><span>07</span><b>ЭПТС</b></li>
-            <li class="journey__stage" data-journey-step="7"><span>08</span><b>Выдача</b></li>
+            <li><button class="journey__stage journey__stage--active" type="button" data-journey-step="0" aria-current="step"><span>01</span><b>Подбор</b></button></li>
+            <li><button class="journey__stage" type="button" data-journey-step="1"><span>02</span><b>Проверка</b></button></li>
+            <li><button class="journey__stage" type="button" data-journey-step="2"><span>03</span><b>Выкуп</b></button></li>
+            <li><button class="journey__stage" type="button" data-journey-step="3"><span>04</span><b>Страхование</b></button></li>
+            <li><button class="journey__stage" type="button" data-journey-step="4"><span>05</span><b>Граница</b></button></li>
+            <li><button class="journey__stage" type="button" data-journey-step="5"><span>06</span><b>Таможня</b></button></li>
+            <li><button class="journey__stage" type="button" data-journey-step="6"><span>07</span><b>ЭПТС</b></button></li>
+            <li><button class="journey__stage" type="button" data-journey-step="7"><span>08</span><b>Выдача</b></button></li>
           </ol>
 
           <div class="journey__detail">
@@ -112,7 +112,7 @@
 
         <div class="configurator__layout">
           <form class="configurator__form" novalidate data-config-form>
-            <div class="configurator__progress"><span data-config-progress></span></div>
+            <div class="configurator__progress" role="progressbar" aria-label="Шаг конфигуратора" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" data-config-progressbar><span data-config-progress></span></div>
 
             <section class="configurator__step configurator__step--active" data-config-step="model">
               <p class="eyebrow">Шаг 1</p><h3 class="type-h3">Какой автомобиль рассматриваете?</h3>
@@ -127,17 +127,17 @@
 
             <section class="configurator__step" data-config-step="condition" hidden>
               <p class="eyebrow">Шаг 2</p><h3 class="type-h3">Состояние автомобиля</h3>
-              <div class="choice-group" data-config-choice="condition"><button class="choice-chip" type="button" data-value="Новый">Новый</button><button class="choice-chip" type="button" data-value="С пробегом">С пробегом</button></div>
+              <div class="choice-group" data-config-choice="condition"><button class="choice-chip" type="button" data-value="Новый">Новый</button><button class="choice-chip" type="button" data-value="С пробегом">С пробегом</button></div><small class="configurator__choice-message" data-choice-message="condition"></small>
             </section>
 
             <section class="configurator__step" data-config-step="power" hidden>
               <p class="eyebrow">Шаг 3</p><h3 class="type-h3">Тип силовой установки</h3>
-              <div class="choice-group" data-config-choice="power"><button class="choice-chip" type="button" data-value="Электромобиль">Электромобиль</button><button class="choice-chip" type="button" data-value="Гибрид / EREV">Гибрид / EREV</button><button class="choice-chip" type="button" data-value="Не принципиально">Не принципиально</button></div>
+              <div class="choice-group" data-config-choice="power"><button class="choice-chip" type="button" data-value="Электромобиль">Электромобиль</button><button class="choice-chip" type="button" data-value="Гибрид / EREV">Гибрид / EREV</button><button class="choice-chip" type="button" data-value="Не принципиально">Не принципиально</button></div><small class="configurator__choice-message" data-choice-message="power"></small>
             </section>
 
             <section class="configurator__step" data-config-step="budget" hidden>
               <p class="eyebrow">Шаг 4</p><h3 class="type-h3">Бюджет под ключ</h3>
-              <div class="choice-group" data-config-choice="budget"><button class="choice-chip" type="button" data-value="До 5 500 000 ₽">До 5 500 000 ₽</button><button class="choice-chip" type="button" data-value="5 500 000–6 500 000 ₽">5 500 000–6 500 000 ₽</button><button class="choice-chip" type="button" data-value="От 6 500 000 ₽">От 6 500 000 ₽</button><button class="choice-chip" type="button" data-value="Нужен ориентир">Нужен ориентир</button></div>
+              <div class="choice-group" data-config-choice="budget"><button class="choice-chip" type="button" data-value="До 5 500 000 ₽">До 5 500 000 ₽</button><button class="choice-chip" type="button" data-value="5 500 000–6 500 000 ₽">5 500 000–6 500 000 ₽</button><button class="choice-chip" type="button" data-value="От 6 500 000 ₽">От 6 500 000 ₽</button><button class="choice-chip" type="button" data-value="Нужен ориентир">Нужен ориентир</button></div><small class="configurator__choice-message" data-choice-message="budget"></small>
             </section>
 
             <section class="configurator__step" data-config-step="city" hidden>
@@ -147,7 +147,7 @@
 
             <section class="configurator__step" data-config-step="contact" hidden>
               <p class="eyebrow">Шаг 6</p><h3 class="type-h3">Куда отправить подборку и расчёт?</h3>
-              <div class="choice-group" data-config-choice="channel"><button class="choice-chip" type="button" data-value="Телефон">Телефон</button><button class="choice-chip" type="button" data-value="Telegram">Telegram</button></div>
+              <div class="choice-group" data-config-choice="channel"><button class="choice-chip" type="button" data-value="Телефон">Телефон</button><button class="choice-chip" type="button" data-value="Telegram">Telegram</button></div><small class="configurator__choice-message" data-choice-message="channel"></small>
               <label class="field" data-contact-field><span class="field__label">Телефон или username в Telegram</span><input class="field__control" name="contact" data-config-contact placeholder="+7 999 000-00-00 / @username"><small class="field__message" data-contact-message>Контакт нужен только для отправки расчёта.</small></label>
             </section>
 
@@ -188,10 +188,10 @@
         <div class="proof__grid">
           <article class="case-card case-card--featured">
             <div class="case-card__media"><span>Zeekr 001 AWD · Москва</span></div>
-            <div class="case-card__body"><p class="eyebrow">2025 · новый · VIN ····4K2</p><h3 class="type-h3">6 490 000 ₽ · 34 дня</h3><p>Клиент искал именно 001 на полном приводе и не хотел менять комплектацию ради более быстрой покупки. После проверки выбрали автомобиль без критичных замечаний и запустили маршрут.</p><blockquote>«Перед выкупом получил видео осмотра, дальше смотрел статус по маршруту. На выдаче всё совпало с тем, что согласовали.»</blockquote><span>Алексей · Москва</span><button class="button button--ghost" type="button" data-case-toggle>Посмотреть кейс</button><div class="case-card__details" hidden><p>Видео осмотра · сверка комплектации · инвойс · страхование · таможенные документы · ЭПТС · фото выдачи.</p></div></div>
+            <div class="case-card__body"><p class="eyebrow">2025 · новый · VIN ····4K2</p><h3 class="type-h3">6 490 000 ₽ · 34 дня</h3><p>Клиент искал именно 001 на полном приводе и не хотел менять комплектацию ради более быстрой покупки. После проверки выбрали автомобиль без критичных замечаний и запустили маршрут.</p><blockquote>«Перед выкупом получил видео осмотра, дальше смотрел статус по маршруту. На выдаче всё совпало с тем, что согласовали.»</blockquote><span>Алексей · Москва</span><button class="button button--ghost" type="button" data-case-toggle aria-expanded="false">Посмотреть кейс</button><div class="case-card__details" hidden><p>Видео осмотра · сверка комплектации · инвойс · страхование · таможенные документы · ЭПТС · фото выдачи.</p></div></div>
           </article>
-          <article class="case-card"><div class="case-card__media case-card__media--xiaomi"><span>Xiaomi SU7 Max · Казань</span></div><div class="case-card__body"><p class="eyebrow">2025 · VIN ····8M7</p><h3 class="type-h3">5 962 000 ₽ · 33 дня</h3><p>5 890 000 ₽ — маршрут до Москвы<br>72 000 ₽ — Москва → Казань</p><button class="button button--ghost" type="button" data-case-toggle>Посмотреть кейс</button><div class="case-card__details" hidden><p>Фото и видео проверки · инвойс · страхование · статусы · ЭПТС · выдача в Казани.</p></div></div></article>
-          <article class="case-card"><div class="case-card__media case-card__media--liauto"><span>Li Auto L6 Pro · Екатеринбург</span></div><div class="case-card__body"><p class="eyebrow">2025 · VIN ····6P1</p><h3 class="type-h3">5 490 000 ₽ · 37 дней</h3><p>5 390 000 ₽ — маршрут до Москвы<br>100 000 ₽ — Москва → Екатеринбург</p><button class="button button--ghost" type="button" data-case-toggle>Посмотреть кейс</button><div class="case-card__details" hidden><p>Осмотр · VIN и комплектация · инвойс · страхование · таможенные документы · ЭПТС · передача клиенту.</p></div></div></article>
+          <article class="case-card"><div class="case-card__media case-card__media--xiaomi"><span>Xiaomi SU7 Max · Казань</span></div><div class="case-card__body"><p class="eyebrow">2025 · VIN ····8M7</p><h3 class="type-h3">5 962 000 ₽ · 33 дня</h3><p>Главным условием была комплектация Max и тёмный салон. После дистанционной проверки автомобиль оформили в Москве и отправили автовозом в Казань.</p><blockquote>«До оплаты прислали подробное видео, поэтому решение принял спокойно. В Казани машину получил уже с готовыми документами.»</blockquote><span>Илья · Казань</span><p>5 890 000 ₽ — маршрут до Москвы<br>72 000 ₽ — Москва → Казань</p><button class="button button--ghost" type="button" data-case-toggle aria-expanded="false">Посмотреть кейс</button><div class="case-card__details" hidden><p>Фото и видео проверки · инвойс · страхование · статусы · ЭПТС · выдача в Казани.</p></div></div></article>
+          <article class="case-card"><div class="case-card__media case-card__media--liauto"><span>Li Auto L6 Pro · Екатеринбург</span></div><div class="case-card__body"><p class="eyebrow">2025 · VIN ····6P1</p><h3 class="type-h3">5 490 000 ₽ · 37 дней</h3><p>Нужен был семейный автомобиль для города и дальних поездок. Выбрали L6 Pro, проверили кузов, салон и комплектацию, затем отправили автомобиль в Екатеринбург.</p><blockquote>«Удобно, что расчёт был собран в одном месте: машина, доставка, оформление и доставка до города.»</blockquote><span>Мария · Екатеринбург</span><p>5 390 000 ₽ — маршрут до Москвы<br>100 000 ₽ — Москва → Екатеринбург</p><button class="button button--ghost" type="button" data-case-toggle aria-expanded="false">Посмотреть кейс</button><div class="case-card__details" hidden><p>Осмотр · VIN и комплектация · инвойс · страхование · таможенные документы · ЭПТС · передача клиенту.</p></div></div></article>
         </div>
       </div>
     </section>
@@ -203,7 +203,7 @@
           <article class="security-item"><span>01</span><div><h3 class="type-h3">Договор до первого платежа</h3><p>Фиксируем сценарий покупки, стоимость услуг, порядок платежей, действия при неуспешной проверке и комплект документов.</p></div><strong>Договор на сопровождение сделки</strong></article>
           <article class="security-item"><span>02</span><div><h3 class="type-h3">Оплата по этапам</h3><p>Автомобиль по инвойсу → логистика и страхование → обязательные платежи. Сервис NEXROUTE — 320 000 ₽ по договору.</p></div><strong>Каждый платёж связан с этапом</strong></article>
           <article class="security-item"><span>03</span><div><h3 class="type-h3">Если проверка не пройдена</h3><p>Автомобиль не выкупаем, показываем замечания и возвращаемся к подбору без повторной сервисной комиссии.</p></div><strong>Отчёт + фото/видео</strong></article>
-          <article class="security-item"><span>04</span><div><h3 class="type-h3">Страхование в перевозке</h3><p>Состояние фиксируется перед отправкой. При повреждении оформляется акт и запускается страховой сценарий.</p></div><strong>Полис + акт состояния</strong></article>
+          <article class="security-item"><span>04</span><div><h3 class="type-h3">Страхование в перевозке</h3><p>Состояние фиксируется перед отправкой. При повреждении оформляется акт и запускается страховой сценарий.</p></div><strong>Полис + акт состояния</strong></article>\n          <article class="security-item"><span>05</span><div><h3 class="type-h3">Документы на выдаче</h3><p>Инвойс или документы покупки, таможенный комплект, выписка из ЭПТС, документы по оплатам и акт выдачи.</p></div><strong>Комплект для передачи автомобиля</strong></article>
         </div>
       </div>
     </section>
@@ -232,7 +232,7 @@
           <label class="field" data-lead-field="city"><span class="field__label">Город получения</span><input class="field__control" name="city" placeholder="Москва"><small class="field__message"></small></label>
           <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="channel" value="Телефон" checked> Телефон</label><label><input type="radio" name="channel" value="Telegram"> Telegram</label></fieldset>
           <label class="field" data-lead-field="contact"><span class="field__label">Телефон или username в Telegram</span><input class="field__control" name="contact" placeholder="+7 999 000-00-00 / @username"><small class="field__message"></small></label>
-          <label class="lead-form__consent"><input type="checkbox" name="consent"> <span>Нажимая «Получить расчёт», вы соглашаетесь на обработку персональных данных.</span></label>
+          <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox" name="consent"> <span>Нажимая «Получить расчёт», вы соглашаетесь на обработку персональных данных.</span></label><small class="lead-form__consent-message" data-consent-message></small></div>
           <button class="button button--primary" type="submit">Получить расчёт</button>
           <div class="lead-form__success" data-lead-success hidden tabindex="-1"><h3 class="type-h3">Заявка принята.</h3><p>Мы получили модель, город и выбранный способ связи. Следующий шаг — уточнить автомобиль и собрать расчёт по вашему маршруту.</p></div>
         </form>
@@ -244,9 +244,9 @@
     <div class="container site-footer__grid">
       <div><strong>NEXROUTE AUTO</strong><p>Автомобили из Китая → Россия</p><p>Подбор · проверка · выкуп · логистика · оформление</p></div>
       <nav aria-label="Навигация в подвале"><a href="#cars">Автомобили</a><a href="#journey">Маршрут</a><a href="#proof">Кейсы</a><a href="#faq">Вопросы</a></nav>
-      <div><a href="#">Telegram</a><a href="#">Телефон</a></div>
+      <div><span>Telegram · @nexroute_auto</span><span>Телефон · +7 (999) 000-00-00</span></div>
     </div>
-    <div class="container site-footer__demo">Демонстрационная версия сайта. Представленные данные, цены, кейсы и материалы используются для демонстрации возможностей шаблона.</div>
+    <div class="container site-footer__legal"><span>Политика обработки персональных данных</span><span>Согласие на обработку персональных данных</span></div>\n    <div class="container site-footer__demo">Демонстрационная версия сайта. Представленные данные, цены, кейсы и материалы используются для демонстрации возможностей шаблона.</div>
   </footer>
 
   <div class="toast-stack" data-toast-stack aria-live="polite" aria-atomic="false"></div>
