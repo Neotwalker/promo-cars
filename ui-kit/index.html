@@ -1,354 +1,115 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="UI kit для сервиса подбора и доставки автомобилей">
-  <title>Auto Import — UI Kit</title>
+  <title>NEXROUTE — UI Kit Base</title>
+  <meta name="description" content="Базовые tokens и компоненты UX-прототипа NEXROUTE">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
+<body class="kit-page">
   <header class="kit-header">
-    <a class="brand" href="#top" aria-label="Auto Import UI kit">
-      <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
-      <span>AUTO<br><small>IMPORT / UI KIT</small></span>
-    </a>
-    <nav class="kit-nav" aria-label="Разделы UI kit">
-      <a href="#foundation">Foundation</a>
-      <a href="#type">Type</a>
-      <a href="#components">Components</a>
-      <a href="#motion">Motion</a>
-      <a href="#art">Art direction</a>
-    </nav>
-    <div class="viewport-readout"><span>FLUID</span><b id="viewportWidth">0000</b></div>
+    <div class="container kit-header__inner">
+      <strong>NEXROUTE / UI KIT BASE</strong>
+      <nav class="kit-nav" aria-label="UI kit">
+        <a href="#tokens">Tokens</a>
+        <a href="#type">Type</a>
+        <a href="#components">Components</a>
+        <a href="#states">States</a>
+      </nav>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="intro">
-      <div class="intro-meta mono">AUTO IMPORT / UI SYSTEM</div>
-      <h1>Автомобиль уже выбран.<br><span>Остальное — маршрут.</span></h1>
-      <div class="intro-bottom">
-        <p>Интерфейс для сервиса подбора и доставки автомобилей: маршрут, проверка, статус сделки, стоимость и движение автомобиля до клиента.</p>
-        <div class="scale-demo">
-          <span class="mono">DESIGN BASE</span>
-          <strong>1920</strong>
-          <i></i>
-          <span class="mono">TABLET CUT</span>
-          <strong>1024</strong>
+  <main>
+    <section class="kit-section" id="tokens">
+      <div class="container">
+        <p class="eyebrow">01 / Foundation</p>
+        <h1 class="type-h1">Сначала система.<br>Потом секции.</h1>
+        <div class="kit-grid kit-grid--colors">
+          <article class="token-swatch token-swatch--ink"><span>Ink</span><code>#101216</code></article>
+          <article class="token-swatch token-swatch--paper"><span>Paper</span><code>#F2EFE9</code></article>
+          <article class="token-swatch token-swatch--fog"><span>Fog</span><code>#D8D6D0</code></article>
+          <article class="token-swatch token-swatch--steel"><span>Steel</span><code>#7D8791</code></article>
+          <article class="token-swatch token-swatch--signal"><span>Signal</span><code>#FF5B35</code></article>
+          <article class="token-swatch token-swatch--night"><span>Night</span><code>#0B151D</code></article>
+        </div>
+        <div class="kit-spacing" aria-label="Spacing tokens">
+          <span style="--size:8px">8</span><span style="--size:12px">12</span><span style="--size:16px">16</span>
+          <span style="--size:24px">24</span><span style="--size:32px">32</span><span style="--size:48px">48</span>
+          <span style="--size:64px">64</span><span style="--size:80px">80</span><span style="--size:112px">112</span>
         </div>
       </div>
     </section>
 
-    <section class="kit-section" id="foundation">
-      <header class="section-head">
-        <span class="section-no mono">01</span>
-        <h2>Foundation</h2>
-        <p>Одна координатная система для desktop. Размеры элементов задаются в rem, а сам rem масштабируется от ширины viewport.</p>
-      </header>
-
-      <div class="token-grid colors">
-        <article class="swatch swatch-ink"><span>INK</span><code>#101216</code></article>
-        <article class="swatch swatch-paper"><span>PAPER</span><code>#F2EFE9</code></article>
-        <article class="swatch swatch-fog"><span>FOG</span><code>#D8D6D0</code></article>
-        <article class="swatch swatch-steel"><span>STEEL</span><code>#7D8791</code></article>
-        <article class="swatch swatch-signal"><span>SIGNAL</span><code>#FF5B35</code></article>
-        <article class="swatch swatch-night"><span>NIGHT</span><code>#0B151D</code></article>
-      </div>
-
-      <div class="foundation-row">
-        <article class="grid-card">
-          <div class="grid-title"><span class="mono">GRID</span><b>12 columns</b></div>
-          <div class="grid-demo" aria-label="12 column grid">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <p>Базовый gutter — 2.0rem. Поля — 2.4rem. Основные композиции: 5/7, 7/5 и 4/8.</p>
-        </article>
-        <article class="spacing-card">
-          <span class="mono">SPACING</span>
-          <div><i style="--w:2rem"></i><b>2</b></div>
-          <div><i style="--w:4rem"></i><b>4</b></div>
-          <div><i style="--w:8rem"></i><b>8</b></div>
-          <div><i style="--w:12rem"></i><b>12</b></div>
-          <div><i style="--w:18rem"></i><b>18</b></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="kit-section" id="type">
-      <header class="section-head">
-        <span class="section-no mono">02</span>
-        <h2>Typography</h2>
-        <p>Крупная редакционная типографика для смыслов и моноширинная служебная типографика для данных, маршрутов и статусов.</p>
-      </header>
-
-      <div class="type-specimens">
-        <article class="type-display">
-          <span class="mono">DISPLAY / 12.8rem / 0.90</span>
-          <div>Автомобиль<br>уже в пути.</div>
-        </article>
-        <article class="type-h1">
-          <span class="mono">H1 / 8.8rem / 0.94</span>
-          <div>Подбираем там,<br><em>где выбор больше.</em></div>
-        </article>
-        <article class="type-h2">
-          <span class="mono">H2 / 5.6rem / 0.98</span>
-          <div>Проверяем до покупки.<br>Считаем до оплаты.</div>
-        </article>
-        <article class="type-body">
-          <span class="mono">BODY / 1.8rem / 1.40</span>
-          <p>Показываем историю автомобиля, фиксируем этапы сделки и заранее считаем логистику до вашего города.</p>
-        </article>
-        <article class="type-data">
-          <span class="mono">DATA / MONO / 1.4rem</span>
-          <code>JP / YOKOHAMA → RU / VLADIVOSTOK<br>ETA 26 DAYS · LOT 184-02 · STATUS: IN TRANSIT</code>
-        </article>
+    <section class="kit-section kit-section--paper" id="type">
+      <div class="container">
+        <p class="eyebrow">02 / Typography</p>
+        <div class="kit-type">
+          <div><span>H1 · 64/68</span><p class="type-h1">Вы выбираете автомобиль.</p></div>
+          <div><span>H2 · 48/52</span><p class="type-h2">Остальное — маршрут.</p></div>
+          <div><span>H3 · 24/30</span><p class="type-h3">Zeekr 001 AWD</p></div>
+          <div><span>Body · 16/24</span><p class="type-body">Подбор, проверка, выкуп, логистика и оформление — в одном маршруте.</p></div>
+          <div><span>Small · 14/20</span><p class="type-small">30–38 дней · Москва</p></div>
+        </div>
       </div>
     </section>
 
     <section class="kit-section" id="components">
-      <header class="section-head">
-        <span class="section-no mono">03</span>
-        <h2>Components</h2>
-        <p>Компоненты не выглядят как типовой лендинг. Визуальный язык — интерфейс маршрута, бирки, статусы и крупные медиа.</p>
-      </header>
-
-      <div class="button-row">
-        <button class="btn btn-primary"><span>Рассчитать автомобиль</span><i aria-hidden="true" data-arrow="ne"></i></button>
-        <button class="btn btn-ghost"><span>Смотреть привезённые</span><i>→</i></button>
-        <button class="round-btn" aria-label="Открыть меню"><span></span><span></span></button>
-        <span class="status status-live"><i></i>На связи</span>
-        <span class="status">Договор / 01</span>
-      </div>
-
-      <div class="interaction-specimen" aria-labelledby="interaction-title">
-        <div class="interaction-copy">
-          <span class="mono">INTERACTION / STATES</span>
-          <h3 id="interaction-title">Default → Hover → Active → Focus</h3>
-          <p>Один язык состояний для кнопок, ссылок и полей: быстрый отклик, без лишней «пружины» и декоративных эффектов.</p>
-        </div>
-        <div class="state-grid">
-          <div class="state-sample">
-            <span class="mono">DEFAULT</span>
-            <button class="btn btn-primary state-demo"><span>Рассчитать</span><i aria-hidden="true" data-arrow="ne"></i></button>
+      <div class="container">
+        <p class="eyebrow">03 / Components</p>
+        <div class="kit-stack">
+          <div class="kit-row">
+            <button class="button button--primary" type="button">Получить расчёт</button>
+            <button class="button button--secondary" type="button">Смотреть маршрут</button>
+            <button class="button button--ghost" type="button">Назад</button>
           </div>
-          <div class="state-sample">
-            <span class="mono">HOVER</span>
-            <button class="btn btn-primary state-demo state-hover"><span>Рассчитать</span><i aria-hidden="true" data-arrow="ne"></i></button>
+
+          <div class="kit-grid kit-grid--two">
+            <label class="field">
+              <span class="field__label">Марка или модель</span>
+              <input class="field__control" type="text" placeholder="Например, Zeekr 007">
+              <small class="field__message">Введите любую марку или модель.</small>
+            </label>
+            <label class="field field--error">
+              <span class="field__label">Город получения</span>
+              <input class="field__control" type="text" aria-invalid="true" value="">
+              <small class="field__message">Укажите город.</small>
+            </label>
           </div>
-          <div class="state-sample">
-            <span class="mono">ACTIVE</span>
-            <button class="btn btn-primary state-demo state-active"><span>Рассчитать</span><i aria-hidden="true" data-arrow="ne"></i></button>
+
+          <div class="choice-group" aria-label="Состояние автомобиля">
+            <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Новый</button>
+            <button class="choice-chip" type="button" aria-pressed="false">С пробегом</button>
           </div>
-          <div class="state-sample">
-            <span class="mono">FOCUS</span>
-            <button class="btn btn-primary state-demo state-focus"><span>Рассчитать</span><i aria-hidden="true" data-arrow="ne"></i></button>
-          </div>
-        </div>
-        <div class="field-state-grid">
-          <label><span class="mono">INPUT / DEFAULT</span><input type="text" placeholder="Toyota Crown"></label>
-          <label class="state-hover"><span class="mono">INPUT / HOVER</span><input type="text" placeholder="Toyota Crown"></label>
-          <label class="state-focus"><span class="mono">INPUT / FOCUS</span><input type="text" value="Toyota Crown"></label>
-        </div>
-      </div>
 
-      <div class="component-grid">
-        <article class="route-card">
-          <header><span class="mono">ROUTE / 184-02</span><b>26 дней</b></header>
-          <div class="route-line"><i></i><i></i><i></i></div>
-          <div class="route-points"><span>YOKOHAMA<small>JP</small></span><span>VLADIVOSTOK<small>RU</small></span><span>CHELYABINSK<small>RU</small></span></div>
-          <footer><span>TOYOTA CROWN</span><b>2 980 000 ₽</b></footer>
-        </article>
-
-        <article class="metric-card">
-          <span class="mono">METRIC / 01</span>
-          <strong>30%</strong>
-          <p>средняя разница с предложениями на российском рынке</p>
-        </article>
-
-        <article class="glass-card">
-          <span class="mono">STEP 02 / CHECK</span>
-          <div class="glass-icon">◎</div>
-          <h3>Проверяем<br>до покупки</h3>
-          <p>История, аукционный лист, кузов, пробег и документы — до перевода денег.</p>
-        </article>
-
-        <article class="car-card">
-          <div class="car-media">
-            <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1000&q=82" alt="Автомобиль">
-            <span class="media-tag mono">DELIVERED / 042</span>
-          </div>
-          <div class="car-info">
-            <h3>Toyota Crown</h3>
-            <dl>
-              <div><dt>Год</dt><dd>2022</dd></div>
-              <div><dt>Пробег</dt><dd>25 000 км</dd></div>
-              <div><dt>Маршрут</dt><dd>Япония → Челябинск</dd></div>
-            </dl>
-          </div>
-        </article>
-      </div>
-
-
-
-
-
-
-      <div class="faq-item-specimen">
-        <details class="faq-item">
-          <summary>
-            <span>Сколько занимает доставка?</span>
-            <i aria-hidden="true"></i>
-          </summary>
-          <div class="faq-answer">
-            <div>
-              <p>Ответ раскрывается внутри компактного accordion-компонента без отдельного JavaScript.</p>
+          <article class="surface-card">
+            <div class="media-frame media-frame--car" aria-hidden="true"></div>
+            <div class="surface-card__body">
+              <p class="type-small">2025 · новый</p>
+              <h2 class="type-h3">Zeekr 001 AWD</h2>
+              <p>Одинаковая структура, media-ratio и padding для всех карточек.</p>
             </div>
-          </div>
-        </details>
-      </div>
+          </article>
 
-      <div class="review-card-specimen">
-        <article class="review-card">
-          <header>
-            <div>
-              <strong>Клиент / город</strong>
-              <span>Автомобиль</span>
-            </div>
-            <span class="review-label">EXAMPLE</span>
-          </header>
-          <p>Компактная карточка отзыва с коротким текстом и необязательными фото-превью.</p>
-          <div class="review-thumbs" aria-hidden="true">
-            <span class="review-thumb"></span>
-            <span class="review-thumb"></span>
-          </div>
-        </article>
-      </div>
-
-      <div class="document-card-specimen">
-        <article class="document-card">
-          <header>
-            <span class="mono">DOCUMENT / PREVIEW</span>
-            <span class="status"><i></i> EXAMPLE</span>
-          </header>
-          <div class="document-card-sheet" aria-hidden="true">
-            <span>AGREEMENT</span>
-            <strong>Договор / сделка</strong>
-            <i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <footer>
-            <span>Контейнер для договора, ЭПТС или таможенного документа.</span>
-          </footer>
-        </article>
-      </div>
-
-      <div class="media-card-specimen">
-        <article class="media-card media-card-dark">
-          <div class="media-card-head">
-            <span class="mono">MEDIA / VIDEO REPORT</span>
-            <span class="media-card-state mono">CONTENT SLOT</span>
-          </div>
-          <div class="media-card-visual" aria-hidden="true">
-            <span class="media-card-frame"></span>
-            <span class="media-card-mark">▶</span>
-          </div>
-          <div class="media-card-copy">
-            <h3>Осмотр автомобиля</h3>
-            <p>Базовый контейнер для видео, фото, документа или отчёта.</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="choice-specimen">
-        <div>
-          <span class="mono">CONTROL / CHOICE CHIP</span>
-          <h3>Выбор параметра</h3>
-        </div>
-        <div class="choice-chip-row" aria-label="Пример выбора типа двигателя">
-          <button class="choice-chip" type="button" aria-pressed="true">EV</button>
-          <button class="choice-chip" type="button" aria-pressed="false">HYBRID</button>
-          <button class="choice-chip" type="button" aria-pressed="false">ICE</button>
-        </div>
-        <div class="choice-select-demo">
-          <span class="mono">LARGE SET / SELECT</span>
-          <div class="choice-select-shell">
-            <select class="choice-select" aria-label="Пример выбора из длинного списка">
-              <option>Xiaomi SU7</option>
-              <option>Zeekr 001</option>
-              <option>Li Auto L6</option>
-              <option>BYD Seal</option>
-              <option>Avatr 12</option>
-              <option>Nio ET5</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-specimen">
-        <div>
-          <span class="mono">FORM / INPUTS</span>
-          <h3>Запрос на подбор</h3>
-        </div>
-        <label><span>Автомобиль</span><input type="text" placeholder="Toyota Crown, Kia K5..."></label>
-        <label><span>Бюджет</span><input type="text" placeholder="до 3 000 000 ₽"></label>
-        <label><span>Город</span><input type="text" placeholder="Челябинск"></label>
-        <button class="btn btn-primary"><span>Отправить запрос</span><i aria-hidden="true" data-arrow="ne"></i></button>
-      </div>
-    </section>
-
-    <section class="kit-section" id="motion">
-      <header class="section-head">
-        <span class="section-no mono">04</span>
-        <h2>Motion</h2>
-        <p>Движение объясняет путь автомобиля. Никаких случайных fade-in: reveal, route progress, marquee и крупные смены состояния.</p>
-      </header>
-
-      <div class="motion-stage">
-        <div class="motion-marquee" aria-label="Этапы доставки" data-stage-marquee>
-          <div class="motion-marquee-track" data-stage-marquee-track>
-            <div class="motion-marquee-set" data-stage-marquee-group>
-              <span>ПОДБОР</span><i>→</i><span>ПРОВЕРКА</span><i>→</i><span>ПОКУПКА</span><i>→</i><span>ЛОГИСТИКА</span><i>→</i><span>ВЫДАЧА</span><i>→</i>
-            </div>
-          </div>
-        </div>
-        <div class="motion-demo">
-          <span class="mono">REVEAL SAMPLE</span>
-          <h3 class="kit-reveal">Сначала смысл.<br><em>Потом движение.</em></h3>
+          <details class="accordion">
+            <summary class="accordion__trigger">Какие автомобили можно привезти?</summary>
+            <div class="accordion__content"><p>Любую доступную марку или модель; витрина не является закрытым каталогом.</p></div>
+          </details>
         </div>
       </div>
     </section>
 
-    <section class="kit-section art-section" id="art">
-      <header class="section-head">
-        <span class="section-no mono">05</span>
-        <h2>Art direction</h2>
-        <p>Автомобильная визуальная система: крупная типографика, данные по машине, маршрутные элементы, статусы и контрастные медиа.</p>
-      </header>
-
-      <article class="hero-concept">
-        <div class="hero-concept-copy">
-          <span class="mono">JP / KR / CN → RU</span>
-          <h3>Вы выбираете<br>автомобиль.<br><em>Остальное — маршрут.</em></h3>
-          <p>Подбор, проверка, выкуп, логистика и выдача — в одной понятной системе.</p>
-          <div class="hero-concept-actions">
-            <button class="btn btn-primary"><span>Рассчитать маршрут</span><i aria-hidden="true" data-arrow="ne"></i></button>
-            <button class="btn btn-ghost btn-ghost-inverse"><span>Смотреть маршрут</span><i aria-hidden="true" data-arrow="down"></i></button>
-          </div>
+    <section class="kit-section kit-section--paper" id="states">
+      <div class="container">
+        <p class="eyebrow">04 / States</p>
+        <div class="kit-grid kit-grid--three">
+          <article class="toast toast--success" role="status"><strong>Заявка отправлена.</strong><span>Параметры переданы.</span></article>
+          <article class="toast toast--error" role="alert"><strong>Не удалось отправить заявку.</strong><span>Попробуйте ещё раз.</span><button class="toast__close" type="button" aria-label="Закрыть">×</button></article>
+          <article class="toast toast--info" role="status"><strong>Данные сохранены.</strong><span>Можно продолжить с того же места.</span></article>
         </div>
-        <div class="hero-concept-visual">
-          <div class="route-code">184<span>/</span>02</div>
-          <div class="orbit orbit-a"></div>
-          <div class="orbit orbit-b"></div>
-          <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1400&q=88" alt="Автомобиль в новой арт-дирекции">
-          <div class="arrival-board mono"><span>STATUS</span><b>ARRIVING</b><small>ETA / 26 DAYS</small></div>
-        </div>
-      </article>
+      </div>
     </section>
   </main>
-
-  <footer class="kit-footer">
-    <span>AUTO IMPORT / UI SYSTEM</span>
-    <span class="mono">UI KIT · 2026</span>
-  </footer>
 
   <script src="./app.js"></script>
 </body>

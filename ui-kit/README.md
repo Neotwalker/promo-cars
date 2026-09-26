@@ -1,65 +1,44 @@
-# Auto Import UI Kit
+# NEXROUTE UI Kit Base
 
-Интерфейсная система для автомобильного сервиса подбора и доставки машин из Азии.
+Базовый слой UX-прототипа.
 
-## Состав
+## Что живёт здесь
 
-- цветовые токены;
-- типографическая шкала;
-- 12-колоночная сетка;
-- spacing-система;
-- кнопки и controls;
-- состояния hover / active / focus;
-- формы подбора автомобиля;
-- карточки автомобилей;
-- маршрутные и статусные элементы;
-- marquee;
-- motion-паттерны;
-- адаптивные правила.
+- design tokens;
+- spacing/container;
+- типографика;
+- layout primitives;
+- buttons;
+- fields / choice controls;
+- media frame;
+- cards;
+- accordion;
+- toast;
+- focus / error / success states;
+- reduced-motion.
 
-## Масштабирование
+## Что НЕ живёт здесь
 
-Desktop использует единую координатную систему:
+Hero, Journey, Configurator, Proof и другие page-specific композиции. Они находятся в `/prototype/`.
 
-```css
-html {
-  font-size: clamp(9px, calc(100vw / 192), 11.5px);
-}
-```
+## Подключение
 
-На ширине 1920 px: `1rem = 10px`.
+В prototype сначала подключается:
 
-До 1100 px используется отдельная tablet/mobile-композиция.
+`../ui-kit/styles.css`
 
-## Токены
+и только потом:
 
-- Ink — `#101216`
-- Paper — `#F2EFE9`
-- Fog — `#D8D6D0`
-- Steel — `#7D8791`
-- Signal — `#FF5B35`
-- Night — `#0B151D`
+`./styles.css`
 
-## Компоненты
+## Naming
 
-### Choice controls
+BEM. JS hooks не завязываются на visual classes.
 
-- до 6 вариантов на mobile показываются как choice chips;
-- если вариантов больше 6, на mobile группа переключается на нативный выпадающий список;
-- выбор в списке и состояние chips синхронизированы;
-- на tablet/desktop варианты показываются полностью как chips.
+## Tokens
 
-- маршрут доставки;
-- карточка автомобиля;
-- метрики;
-- этап проверки;
-- форма запроса;
-- статусы сделки;
-- интерактивные состояния.
+Colors: Ink #101216, Paper #F2EFE9, Fog #D8D6D0, Steel #7D8791, Signal #FF5B35, Night #0B151D, White #FCFBF8.
 
-## Motion
+Spacing: 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 112.
 
-- masked reveal;
-- continuous marquee;
-- route/status transitions;
-- reduced-motion support.
+Typography: Inter; H1 64/68; H2 48/52; H3 24/30; Body 16/24; Small 14/20; controls 16/20.

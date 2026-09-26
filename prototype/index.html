@@ -1,298 +1,257 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Сервис подбора и доставки автомобилей из Азии в Россию">
-  <title>Auto Import — автомобили из Азии</title>
+  <meta name="description" content="NEXROUTE AUTO — UX-прототип сервиса подбора и доставки автомобилей из Китая">
+  <title>NEXROUTE AUTO — UX Prototype</title>
+  <link rel="stylesheet" href="../ui-kit/styles.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="Auto Import">
-      <span class="brand-mark"><i></i><i></i></span>
-      <span>AUTO<br><small>IMPORT</small></span>
-    </a>
-    <nav class="site-nav" aria-label="Основная навигация">
-      <a href="#cars">Автомобили</a>
-      <a href="#route">Как это работает</a>
-      <a href="#calc">Расчёт</a>
-      <a href="#trust">Доверие</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a class="header-cta" href="#calc">Рассчитать</a>
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="#top">NEXROUTE AUTO</a>
+      <nav class="site-header__nav" aria-label="Основная навигация">
+        <a href="#cars">Автомобили</a><a href="#journey">Маршрут</a><a href="#proof">Кейсы</a><a href="#faq">Вопросы</a>
+      </nav>
+      <a class="button button--secondary" href="#final-form">Получить расчёт</a>
+    </div>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow">CHINA → RUSSIA / AUTO IMPORT</span>
-        <h1>Автомобиль уже выбран.<br><em>Остальное — маршрут.</em></h1>
-        <p>Подбор, проверка, выкуп, логистика, таможня и выдача — в одной понятной системе.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#calc"><span>Рассчитать автомобиль</span><i>↗</i></a>
-          <a class="btn btn-ghost" href="#cars"><span>Смотреть автомобили</span><i>→</i></a>
+      <div class="container hero__layout">
+        <div class="hero__copy">
+          <p class="eyebrow">Автомобили из Китая → Россия</p>
+          <h1 class="type-h1 hero__title">Вы выбираете автомобиль.<br>Остальное — маршрут.</h1>
+          <p class="hero__lead">Подбор, проверка, выкуп, логистика и оформление — в одном маршруте. До старта фиксируем расчёт и показываем, из чего складывается цена.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#configurator">Получить расчёт</a>
+            <a class="button button--ghost hero__secondary" href="#journey">Смотреть маршрут</a>
+          </div>
+          <p class="hero__route">Zeekr 001 · Хоргос → Москва · 11 дней до выдачи</p>
         </div>
-      </div>
-
-      <div class="hero-visual" aria-label="Xiaomi SU7, маршрут Китай — Россия">
-        <div class="hero-data">
-          <span>LOT / CN-18402</span>
-          <span>STATUS / IN TRANSIT</span>
-          <span>ETA / 18–28 DAYS</span>
-        </div>
-        <div class="car-silhouette car-silhouette-large" aria-hidden="true">
-          <span class="car-body"></span>
-          <span class="wheel wheel-a"></span>
-          <span class="wheel wheel-b"></span>
-        </div>
-        <div class="hero-model">XIAOMI<br>SU7</div>
-        <div class="hero-route">
-          <span>CN</span><i></i><span>RU</span>
+        <div class="hero__media" aria-label="Сцена для будущего loop-video автомобилей">
+          <div class="hero__media-status"><span>Zeekr 001</span><span>Хоргос → Москва</span></div>
+          <div class="hero__car-shape" aria-hidden="true"></div>
+          <div class="hero__media-footer"><span>Маршрут зафиксирован</span><strong>11 дней до выдачи</strong></div>
         </div>
       </div>
     </section>
 
-    <section class="proof-strip" aria-label="Преимущества">
-      <article><span class="proof-label">01 / CONTRACT</span><strong>Договор</strong><p>Этапы сделки фиксируются заранее.</p></article>
-      <article><span class="proof-label">02 / CHECK</span><strong>Проверка</strong><p>Автомобиль проверяется до выкупа.</p></article>
-      <article><span class="proof-label">03 / CONTROL</span><strong>Статус</strong><p>Понятно, на каком этапе находится машина.</p></article>
-      <article><span class="proof-label">04 / DELIVERY</span><strong>До города</strong><p>Логистика планируется до конечной точки.</p></article>
-    </section>
-
-    <section class="section cars-section" id="cars">
-      <header class="section-head">
-        <span class="section-no">01</span>
-        <div>
-          <span class="eyebrow">CURRENT SELECTION</span>
-          <h2>Что можно<br>привезти сейчас</h2>
-        </div>
-        <p>Примеры направления и формата карточек. На финальном сайте здесь будут реальные автомобили, фото и актуальные данные.</p>
-      </header>
-
-      <div class="cars-grid">
-        <article class="vehicle-card">
-          <div class="vehicle-media vehicle-media-a">
-            <span class="media-status">AVAILABLE / CHINA</span>
-            <div class="car-silhouette"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
-          </div>
-          <div class="vehicle-info">
-            <div><span>XIAOMI SU7</span><small>EV / 2025</small></div>
-            <dl><div><dt>Состояние</dt><dd>Новый</dd></div><div><dt>Маршрут</dt><dd>Китай → Россия</dd></div><div><dt>Стоимость</dt><dd>По расчёту</dd></div></dl>
-            <a href="#calc">Рассчитать этот автомобиль →</a>
-          </div>
-        </article>
-
-        <article class="vehicle-card">
-          <div class="vehicle-media vehicle-media-b">
-            <span class="media-status">ON REQUEST</span>
-            <div class="car-silhouette"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
-          </div>
-          <div class="vehicle-info">
-            <div><span>ZEEKR 001</span><small>EV / 2025</small></div>
-            <dl><div><dt>Состояние</dt><dd>Новый / б/у</dd></div><div><dt>Маршрут</dt><dd>Китай → Россия</dd></div><div><dt>Стоимость</dt><dd>По расчёту</dd></div></dl>
-            <a href="#calc">Рассчитать этот автомобиль →</a>
-          </div>
-        </article>
-
-        <article class="vehicle-card">
-          <div class="vehicle-media vehicle-media-c">
-            <span class="media-status">AVAILABLE / CHINA</span>
-            <div class="car-silhouette"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
-          </div>
-          <div class="vehicle-info">
-            <div><span>LI AUTO L6</span><small>EREV / 2025</small></div>
-            <dl><div><dt>Состояние</dt><dd>Новый</dd></div><div><dt>Маршрут</dt><dd>Китай → Россия</dd></div><div><dt>Стоимость</dt><dd>По расчёту</dd></div></dl>
-            <a href="#calc">Рассчитать этот автомобиль →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="route-section" id="route" data-route-section>
-      <div class="route-sticky">
-        <header class="route-head">
-          <span class="section-no">02</span>
-          <div><span class="eyebrow">ROUTE / CN-18402</span><h2>Путь автомобиля</h2></div>
-          <div class="route-progress"><span data-route-counter>01 / 08</span><i><b data-route-progress></b></i></div>
+    <section class="section cars" id="cars">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="type-h2">То, что хочется привезти.</h2>
+          <p>Несколько автомобилей для ориентира по цене, комплектации и сроку. Нужна другая модель — укажите её в расчёте, и мы соберём маршрут под неё.</p>
         </header>
+        <div class="cars__grid">
+          <article class="car-card" data-car="Zeekr 001 AWD">
+            <div class="car-card__media car-card__media--zeekr"><span>Zeekr 001 AWD</span></div>
+            <div class="car-card__body"><p class="type-small">2025 · новый</p><h3 class="type-h3">Zeekr 001 AWD</h3><p>Быстрый универсальный электромобиль для города и дальних поездок — с полным приводом, большой батареей и комфортной подвеской.</p><p class="car-card__spec">AWD · 100 kWh · пневмоподвеска · 2025</p><div class="car-card__price"><strong>6 490 000 ₽</strong><span>под ключ · 30–38 дней</span></div><button class="button button--secondary" type="button" data-car-select="Zeekr 001 AWD">Получить расчёт по этой машине</button></div>
+          </article>
+          <article class="car-card" data-car="Xiaomi SU7 Max">
+            <div class="car-card__media car-card__media--xiaomi"><span>Xiaomi SU7 Max</span></div>
+            <div class="car-card__body"><p class="type-small">2025 · новый</p><h3 class="type-h3">Xiaomi SU7 Max</h3><p>Низкий электрический седан с акцентом на динамику, электронику и дальние поездки.</p><p class="car-card__spec">AWD · 101 kWh · 800 V · 2025</p><div class="car-card__price"><strong>5 890 000 ₽</strong><span>под ключ · 28–36 дней</span></div><button class="button button--secondary" type="button" data-car-select="Xiaomi SU7 Max">Получить расчёт по этой машине</button></div>
+          </article>
+          <article class="car-card" data-car="Li Auto L6 Pro">
+            <div class="car-card__media car-card__media--liauto"><span>Li Auto L6 Pro</span></div>
+            <div class="car-card__body"><p class="type-small">2025 · новый</p><h3 class="type-h3">Li Auto L6 Pro</h3><p>Семейный кроссовер с электрической тягой в городе и бензиновым генератором для дальних маршрутов.</p><p class="car-card__spec">EREV · AWD · 5 мест · 2025</p><div class="car-card__price"><strong>5 390 000 ₽</strong><span>под ключ · 32–40 дней</span></div><button class="button button--secondary" type="button" data-car-select="Li Auto L6 Pro">Получить расчёт по этой машине</button></div>
+          </article>
+        </div>
+        <a class="button button--primary cars__more" href="#configurator">Подобрать под бюджет</a>
+      </div>
+    </section>
 
-        <div class="route-layout">
-          <ol class="route-steps" data-route-steps>
-            <li class="is-active"><span>01</span><b>Подбор</b></li>
-            <li><span>02</span><b>Проверка</b></li>
-            <li><span>03</span><b>Выкуп</b></li>
-            <li><span>04</span><b>Страхование</b></li>
-            <li><span>05</span><b>Граница</b></li>
-            <li><span>06</span><b>Таможня</b></li>
-            <li><span>07</span><b>ЭПТС</b></li>
-            <li><span>08</span><b>Выдача</b></li>
+    <section class="journey" id="journey" data-journey>
+      <div class="journey__sticky">
+        <div class="container">
+          <header class="section-header section-header--dark">
+            <h2 class="type-h2">От проверки в Китае<br>до выдачи в вашем городе.</h2>
+            <p>Восемь этапов. На каждом — конкретное действие, понятный результат и следующий шаг.</p>
+          </header>
+
+          <div class="journey__progress" aria-hidden="true"><span data-journey-progress></span><i data-journey-marker></i></div>
+          <ol class="journey__stages" data-journey-stages>
+            <li class="journey__stage journey__stage--active" data-journey-step="0"><span>01</span><b>Подбор</b></li>
+            <li class="journey__stage" data-journey-step="1"><span>02</span><b>Проверка</b></li>
+            <li class="journey__stage" data-journey-step="2"><span>03</span><b>Выкуп</b></li>
+            <li class="journey__stage" data-journey-step="3"><span>04</span><b>Страхование</b></li>
+            <li class="journey__stage" data-journey-step="4"><span>05</span><b>Граница</b></li>
+            <li class="journey__stage" data-journey-step="5"><span>06</span><b>Таможня</b></li>
+            <li class="journey__stage" data-journey-step="6"><span>07</span><b>ЭПТС</b></li>
+            <li class="journey__stage" data-journey-step="7"><span>08</span><b>Выдача</b></li>
           </ol>
 
-          <div class="route-stage">
-            <div class="route-stage-media">
-              <div class="car-silhouette route-car"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
-              <span class="route-stage-status" data-route-status>STATUS / SEARCH</span>
+          <div class="journey__detail">
+            <div class="journey__detail-copy">
+              <span class="journey__index" data-journey-index>01</span>
+              <h3 class="type-h3" data-journey-title>Подбор</h3>
+              <p data-journey-copy>Сверяем модель, комплектацию, цвет, бюджет и город получения. На выходе — конкретный автомобиль и предварительный расчёт.</p>
+              <strong data-journey-result>Результат: автомобиль выбран, расчёт собран</strong>
             </div>
-            <div class="route-stage-copy">
-              <span class="eyebrow" data-route-code>STEP / 01</span>
-              <h3 data-route-title>Подбираем автомобиль</h3>
-              <p data-route-text>Сверяем модель, бюджет и требования. Формируем несколько вариантов для проверки.</p>
-              <div class="route-meta">
-                <span data-route-meta-a>OUTPUT / SHORTLIST</span>
-                <span data-route-meta-b>NEXT / CHECK</span>
+            <article class="journey__status-card">
+              <p class="eyebrow">Zeekr 001 AWD</p>
+              <strong data-journey-status>Подбор</strong>
+              <p data-journey-meta>Комплектация Performance · 2025 · новый<br>Москва · бюджет до 6 500 000 ₽</p>
+              <span data-journey-next>Следующий этап: Проверка</span>
+            </article>
+          </div>
+          <a class="button button--secondary journey__cta" href="#configurator">Рассчитать под свой автомобиль</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section configurator" id="configurator" data-configurator>
+      <div class="container">
+        <header class="section-header">
+          <h2 class="type-h2">Соберите расчёт под себя.</h2>
+          <p>Только параметры, которые влияют на подбор и итоговую смету. Контакт попросим после того, как вы увидите выбранные условия и ориентир стоимости.</p>
+        </header>
+
+        <div class="configurator__layout">
+          <form class="configurator__form" novalidate data-config-form>
+            <div class="configurator__progress"><span data-config-progress></span></div>
+
+            <section class="configurator__step configurator__step--active" data-config-step="model">
+              <p class="eyebrow">Шаг 1</p><h3 class="type-h3">Какой автомобиль рассматриваете?</h3>
+              <label class="field"><span class="field__label">Марка или модель</span><input class="field__control" name="model" data-config-model placeholder="Например, Zeekr 007" autocomplete="off"><small class="field__message">Можно указать любую марку или модель.</small></label>
+              <div class="choice-group" data-config-choice="model">
+                <button class="choice-chip" type="button" data-value="Zeekr 001 AWD">Zeekr 001</button>
+                <button class="choice-chip" type="button" data-value="Xiaomi SU7 Max">Xiaomi SU7</button>
+                <button class="choice-chip" type="button" data-value="Li Auto L6 Pro">Li Auto L6</button>
+                <button class="choice-chip" type="button" data-value="Нужен подбор">Не определился — нужен подбор</button>
               </div>
+            </section>
+
+            <section class="configurator__step" data-config-step="condition" hidden>
+              <p class="eyebrow">Шаг 2</p><h3 class="type-h3">Состояние автомобиля</h3>
+              <div class="choice-group" data-config-choice="condition"><button class="choice-chip" type="button" data-value="Новый">Новый</button><button class="choice-chip" type="button" data-value="С пробегом">С пробегом</button></div>
+            </section>
+
+            <section class="configurator__step" data-config-step="power" hidden>
+              <p class="eyebrow">Шаг 3</p><h3 class="type-h3">Тип силовой установки</h3>
+              <div class="choice-group" data-config-choice="power"><button class="choice-chip" type="button" data-value="Электромобиль">Электромобиль</button><button class="choice-chip" type="button" data-value="Гибрид / EREV">Гибрид / EREV</button><button class="choice-chip" type="button" data-value="Не принципиально">Не принципиально</button></div>
+            </section>
+
+            <section class="configurator__step" data-config-step="budget" hidden>
+              <p class="eyebrow">Шаг 4</p><h3 class="type-h3">Бюджет под ключ</h3>
+              <div class="choice-group" data-config-choice="budget"><button class="choice-chip" type="button" data-value="До 5 500 000 ₽">До 5 500 000 ₽</button><button class="choice-chip" type="button" data-value="5 500 000–6 500 000 ₽">5 500 000–6 500 000 ₽</button><button class="choice-chip" type="button" data-value="От 6 500 000 ₽">От 6 500 000 ₽</button><button class="choice-chip" type="button" data-value="Нужен ориентир">Нужен ориентир</button></div>
+            </section>
+
+            <section class="configurator__step" data-config-step="city" hidden>
+              <p class="eyebrow">Шаг 5</p><h3 class="type-h3">Где будете получать автомобиль?</h3>
+              <label class="field" data-city-field><span class="field__label">Город получения</span><input class="field__control" name="city" data-config-city placeholder="Москва"><small class="field__message" data-city-message>Региональная доставка будет отдельной строкой.</small></label>
+            </section>
+
+            <section class="configurator__step" data-config-step="contact" hidden>
+              <p class="eyebrow">Шаг 6</p><h3 class="type-h3">Куда отправить подборку и расчёт?</h3>
+              <div class="choice-group" data-config-choice="channel"><button class="choice-chip" type="button" data-value="Телефон">Телефон</button><button class="choice-chip" type="button" data-value="Telegram">Telegram</button></div>
+              <label class="field" data-contact-field><span class="field__label">Телефон или username в Telegram</span><input class="field__control" name="contact" data-config-contact placeholder="+7 999 000-00-00 / @username"><small class="field__message" data-contact-message>Контакт нужен только для отправки расчёта.</small></label>
+            </section>
+
+            <div class="configurator__actions">
+              <button class="button button--ghost" type="button" data-config-back disabled>Назад</button>
+              <button class="button button--primary" type="button" data-config-next>Далее</button>
+              <button class="button button--primary" type="submit" data-config-submit hidden>Получить расчёт</button>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section calc-section" id="calc">
-      <header class="section-head">
-        <span class="section-no">03</span>
-        <div><span class="eyebrow">COST CONFIGURATOR</span><h2>Соберите<br>свой расчёт</h2></div>
-        <p>Это не точная смета. Прототип показывает будущую логику конфигуратора: параметры слева, структура стоимости справа.</p>
-      </header>
-
-      <div class="calc-panel">
-        <div class="calc-controls">
-          <fieldset>
-            <legend>01 / Автомобиль</legend>
-            <div class="choice-row" data-choice="model">
-              <button class="choice is-active" data-value="Xiaomi SU7">Xiaomi SU7</button>
-              <button class="choice" data-value="Zeekr 001">Zeekr 001</button>
-              <button class="choice" data-value="Li Auto L6">Li Auto L6</button>
+            <div class="configurator__success" data-config-success hidden tabindex="-1">
+              <h3 class="type-h3">Расчёт отправлен.</h3>
+              <p>Мы получили параметры автомобиля и свяжемся с вами в выбранном канале.</p>
             </div>
-          </fieldset>
+          </form>
 
-          <fieldset>
-            <legend>02 / Тип</legend>
-            <div class="choice-row" data-choice="power">
-              <button class="choice is-active" data-value="EV">EV</button>
-              <button class="choice" data-value="Hybrid">Hybrid</button>
-              <button class="choice" data-value="ICE">ICE</button>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>03 / Бюджет</legend>
-            <div class="choice-row" data-choice="budget">
-              <button class="choice" data-value="до 3 млн">до 3 млн</button>
-              <button class="choice is-active" data-value="3–5 млн">3–5 млн</button>
-              <button class="choice" data-value="5+ млн">5+ млн</button>
-            </div>
-          </fieldset>
-
-          <label class="city-field"><span>04 / Город доставки</span><input type="text" value="Москва" data-city></label>
-        </div>
-
-        <aside class="calc-output">
-          <div class="calc-car">
-            <span>SELECTED</span>
-            <strong data-selected-model>Xiaomi SU7</strong>
-            <small><span data-selected-power>EV</span> · <span data-selected-budget>3–5 млн</span> · <span data-selected-city>Москва</span></small>
-          </div>
-          <dl>
-            <div><dt>AUTO PRICE</dt><dd>по подбору</dd></div>
-            <div><dt>LOGISTICS</dt><dd>по маршруту</dd></div>
-            <div><dt>CUSTOMS</dt><dd>calculating</dd></div>
-            <div><dt>RECYCLE FEE</dt><dd>calculating</dd></div>
-            <div class="total"><dt>ESTIMATED TOTAL</dt><dd>индивидуально</dd></div>
-          </dl>
-          <p>Финальная стоимость зависит от автомобиля, курса, пошлин и города доставки.</p>
-          <button class="btn btn-primary"><span>Получить точную смету</span><i>↗</i></button>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section trust-section" id="trust">
-      <header class="section-head">
-        <span class="section-no">04</span>
-        <div><span class="eyebrow">LIVE / TRUST</span><h2>Процесс<br>вживую</h2></div>
-        <p>В финальной версии этот блок заполняется реальными видео, фотографиями, документами и отзывами.</p>
-      </header>
-
-      <div class="bento">
-        <article class="bento-card bento-video"><span>VIDEO REPORT</span><strong>Осмотр автомобиля<br>на площадке</strong><button aria-label="Воспроизвести">▶</button></article>
-        <article class="bento-card bento-doc"><span>DOCUMENT</span><strong>ЭПТС</strong><div class="doc-lines"><i></i><i></i><i></i><i></i></div></article>
-        <article class="bento-card bento-metric"><span>STATUS</span><strong>CHECKED</strong><small>До выкупа</small></article>
-        <article class="bento-card bento-delivery"><span>DELIVERY</span><strong>Граница → город клиента</strong><div class="mini-route"><i></i><i></i><i></i></div></article>
-        <article class="bento-card bento-review"><span>CLIENT STORY</span><blockquote>«Понимал, где машина и что происходит на каждом этапе»</blockquote><small>Кейс клиента / placeholder</small></article>
-      </div>
-    </section>
-
-    <section class="section safety-section">
-      <header class="section-head">
-        <span class="section-no">05</span>
-        <div><span class="eyebrow">SECURITY</span><h2>Безопасность<br>сделки</h2></div>
-        <p>Блок отвечает не на «почему мы хорошие», а на конкретные страхи клиента перед покупкой автомобиля за рубежом.</p>
-      </header>
-
-      <div class="safety-layout">
-        <div class="document-preview">
-          <span>CONTRACT / PREVIEW</span>
-          <h3>Договор</h3>
-          <div class="doc-lines doc-lines-large"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <button class="btn btn-ghost"><span>Посмотреть договор</span><i>→</i></button>
-        </div>
-        <div class="safety-points">
-          <article><span>01</span><h3>Проверка до покупки</h3><p>Состояние и документы автомобиля проверяются до перевода основной суммы.</p></article>
-          <article><span>02</span><h3>Страхование</h3><p>Риски логистики описываются заранее, а условия фиксируются в документах.</p></article>
-          <article><span>03</span><h3>Статусы по этапам</h3><p>Клиент понимает, где автомобиль и какой шаг выполняется сейчас.</p></article>
-          <article><span>04</span><h3>Документы</h3><p>Таможня, ЭПТС и комплект документов включены в маршрут сделки.</p></article>
+          <aside class="configurator__summary" aria-live="polite">
+            <p class="eyebrow">Ваш расчёт</p>
+            <h3 class="type-h3" data-summary-model>Автомобиль не выбран</h3>
+            <p data-summary-meta>Новый · Москва</p>
+            <dl class="configurator__breakdown" data-summary-breakdown>
+              <div><dt>Автомобиль</dt><dd>—</dd></div>
+              <div><dt>Логистика Китай → Россия</dt><dd>—</dd></div>
+              <div><dt>Таможня и оформление</dt><dd>—</dd></div>
+              <div><dt>Утильсбор</dt><dd>—</dd></div>
+              <div><dt>Доставка до Москвы</dt><dd>—</dd></div>
+              <div><dt>Сервис NEXROUTE</dt><dd>320 000 ₽</dd></div>
+            </dl>
+            <div class="configurator__total"><span>Итого</span><strong data-summary-total>Сначала выберите автомобиль</strong></div>
+            <p class="type-small" data-summary-note>Финальная смета зависит от конкретного автомобиля, курса на момент выкупа и города получения.</p>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="section cases-section">
-      <header class="section-head">
-        <span class="section-no">06</span>
-        <div><span class="eyebrow">CLIENT STORIES</span><h2>Кейсы вместо<br>безликих отзывов</h2></div>
-        <p>Каждая история связывает клиента, автомобиль, маршрут и результат. Здесь позже будут реальные кейсы.</p>
-      </header>
-
-      <div class="cases-grid">
-        <article class="case-card case-card-main"><div class="case-media"><div class="car-silhouette"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div></div><div class="case-copy"><span>CASE / 01</span><h3>Xiaomi SU7 → Москва</h3><p>Маршрут, сроки, выдача и короткая цитата клиента.</p></div></article>
-        <article class="case-card"><div class="case-copy"><span>CASE / 02</span><h3>Zeekr 001 → Казань</h3><p>Фото, итог сделки и ссылка на видео.</p></div></article>
-        <article class="case-card"><div class="case-copy"><span>CASE / 03</span><h3>Li Auto L6 → Екатеринбург</h3><p>Короткий формат для второй истории.</p></div></article>
-      </div>
-    </section>
-
-    <section class="section faq-section" id="faq">
-      <header class="section-head">
-        <span class="section-no">07</span>
-        <div><span class="eyebrow">FAQ</span><h2>До заявки<br>должно быть понятно всё</h2></div>
-        <p>FAQ закрывает практические вопросы, а не повторяет рекламные тезисы.</p>
-      </header>
-
-      <div class="faq-list">
-        <article class="faq-item"><button aria-expanded="false"><span>Сколько стоит привезти автомобиль?</span><i>+</i></button><div><p>Точная сумма зависит от конкретного автомобиля, курса, таможенных платежей и города доставки. На сайте показывается предварительная структура, точная смета рассчитывается отдельно.</p></div></article>
-        <article class="faq-item"><button aria-expanded="false"><span>Какие сроки доставки?</span><i>+</i></button><div><p>Срок зависит от маршрута, этапа выкупа, границы и таможни. В финальной версии сайта сроки будут привязаны к выбранному маршруту.</p></div></article>
-        <article class="faq-item"><button aria-expanded="false"><span>Как проходит оплата?</span><i>+</i></button><div><p>Этапность платежей должна быть отражена в договоре и понятна клиенту до начала сделки.</p></div></article>
-        <article class="faq-item"><button aria-expanded="false"><span>Кто отвечает за повреждение в пути?</span><i>+</i></button><div><p>Условия страхования и ответственности фиксируются заранее и показываются в разделе безопасности сделки.</p></div></article>
-        <article class="faq-item"><button aria-expanded="false"><span>Можно доставить автомобиль в мой город?</span><i>+</i></button><div><p>Маршрут может включать доставку по России до города клиента. Конкретная логистика рассчитывается вместе со сметой.</p></div></article>
-      </div>
-    </section>
-
-    <section class="final-cta">
-      <div class="final-status"><span>ROUTE / 100%</span><b>READY FOR HANDOVER</b></div>
-      <div class="final-copy">
-        <span class="eyebrow">CHINA → RUSSIA / COMPLETE</span>
-        <h2>Следующий автомобиль<br><em>может быть вашим.</em></h2>
-        <p>Выберите модель или начните с бюджета. Остальное соберём в понятный маршрут и расчёт.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#calc"><span>Рассчитать автомобиль</span><i>↗</i></a>
-          <a class="btn btn-dark-ghost" href="#cars"><span>Подобрать модель</span><i>→</i></a>
+    <section class="section proof" id="proof">
+      <div class="container">
+        <header class="section-header"><h2 class="type-h2">Три машины. Три завершённых маршрута.</h2><p>В каждом кейсе — автомобиль, проверка, документы, путь до выдачи и итоговая стоимость.</p></header>
+        <div class="proof__grid">
+          <article class="case-card case-card--featured">
+            <div class="case-card__media"><span>Zeekr 001 AWD · Москва</span></div>
+            <div class="case-card__body"><p class="eyebrow">2025 · новый · VIN ····4K2</p><h3 class="type-h3">6 490 000 ₽ · 34 дня</h3><p>Клиент искал именно 001 на полном приводе и не хотел менять комплектацию ради более быстрой покупки. После проверки выбрали автомобиль без критичных замечаний и запустили маршрут.</p><blockquote>«Перед выкупом получил видео осмотра, дальше смотрел статус по маршруту. На выдаче всё совпало с тем, что согласовали.»</blockquote><span>Алексей · Москва</span><button class="button button--ghost" type="button" data-case-toggle>Посмотреть кейс</button><div class="case-card__details" hidden><p>Видео осмотра · сверка комплектации · инвойс · страхование · таможенные документы · ЭПТС · фото выдачи.</p></div></div>
+          </article>
+          <article class="case-card"><div class="case-card__media case-card__media--xiaomi"><span>Xiaomi SU7 Max · Казань</span></div><div class="case-card__body"><p class="eyebrow">2025 · VIN ····8M7</p><h3 class="type-h3">5 962 000 ₽ · 33 дня</h3><p>5 890 000 ₽ — маршрут до Москвы<br>72 000 ₽ — Москва → Казань</p><button class="button button--ghost" type="button" data-case-toggle>Посмотреть кейс</button><div class="case-card__details" hidden><p>Фото и видео проверки · инвойс · страхование · статусы · ЭПТС · выдача в Казани.</p></div></div></article>
+          <article class="case-card"><div class="case-card__media case-card__media--liauto"><span>Li Auto L6 Pro · Екатеринбург</span></div><div class="case-card__body"><p class="eyebrow">2025 · VIN ····6P1</p><h3 class="type-h3">5 490 000 ₽ · 37 дней</h3><p>5 390 000 ₽ — маршрут до Москвы<br>100 000 ₽ — Москва → Екатеринбург</p><button class="button button--ghost" type="button" data-case-toggle>Посмотреть кейс</button><div class="case-card__details" hidden><p>Осмотр · VIN и комплектация · инвойс · страхование · таможенные документы · ЭПТС · передача клиенту.</p></div></div></article>
         </div>
       </div>
-      <div class="final-car">
-        <div class="car-silhouette car-silhouette-large"><span class="car-body"></span><span class="wheel wheel-a"></span><span class="wheel wheel-b"></span></div>
+    </section>
+
+    <section class="section security">
+      <div class="container">
+        <header class="section-header"><h2 class="type-h2">Если что-то идёт не по плану.</h2><p>Риски не закрываем словом «надёжность». Ниже — что фиксируется до оплаты и что происходит при проблеме.</p></header>
+        <div class="security__list">
+          <article class="security-item"><span>01</span><div><h3 class="type-h3">Договор до первого платежа</h3><p>Фиксируем сценарий покупки, стоимость услуг, порядок платежей, действия при неуспешной проверке и комплект документов.</p></div><strong>Договор на сопровождение сделки</strong></article>
+          <article class="security-item"><span>02</span><div><h3 class="type-h3">Оплата по этапам</h3><p>Автомобиль по инвойсу → логистика и страхование → обязательные платежи. Сервис NEXROUTE — 320 000 ₽ по договору.</p></div><strong>Каждый платёж связан с этапом</strong></article>
+          <article class="security-item"><span>03</span><div><h3 class="type-h3">Если проверка не пройдена</h3><p>Автомобиль не выкупаем, показываем замечания и возвращаемся к подбору без повторной сервисной комиссии.</p></div><strong>Отчёт + фото/видео</strong></article>
+          <article class="security-item"><span>04</span><div><h3 class="type-h3">Страхование в перевозке</h3><p>Состояние фиксируется перед отправкой. При повреждении оформляется акт и запускается страховой сценарий.</p></div><strong>Полис + акт состояния</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="container">
+        <header class="section-header"><h2 class="type-h2">Осталось уточнить несколько вещей.</h2><p>Коротко о том, что чаще всего нужно понять до заявки.</p></header>
+        <div class="faq__list" data-faq>
+          <details class="accordion"><summary class="accordion__trigger">Какие автомобили можно привезти?</summary><div class="accordion__content"><p>Не только модели из витрины. В расчёте можно указать любую марку и модель из Китая или выбрать «не определился — нужен подбор».</p></div></details>
+          <details class="accordion"><summary class="accordion__trigger">Что входит в цену «под ключ»?</summary><div class="accordion__content"><p>Автомобиль, логистика Китай → Россия, таможня и оформление, утильсбор, доставка и сервис NEXROUTE. Региональная доставка — отдельной строкой.</p></div></details>
+          <details class="accordion"><summary class="accordion__trigger">Как проходит оплата?</summary><div class="accordion__content"><p>Платежи привязаны к этапам сделки: после проверки — автомобиль, перед отправкой — логистика и страхование, перед таможней — обязательные платежи.</p></div></details>
+          <details class="accordion"><summary class="accordion__trigger">Что будет, если автомобиль не пройдёт проверку?</summary><div class="accordion__content"><p>Такой автомобиль не выкупаем. Показываем замечания и возвращаемся к подбору без повторной сервисной комиссии.</p></div></details>
+          <details class="accordion"><summary class="accordion__trigger">Сколько занимает доставка?</summary><div class="accordion__content"><p>Для текущей витрины ориентир до Москвы — 28–40 дней. Точный срок зависит от автомобиля, маршрута и оформления.</p></div></details>
+          <details class="accordion"><summary class="accordion__trigger">Можно привезти автомобиль с пробегом?</summary><div class="accordion__content"><p>Да. Для автомобиля с пробегом проверка состояния становится отдельной частью решения о выкупе.</p></div></details>
+          <details class="accordion"><summary class="accordion__trigger">Можно получить автомобиль не в Москве?</summary><div class="accordion__content"><p>Да. После оформления организуем доставку в нужный город и показываем её отдельной строкой в расчёте.</p></div></details>
+          <details class="accordion"><summary class="accordion__trigger">Какие документы я получу?</summary><div class="accordion__content"><p>Инвойс или документы покупки, таможенные документы, выписку из ЭПТС, документы по оплатам и акт выдачи.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-form" id="final-form">
+      <div class="container final-form__layout">
+        <div><p class="eyebrow">Расчёт маршрута</p><h2 class="type-h2">Уже знаете, какой автомобиль нужен?</h2><p>Укажите модель и город получения. Если с машиной ещё не определились — так и напишите, подберём варианты под бюджет.</p></div>
+        <form class="lead-form" data-lead-form novalidate>
+          <label class="field" data-lead-field="model"><span class="field__label">Марка или модель</span><input class="field__control" name="model" placeholder="Например, Zeekr 007"><small class="field__message">Можно написать «нужен подбор».</small></label>
+          <label class="field" data-lead-field="city"><span class="field__label">Город получения</span><input class="field__control" name="city" placeholder="Москва"><small class="field__message"></small></label>
+          <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="channel" value="Телефон" checked> Телефон</label><label><input type="radio" name="channel" value="Telegram"> Telegram</label></fieldset>
+          <label class="field" data-lead-field="contact"><span class="field__label">Телефон или username в Telegram</span><input class="field__control" name="contact" placeholder="+7 999 000-00-00 / @username"><small class="field__message"></small></label>
+          <label class="lead-form__consent"><input type="checkbox" name="consent"> <span>Нажимая «Получить расчёт», вы соглашаетесь на обработку персональных данных.</span></label>
+          <button class="button button--primary" type="submit">Получить расчёт</button>
+          <div class="lead-form__success" data-lead-success hidden tabindex="-1"><h3 class="type-h3">Заявка принята.</h3><p>Мы получили модель, город и выбранный способ связи. Следующий шаг — уточнить автомобиль и собрать расчёт по вашему маршруту.</p></div>
+        </form>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer"><span>AUTO IMPORT</span><span>CHINA → RUSSIA</span></footer>
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div><strong>NEXROUTE AUTO</strong><p>Автомобили из Китая → Россия</p><p>Подбор · проверка · выкуп · логистика · оформление</p></div>
+      <nav aria-label="Навигация в подвале"><a href="#cars">Автомобили</a><a href="#journey">Маршрут</a><a href="#proof">Кейсы</a><a href="#faq">Вопросы</a></nav>
+      <div><a href="#">Telegram</a><a href="#">Телефон</a></div>
+    </div>
+    <div class="container site-footer__demo">Демонстрационная версия сайта. Представленные данные, цены, кейсы и материалы используются для демонстрации возможностей шаблона.</div>
+  </footer>
+
+  <div class="toast-stack" data-toast-stack aria-live="polite" aria-atomic="false"></div>
+  <div class="sr-live" data-toast-alert aria-live="assertive" aria-atomic="true"></div>
+
   <script src="./app.js"></script>
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEXROUTE — UX States</title>
+  <link rel="stylesheet" href="../ui-kit/styles.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="states-page">
+  <header class="states-header"><div class="container"><strong>NEXROUTE / UX STATES</strong><a href="./index.html">← Prototype</a></div></header>
+  <main class="states-main">
+    <section class="states-group"><div class="container"><p class="eyebrow">Journey 01–08</p><div class="states-scroll">
+      <article class="state-card"><span>01</span><h2>Подбор</h2><p>Автомобиль выбран, расчёт собран.</p></article>
+      <article class="state-card"><span>02</span><h2>Проверка</h2><p>Проверка пройдена.</p></article>
+      <article class="state-card"><span>03</span><h2>Выкуп</h2><p>Автомобиль выкуплен.</p></article>
+      <article class="state-card"><span>04</span><h2>Страхование</h2><p>Перевозка застрахована.</p></article>
+      <article class="state-card"><span>05</span><h2>Граница</h2><p>Экспорт оформлен.</p></article>
+      <article class="state-card"><span>06</span><h2>Таможня</h2><p>Документы поданы · 11 дней до выдачи.</p></article>
+      <article class="state-card"><span>07</span><h2>ЭПТС</h2><p>Документы готовы.</p></article>
+      <article class="state-card"><span>08</span><h2>Выдача</h2><p>Маршрут завершён.</p></article>
+    </div></div></section>
+
+    <section class="states-group states-group--paper"><div class="container"><p class="eyebrow">Configurator</p><div class="states-scroll">
+      <article class="state-card state-card--light"><span>01</span><h2>Модель</h2><p>Поиск + быстрый выбор + «нужен подбор».</p></article>
+      <article class="state-card state-card--light"><span>02</span><h2>Состояние</h2><p>Новый / с пробегом.</p></article>
+      <article class="state-card state-card--light"><span>03</span><h2>Power</h2><p>EV / EREV / не принципиально.</p></article>
+      <article class="state-card state-card--light"><span>04</span><h2>Бюджет</h2><p>Четыре диапазона.</p></article>
+      <article class="state-card state-card--light"><span>05</span><h2>Город</h2><p>Региональная доставка отдельно.</p></article>
+      <article class="state-card state-card--light"><span>06</span><h2>Contact</h2><p>Телефон / Telegram после summary.</p></article>
+      <article class="state-card state-card--success"><span>✓</span><h2>Success</h2><p>Расчёт отправлен.</p></article>
+    </div></div></section>
+
+    <section class="states-group"><div class="container"><p class="eyebrow">FAQ / Form / Toast</p><div class="states-grid">
+      <details class="accordion" open><summary class="accordion__trigger">Какие автомобили можно привезти?</summary><div class="accordion__content"><p>Любую доступную марку или модель. Cars — витрина, а не закрытый каталог.</p></div></details>
+      <label class="field field--error"><span class="field__label">Город получения</span><input class="field__control" aria-invalid="true"><small class="field__message">Укажите город.</small></label>
+      <div class="states-toast-row">
+        <article class="toast toast--success"><strong>Заявка отправлена.</strong><span>Параметры переданы.</span></article>
+        <article class="toast toast--error"><strong>Не удалось отправить заявку.</strong><span>Попробуйте ещё раз.</span><button class="toast__close" type="button">×</button></article>
+        <article class="toast toast--info"><strong>Данные сохранены.</strong><span>Можно продолжить расчёт.</span></article>
+      </div>
+    </div></div></section>
+  </main>
+</body>
+</html>
