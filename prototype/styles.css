@@ -20,7 +20,7 @@
 .hero__copy .button--primary{background:var(--color-white);color:var(--color-ink)}
 .hero__secondary{border-color:rgba(252,251,248,.25);color:var(--color-white)}
 .hero__route{margin-top:auto;font-size:14px;color:rgba(252,251,248,.6)}
-.hero__media{min-height:610px;padding:24px;position:relative;overflow:hidden;border:1px solid var(--color-line-inverse);border-radius:4px;background:linear-gradient(rgba(8,11,14,.16),rgba(8,11,14,.48)),url("../live/assets/hero/nexroute-garage-stage-v2.avif") center/cover no-repeat;display:flex;flex-direction:column;justify-content:space-between}
+.hero__media{min-height:610px;padding:24px;position:relative;overflow:hidden;border:1px solid var(--color-line-inverse);border-radius:4px;background:linear-gradient(rgba(8,11,14,.16),rgba(8,11,14,.48)),url("./assets/hero/nexroute-garage-stage-v2.avif") center/cover no-repeat;display:flex;flex-direction:column;justify-content:space-between}
 .hero__media-status,.hero__media-footer{position:relative;z-index:2;display:flex;justify-content:space-between;gap:16px;font-size:14px}
 .hero__media-status{color:rgba(252,251,248,.68)}
 .hero__media-footer{padding-top:16px;border-top:1px solid var(--color-line-inverse)}
