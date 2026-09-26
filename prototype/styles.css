@@ -82,7 +82,7 @@
 
 .proof{background:var(--color-paper)}
 .proof__grid{display:grid;grid-template-columns:1.18fr .82fr;gap:24px}
-.case-card{border:1px solid var(--color-line);background:var(--color-white);overflow:hidden;border-radius:4px}
+.case-card{border:1px solid var(--color-line);background:var(--color-white);color:var(--color-ink);overflow:hidden;border-radius:4px}
 .case-card--featured{grid-row:span 2}
 .case-card__media{aspect-ratio:16/10;padding:24px;display:flex;align-items:flex-end;background:linear-gradient(145deg,#27313a,#606a72);color:white;font-weight:600}
 .case-card__media--xiaomi{background:linear-gradient(145deg,#8c8782,#c9c2bb);color:var(--color-ink)}
