@@ -157,6 +157,13 @@
   .toast-stack{left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom))}.toast-stack .toast{max-width:none;min-width:0;width:100%}
 }
 
+@media(max-width:720px) and (max-height:720px){
+  .journey .section-header>p{display:none}
+  .journey .section-header{margin-bottom:16px}
+  .journey__detail{margin-top:16px}
+  .journey__cta{margin-top:12px}
+}
+
 /* 05 — A11Y / REDUCED MOTION */
 @media(prefers-reduced-motion:reduce){
   .journey__progress>span,.journey__progress>i,.configurator__progress span{transition:none}
