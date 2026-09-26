@@ -33,7 +33,8 @@
       copy: root.querySelector('[data-journey-copy]'),
       result: root.querySelector('[data-journey-result]'),
       status: root.querySelector('[data-journey-status]'),
-      next: root.querySelector('[data-journey-next]')
+      next: root.querySelector('[data-journey-next]'),
+      stages: root.querySelector('[data-journey-stages]')
     };
 
     let current = -1;
@@ -62,14 +63,34 @@
       const progress = safeIndex / (journeyData.length - 1) * 100;
       refs.progress.style.width = progress + '%';
       refs.marker.style.left = progress + '%';
+
+      if (window.innerWidth <= 720 && refs.stages) {
+        const activeStage = stages[safeIndex];
+        const item = activeStage?.parentElement;
+        if (item) {
+          const left = item.offsetLeft - (refs.stages.clientWidth - item.offsetWidth) / 2;
+          refs.stages.scrollTo({
+            left:Math.max(0, left),
+            behavior:reduceMotion.matches ? 'auto' : 'smooth'
+          });
+        }
+      }
+    };
+
+    const scrollToStep = (index) => {
+      const max = Math.max(1, root.offsetHeight - window.innerHeight);
+      const target = root.offsetTop - 72 + (index / (journeyData.length - 1)) * max;
+      window.scrollTo({
+        top:Math.max(0, target),
+        behavior:reduceMotion.matches ? 'auto' : 'smooth'
+      });
     };
 
     stages.forEach((stage) => {
-      stage.addEventListener('click', () => render(Number(stage.dataset.journeyStep)));
+      stage.addEventListener('click', () => scrollToStep(Number(stage.dataset.journeyStep)));
     });
 
     const update = () => {
-      if (window.innerWidth <= 720) return;
       const rect = root.getBoundingClientRect();
       const max = Math.max(1, root.offsetHeight - window.innerHeight);
       const passed = Math.min(Math.max(-rect.top + 72, 0), max);
