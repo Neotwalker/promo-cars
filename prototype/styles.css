@@ -47,7 +47,8 @@
 .journey__progress{height:2px;position:relative;margin:0 0 24px;background:rgba(252,251,248,.14)}
 .journey__progress>span{display:block;height:100%;width:0;background:var(--color-signal);transition:width .3s var(--ease)}
 .journey__progress>i{position:absolute;top:50%;left:0;width:12px;height:12px;border-radius:50%;background:var(--color-signal);transform:translate(-50%,-50%);transition:left .3s var(--ease)}
-.journey__stages{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(8,1fr);gap:0}\n.journey__stages>li{min-width:0}
+.journey__stages{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(8,1fr);gap:0}
+.journey__stages>li{min-width:0}
 .journey__stage{position:relative;width:100%;min-width:0;padding:12px 8px 18px;border:0;border-top:1px solid var(--color-line-inverse);background:transparent;color:rgba(252,251,248,.3);display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;font:inherit;cursor:pointer}
 .journey__stage span,.journey__stage b{font-size:14px;line-height:20px}.journey__stage b{font-weight:500}
 .journey__stage--active{color:var(--color-white)}.journey__stage--active span{color:var(--color-signal)}
@@ -66,7 +67,8 @@
 .configurator__layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.72fr);border:1px solid var(--color-line)}
 .configurator__form{padding:32px;min-height:570px;display:flex;flex-direction:column;gap:32px}
 .configurator__progress{height:2px;background:var(--color-fog)}.configurator__progress span{display:block;height:100%;width:16.666%;background:var(--color-signal);transition:width .25s var(--ease)}
-.configurator__step{display:flex;flex-direction:column;gap:24px}\n.configurator__choice-message{min-height:20px;margin-top:-16px;color:#a63422;font-size:14px;line-height:20px}
+.configurator__step{display:flex;flex-direction:column;gap:24px}
+.configurator__choice-message{min-height:20px;margin-top:-16px;color:#a63422;font-size:14px;line-height:20px}
 .configurator__actions{margin-top:auto;display:flex;gap:12px}
 .configurator__summary{padding:32px;background:var(--color-night);color:var(--color-white);display:flex;flex-direction:column;gap:18px}
 .configurator__summary .eyebrow{color:rgba(252,251,248,.48)}
