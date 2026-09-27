@@ -58,29 +58,127 @@
       <div class="container">
         <p class="eyebrow">03 / Components</p>
         <div class="kit-stack">
-          <div class="kit-row">
-            <button class="button button--primary" type="button">Получить расчёт</button>
-            <button class="button button--secondary" type="button">Смотреть маршрут</button>
-            <button class="button button--ghost" type="button">Назад</button>
-          </div>
+          <section class="kit-component-group" aria-labelledby="kit-links">
+            <h2 class="type-h3" id="kit-links">Links</h2>
+            <div class="kit-state-grid">
+              <div class="kit-state"><span class="kit-state__label">Default</span><a class="link" href="#components">Текстовая ссылка</a></div>
+              <div class="kit-state"><span class="kit-state__label">Hover</span><a class="link" data-ui-state="hover" href="#components">Текстовая ссылка</a></div>
+              <div class="kit-state"><span class="kit-state__label">Focus-visible</span><a class="link" data-ui-state="focus" href="#components">Текстовая ссылка</a></div>
+              <div class="kit-state"><span class="kit-state__label">Active</span><a class="link" data-ui-state="active" href="#components">Текстовая ссылка</a></div>
+              <div class="kit-state"><span class="kit-state__label">Disabled</span><a class="link" aria-disabled="true">Текстовая ссылка</a></div>
+              <div class="kit-state"><span class="kit-state__label">Navigation</span><a class="link link--nav" href="#components">Автомобили</a></div>
+              <div class="kit-state kit-state--dark"><span class="kit-state__label">On dark</span><a class="link link--inverse" href="#components">Смотреть маршрут</a></div>
+            </div>
+          </section>
 
-          <div class="kit-grid kit-grid--two">
-            <label class="field" data-field>
-              <span class="field__label">Марка или модель</span>
-              <input class="field__control" type="text" placeholder="Например, Zeekr 007">
-              <small class="field__message" data-field-message>Введите любую марку или модель.</small>
-            </label>
-            <label class="field field--error" data-field>
-              <span class="field__label">Город получения</span>
-              <input class="field__control" type="text" aria-invalid="true" value="">
-              <small class="field__message" data-field-message>Укажите город.</small>
-            </label>
-          </div>
+          <section class="kit-component-group" aria-labelledby="kit-buttons">
+            <h2 class="type-h3" id="kit-buttons">Buttons</h2>
+            <div class="kit-button-spec">
+              <span class="kit-state__label">Primary</span>
+              <div class="kit-row">
+                <button class="button button--primary" type="button">Default</button>
+                <button class="button button--primary" data-ui-state="hover" type="button">Hover</button>
+                <button class="button button--primary" data-ui-state="focus" type="button">Focus</button>
+                <button class="button button--primary" data-ui-state="active" type="button">Active</button>
+                <button class="button button--primary" type="button" disabled>Disabled</button>
+              </div>
+            </div>
+            <div class="kit-button-spec">
+              <span class="kit-state__label">Secondary</span>
+              <div class="kit-row">
+                <button class="button button--secondary" type="button">Default</button>
+                <button class="button button--secondary" data-ui-state="hover" type="button">Hover</button>
+                <button class="button button--secondary" data-ui-state="focus" type="button">Focus</button>
+                <button class="button button--secondary" data-ui-state="active" type="button">Active</button>
+                <button class="button button--secondary" type="button" disabled>Disabled</button>
+              </div>
+            </div>
+            <div class="kit-button-spec">
+              <span class="kit-state__label">Ghost</span>
+              <div class="kit-row">
+                <button class="button button--ghost" type="button">Default</button>
+                <button class="button button--ghost" data-ui-state="hover" type="button">Hover</button>
+                <button class="button button--ghost" data-ui-state="focus" type="button">Focus</button>
+                <button class="button button--ghost" data-ui-state="active" type="button">Active</button>
+                <button class="button button--ghost" type="button" disabled>Disabled</button>
+              </div>
+            </div>
+          </section>
 
-          <div class="choice-group" aria-label="Состояние автомобиля">
-            <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Новый</button>
-            <button class="choice-chip" type="button" aria-pressed="false">С пробегом</button>
-          </div>
+          <section class="kit-component-group" aria-labelledby="kit-fields">
+            <h2 class="type-h3" id="kit-fields">Fields</h2>
+            <div class="kit-grid kit-grid--two">
+              <label class="field" data-field>
+                <span class="field__label">Default input</span>
+                <input class="field__control" type="text" placeholder="Например, Zeekr 007">
+                <small class="field__message" data-field-message>Helper text.</small>
+              </label>
+              <label class="field" data-field data-ui-state="hover">
+                <span class="field__label">Hover</span>
+                <input class="field__control" type="text" value="Xiaomi SU7 Max">
+                <small class="field__message" data-field-message>Hover state.</small>
+              </label>
+              <label class="field" data-field data-ui-state="focus">
+                <span class="field__label">Focus-visible</span>
+                <input class="field__control" type="text" value="Zeekr 001 AWD">
+                <small class="field__message" data-field-message>Keyboard focus.</small>
+              </label>
+              <label class="field" data-field>
+                <span class="field__label">Disabled</span>
+                <input class="field__control" type="text" value="Недоступно" disabled>
+                <small class="field__message" data-field-message>Поле недоступно.</small>
+              </label>
+              <label class="field field--error" data-field>
+                <span class="field__label">Error</span>
+                <input class="field__control" type="text" aria-invalid="true">
+                <small class="field__message" data-field-message>Укажите город.</small>
+              </label>
+              <label class="field field--success" data-field>
+                <span class="field__label">Success</span>
+                <input class="field__control" type="text" value="Москва">
+                <small class="field__message" data-field-message>Город указан.</small>
+              </label>
+              <label class="field" data-field>
+                <span class="field__label">Read-only</span>
+                <input class="field__control" type="text" value="Zeekr 001 AWD" readonly>
+                <small class="field__message" data-field-message>Значение зафиксировано.</small>
+              </label>
+              <label class="field field--autofill" data-field>
+                <span class="field__label">Autofill</span>
+                <input class="field__control" type="tel" value="+7 999 000-00-00" autocomplete="tel">
+                <small class="field__message" data-field-message>Автозаполненное значение.</small>
+              </label>
+              <label class="field" data-field>
+                <span class="field__label">Textarea</span>
+                <textarea class="field__control field__control--textarea" rows="4">Нужен подбор под бюджет.</textarea>
+                <small class="field__message" data-field-message>Дополнительный комментарий.</small>
+              </label>
+              <label class="field" data-field>
+                <span class="field__label">Select</span>
+                <select class="field__control">
+                  <option>Telegram</option>
+                  <option>Телефон</option>
+                </select>
+                <small class="field__message" data-field-message>Способ связи.</small>
+              </label>
+            </div>
+          </section>
+
+          <section class="kit-component-group" aria-labelledby="kit-selection">
+            <h2 class="type-h3" id="kit-selection">Checkbox / Radio / Choice</h2>
+            <div class="kit-selection-grid">
+              <label class="selection-control"><input type="checkbox"><span>Согласен на обработку данных</span></label>
+              <label class="selection-control"><input type="checkbox" checked><span>Checked</span></label>
+              <label class="selection-control"><input type="checkbox" disabled><span>Disabled</span></label>
+              <label class="selection-control"><input type="radio" name="kit-radio"><span>Telegram</span></label>
+              <label class="selection-control"><input type="radio" name="kit-radio" checked><span>Телефон</span></label>
+            </div>
+            <div class="choice-group" aria-label="Состояние автомобиля">
+              <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Новый</button>
+              <button class="choice-chip" type="button" aria-pressed="false">С пробегом</button>
+              <button class="choice-chip" type="button" disabled>Недоступно</button>
+            </div>
+          </section>
 
           <article class="surface-card">
             <div class="media-frame media-frame--car" aria-hidden="true"></div>
