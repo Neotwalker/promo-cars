@@ -41,11 +41,19 @@
 .car-card__price strong{font-size:var(--type-h3)}.car-card__price span{font-size:var(--type-small);color:var(--color-steel)}
 .cars__more{margin-top:var(--space-5)}
 
-.journey{position:relative;height:640vh;background:var(--color-ink);color:var(--color-white)}
+.journey{position:relative;height:640vh;overflow:clip;background:var(--color-ink);color:var(--color-white)}
 .journey__sticky{position:sticky;top:var(--header-h);min-height:calc(100vh - var(--header-h));padding:var(--space-layout-lg) 0;overflow:hidden;display:flex;align-items:center}
 .journey .eyebrow{color:rgba(252,251,248,.5)}
 .journey__stages{position:relative;margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(8,1fr);gap:0;border:1px solid var(--color-line-inverse);overflow:hidden}
 .journey__stages::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--color-signal);transform:scaleX(var(--journey-progress,0));transform-origin:left center;pointer-events:none}
+.journey__mobile-progress{display:none}
+.journey__mobile-progress-copy{display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:.2rem var(--space-2)}
+.journey__mobile-progress-copy>span{font-size:var(--type-small);line-height:var(--type-small-lh);color:rgba(252,251,248,.48)}
+.journey__mobile-progress-copy>span:first-child{color:var(--color-signal);font-variant-numeric:tabular-nums}
+.journey__mobile-progress-copy>strong{font-size:var(--type-body);line-height:var(--type-body-lh);font-weight:600}
+.journey__mobile-progress-copy>span:last-child{grid-column:2}
+.journey__mobile-progress-bar{height:2px;margin-top:var(--space-2);background:var(--color-line-inverse);overflow:hidden}
+.journey__mobile-progress-bar span{display:block;width:100%;height:100%;background:var(--color-signal);transform:scaleX(var(--journey-progress,0));transform-origin:left center}
 .journey__stage-item{position:relative;min-width:0;background:transparent;border-right:1px solid var(--color-line-inverse);transition:background-color var(--motion-normal) var(--ease-standard),color var(--motion-normal) var(--ease-standard)}
 .journey__stage-item:last-child{border-right:0}
 .journey__stage-item--complete{background:rgba(255,91,53,.16)}
@@ -154,7 +162,7 @@
   .section-header{grid-template-columns:1fr;gap:var(--space-4);margin-bottom:var(--space-5)}
   .hero__copy{padding:0}.hero__media{aspect-ratio:1/1}.hero__actions{width:100%}.hero__actions .button{width:100%}
   .cars__grid{grid-template-columns:1fr}
-  .journey{height:440vh}.journey__sticky{position:sticky;top:var(--header-h);min-height:calc(100svh - var(--header-h));padding:var(--space-4) 0;align-items:flex-start}.journey .section-header{margin-bottom:var(--space-4)}.journey__stages{display:flex;grid-template-columns:none;gap:0;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none}.journey__stages::-webkit-scrollbar{display:none}.journey__stages>li{flex:0 0 7rem;scroll-snap-align:center}.journey__stage{min-height:4rem;padding:var(--space-1) var(--space-1) var(--space-2)}.journey__viewport{--journey-panel-gap:var(--space-5);margin-top:var(--space-4)}.journey__detail{grid-template-columns:1fr;gap:0}.journey__detail-copy{min-height:0;gap:var(--space-2)}.journey__detail-copy>strong{margin-top:.25rem}.journey__status-card{display:none}.journey__cta{margin-top:1.25rem}
+  .journey{height:440vh}.journey__sticky{position:sticky;top:var(--header-h);min-height:calc(100svh - var(--header-h));padding:var(--space-4) 0;align-items:flex-start}.journey .section-header{margin-bottom:var(--space-4)}.journey__stages{display:none}.journey__mobile-progress{display:block}.journey__viewport{--journey-panel-gap:var(--space-5);margin-top:var(--space-4)}.journey__detail{grid-template-columns:1fr;gap:0}.journey__detail-copy{min-height:0;gap:var(--space-2)}.journey__detail-copy>strong{margin-top:.25rem}.journey__status-card{display:none}.journey__cta{margin-top:1.25rem}
   .configurator__form,.configurator__summary,.lead-form{padding:var(--space-4)}.configurator__actions{flex-wrap:wrap}.configurator__actions .button{flex:1}
   .proof__grid{grid-template-columns:1fr}
   .security-item{grid-template-columns:2rem 1fr;gap:var(--space-3)}

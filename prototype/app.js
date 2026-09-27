@@ -18,7 +18,10 @@
     const stageItems = [...root.querySelectorAll('[data-journey-item]')];
     const panels = [...root.querySelectorAll('[data-journey-panel]')];
     const track = root.querySelector('[data-journey-track]');
-    const stagesRail = root.querySelector('[data-journey-stages]');
+    const mobileProgress = root.querySelector('[data-journey-mobile-progress]');
+    const mobileIndex = root.querySelector('[data-journey-mobile-index]');
+    const mobileTitle = root.querySelector('[data-journey-mobile-title]');
+    const mobileNext = root.querySelector('[data-journey-mobile-next]');
     if (!sticky || !track || !panels.length) return;
 
     let current = -1;
@@ -43,15 +46,14 @@
         panel.hidden = reduceMotion.matches ? !active : false;
       });
 
-      if (changed && window.innerWidth <= 768 && stagesRail) {
-        const activeItem = stages[safeIndex]?.parentElement;
-        if (activeItem) {
-          const left = activeItem.offsetLeft - (stagesRail.clientWidth - activeItem.offsetWidth) / 2;
-          stagesRail.scrollTo({
-            left:Math.max(0, left),
-            behavior:reduceMotion.matches ? 'auto' : 'smooth'
-          });
-        }
+      if (changed && mobileProgress) {
+        const title = panels[safeIndex]?.querySelector('h3')?.textContent?.trim() || '';
+        const nextTitle = panels[safeIndex + 1]?.querySelector('h3')?.textContent?.trim();
+
+        mobileProgress.setAttribute('aria-valuenow', String(safeIndex + 1));
+        if (mobileIndex) mobileIndex.textContent = String(safeIndex + 1).padStart(2, '0');
+        if (mobileTitle) mobileTitle.textContent = title;
+        if (mobileNext) mobileNext.textContent = nextTitle ? 'Далее: ' + nextTitle : 'Маршрут завершён';
       }
     };
 
