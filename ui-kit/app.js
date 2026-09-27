@@ -171,9 +171,13 @@
     if (open) {
       if (activeModal && activeModal !== modal) finishModalClose(activeModal, false);
       const openMenuToggle = document.querySelector('[data-menu-toggle][aria-expanded="true"]');
+      const triggerInMenu = trigger instanceof HTMLElement && trigger.closest('[data-menu-panel]');
+      modalRestoreFocus = triggerInMenu && openMenuToggle
+        ? openMenuToggle
+        : trigger instanceof HTMLElement
+          ? trigger
+          : document.activeElement;
       openMenuToggle?.click();
-
-      modalRestoreFocus = trigger instanceof HTMLElement ? trigger : document.activeElement;
       modal.hidden = false;
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('modal-open');
