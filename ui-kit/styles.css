@@ -184,6 +184,12 @@ html [hidden]{display:none}
 /* 06 — COMPONENT STATES */
 .is-disabled{pointer-events:none;opacity:.45}
 
+.site-header{--menu-offset:var(--header-h);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--color-line);background:rgba(252,251,248,.94);backdrop-filter:blur(.75rem)}
+.site-header__inner{min-height:var(--header-h);display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:var(--space-5)}
+.site-header__brand{font-weight:700;text-decoration:none;letter-spacing:-.02em}
+.site-header__nav{display:flex;align-items:center;gap:var(--space-4)}
+.site-header__cta{white-space:nowrap}
+
 .menu-toggle{display:none;width:var(--tap-target);height:var(--tap-target);padding:0;border:1px solid var(--color-line);border-radius:var(--radius-xs);background:var(--color-white);color:var(--color-ink);align-items:center;justify-content:center;transition:background-color var(--motion-fast) var(--ease-standard),border-color var(--motion-fast) var(--ease-standard),color var(--motion-fast) var(--ease-standard)}
 .menu-toggle:hover{border-color:rgba(16,18,22,.34);background:var(--color-paper)}
 .menu-toggle:focus-visible{outline:2px solid var(--color-signal);outline-offset:.25rem}
@@ -219,10 +225,13 @@ body.menu-open{overflow:hidden}
 /* 07 — A11Y / REDUCED MOTION */
 @media(max-width:64rem){
   .grid--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .site-header__inner{grid-template-columns:1fr auto}
+  .site-header__nav,.site-header__cta{display:none}
   .menu-toggle{display:inline-flex}
 }
 @media(max-width:48rem){
   .grid--2,.grid--3{grid-template-columns:1fr}
+  .site-header__brand{font-size:var(--type-small)}
   .button{width:100%}
   .menu-panel__layout{grid-template-columns:1fr;gap:var(--space-5)}
   .menu-panel__contact{padding:var(--space-4)}
@@ -261,6 +270,15 @@ body.menu-open{overflow:hidden}
 .kit-state__label{font-size:var(--type-small);line-height:var(--type-small-lh);color:var(--color-steel)}
 .kit-button-spec{display:flex;flex-direction:column;gap:var(--space-2)}
 .kit-selection-grid{display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-5)}
+.kit-header-specimens{display:grid;grid-template-columns:minmax(0,1fr) minmax(18rem,.42fr);gap:var(--space-4);align-items:start}
+.header-specimen{min-width:0;border:1px solid var(--color-line);background:var(--color-paper);overflow:hidden}
+.header-specimen__label{display:block;padding:var(--space-2) var(--space-3);border-bottom:1px solid var(--color-line);font-size:var(--type-small);line-height:var(--type-small-lh);color:var(--color-steel)}
+.site-header--specimen{position:relative;top:auto;z-index:auto}
+.site-header--specimen .site-header__inner{padding-inline:var(--space-3)}
+.header-specimen--desktop .menu-toggle{display:none}
+.header-specimen--mobile .site-header__inner{grid-template-columns:1fr auto}
+.header-specimen--mobile .site-header__nav,.header-specimen--mobile .site-header__cta{display:none}
+.header-specimen--mobile .menu-toggle{display:inline-flex}
 .kit-menu-specimens{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}
 .menu-specimen{border:1px solid var(--color-line);background:var(--color-white);padding:var(--space-3);display:flex;flex-direction:column;gap:var(--space-3)}
 .menu-specimen__header{min-height:var(--header-h-compact);display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);border-bottom:1px solid var(--color-line)}
@@ -271,5 +289,5 @@ body.menu-open{overflow:hidden}
 .menu-panel--specimen .menu-panel__nav a{font-size:var(--type-h3);line-height:var(--type-h3-lh);padding:var(--space-3) 0}
 .menu-panel--specimen .menu-panel__contact{padding:var(--space-3);gap:var(--space-3)}
 
-@media(max-width:64rem){.kit-grid--colors{grid-template-columns:repeat(3,1fr)}.kit-grid--three{grid-template-columns:1fr}.kit-state-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.kit-nav{display:none}}
+@media(max-width:64rem){.kit-grid--colors{grid-template-columns:repeat(3,1fr)}.kit-grid--three{grid-template-columns:1fr}.kit-state-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.kit-header-specimens{grid-template-columns:1fr}.kit-nav{display:none}}
 @media(max-width:48rem){.kit-grid--colors,.kit-grid--two,.kit-state-grid,.kit-menu-specimens{grid-template-columns:1fr}.kit-type>div{grid-template-columns:1fr;gap:var(--space-1)}}

@@ -1,10 +1,6 @@
 /* Prototype uses ../ui-kit/styles.css as the base. */
 
 /* 01 — PAGE LAYOUT */
-.site-header{--menu-offset:var(--header-h);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--color-line);background:rgba(252,251,248,.94);backdrop-filter:blur(.75rem)}
-.site-header__inner{min-height:var(--header-h);display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:var(--space-5)}
-.site-header__brand{font-weight:700;text-decoration:none;letter-spacing:-.02em}
-.site-header__nav{display:flex;gap:var(--space-4)}.site-header__nav a{text-decoration:none;font-size:var(--type-small)}
 .section{padding:var(--space-section) 0}
 .section-header{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(20rem,.7fr);gap:var(--space-layout-lg);align-items:start;margin-bottom:var(--space-5)}
 .section-header>p{max-width:32.5rem;color:#62676d}
@@ -143,7 +139,6 @@
 
 /* 04 — RESPONSIVE */
 @media(max-width:64rem){
-  .site-header__nav,.site-header__cta{display:none}
   .hero__layout,.configurator__layout,.final-form__layout{grid-template-columns:1fr}
   .hero__media{aspect-ratio:4/3}
   .cars__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -153,7 +148,6 @@
   .security-item{grid-template-columns:3rem 1fr}.security-item>strong{grid-column:2}
 }
 @media(max-width:48rem){
-  .site-header__inner{grid-template-columns:1fr auto}.site-header__brand{font-size:var(--type-small)}
   .section-header{grid-template-columns:1fr;gap:var(--space-4);margin-bottom:var(--space-5)}
   .hero__copy{padding:0}.hero__media{aspect-ratio:1/1}.hero__actions{width:100%}.hero__actions .button{width:100%}
   .cars__grid{grid-template-columns:1fr}
