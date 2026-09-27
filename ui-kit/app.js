@@ -20,19 +20,72 @@
     if (!toggle || !panel) return;
 
     let restoreFocus = null;
+    let menuAnimation = null;
 
     const focusables = () => [
       toggle,
       ...panel.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')
     ].filter((node) => !node.hidden);
 
+    const panelFrame = () => {
+      if (panel.hidden) return { opacity:'0', transform:'translateY(-1rem)' };
+      const styles = getComputedStyle(panel);
+      return {
+        opacity:styles.opacity,
+        transform:styles.transform === 'none' ? 'translateY(0)' : styles.transform
+      };
+    };
+
     const setOpen = (open, returnFocus = false) => {
+      const from = panelFrame();
+      menuAnimation?.cancel();
+      menuAnimation = null;
+
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
-      panel.hidden = !open;
       root.classList.toggle('menu--open', open);
       document.body.classList.toggle('menu-open', open);
       pageLayers().forEach((layer) => { layer.inert = open; });
+
+      if (reduceMotion.matches) {
+        panel.hidden = !open;
+        panel.inert = false;
+      } else if (open) {
+        panel.hidden = false;
+        panel.inert = false;
+        const animation = panel.animate(
+          [from, { opacity:'1', transform:'translateY(0)' }],
+          {
+            duration:motionMs('--motion-slow', 760),
+            easing:motionEase('--ease-standard', 'ease'),
+            fill:'both'
+          }
+        );
+        menuAnimation = animation;
+        animation.onfinish = () => {
+          if (menuAnimation !== animation) return;
+          animation.cancel();
+          menuAnimation = null;
+        };
+      } else if (!panel.hidden) {
+        panel.inert = true;
+        const animation = panel.animate(
+          [from, { opacity:'0', transform:'translateY(-1rem)' }],
+          {
+            duration:motionMs('--motion-slow', 760),
+            easing:motionEase('--ease-standard', 'ease'),
+            fill:'both'
+          }
+        );
+        menuAnimation = animation;
+        animation.onfinish = () => {
+          if (menuAnimation !== animation || toggle.getAttribute('aria-expanded') === 'true') return;
+          panel.hidden = true;
+          panel.inert = false;
+          animation.cancel();
+          menuAnimation = null;
+        };
+      }
 
       if (open) {
         restoreFocus = document.activeElement;
