@@ -33,7 +33,8 @@
       result: root.querySelector('[data-journey-result]'),
       status: root.querySelector('[data-journey-status]'),
       next: root.querySelector('[data-journey-next]'),
-      stages: root.querySelector('[data-journey-stages]')
+      stages: root.querySelector('[data-journey-stages]'),
+      detail: root.querySelector('.journey__detail')
     };
 
     let current = -1;
@@ -41,6 +42,7 @@
     const render = (index) => {
       const safeIndex = Math.max(0, Math.min(index, journeyData.length - 1));
       if (safeIndex === current) return;
+      const isInitial = current === -1;
       current = safeIndex;
       const item = journeyData[safeIndex];
 
@@ -60,6 +62,12 @@
       refs.result.textContent = item[3];
       refs.status.textContent = item[4];
       refs.next.textContent = item[5];
+
+      if (!isInitial && !reduceMotion.matches && refs.detail) {
+        refs.detail.classList.remove('journey__detail--enter');
+        void refs.detail.offsetWidth;
+        refs.detail.classList.add('journey__detail--enter');
+      }
 
       if (window.innerWidth <= 720 && refs.stages) {
         const activeStage = stages[safeIndex];
@@ -92,6 +100,7 @@
       const max = Math.max(1, root.offsetHeight - window.innerHeight);
       const passed = Math.min(Math.max(-rect.top + 72, 0), max);
       const ratio = passed / max;
+      root.style.setProperty('--journey-progress', ratio.toFixed(4));
       render(Math.min(journeyData.length - 1, Math.floor(ratio * journeyData.length)));
     };
 
@@ -398,19 +407,6 @@
     });
   }
 
-  function initFaq() {
-    const root = document.querySelector('[data-faq]');
-    if (!root) return;
-
-    root.addEventListener('toggle', (event) => {
-      const item = event.target;
-      if (!(item instanceof HTMLDetailsElement) || !item.open) return;
-      root.querySelectorAll('details[open]').forEach((other) => {
-        if (other !== item) other.open = false;
-      });
-    }, true);
-  }
-
   function initCases() {
     document.querySelectorAll('[data-case-toggle]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -509,7 +505,6 @@
   initJourney();
   initConfigurator();
   initCars();
-  initFaq();
   initCases();
   initLeadForm();
   initAnchors();

@@ -1,5 +1,18 @@
 (() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pageLayers = () => [...document.querySelectorAll('main, footer')];
+
+  const motionMs = (name, fallback) => {
+    const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    if (!value) return fallback;
+    if (value.endsWith('ms')) return Number.parseFloat(value);
+    if (value.endsWith('s')) return Number.parseFloat(value) * 1000;
+    return fallback;
+  };
+
+  const motionEase = (name, fallback) => (
+    getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback
+  );
 
   document.querySelectorAll('[data-menu]').forEach((root) => {
     const toggle = root.querySelector('[data-menu-toggle]');
@@ -64,6 +77,64 @@
     const desktop = window.matchMedia('(min-width:64.001rem)');
     desktop.addEventListener('change', (event) => {
       if (event.matches && toggle.getAttribute('aria-expanded') === 'true') setOpen(false);
+    });
+  });
+
+  const accordionAnimations = new WeakMap();
+
+  const setAccordionOpen = (details, open) => {
+    const summary = details.querySelector(':scope > .accordion__trigger');
+    const content = details.querySelector(':scope > .accordion__content');
+    if (!summary || !content) {
+      details.open = open;
+      return;
+    }
+
+    const currentHeight = details.getBoundingClientRect().height;
+    accordionAnimations.get(details)?.cancel();
+
+    if (open) {
+      const group = details.closest('[data-faq]');
+      group?.querySelectorAll('details.accordion[open]').forEach((other) => {
+        if (other !== details) setAccordionOpen(other, false);
+      });
+    }
+
+    if (reduceMotion.matches) {
+      details.open = open;
+      details.style.height = '';
+      details.style.overflow = '';
+      return;
+    }
+
+    if (open) details.open = true;
+    const targetHeight = open ? summary.offsetHeight + content.offsetHeight : summary.offsetHeight;
+    details.style.overflow = 'hidden';
+
+    const animation = details.animate(
+      { height:[currentHeight + 'px', targetHeight + 'px'] },
+      {
+        duration:motionMs('--motion-normal', 220),
+        easing:motionEase('--ease-emphasized', 'ease'),
+        fill:'none'
+      }
+    );
+
+    accordionAnimations.set(details, animation);
+    animation.onfinish = () => {
+      if (!open) details.open = false;
+      details.style.height = '';
+      details.style.overflow = '';
+      if (accordionAnimations.get(details) === animation) accordionAnimations.delete(details);
+    };
+  };
+
+  document.querySelectorAll('details.accordion').forEach((details) => {
+    const summary = details.querySelector(':scope > .accordion__trigger');
+    if (!summary) return;
+    summary.addEventListener('click', (event) => {
+      event.preventDefault();
+      setAccordionOpen(details, !details.open);
     });
   });
 
