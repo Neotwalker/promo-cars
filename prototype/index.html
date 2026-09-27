@@ -31,10 +31,10 @@
           </nav>
           <aside class="menu-panel__contact" aria-label="Контакты">
             <p class="menu-panel__eyebrow">Связь</p>
-            <div class="menu-panel__contacts">
-              <a href="tel:+79990000000"><span>Телефон</span><strong>+7 (999) 000-00-00</strong></a>
-              <a href="mailto:hello@nexroute.auto"><span>Почта</span><strong>hello@nexroute.auto</strong></a>
-              <a href="https://t.me/nexroute_auto"><span>Telegram</span><strong>@nexroute_auto</strong></a>
+            <div class="menu-panel__contacts contact-list contact-list--inverse">
+              <a class="contact-list__link" href="tel:+79990000000"><span class="contact-list__label">Телефон</span><strong>+7 (999) 000-00-00</strong></a>
+              <a class="contact-list__link" href="mailto:hello@nexroute.auto"><span class="contact-list__label">Почта</span><strong>hello@nexroute.auto</strong></a>
+              <a class="contact-list__link" href="https://t.me/nexroute_auto"><span class="contact-list__label">Telegram</span><strong>@nexroute_auto</strong></a>
             </div>
             <div class="menu-panel__meta">
               <span><small>Город</small>Москва</span>
@@ -402,9 +402,12 @@
 
   <footer class="site-footer">
     <div class="container site-footer__grid">
-      <div><strong>NEXROUTE AUTO</strong><p>Автомобили из Китая → Россия</p><p>Подбор · проверка · выкуп · логистика · оформление</p></div>
-      <nav aria-label="Навигация в подвале"><a href="#cars">Автомобили</a><a href="#journey">Маршрут</a><a href="#proof">Кейсы</a><a href="#faq">Вопросы</a></nav>
-      <div><span>Telegram · @nexroute_auto</span><span>Телефон · +7 (999) 000-00-00</span></div>
+      <div class="site-footer__brand"><strong>NEXROUTE AUTO</strong><p>Автомобили из Китая → Россия</p><p>Подбор · проверка · выкуп · логистика · оформление</p></div>
+      <nav class="site-footer__nav" aria-label="Навигация в подвале"><a class="link link--nav link--inverse" href="#cars">Автомобили</a><a class="link link--nav link--inverse" href="#journey">Маршрут</a><a class="link link--nav link--inverse" href="#proof">Кейсы</a><a class="link link--nav link--inverse" href="#faq">Вопросы</a></nav>
+      <div class="site-footer__contacts contact-list contact-list--inverse">
+        <a class="contact-list__link site-footer__contact-link" href="https://t.me/nexroute_auto"><span class="contact-list__label">Telegram</span><strong>@nexroute_auto</strong></a>
+        <a class="contact-list__link site-footer__contact-link" href="tel:+79990000000"><span class="contact-list__label">Телефон</span><strong>+7 (999) 000-00-00</strong></a>
+      </div>
     </div>
     <div class="container site-footer__legal"><span>Политика обработки персональных данных</span><span>Согласие на обработку персональных данных</span></div>
     <div class="container site-footer__demo">Демонстрационная версия сайта. Представленные данные, цены, кейсы и материалы используются для демонстрации возможностей шаблона.</div>
