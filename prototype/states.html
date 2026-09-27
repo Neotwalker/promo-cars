@@ -239,14 +239,6 @@
             </form>
           </article>
 
-          <article class="states-component states-component--narrow" data-state="config-success">
-            <form class="configurator__form">
-              <div class="configurator__success" tabindex="-1">
-                <h2 class="type-h3">Расчёт отправлен.</h2>
-                <p>Мы получили параметры автомобиля и свяжемся с вами в выбранном канале.</p>
-              </div>
-            </form>
-          </article>
         </div>
       </div>
     </section>
@@ -314,7 +306,7 @@
 
     <section class="states-group">
       <div class="container">
-        <p class="eyebrow">Final Form · default / error / success</p>
+        <p class="eyebrow">Final Form · default / field errors</p>
         <div class="states-component-row">
           <article class="states-component states-component--narrow" data-state="form-default">
             <form class="lead-form">
@@ -362,31 +354,13 @@
             </form>
           </article>
 
-          <article class="states-component states-component--narrow" data-state="form-success">
-            <form class="lead-form">
-              <label class="field" data-field>
-                <span class="field__label">Марка или модель</span>
-                <input class="field__control" value="Zeekr 001 AWD">
-                <small class="field__message" data-field-message>Можно написать «нужен подбор».</small>
-              </label>
-              <label class="field" data-field>
-                <span class="field__label">Город получения</span>
-                <input class="field__control" value="Москва">
-                <small class="field__message" data-field-message></small>
-              </label>
-              <div class="lead-form__success" tabindex="-1">
-                <h2 class="type-h3">Заявка принята.</h2>
-                <p>Мы получили модель, город и выбранный способ связи. Следующий шаг — уточнить автомобиль и собрать расчёт по вашему маршруту.</p>
-              </div>
-            </form>
-          </article>
         </div>
       </div>
     </section>
 
     <section class="states-group states-group--paper">
       <div class="container">
-        <p class="eyebrow">Toast · success / error / info</p>
+        <p class="eyebrow">Toast · global submit success / error / info</p>
         <div class="states-component-row">
           <article class="states-component states-component--wide" data-state="toast-variants">
             <div class="states-toast-row">

@@ -168,8 +168,7 @@
       summaryMeta: root.querySelector('[data-summary-meta]'),
       summaryTotal: root.querySelector('[data-summary-total]'),
       summaryNote: root.querySelector('[data-summary-note]'),
-      breakdown: root.querySelector('[data-summary-breakdown]'),
-      success: root.querySelector('[data-config-success]')
+      breakdown: root.querySelector('[data-summary-breakdown]')
     };
 
     const clearFieldError = (input, defaultMessage) => {
@@ -364,8 +363,6 @@
       }
 
       clearFieldError(refs.contact, 'Контакт нужен только для отправки расчёта.');
-      refs.success.hidden = false;
-      refs.success.focus();
       showToast('success','Заявка отправлена.','Параметры переданы — дальше используем выбранный способ связи.');
     });
 
@@ -490,9 +487,6 @@
 
       if (!valid) return;
 
-      const success = form.querySelector('[data-lead-success]');
-      success.hidden = false;
-      success.focus();
       showToast('success','Заявка отправлена.','Параметры переданы — дальше используем выбранный способ связи.');
     });
   }

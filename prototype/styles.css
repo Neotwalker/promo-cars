@@ -83,7 +83,6 @@
 .configurator__breakdown dt,.configurator__breakdown dd{font-size:var(--type-small)}.configurator__breakdown dd{margin:0;text-align:right;color:rgba(252,251,248,.7)}
 .configurator__total{margin-top:auto;padding-top:1.25rem;border-top:1px solid var(--color-line-inverse);display:flex;justify-content:space-between;gap:20px}
 .configurator__total strong{font-size:var(--type-h3);text-align:right}
-.configurator__success{padding:var(--space-4);border:1px solid #2f7d55;background:#edf6f0;display:flex;flex-direction:column;gap:var(--space-1)}
 
 .proof{background:var(--color-paper)}
 .proof__grid{display:grid;grid-template-columns:1.18fr .82fr;gap:var(--space-4)}
@@ -111,7 +110,6 @@
 .lead-form .field__control{background:#0c1218;color:var(--color-white);border-color:var(--color-line-inverse)}
 .lead-form__channel{margin:0;padding:0;border:0;display:flex;gap:var(--space-4);flex-wrap:wrap}.lead-form__channel legend{width:100%;font-size:var(--type-small);margin-bottom:var(--space-1)}
 .lead-form__consent-wrap{display:flex;flex-direction:column;gap:var(--space-1)}.lead-form__consent{display:flex;gap:var(--space-2);align-items:flex-start;font-size:var(--type-small);line-height:var(--type-small-lh);color:rgba(252,251,248,.58)}.lead-form__consent-message{min-height:var(--type-small-lh);color:#ff9d87;font-size:var(--type-small);line-height:var(--type-small-lh)}
-.lead-form__success{padding:var(--space-4);border:1px solid rgba(90,190,132,.45);background:rgba(47,125,85,.15);display:flex;flex-direction:column;gap:var(--space-1)}
 
 .site-footer{padding:var(--space-7) 0 1.75rem;background:#080c10;color:rgba(252,251,248,.58)}
 .site-footer__grid{display:grid;grid-template-columns:1.4fr 1fr .6fr;gap:var(--space-6)}
@@ -125,7 +123,7 @@
 @keyframes toast-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 /* 03 — STATES */
-.configurator__step[hidden],.configurator__success[hidden],.case-card__details[hidden],.lead-form__success[hidden]{display:none}
+.configurator__step[hidden],.case-card__details[hidden]{display:none}
 .car-card--selected{box-shadow:0 0 0 2px var(--color-signal)}
 .accordion[open]{background:rgba(252,251,248,.55)}
 
