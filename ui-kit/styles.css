@@ -26,7 +26,7 @@
   --space-layout-lg:clamp(2rem,calc(1rem + 3.333vw),5rem);
   --space-layout-md:clamp(1.5rem,calc(1rem + 1.111vw),2.5rem);
 
-  --container:clamp(78rem,calc(24rem + 60vw),96rem);
+  --container:clamp(78rem,calc(24rem + 60vw),112rem);
   --page-pad:clamp(1.25rem,6.6667vw,6rem);
   --header-h:4.5rem;
   --header-h-compact:4rem;
