@@ -137,6 +137,13 @@
                 <button class="button button--ghost" type="button" disabled>Disabled</button>
               </div>
             </div>
+            <div class="kit-button-spec kit-state kit-state--dark">
+              <span class="kit-state__label">On dark</span>
+              <div class="kit-row">
+                <button class="button button--primary button--inverse" type="button">Primary inverse</button>
+                <button class="button button--ghost button--inverse" type="button">Ghost inverse</button>
+              </div>
+            </div>
           </section>
 
           <section class="kit-component-group" aria-labelledby="kit-fields">
@@ -195,6 +202,13 @@
                 </select>
                 <small class="field__message" data-field-message>Способ связи.</small>
               </label>
+              <div class="kit-state kit-state--dark">
+                <label class="field field--inverse" data-field>
+                  <span class="field__label">On dark</span>
+                  <input class="field__control" type="text" placeholder="Телефон или @username">
+                  <small class="field__message" data-field-message>Inverse field variant.</small>
+                </label>
+              </div>
             </div>
           </section>
 
@@ -211,6 +225,14 @@
               <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Новый</button>
               <button class="choice-chip" type="button" aria-pressed="false">С пробегом</button>
               <button class="choice-chip" type="button" disabled>Недоступно</button>
+            </div>
+            <div class="kit-state kit-state--dark">
+              <span class="kit-state__label">On dark</span>
+              <div class="kit-selection-grid">
+                <label class="selection-control selection-control--inverse"><input type="radio" name="kit-radio-dark" checked><span>Телефон</span></label>
+                <label class="selection-control selection-control--inverse"><input type="radio" name="kit-radio-dark"><span>Telegram</span></label>
+                <label class="selection-control selection-control--inverse"><input type="checkbox"><span>Согласие на обработку данных</span></label>
+              </div>
             </div>
           </section>
 

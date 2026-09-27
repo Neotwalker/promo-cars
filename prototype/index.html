@@ -58,8 +58,8 @@
           <h1 class="type-h1 hero__title">Вы выбираете автомобиль.<br>Остальное — маршрут.</h1>
           <p class="hero__lead">Подбор, проверка, выкуп, логистика и оформление — в одном маршруте. До старта фиксируем расчёт и показываем, из чего складывается цена.</p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#configurator">Получить расчёт</a>
-            <a class="button button--ghost hero__secondary" href="#journey">Смотреть маршрут</a>
+            <a class="button button--primary button--inverse" href="#configurator">Получить расчёт</a>
+            <a class="button button--ghost button--inverse" href="#journey">Смотреть маршрут</a>
           </div>
           <p class="hero__route">Zeekr 001 · Хоргос → Москва · 11 дней до выдачи</p>
         </div>
@@ -389,12 +389,12 @@
       <div class="container final-form__layout">
         <div><p class="eyebrow">Расчёт маршрута</p><h2 class="type-h2">Уже знаете, какой автомобиль нужен?</h2><p>Укажите модель и город получения. Если с машиной ещё не определились — так и напишите, подберём варианты под бюджет.</p></div>
         <form class="lead-form" data-lead-form novalidate>
-          <label class="field" data-field data-lead-field="model"><span class="field__label">Марка или модель</span><input class="field__control" name="model" placeholder="Например, Zeekr 007"><small class="field__message" data-field-message>Можно написать «нужен подбор».</small></label>
-          <label class="field" data-field data-lead-field="city"><span class="field__label">Город получения</span><input class="field__control" name="city" placeholder="Москва"><small class="field__message" data-field-message></small></label>
-          <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="channel" value="Телефон" checked> Телефон</label><label><input type="radio" name="channel" value="Telegram"> Telegram</label></fieldset>
-          <label class="field" data-field data-lead-field="contact"><span class="field__label">Телефон или username в Telegram</span><input class="field__control" name="contact" placeholder="+7 999 000-00-00 / @username"><small class="field__message" data-field-message></small></label>
-          <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox" name="consent"> <span>Нажимая «Получить расчёт», вы соглашаетесь на обработку персональных данных.</span></label><small class="lead-form__consent-message" data-consent-message></small></div>
-          <button class="button button--primary" type="submit">Получить расчёт</button>
+          <label class="field field--inverse" data-field data-lead-field="model"><span class="field__label">Марка или модель</span><input class="field__control" name="model" placeholder="Например, Zeekr 007"><small class="field__message" data-field-message>Можно написать «нужен подбор».</small></label>
+          <label class="field field--inverse" data-field data-lead-field="city"><span class="field__label">Город получения</span><input class="field__control" name="city" placeholder="Москва"><small class="field__message" data-field-message></small></label>
+          <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label class="selection-control selection-control--inverse"><input type="radio" name="channel" value="Телефон" checked><span>Телефон</span></label><label class="selection-control selection-control--inverse"><input type="radio" name="channel" value="Telegram"><span>Telegram</span></label></fieldset>
+          <label class="field field--inverse" data-field data-lead-field="contact"><span class="field__label">Телефон или username в Telegram</span><input class="field__control" name="contact" placeholder="+7 999 000-00-00 / @username"><small class="field__message" data-field-message></small></label>
+          <div class="lead-form__consent-wrap"><label class="selection-control selection-control--inverse"><input type="checkbox" name="consent"><span>Нажимая «Получить расчёт», вы соглашаетесь на обработку персональных данных.</span></label><small class="lead-form__consent-message" data-consent-message></small></div>
+          <button class="button button--primary button--inverse" type="submit">Получить расчёт</button>
         </form>
       </div>
     </section>

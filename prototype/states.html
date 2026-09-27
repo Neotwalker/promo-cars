@@ -211,7 +211,7 @@
               </section>
               <div class="configurator__actions">
                 <button class="button button--ghost" type="button">Назад</button>
-                <button class="button button--primary" type="button">Получить расчёт</button>
+                <button class="button button--primary button--inverse" type="button">Получить расчёт</button>
               </div>
             </form>
           </article>
@@ -310,47 +310,47 @@
         <div class="states-component-row">
           <article class="states-component states-component--narrow" data-state="form-default">
             <form class="lead-form">
-              <label class="field" data-field>
+              <label class="field field--inverse" data-field>
                 <span class="field__label">Марка или модель</span>
                 <input class="field__control" value="Zeekr 001 AWD">
                 <small class="field__message" data-field-message>Можно написать «нужен подбор».</small>
               </label>
-              <label class="field" data-field>
+              <label class="field field--inverse" data-field>
                 <span class="field__label">Город получения</span>
                 <input class="field__control" value="Москва">
                 <small class="field__message" data-field-message></small>
               </label>
-              <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="state-default-channel" checked> Телефон</label><label><input type="radio" name="state-default-channel"> Telegram</label></fieldset>
-              <label class="field" data-field>
+              <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label class="selection-control selection-control--inverse"><input type="radio" name="state-default-channel" checked><span>Телефон</span></label><label class="selection-control selection-control--inverse"><input type="radio" name="state-default-channel"><span>Telegram</span></label></fieldset>
+              <label class="field field--inverse" data-field>
                 <span class="field__label">Телефон или username в Telegram</span>
                 <input class="field__control" value="+7 999 000-00-00">
                 <small class="field__message" data-field-message></small>
               </label>
-              <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox"> <span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message"></small></div>
-              <button class="button button--primary" type="button">Получить расчёт</button>
+              <div class="lead-form__consent-wrap"><label class="selection-control selection-control--inverse"><input type="checkbox"><span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message"></small></div>
+              <button class="button button--primary button--inverse" type="button">Получить расчёт</button>
             </form>
           </article>
 
           <article class="states-component states-component--narrow" data-state="form-error">
             <form class="lead-form">
-              <label class="field" data-field>
+              <label class="field field--inverse" data-field>
                 <span class="field__label">Марка или модель</span>
                 <input class="field__control" value="Zeekr 001 AWD">
                 <small class="field__message" data-field-message>Можно написать «нужен подбор».</small>
               </label>
-              <label class="field field--error" data-field>
+              <label class="field field--inverse field--error" data-field>
                 <span class="field__label">Город получения</span>
                 <input class="field__control" aria-invalid="true" value="">
                 <small class="field__message" data-field-message>Укажите город.</small>
               </label>
-              <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label><input type="radio" name="state-error-channel" checked> Телефон</label><label><input type="radio" name="state-error-channel"> Telegram</label></fieldset>
-              <label class="field field--error" data-field>
+              <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label class="selection-control selection-control--inverse"><input type="radio" name="state-error-channel" checked><span>Телефон</span></label><label class="selection-control selection-control--inverse"><input type="radio" name="state-error-channel"><span>Telegram</span></label></fieldset>
+              <label class="field field--inverse field--error" data-field>
                 <span class="field__label">Телефон или username в Telegram</span>
                 <input class="field__control" aria-invalid="true" value="">
                 <small class="field__message" data-field-message>Укажите контакт.</small>
               </label>
-              <div class="lead-form__consent-wrap"><label class="lead-form__consent"><input type="checkbox"> <span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message">Подтвердите согласие на обработку персональных данных.</small></div>
-              <button class="button button--primary" type="button">Получить расчёт</button>
+              <div class="lead-form__consent-wrap"><label class="selection-control selection-control--inverse"><input type="checkbox"><span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message">Подтвердите согласие на обработку персональных данных.</small></div>
+              <button class="button button--primary button--inverse" type="button">Получить расчёт</button>
             </form>
           </article>
 
