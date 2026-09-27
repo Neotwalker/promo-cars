@@ -12,15 +12,15 @@
 
 /* 02 — SECTIONS */
 .hero{padding:var(--space-hero-top) 0 var(--space-section);background:var(--color-night);color:var(--color-white)}
-.hero__layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:var(--space-layout-lg);align-items:stretch}
-.hero__copy{padding:var(--space-6) 0;display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-4)}
+.hero__layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:var(--space-layout-lg);align-items:start}
+.hero__copy{min-width:0;padding:var(--space-6) 0;display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-4)}
 .hero__copy .eyebrow{color:rgba(252,251,248,.56)}
 .hero__lead{max-width:35.625rem;color:rgba(252,251,248,.74)}
 .hero__actions{display:flex;gap:var(--space-3);flex-wrap:wrap}
 .hero__copy .button--primary{background:var(--color-white);color:var(--color-ink)}
 .hero__secondary{border-color:rgba(252,251,248,.25);color:var(--color-white)}
 .hero__route{margin-top:auto;font-size:var(--type-small);color:rgba(252,251,248,.6)}
-.hero__media{aspect-ratio:1.05/1;padding:var(--space-4);position:relative;overflow:hidden;border:1px solid var(--color-line-inverse);border-radius:var(--radius-sm);background:linear-gradient(rgba(8,11,14,.16),rgba(8,11,14,.48)),url("./assets/hero/nexroute-garage-stage-v2.avif") center/cover no-repeat;display:flex;flex-direction:column;justify-content:space-between}
+.hero__media{width:100%;min-width:0;aspect-ratio:1.05/1;padding:var(--space-4);position:relative;overflow:hidden;border:1px solid var(--color-line-inverse);border-radius:var(--radius-sm);background:linear-gradient(rgba(8,11,14,.16),rgba(8,11,14,.48)),url("./assets/hero/nexroute-garage-stage-v2.avif") center/cover no-repeat;display:flex;flex-direction:column;justify-content:space-between}
 .hero__media-status,.hero__media-footer{position:relative;z-index:2;display:flex;justify-content:space-between;gap:var(--space-3);font-size:var(--type-small)}
 .hero__media-status{color:rgba(252,251,248,.68)}
 .hero__media-footer{padding-top:var(--space-3);border-top:1px solid var(--color-line-inverse)}
