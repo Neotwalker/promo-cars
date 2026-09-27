@@ -241,7 +241,6 @@ html [hidden]{display:none}
 .social-links{display:flex;flex-wrap:wrap;gap:var(--space-1)}
 .social-links__link{position:relative;width:var(--tap-target);height:var(--tap-target);flex:0 0 var(--tap-target);display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--color-line);border-radius:var(--radius-xs);background:var(--color-white);color:var(--color-ink);text-decoration:none;transition:background-color var(--motion-fast) var(--ease-standard),border-color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard)}
 .social-links__link img{width:1.25rem;height:1.25rem;object-fit:contain}
-.social-links__link[aria-label="Перейти в MAX"] img{filter:grayscale(1) brightness(0)}
 .social-links__link::after{content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + var(--space-1));z-index:3;padding:.35rem .5rem;border-radius:var(--radius-xs);background:var(--color-ink);color:var(--color-white);font-size:.75rem;line-height:1rem;font-weight:500;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,.25rem);transition:opacity var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard),visibility 0s linear var(--motion-fast)}
 .social-links__link:hover{background:var(--color-paper);border-color:rgba(16,18,22,.34);transform:translateY(-1px)}
 .social-links__link:hover::after,.social-links__link:focus-visible::after{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
