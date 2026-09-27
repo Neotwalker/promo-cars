@@ -81,10 +81,19 @@
   });
 
   const accordionAnimations = new WeakMap();
+  const accordionStates = new WeakMap();
+
+  const accordionExpanded = (details) => (
+    accordionStates.has(details) ? accordionStates.get(details) : details.open
+  );
 
   const setAccordionOpen = (details, open) => {
     const summary = details.querySelector('[data-accordion-trigger]');
     const content = details.querySelector('[data-accordion-content]');
+    accordionStates.set(details, open);
+    details.dataset.accordionExpanded = String(open);
+    summary?.setAttribute('aria-expanded', String(open));
+
     if (!summary || !content) {
       details.open = open;
       return;
@@ -95,8 +104,8 @@
 
     if (open) {
       const group = details.closest('[data-faq]');
-      group?.querySelectorAll('[data-accordion][open]').forEach((other) => {
-        if (other !== details) setAccordionOpen(other, false);
+      group?.querySelectorAll('[data-accordion]').forEach((other) => {
+        if (other !== details && accordionExpanded(other)) setAccordionOpen(other, false);
       });
     }
 
@@ -104,6 +113,7 @@
       details.open = open;
       details.style.height = '';
       details.style.overflow = '';
+      accordionAnimations.delete(details);
       return;
     }
 
@@ -115,26 +125,30 @@
       { height:[currentHeight + 'px', targetHeight + 'px'] },
       {
         duration:motionMs('--motion-normal', 520),
-        easing:motionEase('--ease-emphasized', 'ease'),
+        easing:motionEase('--ease-standard', 'ease'),
         fill:'none'
       }
     );
 
     accordionAnimations.set(details, animation);
     animation.onfinish = () => {
+      if (accordionAnimations.get(details) !== animation) return;
       if (!open) details.open = false;
       details.style.height = '';
       details.style.overflow = '';
-      if (accordionAnimations.get(details) === animation) accordionAnimations.delete(details);
+      accordionAnimations.delete(details);
     };
   };
 
   document.querySelectorAll('[data-accordion]').forEach((details) => {
     const summary = details.querySelector('[data-accordion-trigger]');
     if (!summary) return;
+    accordionStates.set(details, details.open);
+    details.dataset.accordionExpanded = String(details.open);
+    summary.setAttribute('aria-expanded', String(details.open));
     summary.addEventListener('click', (event) => {
       event.preventDefault();
-      setAccordionOpen(details, !details.open);
+      setAccordionOpen(details, !accordionExpanded(details));
     });
   });
 
