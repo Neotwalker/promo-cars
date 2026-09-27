@@ -114,7 +114,7 @@
     const animation = details.animate(
       { height:[currentHeight + 'px', targetHeight + 'px'] },
       {
-        duration:motionMs('--motion-normal', 220),
+        duration:motionMs('--motion-normal', 520),
         easing:motionEase('--ease-emphasized', 'ease'),
         fill:'none'
       }

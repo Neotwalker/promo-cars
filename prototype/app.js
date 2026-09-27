@@ -137,7 +137,7 @@
 
       const elapsed = lastFrame ? Math.min(time - lastFrame, 64) : 16.67;
       lastFrame = time;
-      const response = Math.max(70, motionMs('--motion-normal', 220) * .5);
+      const response = Math.max(90, motionMs('--motion-normal', 520) * .3);
       const alpha = 1 - Math.exp(-elapsed / response);
       visualStep += (targetStep - visualStep) * alpha;
 
