@@ -96,7 +96,7 @@
     </section>
 
     <section class="journey" id="journey" data-journey>
-      <div class="journey__sticky">
+      <div class="journey__sticky" data-journey-sticky>
         <div class="container">
           <header class="section-header section-header--dark">
             <h2 class="type-h2">От проверки в Китае<br>до выдачи в вашем городе.</h2>
@@ -279,7 +279,7 @@
             <div class="configurator__progress" role="progressbar" aria-label="Шаг конфигуратора" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" data-config-progressbar><span data-config-progress></span></div>
 
             <section class="configurator__step configurator__step--active" data-config-step="model">
-              <p class="eyebrow">Шаг 1</p><h3 class="type-h3">Какой автомобиль рассматриваете?</h3>
+              <p class="eyebrow" data-config-step-label>Шаг 1</p><h3 class="type-h3">Какой автомобиль рассматриваете?</h3>
               <label class="field" data-field><span class="field__label">Марка или модель</span><input class="field__control" name="model" data-config-model placeholder="Например, Zeekr 007" autocomplete="off"><small class="field__message" data-field-message>Можно указать любую марку или модель.</small></label>
               <div class="choice-group" data-config-choice="model">
                 <button class="choice-chip" type="button" data-value="Zeekr 001 AWD">Zeekr 001</button>
@@ -290,27 +290,27 @@
             </section>
 
             <section class="configurator__step" data-config-step="condition" hidden>
-              <p class="eyebrow">Шаг 2</p><h3 class="type-h3">Состояние автомобиля</h3>
+              <p class="eyebrow" data-config-step-label>Шаг 2</p><h3 class="type-h3">Состояние автомобиля</h3>
               <div class="choice-group" data-config-choice="condition"><button class="choice-chip" type="button" data-value="Новый">Новый</button><button class="choice-chip" type="button" data-value="С пробегом">С пробегом</button></div><small class="configurator__choice-message" data-choice-message="condition"></small>
             </section>
 
             <section class="configurator__step" data-config-step="power" hidden>
-              <p class="eyebrow">Шаг 3</p><h3 class="type-h3">Тип силовой установки</h3>
+              <p class="eyebrow" data-config-step-label>Шаг 3</p><h3 class="type-h3">Тип силовой установки</h3>
               <div class="choice-group" data-config-choice="power"><button class="choice-chip" type="button" data-value="Электромобиль">Электромобиль</button><button class="choice-chip" type="button" data-value="Гибрид / EREV">Гибрид / EREV</button><button class="choice-chip" type="button" data-value="Не принципиально">Не принципиально</button></div><small class="configurator__choice-message" data-choice-message="power"></small>
             </section>
 
             <section class="configurator__step" data-config-step="budget" hidden>
-              <p class="eyebrow">Шаг 4</p><h3 class="type-h3">Бюджет под ключ</h3>
+              <p class="eyebrow" data-config-step-label>Шаг 4</p><h3 class="type-h3">Бюджет под ключ</h3>
               <div class="choice-group" data-config-choice="budget"><button class="choice-chip" type="button" data-value="До 5 500 000 ₽">До 5 500 000 ₽</button><button class="choice-chip" type="button" data-value="5 500 000–6 500 000 ₽">5 500 000–6 500 000 ₽</button><button class="choice-chip" type="button" data-value="От 6 500 000 ₽">От 6 500 000 ₽</button><button class="choice-chip" type="button" data-value="Нужен ориентир">Нужен ориентир</button></div><small class="configurator__choice-message" data-choice-message="budget"></small>
             </section>
 
             <section class="configurator__step" data-config-step="city" hidden>
-              <p class="eyebrow">Шаг 5</p><h3 class="type-h3">Где будете получать автомобиль?</h3>
+              <p class="eyebrow" data-config-step-label>Шаг 5</p><h3 class="type-h3">Где будете получать автомобиль?</h3>
               <label class="field" data-field data-city-field><span class="field__label">Город получения</span><input class="field__control" name="city" data-config-city placeholder="Москва"><small class="field__message" data-field-message data-city-message>Региональная доставка будет отдельной строкой.</small></label>
             </section>
 
             <section class="configurator__step" data-config-step="contact" hidden>
-              <p class="eyebrow">Шаг 6</p><h3 class="type-h3">Куда отправить подборку и расчёт?</h3>
+              <p class="eyebrow" data-config-step-label>Шаг 6</p><h3 class="type-h3">Куда отправить подборку и расчёт?</h3>
               <div class="choice-group" data-config-choice="channel"><button class="choice-chip" type="button" data-value="Телефон">Телефон</button><button class="choice-chip" type="button" data-value="Telegram">Telegram</button></div><small class="configurator__choice-message" data-choice-message="channel"></small>
               <label class="field" data-field data-contact-field><span class="field__label">Телефон или username в Telegram</span><input class="field__control" name="contact" data-config-contact placeholder="+7 999 000-00-00 / @username"><small class="field__message" data-field-message data-contact-message>Контакт нужен только для отправки расчёта.</small></label>
             </section>
@@ -373,14 +373,14 @@
       <div class="container">
         <header class="section-header"><h2 class="type-h2">Осталось уточнить несколько вещей.</h2><p>Коротко о том, что чаще всего нужно понять до заявки.</p></header>
         <div class="faq__list" data-faq>
-          <details class="accordion"><summary class="accordion__trigger">Какие автомобили можно привезти?</summary><div class="accordion__content"><p>Не только модели из витрины. В расчёте можно указать любую марку и модель из Китая или выбрать «не определился — нужен подбор».</p></div></details>
-          <details class="accordion"><summary class="accordion__trigger">Что входит в цену «под ключ»?</summary><div class="accordion__content"><p>Автомобиль, логистика Китай → Россия, таможня и оформление, утильсбор, доставка и сервис NEXROUTE. Региональная доставка — отдельной строкой.</p></div></details>
-          <details class="accordion"><summary class="accordion__trigger">Как проходит оплата?</summary><div class="accordion__content"><p>Платежи привязаны к этапам сделки: после проверки — автомобиль, перед отправкой — логистика и страхование, перед таможней — обязательные платежи.</p></div></details>
-          <details class="accordion"><summary class="accordion__trigger">Что будет, если автомобиль не пройдёт проверку?</summary><div class="accordion__content"><p>Такой автомобиль не выкупаем. Показываем замечания и возвращаемся к подбору без повторной сервисной комиссии.</p></div></details>
-          <details class="accordion"><summary class="accordion__trigger">Сколько занимает доставка?</summary><div class="accordion__content"><p>Для текущей витрины ориентир до Москвы — 28–40 дней. Точный срок зависит от автомобиля, маршрута и оформления.</p></div></details>
-          <details class="accordion"><summary class="accordion__trigger">Можно привезти автомобиль с пробегом?</summary><div class="accordion__content"><p>Да. Для автомобиля с пробегом проверка состояния становится отдельной частью решения о выкупе.</p></div></details>
-          <details class="accordion"><summary class="accordion__trigger">Можно получить автомобиль не в Москве?</summary><div class="accordion__content"><p>Да. После оформления организуем доставку в нужный город и показываем её отдельной строкой в расчёте.</p></div></details>
-          <details class="accordion"><summary class="accordion__trigger">Какие документы я получу?</summary><div class="accordion__content"><p>Инвойс или документы покупки, таможенные документы, выписку из ЭПТС, документы по оплатам и акт выдачи.</p></div></details>
+          <details class="accordion" data-accordion><summary class="accordion__trigger" data-accordion-trigger>Какие автомобили можно привезти?</summary><div class="accordion__content" data-accordion-content><p>Не только модели из витрины. В расчёте можно указать любую марку и модель из Китая или выбрать «не определился — нужен подбор».</p></div></details>
+          <details class="accordion" data-accordion><summary class="accordion__trigger" data-accordion-trigger>Что входит в цену «под ключ»?</summary><div class="accordion__content" data-accordion-content><p>Автомобиль, логистика Китай → Россия, таможня и оформление, утильсбор, доставка и сервис NEXROUTE. Региональная доставка — отдельной строкой.</p></div></details>
+          <details class="accordion" data-accordion><summary class="accordion__trigger" data-accordion-trigger>Как проходит оплата?</summary><div class="accordion__content" data-accordion-content><p>Платежи привязаны к этапам сделки: после проверки — автомобиль, перед отправкой — логистика и страхование, перед таможней — обязательные платежи.</p></div></details>
+          <details class="accordion" data-accordion><summary class="accordion__trigger" data-accordion-trigger>Что будет, если автомобиль не пройдёт проверку?</summary><div class="accordion__content" data-accordion-content><p>Такой автомобиль не выкупаем. Показываем замечания и возвращаемся к подбору без повторной сервисной комиссии.</p></div></details>
+          <details class="accordion" data-accordion><summary class="accordion__trigger" data-accordion-trigger>Сколько занимает доставка?</summary><div class="accordion__content" data-accordion-content><p>Для текущей витрины ориентир до Москвы — 28–40 дней. Точный срок зависит от автомобиля, маршрута и оформления.</p></div></details>
+          <details class="accordion" data-accordion><summary class="accordion__trigger" data-accordion-trigger>Можно привезти автомобиль с пробегом?</summary><div class="accordion__content" data-accordion-content><p>Да. Для автомобиля с пробегом проверка состояния становится отдельной частью решения о выкупе.</p></div></details>
+          <details class="accordion" data-accordion><summary class="accordion__trigger" data-accordion-trigger>Можно получить автомобиль не в Москве?</summary><div class="accordion__content" data-accordion-content><p>Да. После оформления организуем доставку в нужный город и показываем её отдельной строкой в расчёте.</p></div></details>
+          <details class="accordion" data-accordion><summary class="accordion__trigger" data-accordion-trigger>Какие документы я получу?</summary><div class="accordion__content" data-accordion-content><p>Инвойс или документы покупки, таможенные документы, выписку из ЭПТС, документы по оплатам и акт выдачи.</p></div></details>
         </div>
       </div>
     </section>

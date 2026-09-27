@@ -83,8 +83,8 @@
   const accordionAnimations = new WeakMap();
 
   const setAccordionOpen = (details, open) => {
-    const summary = details.querySelector(':scope > .accordion__trigger');
-    const content = details.querySelector(':scope > .accordion__content');
+    const summary = details.querySelector('[data-accordion-trigger]');
+    const content = details.querySelector('[data-accordion-content]');
     if (!summary || !content) {
       details.open = open;
       return;
@@ -95,7 +95,7 @@
 
     if (open) {
       const group = details.closest('[data-faq]');
-      group?.querySelectorAll('details.accordion[open]').forEach((other) => {
+      group?.querySelectorAll('[data-accordion][open]').forEach((other) => {
         if (other !== details) setAccordionOpen(other, false);
       });
     }
@@ -129,8 +129,8 @@
     };
   };
 
-  document.querySelectorAll('details.accordion').forEach((details) => {
-    const summary = details.querySelector(':scope > .accordion__trigger');
+  document.querySelectorAll('[data-accordion]').forEach((details) => {
+    const summary = details.querySelector('[data-accordion-trigger]');
     if (!summary) return;
     summary.addEventListener('click', (event) => {
       event.preventDefault();

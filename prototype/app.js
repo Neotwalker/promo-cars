@@ -13,7 +13,7 @@
     const root = document.querySelector('[data-journey]');
     if (!root) return;
 
-    const sticky = root.querySelector('.journey__sticky');
+    const sticky = root.querySelector('[data-journey-sticky]');
     const stages = [...root.querySelectorAll('[data-journey-step]')];
     const stageItems = [...root.querySelectorAll('[data-journey-item]')];
     const panels = [...root.querySelectorAll('[data-journey-panel]')];
@@ -240,7 +240,7 @@
 
     const setChoice = (groupName, value) => {
       state[groupName] = value;
-      root.querySelectorAll('[data-config-choice="' + groupName + '"] .choice-chip').forEach((button) => {
+      root.querySelectorAll('[data-config-choice="' + groupName + '"] [data-value]').forEach((button) => {
         const selected = button.dataset.value === value;
         button.classList.toggle('choice-chip--selected', selected);
         button.setAttribute('aria-pressed', String(selected));
@@ -252,7 +252,7 @@
     const choiceError = (key, message) => {
       const messageNode = root.querySelector('[data-choice-message="' + key + '"]');
       if (messageNode) messageNode.textContent = message;
-      root.querySelector('[data-config-choice="' + key + '"] .choice-chip')?.focus();
+      root.querySelector('[data-config-choice="' + key + '"] [data-value]')?.focus();
       return false;
     };
 
@@ -305,7 +305,7 @@
 
       list.forEach((name, index) => {
         const step = steps.find((item) => item.dataset.configStep === name);
-        const label = step?.querySelector('.eyebrow');
+        const label = step?.querySelector('[data-config-step-label]');
         if (label) label.textContent = 'Шаг ' + (index + 1);
       });
 
@@ -348,7 +348,7 @@
 
     refs.model.addEventListener('input', () => {
       state.model = refs.model.value.trim();
-      root.querySelectorAll('[data-config-choice="model"] .choice-chip').forEach((button) => {
+      root.querySelectorAll('[data-config-choice="model"] [data-value]').forEach((button) => {
         button.classList.remove('choice-chip--selected');
         button.setAttribute('aria-pressed', 'false');
       });
