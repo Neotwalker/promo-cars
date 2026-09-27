@@ -252,6 +252,12 @@
       current = Math.max(0, Math.min(current, list.length - 1));
       const activeName = list[current];
 
+      list.forEach((name, index) => {
+        const step = steps.find((item) => item.dataset.configStep === name);
+        const label = step?.querySelector('.eyebrow');
+        if (label) label.textContent = 'Шаг ' + (index + 1);
+      });
+
       steps.forEach((step) => {
         const active = step.dataset.configStep === activeName;
         step.hidden = !active;
