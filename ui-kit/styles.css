@@ -235,6 +235,16 @@ html [hidden]{display:none}
 .contact-list__link:hover strong{color:var(--color-signal)}
 .contact-list--inverse .contact-list__link{border-color:var(--color-line-inverse);color:var(--color-white)}
 .contact-list--inverse .contact-list__label,.menu-panel__meta small{color:rgba(252,251,248,.5)}
+
+.social-links{display:flex;flex-wrap:wrap;gap:var(--space-1)}
+.social-links__link{width:var(--tap-target);height:var(--tap-target);flex:0 0 var(--tap-target);display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--color-line);border-radius:var(--radius-xs);background:var(--color-white);color:var(--color-ink);text-decoration:none;transition:background-color var(--motion-fast) var(--ease-standard),border-color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard)}
+.social-links__link img{width:1.25rem;height:1.25rem;object-fit:contain}
+.social-links__link:hover{background:var(--color-paper);border-color:rgba(16,18,22,.34);transform:translateY(-1px)}
+.social-links__link:focus-visible{outline:2px solid var(--color-signal);outline-offset:.25rem;border-color:var(--color-signal)}
+.social-links__link:active{transform:translateY(0)}
+.social-links--inverse .social-links__link{border-color:var(--color-line-inverse)}
+.social-links--inverse .social-links__link:hover{border-color:rgba(252,251,248,.34)}
+
 .menu-panel__meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}
 .menu-panel__meta>span{display:flex;flex-direction:column;gap:.2rem;font-size:var(--type-small);line-height:var(--type-small-lh)}
 .menu-panel__meta small{display:block}
@@ -267,7 +277,8 @@ body.menu-open{overflow:hidden}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .link,.button,.field__control,.choice-chip,.menu-toggle,.menu-toggle__icon i,.menu-panel__nav a,.contact-list__link,.contact-list__link strong,.accordion,.toast__close{transition:none}
+  .link,.button,.field__control,.choice-chip,.menu-toggle,.menu-toggle__icon i,.menu-panel__nav a,.contact-list__link,.contact-list__link strong,.social-links__link,.accordion,.toast__close{transition:none}
+  .social-links__link:hover,.social-links__link:active{transform:none}
 }
 
 /* UI-KIT SHOWCASE ONLY */
