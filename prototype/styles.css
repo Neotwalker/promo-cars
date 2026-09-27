@@ -150,6 +150,13 @@
   .toast-stack{left:var(--space-3);right:var(--space-3);bottom:calc(var(--space-3) + env(safe-area-inset-bottom))}.toast-stack .toast{max-width:none;min-width:0;width:100%}
 }
 
+@media(min-width:40.0625rem) and (max-width:48rem){
+  .hero__media{aspect-ratio:4/3}
+  .hero__actions{width:auto}
+  .hero__actions .button{width:auto}
+  .cars__grid,.proof__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
 @media(max-width:48rem) and (max-height:45rem){
   .journey .section-header>p{display:none}
   .journey .section-header{margin-bottom:var(--space-3)}
