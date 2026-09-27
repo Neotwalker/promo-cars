@@ -53,8 +53,8 @@
   --motion-fast:300ms;
   --motion-normal:520ms;
   --motion-slow:760ms;
-  --ease-standard:cubic-bezier(.22,.72,.28,1);
-  --ease-emphasized:cubic-bezier(.16,1,.3,1);
+  --ease-standard:cubic-bezier(.2,.6,.2,1);
+  --ease-emphasized:cubic-bezier(.16,.84,.24,1);
 }
 
 /* 02 — RESET / BASE */
