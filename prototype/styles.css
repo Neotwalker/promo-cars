@@ -59,9 +59,10 @@
 .journey__stage-item--complete .journey__stage span{color:var(--color-signal)}
 .journey__stage-item--active .journey__stage,.journey__stage-item--active .journey__stage span{color:var(--color-white)}
 .journey__stage-item--active .journey__stage b{font-weight:600}
-.journey__detail{margin-top:var(--space-6);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)}
-.journey__detail--enter{animation:journey-state-in var(--motion-normal) var(--ease-emphasized)}
-@keyframes journey-state-in{from{opacity:.55;transform:translateY(.375rem)}to{opacity:1;transform:none}}
+.journey__viewport{margin-top:var(--space-6);overflow:visible}
+.journey__track{width:100%;display:flex;transform:translate3d(0,0,0);will-change:transform}
+.journey__panel{flex:0 0 100%;min-width:0}
+.journey__detail{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)}
 .journey__detail-copy{min-height:16.25rem;display:flex;flex-direction:column;gap:var(--space-3)}
 .journey__index{font-size:var(--type-display);line-height:1;color:rgba(252,251,248,.12);font-weight:600}
 .journey__detail-copy>p{max-width:35rem;color:rgba(252,251,248,.7)}
@@ -145,7 +146,6 @@
   .cars__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .proof__grid{grid-template-columns:1fr 1fr}.case-card--featured{grid-column:1/-1;grid-row:auto}
   .journey{height:560vh}.journey__sticky{align-items:flex-start;padding-top:var(--space-6)}
-  .journey__stages{grid-template-columns:repeat(4,1fr)}
   .journey__detail{grid-template-columns:1fr 1fr;gap:var(--space-4)}
   .security-item{grid-template-columns:3rem 1fr}.security-item>strong{grid-column:2}
 }
@@ -154,7 +154,7 @@
   .section-header{grid-template-columns:1fr;gap:var(--space-4);margin-bottom:var(--space-5)}
   .hero__copy{padding:0}.hero__media{aspect-ratio:1/1}.hero__actions{width:100%}.hero__actions .button{width:100%}
   .cars__grid{grid-template-columns:1fr}
-  .journey{height:440vh}.journey__sticky{position:sticky;top:var(--header-h);min-height:calc(100svh - var(--header-h));padding:var(--space-4) 0;align-items:flex-start}.journey .section-header{margin-bottom:var(--space-4)}.journey__stages{display:flex;grid-template-columns:none;gap:0;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none}.journey__stages::-webkit-scrollbar{display:none}.journey__stages>li{flex:0 0 7rem;scroll-snap-align:center}.journey__stage{min-height:4rem;padding:var(--space-1) var(--space-1) var(--space-2)}.journey__detail{grid-template-columns:1fr;gap:0;margin-top:var(--space-4)}.journey__detail-copy{min-height:0;gap:var(--space-2)}.journey__detail-copy>strong{margin-top:.25rem}.journey__status-card{display:none}.journey__cta{margin-top:1.25rem}
+  .journey{height:440vh}.journey__sticky{position:sticky;top:var(--header-h);min-height:calc(100svh - var(--header-h));padding:var(--space-4) 0;align-items:flex-start}.journey .section-header{margin-bottom:var(--space-4)}.journey__stages{display:flex;grid-template-columns:none;gap:0;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none}.journey__stages::-webkit-scrollbar{display:none}.journey__stages>li{flex:0 0 7rem;scroll-snap-align:center}.journey__stage{min-height:4rem;padding:var(--space-1) var(--space-1) var(--space-2)}.journey__viewport{margin-top:var(--space-4)}.journey__detail{grid-template-columns:1fr;gap:0}.journey__detail-copy{min-height:0;gap:var(--space-2)}.journey__detail-copy>strong{margin-top:.25rem}.journey__status-card{display:none}.journey__cta{margin-top:1.25rem}
   .configurator__form,.configurator__summary,.lead-form{padding:var(--space-4)}.configurator__actions{flex-wrap:wrap}.configurator__actions .button{flex:1}
   .proof__grid{grid-template-columns:1fr}
   .security-item{grid-template-columns:2rem 1fr;gap:var(--space-3)}
@@ -172,7 +172,8 @@
 /* 05 — A11Y / REDUCED MOTION */
 @media(prefers-reduced-motion:reduce){
   .journey__stage-item,.journey__stage,.configurator__progress span{transition:none}
-  .journey__detail--enter,.toast-stack .toast{animation:none}
+  .journey__track{will-change:auto}
+  .toast-stack .toast{animation:none}
   .journey__stages::after{display:none}
 }
 

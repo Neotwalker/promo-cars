@@ -9,72 +9,45 @@
     'Li Auto L6 Pro': { power:'Гибрид / EREV', total:5390000, eta:'32–40 дней', parts:[3870000,350000,790000,3400,56600,320000] }
   };
 
-  const journeyData = [
-    ['01','Подбор','Сверяем модель, комплектацию, цвет, бюджет и город получения. На выходе — конкретный автомобиль и предварительный расчёт.','Результат: автомобиль выбран, расчёт собран','Подбор','Следующий этап: Проверка'],
-    ['02','Проверка','Запрашиваем фото и видео, сверяем VIN, комплектацию и состояние. При критичных расхождениях возвращаемся к подбору.','Результат: проверка пройдена','Проверка','Следующий этап: Выкуп'],
-    ['03','Выкуп','После согласования фиксируем автомобиль и проводим оплату по согласованной схеме.','Результат: автомобиль выкуплен','Выкуп','Следующий этап: Страхование'],
-    ['04','Страхование','Перед отправкой оформляем страхование перевозки и фиксируем состояние автомобиля.','Результат: перевозка застрахована','Страхование','Следующий этап: Граница'],
-    ['05','Граница','Автомобиль идёт к границе и проходит экспортное оформление.','Результат: экспорт оформлен','Граница','Следующий этап: Таможня'],
-    ['06','Таможня','Подаём документы, оформляем таможенные платежи и выпускаем автомобиль на территорию России.','Документы поданы · ориентир 11 дней до выдачи','Таможня','Следующий этап: ЭПТС'],
-    ['07','ЭПТС','Оформляем электронный ПТС и комплект документов, необходимых для постановки автомобиля на учёт.','Результат: документы готовы','ЭПТС','Следующий этап: Выдача'],
-    ['08','Выдача','Проверяем комплектность, передаём автомобиль и документы или организуем доставку в другой город.','Результат: маршрут завершён','Выдача','Маршрут завершён']
-  ];
-
   function initJourney() {
     const root = document.querySelector('[data-journey]');
     if (!root) return;
 
+    const sticky = root.querySelector('.journey__sticky');
     const stages = [...root.querySelectorAll('[data-journey-step]')];
     const stageItems = [...root.querySelectorAll('[data-journey-item]')];
-    const refs = {
-      index: root.querySelector('[data-journey-index]'),
-      title: root.querySelector('[data-journey-title]'),
-      copy: root.querySelector('[data-journey-copy]'),
-      result: root.querySelector('[data-journey-result]'),
-      status: root.querySelector('[data-journey-status]'),
-      next: root.querySelector('[data-journey-next]'),
-      stages: root.querySelector('[data-journey-stages]'),
-      detail: root.querySelector('.journey__detail')
-    };
+    const panels = [...root.querySelectorAll('[data-journey-panel]')];
+    const track = root.querySelector('[data-journey-track]');
+    const stagesRail = root.querySelector('[data-journey-stages]');
+    if (!sticky || !track || !panels.length) return;
 
     let current = -1;
 
-    const render = (index) => {
-      const safeIndex = Math.max(0, Math.min(index, journeyData.length - 1));
+    const setActive = (index) => {
+      const safeIndex = Math.max(0, Math.min(index, panels.length - 1));
       if (safeIndex === current) return;
-      const isInitial = current === -1;
       current = safeIndex;
-      const item = journeyData[safeIndex];
 
       stages.forEach((stage, i) => {
         const active = i === safeIndex;
         const completed = i < safeIndex;
-        const stageItem = stageItems[i];
-        stageItem?.classList.toggle('journey__stage-item--active', active);
-        stageItem?.classList.toggle('journey__stage-item--complete', completed);
+        stageItems[i]?.classList.toggle('journey__stage-item--active', active);
+        stageItems[i]?.classList.toggle('journey__stage-item--complete', completed);
         if (active) stage.setAttribute('aria-current', 'step');
         else stage.removeAttribute('aria-current');
       });
 
-      refs.index.textContent = item[0];
-      refs.title.textContent = item[1];
-      refs.copy.textContent = item[2];
-      refs.result.textContent = item[3];
-      refs.status.textContent = item[4];
-      refs.next.textContent = item[5];
+      panels.forEach((panel, i) => {
+        const active = i === safeIndex;
+        panel.classList.toggle('journey__panel--active', active);
+        panel.hidden = reduceMotion.matches ? !active : false;
+      });
 
-      if (!isInitial && !reduceMotion.matches && refs.detail) {
-        refs.detail.classList.remove('journey__detail--enter');
-        void refs.detail.offsetWidth;
-        refs.detail.classList.add('journey__detail--enter');
-      }
-
-      if (window.innerWidth <= 720 && refs.stages) {
-        const activeStage = stages[safeIndex];
-        const item = activeStage?.parentElement;
-        if (item) {
-          const left = item.offsetLeft - (refs.stages.clientWidth - item.offsetWidth) / 2;
-          refs.stages.scrollTo({
+      if (window.innerWidth <= 768 && stagesRail) {
+        const activeItem = stages[safeIndex]?.parentElement;
+        if (activeItem) {
+          const left = activeItem.offsetLeft - (stagesRail.clientWidth - activeItem.offsetWidth) / 2;
+          stagesRail.scrollTo({
             left:Math.max(0, left),
             behavior:reduceMotion.matches ? 'auto' : 'smooth'
           });
@@ -82,9 +55,18 @@
       }
     };
 
+    const metrics = () => {
+      const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
+      return {
+        stickyTop,
+        max:Math.max(1, root.offsetHeight - window.innerHeight)
+      };
+    };
+
     const scrollToStep = (index) => {
-      const max = Math.max(1, root.offsetHeight - window.innerHeight);
-      const target = root.offsetTop - 72 + (index / (journeyData.length - 1)) * max;
+      const { stickyTop, max } = metrics();
+      const denominator = Math.max(1, panels.length - 1);
+      const target = root.offsetTop - stickyTop + (index / denominator) * max;
       window.scrollTo({
         top:Math.max(0, target),
         behavior:reduceMotion.matches ? 'auto' : 'smooth'
@@ -96,12 +78,21 @@
     });
 
     const update = () => {
+      const { stickyTop, max } = metrics();
       const rect = root.getBoundingClientRect();
-      const max = Math.max(1, root.offsetHeight - window.innerHeight);
-      const passed = Math.min(Math.max(-rect.top + 72, 0), max);
+      const passed = Math.min(Math.max(-rect.top + stickyTop, 0), max);
       const ratio = passed / max;
+      const exactStep = ratio * Math.max(0, panels.length - 1);
+      const activeIndex = Math.round(exactStep);
+
       root.style.setProperty('--journey-progress', ratio.toFixed(4));
-      render(Math.min(journeyData.length - 1, Math.floor(ratio * journeyData.length)));
+      setActive(activeIndex);
+
+      if (reduceMotion.matches) {
+        track.style.transform = 'translate3d(0,0,0)';
+      } else {
+        track.style.transform = 'translate3d(' + (-exactStep * 100).toFixed(4) + '%,0,0)';
+      }
     };
 
     let raf = 0;
@@ -113,9 +104,11 @@
       });
     };
 
-    render(0);
+    setActive(0);
+    update();
     addEventListener('scroll', schedule, { passive:true });
     addEventListener('resize', schedule, { passive:true });
+    reduceMotion.addEventListener('change', schedule);
   }
 
   function initToasts() {

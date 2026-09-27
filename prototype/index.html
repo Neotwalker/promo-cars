@@ -114,19 +114,144 @@
             <li class="journey__stage-item" data-journey-item><button class="journey__stage" type="button" data-journey-step="7"><span>08</span><b>Выдача</b></button></li>
           </ol>
 
-          <div class="journey__detail">
-            <div class="journey__detail-copy">
-              <span class="journey__index" data-journey-index>01</span>
-              <h3 class="type-h3" data-journey-title>Подбор</h3>
-              <p data-journey-copy>Сверяем модель, комплектацию, цвет, бюджет и город получения. На выходе — конкретный автомобиль и предварительный расчёт.</p>
-              <strong data-journey-result>Результат: автомобиль выбран, расчёт собран</strong>
+          <div class="journey__viewport" data-journey-viewport>
+            <div class="journey__track" data-journey-track>
+              <article class="journey__panel journey__panel--active" data-journey-panel aria-labelledby="journey-panel-01-title">
+                <div class="journey__detail">
+                  <div class="journey__detail-copy">
+                    <span class="journey__index">01</span>
+                    <h3 class="type-h3" id="journey-panel-01-title">Подбор</h3>
+                    <p>Сверяем модель, комплектацию, цвет, бюджет и город получения. На выходе — конкретный автомобиль и предварительный расчёт.</p>
+                    <strong>Результат: автомобиль выбран, расчёт собран</strong>
+                  </div>
+                  <div class="journey__status-card">
+                    <p class="eyebrow">Zeekr 001 AWD</p>
+                    <strong>Подбор</strong>
+                    <p>Комплектация Performance · 2025 · новый<br>Москва · бюджет до 6 500 000 ₽</p>
+                    <span>Следующий этап: Проверка</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-02-title">
+                <div class="journey__detail">
+                  <div class="journey__detail-copy">
+                    <span class="journey__index">02</span>
+                    <h3 class="type-h3" id="journey-panel-02-title">Проверка</h3>
+                    <p>Запрашиваем фото и видео, сверяем VIN, комплектацию и состояние. При критичных расхождениях возвращаемся к подбору.</p>
+                    <strong>Результат: проверка пройдена</strong>
+                  </div>
+                  <div class="journey__status-card">
+                    <p class="eyebrow">Zeekr 001 AWD</p>
+                    <strong>Проверка</strong>
+                    <p>VIN и комплектация подтверждены</p>
+                    <span>Следующий этап: Выкуп</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-03-title">
+                <div class="journey__detail">
+                  <div class="journey__detail-copy">
+                    <span class="journey__index">03</span>
+                    <h3 class="type-h3" id="journey-panel-03-title">Выкуп</h3>
+                    <p>После согласования фиксируем автомобиль и проводим оплату по согласованной схеме.</p>
+                    <strong>Результат: автомобиль выкуплен</strong>
+                  </div>
+                  <div class="journey__status-card">
+                    <p class="eyebrow">Zeekr 001 AWD</p>
+                    <strong>Выкуп</strong>
+                    <p>Инвойс согласован</p>
+                    <span>Следующий этап: Страхование</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-04-title">
+                <div class="journey__detail">
+                  <div class="journey__detail-copy">
+                    <span class="journey__index">04</span>
+                    <h3 class="type-h3" id="journey-panel-04-title">Страхование</h3>
+                    <p>Перед отправкой оформляем страхование перевозки и фиксируем состояние автомобиля.</p>
+                    <strong>Результат: перевозка застрахована</strong>
+                  </div>
+                  <div class="journey__status-card">
+                    <p class="eyebrow">Zeekr 001 AWD</p>
+                    <strong>Страхование</strong>
+                    <p>Состояние зафиксировано</p>
+                    <span>Следующий этап: Граница</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-05-title">
+                <div class="journey__detail">
+                  <div class="journey__detail-copy">
+                    <span class="journey__index">05</span>
+                    <h3 class="type-h3" id="journey-panel-05-title">Граница</h3>
+                    <p>Автомобиль идёт к границе и проходит экспортное оформление.</p>
+                    <strong>Результат: экспорт оформлен</strong>
+                  </div>
+                  <div class="journey__status-card">
+                    <p class="eyebrow">Zeekr 001 AWD</p>
+                    <strong>Граница</strong>
+                    <p>Хоргос · экспортное оформление</p>
+                    <span>Следующий этап: Таможня</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-06-title">
+                <div class="journey__detail">
+                  <div class="journey__detail-copy">
+                    <span class="journey__index">06</span>
+                    <h3 class="type-h3" id="journey-panel-06-title">Таможня</h3>
+                    <p>Подаём документы, оформляем таможенные платежи и выпускаем автомобиль на территорию России.</p>
+                    <strong>Документы поданы · ориентир 11 дней до выдачи</strong>
+                  </div>
+                  <div class="journey__status-card">
+                    <p class="eyebrow">Zeekr 001 AWD</p>
+                    <strong>Таможня</strong>
+                    <p>Документы поданы</p>
+                    <span>Следующий этап: ЭПТС</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-07-title">
+                <div class="journey__detail">
+                  <div class="journey__detail-copy">
+                    <span class="journey__index">07</span>
+                    <h3 class="type-h3" id="journey-panel-07-title">ЭПТС</h3>
+                    <p>Оформляем электронный ПТС и комплект документов, необходимых для постановки автомобиля на учёт.</p>
+                    <strong>Результат: документы готовы</strong>
+                  </div>
+                  <div class="journey__status-card">
+                    <p class="eyebrow">Zeekr 001 AWD</p>
+                    <strong>ЭПТС</strong>
+                    <p>Документы оформляются</p>
+                    <span>Следующий этап: Выдача</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-08-title">
+                <div class="journey__detail">
+                  <div class="journey__detail-copy">
+                    <span class="journey__index">08</span>
+                    <h3 class="type-h3" id="journey-panel-08-title">Выдача</h3>
+                    <p>Проверяем комплектность, передаём автомобиль и документы или организуем доставку в другой город.</p>
+                    <strong>Результат: маршрут завершён</strong>
+                  </div>
+                  <div class="journey__status-card">
+                    <p class="eyebrow">Zeekr 001 AWD</p>
+                    <strong>Выдача</strong>
+                    <p>Москва · готов к передаче</p>
+                    <span>Маршрут завершён</span>
+                  </div>
+                </div>
+              </article>
             </div>
-            <article class="journey__status-card">
-              <p class="eyebrow">Zeekr 001 AWD</p>
-              <strong data-journey-status>Подбор</strong>
-              <p data-journey-meta>Комплектация Performance · 2025 · новый<br>Москва · бюджет до 6 500 000 ₽</p>
-              <span data-journey-next>Следующий этап: Проверка</span>
-            </article>
           </div>
           <a class="button button--secondary journey__cta" href="#configurator">Рассчитать под свой автомобиль</a>
         </div>
