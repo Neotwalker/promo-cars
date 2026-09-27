@@ -142,6 +142,30 @@
   let modalRestoreFocus = null;
   let modalAnimations = [];
 
+  const measureScrollbar = () => {
+    const current = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+    if (current) return current;
+    if (document.documentElement.scrollHeight <= window.innerHeight) return 0;
+
+    const probe = document.createElement('div');
+    probe.setAttribute('aria-hidden', 'true');
+    probe.style.cssText = 'position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll;';
+    document.body.append(probe);
+    const width = Math.max(0, probe.offsetWidth - probe.clientWidth);
+    probe.remove();
+    return width;
+  };
+
+  const setModalScrollLock = (locked) => {
+    if (locked) {
+      document.documentElement.style.setProperty('--modal-scrollbar-compensation', measureScrollbar() + 'px');
+      document.body.classList.add('modal-open');
+      return;
+    }
+    document.body.classList.remove('modal-open');
+    document.documentElement.style.removeProperty('--modal-scrollbar-compensation');
+  };
+
   const modalFocusable = (modal) => [
     ...modal.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')
   ].filter((node) => !node.hidden && !node.closest('[hidden]'));
@@ -155,7 +179,7 @@
     modal.hidden = true;
     modal.setAttribute('aria-hidden', 'true');
     modalLayers().forEach((layer) => { layer.inert = false; });
-    document.body.classList.remove('modal-open');
+    setModalScrollLock(false);
     activeModal = null;
     if (returnFocus && modalRestoreFocus instanceof HTMLElement) modalRestoreFocus.focus();
     modalRestoreFocus = null;
@@ -164,7 +188,8 @@
   const setModalOpen = (modal, open, trigger = null, returnFocus = true) => {
     if (!modal) return;
     const dialog = modal.querySelector('[data-modal-dialog]');
-    if (!dialog) return;
+    const backdrop = modal.querySelector('[data-modal-backdrop]');
+    if (!dialog || !backdrop) return;
 
     stopModalAnimations();
 
@@ -180,12 +205,12 @@
       openMenuToggle?.click();
       modal.hidden = false;
       modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
+      setModalScrollLock(true);
       modalLayers().forEach((layer) => { layer.inert = true; });
       activeModal = modal;
 
       if (!reduceMotion.matches) {
-        const overlayAnimation = modal.animate(
+        const overlayAnimation = backdrop.animate(
           [{ opacity:0 }, { opacity:1 }],
           {
             duration:motionMs('--motion-normal', 520),
@@ -225,7 +250,7 @@
     }
 
     modalLayers().forEach((layer) => { layer.inert = true; });
-    const overlayAnimation = modal.animate(
+    const overlayAnimation = backdrop.animate(
       [{ opacity:1 }, { opacity:0 }],
       {
         duration:motionMs('--motion-normal', 520),
