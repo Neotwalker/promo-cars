@@ -133,6 +133,168 @@
     });
   });
 
+
+  const modalLayers = () => [...document.querySelectorAll('body > header, body > main, body > footer')];
+  const modalByName = new Map(
+    [...document.querySelectorAll('[data-modal]')].map((modal) => [modal.dataset.modal, modal])
+  );
+  let activeModal = null;
+  let modalRestoreFocus = null;
+  let modalAnimations = [];
+
+  const modalFocusable = (modal) => [
+    ...modal.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')
+  ].filter((node) => !node.hidden && !node.closest('[hidden]'));
+
+  const stopModalAnimations = () => {
+    modalAnimations.forEach((animation) => animation.cancel());
+    modalAnimations = [];
+  };
+
+  const finishModalClose = (modal, returnFocus) => {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    modalLayers().forEach((layer) => { layer.inert = false; });
+    document.body.classList.remove('modal-open');
+    activeModal = null;
+    if (returnFocus && modalRestoreFocus instanceof HTMLElement) modalRestoreFocus.focus();
+    modalRestoreFocus = null;
+  };
+
+  const setModalOpen = (modal, open, trigger = null, returnFocus = true) => {
+    if (!modal) return;
+    const dialog = modal.querySelector('[data-modal-dialog]');
+    if (!dialog) return;
+
+    stopModalAnimations();
+
+    if (open) {
+      if (activeModal && activeModal !== modal) finishModalClose(activeModal, false);
+      const openMenuToggle = document.querySelector('[data-menu-toggle][aria-expanded="true"]');
+      openMenuToggle?.click();
+
+      modalRestoreFocus = trigger instanceof HTMLElement ? trigger : document.activeElement;
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      modalLayers().forEach((layer) => { layer.inert = true; });
+      activeModal = modal;
+
+      if (!reduceMotion.matches) {
+        const overlayAnimation = modal.animate(
+          [{ opacity:0 }, { opacity:1 }],
+          {
+            duration:motionMs('--motion-normal', 520),
+            easing:motionEase('--ease-standard', 'ease'),
+            fill:'both'
+          }
+        );
+        const dialogAnimation = dialog.animate(
+          [
+            { opacity:0, transform:'translateY(1.5rem) scale(.985)' },
+            { opacity:1, transform:'translateY(0) scale(1)' }
+          ],
+          {
+            duration:motionMs('--motion-normal', 520),
+            easing:motionEase('--ease-emphasized', 'ease'),
+            fill:'both'
+          }
+        );
+        modalAnimations = [overlayAnimation, dialogAnimation];
+        dialogAnimation.onfinish = () => {
+          if (activeModal !== modal) return;
+          stopModalAnimations();
+        };
+      }
+
+      requestAnimationFrame(() => {
+        const first = modalFocusable(modal)[0];
+        (first || dialog).focus();
+      });
+      return;
+    }
+
+    if (activeModal !== modal) return;
+    if (reduceMotion.matches) {
+      finishModalClose(modal, returnFocus);
+      return;
+    }
+
+    modalLayers().forEach((layer) => { layer.inert = true; });
+    const overlayAnimation = modal.animate(
+      [{ opacity:1 }, { opacity:0 }],
+      {
+        duration:motionMs('--motion-normal', 520),
+        easing:motionEase('--ease-standard', 'ease'),
+        fill:'both'
+      }
+    );
+    const dialogAnimation = dialog.animate(
+      [
+        { opacity:1, transform:'translateY(0) scale(1)' },
+        { opacity:0, transform:'translateY(1rem) scale(.99)' }
+      ],
+      {
+        duration:motionMs('--motion-normal', 520),
+        easing:motionEase('--ease-standard', 'ease'),
+        fill:'both'
+      }
+    );
+    modalAnimations = [overlayAnimation, dialogAnimation];
+    overlayAnimation.onfinish = () => {
+      if (activeModal !== modal) return;
+      stopModalAnimations();
+      finishModalClose(modal, returnFocus);
+    };
+  };
+
+  document.addEventListener('click', (event) => {
+    const opener = event.target.closest('[data-modal-open]');
+    if (opener) {
+      event.preventDefault();
+      setModalOpen(modalByName.get(opener.dataset.modalOpen), true, opener);
+      return;
+    }
+
+    if (!activeModal) return;
+    if (event.target.closest('[data-modal-close]') || event.target.matches('[data-modal-backdrop]')) {
+      event.preventDefault();
+      setModalOpen(activeModal, false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!activeModal) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setModalOpen(activeModal, false);
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+    const items = modalFocusable(activeModal);
+    if (!items.length) {
+      event.preventDefault();
+      activeModal.querySelector('[data-modal-dialog]')?.focus();
+      return;
+    }
+
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  modalByName.forEach((modal) => {
+    modal.addEventListener('nexroute:modal-close', () => setModalOpen(modal, false));
+  });
+
   const accordionAnimations = new WeakMap();
   const accordionStates = new WeakMap();
 

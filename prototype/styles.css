@@ -110,11 +110,6 @@
 .final-form__layout{display:grid;grid-template-columns:.78fr 1.02fr;gap:var(--space-layout-lg);align-items:start}
 .final-form__layout>div>p:not(.eyebrow){margin-top:var(--space-4);color:rgba(252,251,248,.62);max-width:30rem}
 .final-form .eyebrow{color:rgba(252,251,248,.48)}
-.lead-form{padding:var(--space-5);border:1px solid var(--color-line-inverse);background:#121a21;display:flex;flex-direction:column;gap:var(--space-4)}
-.lead-form__channel legend{color:var(--color-white)}
-.lead-form__channel{margin:0;padding:0;border:0;display:flex;gap:var(--space-4);flex-wrap:wrap}.lead-form__channel legend{width:100%;font-size:var(--type-small);margin-bottom:var(--space-1)}
-.lead-form__consent-wrap{display:flex;flex-direction:column;gap:var(--space-1)}.lead-form__consent-message{min-height:var(--type-small-lh);color:#ff9d87;font-size:var(--type-small);line-height:var(--type-small-lh)}
-
 .toast-stack{position:fixed;right:var(--space-4);bottom:var(--space-4);z-index:100;display:flex;flex-direction:column;gap:var(--space-1);pointer-events:none}
 .toast-stack .toast{pointer-events:auto;animation:toast-in var(--motion-normal) var(--ease-emphasized)}
 .sr-live{position:fixed;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
@@ -146,7 +141,7 @@
   .hero__copy{padding:0}.hero__media{aspect-ratio:1/1}.hero__actions{width:100%}.hero__actions .button{width:100%}
   .cars__grid{grid-template-columns:1fr}
   .journey{height:440vh}.journey__sticky{position:sticky;top:var(--header-h);min-height:calc(100svh - var(--header-h));padding:var(--space-4) 0;align-items:flex-start}.journey .section-header{margin-bottom:var(--space-4)}.journey__stages{display:none}.journey__mobile-progress{display:block}.journey__viewport{--journey-panel-gap:var(--space-5);margin-top:var(--space-4)}.journey__detail{grid-template-columns:1fr;gap:0}.journey__detail-copy{min-height:0;gap:var(--space-2)}.journey__detail-copy>strong{margin-top:.25rem}.journey__status-card{display:none}.journey__cta{margin-top:1.25rem}
-  .configurator__form,.configurator__summary,.lead-form{padding:var(--space-4)}.configurator__actions{flex-wrap:wrap}.configurator__actions .button{flex:1}
+  .configurator__form,.configurator__summary{padding:var(--space-4)}.configurator__actions{flex-wrap:wrap}.configurator__actions .button{flex:1}
   .proof__grid{grid-template-columns:1fr}
   .security-item{grid-template-columns:2rem 1fr;gap:var(--space-3)}
   .toast-stack{left:var(--space-3);right:var(--space-3);bottom:calc(var(--space-3) + env(safe-area-inset-bottom))}.toast-stack .toast{max-width:none;min-width:0;width:100%}

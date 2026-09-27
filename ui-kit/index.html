@@ -386,6 +386,32 @@
             </div>
           </section>
 
+          <section class="kit-component-group" aria-labelledby="kit-modal-component">
+            <h2 class="type-h3" id="kit-modal-component">Modal / Lead Form</h2>
+            <div class="kit-state-grid">
+              <article class="kit-state">
+                <span class="kit-state__label">Closed</span>
+                <button class="button button--primary" type="button" data-modal-open="kit-lead-modal">Открыть заявку</button>
+              </article>
+              <article class="kit-state kit-state--dark">
+                <span class="kit-state__label">Validation</span>
+                <label class="field field--inverse field--error" data-field>
+                  <span class="field__label">Город получения</span>
+                  <input class="field__control" aria-invalid="true">
+                  <small class="field__message" data-field-message>Укажите город.</small>
+                </label>
+              </article>
+              <article class="kit-state kit-state--dark">
+                <span class="kit-state__label">Submitting</span>
+                <button class="button button--primary button--inverse" type="button" disabled>Отправляем…</button>
+              </article>
+              <article class="kit-state kit-state--dark">
+                <span class="kit-state__label">Open</span>
+                <p class="type-small">Интерактивный specimen открывается кнопкой и использует shared dialog behavior.</p>
+              </article>
+            </div>
+          </section>
+
           <article class="surface-card">
             <div class="media-frame media-frame--car" aria-hidden="true"></div>
             <div class="surface-card__body">
@@ -414,6 +440,24 @@
       </div>
     </section>
   </main>
+
+  <div class="modal" id="kit-lead-modal" data-modal="kit-lead-modal" aria-hidden="true" hidden>
+    <div class="modal__backdrop" data-modal-backdrop></div>
+    <section class="modal__dialog" data-modal-dialog role="dialog" aria-modal="true" aria-labelledby="kit-lead-modal-title" tabindex="-1">
+      <header class="modal__header">
+        <div class="modal__header-copy"><p class="eyebrow">Заявка</p><h2 class="type-h2" id="kit-lead-modal-title">Получить расчёт</h2><p>Укажите автомобиль, город и удобный способ связи.</p></div>
+        <button class="modal__close" type="button" data-modal-close aria-label="Закрыть модальное окно">×</button>
+      </header>
+      <form class="lead-form" novalidate>
+        <label class="field field--inverse" data-field><span class="field__label">Марка или модель</span><input class="field__control" name="model" placeholder="Например, Zeekr 007"><small class="field__message" data-field-message>Можно написать «нужен подбор».</small></label>
+        <label class="field field--inverse" data-field><span class="field__label">Город получения</span><input class="field__control" name="city" placeholder="Москва"><small class="field__message" data-field-message></small></label>
+        <fieldset class="lead-form__channel"><legend>Как удобнее получить расчёт?</legend><label class="selection-control selection-control--inverse"><input type="radio" name="kit-modal-channel" checked><span>Телефон</span></label><label class="selection-control selection-control--inverse"><input type="radio" name="kit-modal-channel"><span>Telegram</span></label></fieldset>
+        <label class="field field--inverse" data-field><span class="field__label">Телефон или username в Telegram</span><input class="field__control" name="contact" placeholder="+7 999 000-00-00 / @username"><small class="field__message" data-field-message></small></label>
+        <div class="lead-form__consent-wrap"><label class="selection-control selection-control--inverse"><input type="checkbox"><span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message"></small></div>
+        <button class="button button--primary button--inverse" type="button">Получить расчёт</button>
+      </form>
+    </section>
+  </div>
 
   <script src="./app.js"></script>
 </body>

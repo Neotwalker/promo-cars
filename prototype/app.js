@@ -478,69 +478,80 @@
   }
 
   function initLeadForm() {
-    const form = document.querySelector('[data-lead-form]');
-    if (!form) return;
-
-    const consentMessage = form.querySelector('[data-consent-message]');
+    const forms = [...document.querySelectorAll('[data-lead-form]')];
+    if (!forms.length) return;
 
     window.addEventListener('nexroute:config-sync', (event) => {
       const { model, city } = event.detail || {};
-      if (model) form.elements.model.value = model;
-      if (city) form.elements.city.value = city;
+      forms.forEach((form) => {
+        if (model) form.elements.model.value = model;
+        if (city) form.elements.city.value = city;
+      });
     });
 
-    form.addEventListener('input', (event) => {
-      const input = event.target;
+    forms.forEach((form) => {
+      const consentMessage = form.querySelector('[data-consent-message]');
 
-      if (input.matches('input[name="model"],input[name="city"],input[name="contact"]')) {
-        const field = input.closest('[data-field]');
-        field?.classList.remove('field--error');
-        const message = field?.querySelector('[data-field-message]');
-        if (message && input.name !== 'model') message.textContent = '';
-      }
+      form.addEventListener('input', (event) => {
+        const input = event.target;
 
-      if (input.name === 'consent' && input.checked && consentMessage) {
-        consentMessage.textContent = '';
-      }
-    });
+        if (input.matches('input[name="model"],input[name="city"],input[name="contact"]')) {
+          const field = input.closest('[data-field]');
+          field?.classList.remove('field--error');
+          input.removeAttribute('aria-invalid');
+          const message = field?.querySelector('[data-field-message]');
+          if (message && input.name !== 'model') message.textContent = '';
+        }
 
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      let valid = true;
-
-      ['model','city','contact'].forEach((name) => {
-        const input = form.elements[name];
-        const field = input.closest('[data-field]');
-        const message = field.querySelector('[data-field-message]');
-
-        if (!input.value.trim()) {
-          field.classList.add('field--error');
-          message.textContent = name === 'model'
-            ? 'Укажите модель или напишите «нужен подбор».'
-            : name === 'city'
-              ? 'Укажите город.'
-              : 'Укажите контакт.';
-          if (valid) input.focus();
-          valid = false;
-        } else {
-          field.classList.remove('field--error');
-          if (name !== 'model') message.textContent = '';
+        if (input.name === 'consent' && input.checked && consentMessage) {
+          input.removeAttribute('aria-invalid');
+          consentMessage.textContent = '';
         }
       });
 
-      if (!form.elements.consent.checked) {
-        if (consentMessage) {
-          consentMessage.textContent = 'Подтвердите согласие на обработку персональных данных.';
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        let valid = true;
+
+        ['model','city','contact'].forEach((name) => {
+          const input = form.elements[name];
+          const field = input.closest('[data-field]');
+          const message = field.querySelector('[data-field-message]');
+
+          if (!input.value.trim()) {
+            field.classList.add('field--error');
+            input.setAttribute('aria-invalid', 'true');
+            message.textContent = name === 'model'
+              ? 'Укажите модель или напишите «нужен подбор».'
+              : name === 'city'
+                ? 'Укажите город.'
+                : 'Укажите контакт.';
+            if (valid) input.focus();
+            valid = false;
+          } else {
+            field.classList.remove('field--error');
+            input.removeAttribute('aria-invalid');
+            if (name !== 'model') message.textContent = '';
+          }
+        });
+
+        if (!form.elements.consent.checked) {
+          form.elements.consent.setAttribute('aria-invalid', 'true');
+          if (consentMessage) {
+            consentMessage.textContent = 'Подтвердите согласие на обработку персональных данных.';
+          }
+          if (valid) form.elements.consent.focus();
+          valid = false;
+        } else {
+          form.elements.consent.removeAttribute('aria-invalid');
+          if (consentMessage) consentMessage.textContent = '';
         }
-        if (valid) form.elements.consent.focus();
-        valid = false;
-      } else if (consentMessage) {
-        consentMessage.textContent = '';
-      }
 
-      if (!valid) return;
+        if (!valid) return;
 
-      showToast('success','Заявка отправлена.','Параметры переданы — дальше используем выбранный способ связи.');
+        showToast('success','Заявка отправлена.','Параметры переданы — дальше используем выбранный способ связи.');
+        form.closest('[data-modal]')?.dispatchEvent(new CustomEvent('nexroute:modal-close'));
+      });
     });
   }
 

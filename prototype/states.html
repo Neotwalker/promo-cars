@@ -358,6 +358,40 @@
       </div>
     </section>
 
+    <section class="states-group">
+      <div class="container">
+        <p class="eyebrow">Modal / Lead Form · closed / open / validation / submitting</p>
+        <div class="states-component-row">
+          <article class="states-component states-component--narrow" data-state="modal-closed">
+            <p class="type-small">Closed</p>
+            <button class="button button--primary" type="button">Получить расчёт</button>
+          </article>
+          <article class="states-component states-component--dark states-component--narrow" data-state="modal-open">
+            <div class="modal__header">
+              <div class="modal__header-copy"><p class="eyebrow">Заявка</p><h2 class="type-h3">Получить расчёт</h2><p>Open state.</p></div>
+              <button class="modal__close" type="button" aria-label="Закрыть">×</button>
+            </div>
+            <form class="lead-form">
+              <label class="field field--inverse" data-field><span class="field__label">Марка или модель</span><input class="field__control" value="Zeekr 001 AWD"><small class="field__message" data-field-message></small></label>
+              <button class="button button--primary button--inverse" type="button">Получить расчёт</button>
+            </form>
+          </article>
+          <article class="states-component states-component--dark states-component--narrow" data-state="modal-validation">
+            <form class="lead-form">
+              <label class="field field--inverse field--error" data-field><span class="field__label">Город получения</span><input class="field__control" aria-invalid="true"><small class="field__message" data-field-message>Укажите город.</small></label>
+              <div class="lead-form__consent-wrap"><label class="selection-control selection-control--inverse"><input type="checkbox" aria-invalid="true"><span>Согласие на обработку персональных данных</span></label><small class="lead-form__consent-message">Подтвердите согласие на обработку персональных данных.</small></div>
+            </form>
+          </article>
+          <article class="states-component states-component--dark states-component--narrow" data-state="modal-submitting">
+            <form class="lead-form" aria-busy="true">
+              <label class="field field--inverse" data-field><span class="field__label">Контакт</span><input class="field__control" value="+7 999 000-00-00" readonly><small class="field__message" data-field-message></small></label>
+              <button class="button button--primary button--inverse" type="button" disabled>Отправляем…</button>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="states-group states-group--paper">
       <div class="container">
         <p class="eyebrow">Toast · global submit success / error / info</p>
