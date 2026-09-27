@@ -185,9 +185,10 @@ html [hidden]{display:none}
 .is-disabled{pointer-events:none;opacity:.45}
 
 .site-header{--menu-offset:var(--header-h);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--color-line);background:rgba(252,251,248,.94);backdrop-filter:blur(.75rem)}
-.site-header__inner{min-height:var(--header-h);display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:var(--space-5)}
+.site-header__inner{min-height:var(--header-h);display:grid;grid-template-columns:1fr auto auto auto;align-items:center;gap:var(--space-5)}
 .site-header__brand{font-weight:700;text-decoration:none;letter-spacing:-.02em}
 .site-header__nav{display:flex;align-items:center;gap:var(--space-4)}
+.site-header__social{flex-wrap:nowrap}
 .site-header__cta{white-space:nowrap}
 
 .site-footer{padding:var(--space-7) 0 1.75rem;background:#080c10;color:rgba(252,251,248,.58)}
@@ -260,7 +261,7 @@ body.menu-open{overflow:hidden}
 @media(max-width:64rem){
   .grid--3{grid-template-columns:repeat(2,minmax(0,1fr))}
   .site-header__inner{grid-template-columns:1fr auto}
-  .site-header__nav,.site-header__cta{display:none}
+  .site-header__nav,.site-header__social,.site-header__cta{display:none}
   .site-footer__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .site-footer__brand{grid-column:1/-1}
   .menu-toggle{display:inline-flex}
@@ -318,7 +319,7 @@ body.menu-open{overflow:hidden}
 .site-header--specimen .site-header__inner{padding-inline:var(--space-3)}
 .header-specimen--desktop .menu-toggle{display:none}
 .header-specimen--mobile .site-header__inner{grid-template-columns:1fr auto}
-.header-specimen--mobile .site-header__nav,.header-specimen--mobile .site-header__cta{display:none}
+.header-specimen--mobile .site-header__nav,.header-specimen--mobile .site-header__social,.header-specimen--mobile .site-header__cta{display:none}
 .header-specimen--mobile .menu-toggle{display:inline-flex}
 .footer-specimen{border:1px solid var(--color-line);background:var(--color-paper);overflow:hidden}
 .footer-specimen__label{display:block;padding:var(--space-2) var(--space-3);border-bottom:1px solid var(--color-line);font-size:var(--type-small);line-height:var(--type-small-lh);color:var(--color-steel)}
