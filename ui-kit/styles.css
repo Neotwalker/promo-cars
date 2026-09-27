@@ -194,11 +194,13 @@ html [hidden]{display:none}
 .site-footer__grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(10rem,.75fr) minmax(14rem,.85fr);gap:var(--space-6);align-items:start}
 .site-footer__brand,.site-footer__nav,.site-footer__contacts{min-width:0;display:flex;flex-direction:column;gap:var(--space-1)}
 .site-footer__brand strong{color:var(--color-white)}
+.site-footer__nav-title{margin-bottom:var(--space-1);font-size:var(--type-small);line-height:var(--type-small-lh);color:rgba(252,251,248,.5)}
 .site-footer__nav .link{width:max-content;max-width:100%;color:rgba(252,251,248,.7)}
 .site-footer__nav .link:hover{color:var(--color-signal);text-decoration-color:currentColor}
 .site-footer__nav .link:focus-visible{color:var(--color-signal);outline:2px solid var(--color-signal);outline-offset:.25rem;text-decoration-color:currentColor}
 .site-footer__contacts{gap:0}
 .site-footer__contact-link{width:100%}
+.site-footer__contacts .social-links{margin-top:var(--space-3)}
 .site-footer__legal{margin-top:var(--space-5);display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3) var(--space-5);font-size:var(--type-small);line-height:var(--type-small-lh);color:rgba(252,251,248,.46)}
 .site-footer__copyright{color:rgba(252,251,248,.62)}
 .site-footer__credit{margin-left:auto;color:rgba(252,251,248,.62);white-space:nowrap}
@@ -237,9 +239,12 @@ html [hidden]{display:none}
 .contact-list--inverse .contact-list__label,.menu-panel__meta small{color:rgba(252,251,248,.5)}
 
 .social-links{display:flex;flex-wrap:wrap;gap:var(--space-1)}
-.social-links__link{width:var(--tap-target);height:var(--tap-target);flex:0 0 var(--tap-target);display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--color-line);border-radius:var(--radius-xs);background:var(--color-white);color:var(--color-ink);text-decoration:none;transition:background-color var(--motion-fast) var(--ease-standard),border-color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard)}
+.social-links__link{position:relative;width:var(--tap-target);height:var(--tap-target);flex:0 0 var(--tap-target);display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--color-line);border-radius:var(--radius-xs);background:var(--color-white);color:var(--color-ink);text-decoration:none;transition:background-color var(--motion-fast) var(--ease-standard),border-color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard)}
 .social-links__link img{width:1.25rem;height:1.25rem;object-fit:contain}
+.social-links__link[aria-label="Перейти в MAX"] img{filter:grayscale(1) brightness(0)}
+.social-links__link::after{content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + var(--space-1));z-index:3;padding:.35rem .5rem;border-radius:var(--radius-xs);background:var(--color-ink);color:var(--color-white);font-size:.75rem;line-height:1rem;font-weight:500;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,.25rem);transition:opacity var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard),visibility 0s linear var(--motion-fast)}
 .social-links__link:hover{background:var(--color-paper);border-color:rgba(16,18,22,.34);transform:translateY(-1px)}
+.social-links__link:hover::after,.social-links__link:focus-visible::after{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
 .social-links__link:focus-visible{outline:2px solid var(--color-signal);outline-offset:.25rem;border-color:var(--color-signal)}
 .social-links__link:active{transform:translateY(0)}
 .social-links--inverse .social-links__link{border-color:var(--color-line-inverse)}
@@ -277,7 +282,7 @@ body.menu-open{overflow:hidden}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .link,.button,.field__control,.choice-chip,.menu-toggle,.menu-toggle__icon i,.menu-panel__nav a,.contact-list__link,.contact-list__link strong,.social-links__link,.accordion,.toast__close{transition:none}
+  .link,.button,.field__control,.choice-chip,.menu-toggle,.menu-toggle__icon i,.menu-panel__nav a,.contact-list__link,.contact-list__link strong,.social-links__link,.social-links__link::after,.accordion,.toast__close{transition:none}
   .social-links__link:hover,.social-links__link:active{transform:none}
 }
 
