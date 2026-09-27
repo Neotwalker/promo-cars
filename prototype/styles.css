@@ -95,13 +95,12 @@
 .configurator__total strong{font-size:var(--type-h3);text-align:right}
 
 .proof{background:var(--color-paper)}
-.proof__grid{display:grid;grid-template-columns:1.18fr .82fr;gap:var(--space-4)}
-.case-card{border:1px solid var(--color-line);background:var(--color-white);color:var(--color-ink);overflow:hidden;border-radius:4px}
-.case-card--featured{grid-row:span 2}
+.proof__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);align-items:start}
+.case-card{min-width:0;border:1px solid var(--color-line);background:var(--color-white);color:var(--color-ink);overflow:hidden;border-radius:4px;display:flex;flex-direction:column}
 .case-card__media{aspect-ratio:16/10;padding:var(--space-4);display:flex;align-items:flex-end;background:linear-gradient(145deg,#27313a,#606a72);color:white;font-weight:600}
 .case-card__media--xiaomi{background:linear-gradient(145deg,#8c8782,#c9c2bb);color:var(--color-ink)}
 .case-card__media--liauto{background:linear-gradient(145deg,#68776d,#b9c1bc);color:var(--color-ink)}
-.case-card__body{padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-3)}
+.case-card__body{padding:var(--space-4);display:flex;flex:1;flex-direction:column;gap:var(--space-3)}
 .case-card blockquote{margin:0;padding-left:var(--space-3);border-left:2px solid var(--color-signal);color:#555b61}
 .case-card__details{padding-top:var(--space-3);border-top:1px solid var(--color-line);color:#60666c}
 
@@ -148,7 +147,7 @@
   .hero__layout,.configurator__layout,.final-form__layout{grid-template-columns:1fr}
   .hero__media{aspect-ratio:4/3}
   .cars__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .proof__grid{grid-template-columns:1fr 1fr}.case-card--featured{grid-column:1/-1;grid-row:auto}
+  .proof__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .journey{height:560vh}.journey__sticky{align-items:flex-start;padding-top:var(--space-6)}
   .journey__detail{grid-template-columns:1fr 1fr;gap:var(--space-4)}
   .security-item{grid-template-columns:3rem 1fr}.security-item>strong{grid-column:2}
