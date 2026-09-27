@@ -25,7 +25,7 @@
 
     const setActive = (index) => {
       const safeIndex = Math.max(0, Math.min(index, panels.length - 1));
-      if (safeIndex === current) return;
+      const changed = safeIndex !== current;
       current = safeIndex;
 
       stages.forEach((stage, i) => {
@@ -43,7 +43,7 @@
         panel.hidden = reduceMotion.matches ? !active : false;
       });
 
-      if (window.innerWidth <= 768 && stagesRail) {
+      if (changed && window.innerWidth <= 768 && stagesRail) {
         const activeItem = stages[safeIndex]?.parentElement;
         if (activeItem) {
           const left = activeItem.offsetLeft - (stagesRail.clientWidth - activeItem.offsetWidth) / 2;
