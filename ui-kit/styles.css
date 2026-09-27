@@ -132,6 +132,10 @@ html [hidden]{display:none}
 .field--inverse .field__control{background:#0c1218;color:var(--color-white);border-color:var(--color-line-inverse)}
 .field--inverse .field__control::placeholder{color:rgba(252,251,248,.42)}
 .field--inverse .field__control:hover{border-color:rgba(252,251,248,.34)}
+.field--inverse .field__control:focus{border-color:var(--color-signal)}
+.field--inverse .field__control:disabled{background:#1a2026;color:rgba(252,251,248,.38);border-color:rgba(252,251,248,.1)}
+.field--inverse .field__control:read-only{background:#151b21;color:rgba(252,251,248,.72)}
+.field--inverse.field--autofill .field__control,.field--inverse .field__control:-webkit-autofill{box-shadow:0 0 0 1000px #182028 inset;-webkit-text-fill-color:var(--color-white);border-color:#8b7440}
 .field--inverse.field--error .field__control{border-color:#ff9d87}
 .field--inverse.field--error .field__message{color:#ff9d87}
 .field--inverse.field--success .field__control{border-color:#5abe84;box-shadow:0 0 0 1px rgba(90,190,132,.2)}
