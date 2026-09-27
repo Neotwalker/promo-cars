@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body class="kit-page">
-  <header class="kit-header">
+  <header class="kit-header" data-menu>
     <div class="container kit-header__inner">
       <strong>NEXROUTE / UI KIT BASE</strong>
       <nav class="kit-nav" aria-label="UI kit">
@@ -17,6 +17,19 @@
         <a href="#components">Components</a>
         <a href="#states">States</a>
       </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="kit-mobile-nav" aria-label="Открыть меню" data-menu-toggle>
+        <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+    <div class="menu-panel" id="kit-mobile-nav" data-menu-panel hidden>
+      <div class="container menu-panel__inner">
+        <nav class="menu-panel__nav" aria-label="UI kit mobile">
+          <a href="#tokens">Tokens</a>
+          <a href="#type">Type</a>
+          <a href="#components">Components</a>
+          <a href="#states">States</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -177,6 +190,40 @@
               <button class="choice-chip choice-chip--selected" type="button" aria-pressed="true">Новый</button>
               <button class="choice-chip" type="button" aria-pressed="false">С пробегом</button>
               <button class="choice-chip" type="button" disabled>Недоступно</button>
+            </div>
+          </section>
+
+          <section class="kit-component-group" aria-labelledby="kit-navigation">
+            <h2 class="type-h3" id="kit-navigation">Navigation / Burger</h2>
+            <div class="kit-menu-specimens">
+              <article class="menu-specimen">
+                <span class="kit-state__label">Closed</span>
+                <div class="menu-specimen__header">
+                  <strong>NEXROUTE</strong>
+                  <button class="menu-toggle menu-toggle--specimen" type="button" aria-expanded="false" aria-label="Открыть меню">
+                    <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+                  </button>
+                </div>
+              </article>
+              <article class="menu-specimen">
+                <span class="kit-state__label">Open</span>
+                <div class="menu-specimen__header">
+                  <strong>NEXROUTE</strong>
+                  <button class="menu-toggle menu-toggle--specimen" type="button" aria-expanded="true" aria-label="Закрыть меню">
+                    <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+                  </button>
+                </div>
+                <div class="menu-panel menu-panel--specimen">
+                  <div class="menu-panel__inner">
+                    <nav class="menu-panel__nav" aria-label="Пример открытого меню">
+                      <a href="#components">Автомобили</a>
+                      <a href="#components">Маршрут</a>
+                      <a href="#components">Кейсы</a>
+                      <a href="#components">Вопросы</a>
+                    </nav>
+                  </div>
+                </div>
+              </article>
             </div>
           </section>
 

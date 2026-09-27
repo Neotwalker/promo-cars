@@ -9,13 +9,27 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" data-menu>
     <div class="container site-header__inner">
       <a class="site-header__brand" href="#top">NEXROUTE AUTO</a>
       <nav class="site-header__nav" aria-label="Основная навигация">
         <a href="#cars">Автомобили</a><a href="#journey">Маршрут</a><a href="#proof">Кейсы</a><a href="#faq">Вопросы</a>
       </nav>
-      <a class="button button--secondary" href="#final-form">Получить расчёт</a>
+      <a class="button button--secondary site-header__cta" href="#final-form">Получить расчёт</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-mobile-nav" aria-label="Открыть меню" data-menu-toggle>
+        <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+    <div class="menu-panel" id="site-mobile-nav" data-menu-panel hidden>
+      <div class="container menu-panel__inner">
+        <nav class="menu-panel__nav" aria-label="Мобильная навигация">
+          <a href="#cars">Автомобили</a>
+          <a href="#journey">Маршрут</a>
+          <a href="#proof">Кейсы</a>
+          <a href="#faq">Вопросы</a>
+        </nav>
+        <a class="button button--primary menu-panel__cta" href="#final-form">Получить расчёт</a>
+      </div>
     </div>
   </header>
 
@@ -254,6 +268,7 @@
   <div class="sr-live" data-toast-status aria-live="polite" aria-atomic="true"></div>
   <div class="sr-live" data-toast-alert aria-live="assertive" aria-atomic="true"></div>
 
+  <script src="../ui-kit/app.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>
