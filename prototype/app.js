@@ -82,8 +82,12 @@
       const rect = root.getBoundingClientRect();
       const passed = Math.min(Math.max(-rect.top + stickyTop, 0), max);
       const ratio = passed / max;
-      const exactStep = ratio * Math.max(0, panels.length - 1);
-      const activeIndex = Math.round(exactStep);
+      const lastIndex = Math.max(0, panels.length - 1);
+      const exactStep = ratio * lastIndex;
+      const activeIndex = Math.min(lastIndex, Math.floor(exactStep + .001));
+      const stepDistance = panels.length > 1
+        ? panels[1].offsetLeft - panels[0].offsetLeft
+        : track.clientWidth;
 
       root.style.setProperty('--journey-progress', ratio.toFixed(4));
       setActive(activeIndex);
@@ -91,7 +95,7 @@
       if (reduceMotion.matches) {
         track.style.transform = 'translate3d(0,0,0)';
       } else {
-        track.style.transform = 'translate3d(' + (-exactStep * 100).toFixed(4) + '%,0,0)';
+        track.style.transform = 'translate3d(' + (-exactStep * stepDistance).toFixed(2) + 'px,0,0)';
       }
     };
 
