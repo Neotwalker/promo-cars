@@ -77,42 +77,94 @@
       stage.addEventListener('click', () => scrollToStep(Number(stage.dataset.journeyStep)));
     });
 
-    const update = () => {
+    const motionMs = (name, fallback) => {
+      const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      if (!value) return fallback;
+      if (value.endsWith('ms')) return Number.parseFloat(value);
+      if (value.endsWith('s')) return Number.parseFloat(value) * 1000;
+      return fallback;
+    };
+
+    const readTarget = () => {
       const { stickyTop, max } = metrics();
       const rect = root.getBoundingClientRect();
       const passed = Math.min(Math.max(-rect.top + stickyTop, 0), max);
       const ratio = passed / max;
       const lastIndex = Math.max(0, panels.length - 1);
-      const exactStep = ratio * lastIndex;
-      const activeIndex = Math.min(lastIndex, Math.floor(exactStep + .001));
       const stepDistance = panels.length > 1
         ? panels[1].offsetLeft - panels[0].offsetLeft
         : track.clientWidth;
 
-      root.style.setProperty('--journey-progress', ratio.toFixed(4));
+      return {
+        step:ratio * lastIndex,
+        lastIndex,
+        stepDistance
+      };
+    };
+
+    let targetStep = 0;
+    let visualStep = 0;
+    let raf = 0;
+    let lastFrame = 0;
+
+    const paint = ({ lastIndex, stepDistance }) => {
+      const visualRatio = lastIndex ? visualStep / lastIndex : 0;
+      const activeIndex = Math.min(lastIndex, Math.floor(visualStep + .001));
+
+      root.style.setProperty('--journey-progress', visualRatio.toFixed(4));
       setActive(activeIndex);
 
       if (reduceMotion.matches) {
         track.style.transform = 'translate3d(0,0,0)';
       } else {
-        track.style.transform = 'translate3d(' + (-exactStep * stepDistance).toFixed(2) + 'px,0,0)';
+        track.style.transform = 'translate3d(' + (-visualStep * stepDistance).toFixed(2) + 'px,0,0)';
       }
     };
 
-    let raf = 0;
-    const schedule = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        update();
-      });
+    const frame = (time) => {
+      raf = 0;
+      const state = readTarget();
+      targetStep = state.step;
+
+      if (reduceMotion.matches) {
+        visualStep = targetStep;
+        lastFrame = time;
+        paint(state);
+        return;
+      }
+
+      const elapsed = lastFrame ? Math.min(time - lastFrame, 64) : 16.67;
+      lastFrame = time;
+      const response = Math.max(70, motionMs('--motion-normal', 220) * .5);
+      const alpha = 1 - Math.exp(-elapsed / response);
+      visualStep += (targetStep - visualStep) * alpha;
+
+      if (Math.abs(targetStep - visualStep) < .001) visualStep = targetStep;
+      paint(state);
+
+      if (visualStep !== targetStep) {
+        raf = requestAnimationFrame(frame);
+      }
     };
 
-    setActive(0);
-    update();
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
+
+    const initial = readTarget();
+    targetStep = initial.step;
+    visualStep = initial.step;
+    paint(initial);
+
     addEventListener('scroll', schedule, { passive:true });
-    addEventListener('resize', schedule, { passive:true });
-    reduceMotion.addEventListener('change', schedule);
+    addEventListener('resize', () => {
+      lastFrame = 0;
+      schedule();
+    }, { passive:true });
+    reduceMotion.addEventListener('change', () => {
+      lastFrame = 0;
+      schedule();
+    });
   }
 
   function initToasts() {
