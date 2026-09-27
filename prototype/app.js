@@ -9,6 +9,29 @@
     'Li Auto L6 Pro': { power:'Гибрид / EREV', total:5390000, eta:'32–40 дней', parts:[3870000,350000,790000,3400,56600,320000] }
   };
 
+  function initHeroVideo() {
+    const video = document.querySelector('[data-hero-video]');
+    if (!video) return;
+
+    const syncPlayback = () => {
+      if (reduceMotion.matches) {
+        video.pause();
+        return;
+      }
+
+      const playback = video.play();
+      if (playback && typeof playback.catch === 'function') playback.catch(() => {});
+    };
+
+    syncPlayback();
+
+    if (typeof reduceMotion.addEventListener === 'function') {
+      reduceMotion.addEventListener('change', syncPlayback);
+    } else if (typeof reduceMotion.addListener === 'function') {
+      reduceMotion.addListener(syncPlayback);
+    }
+  }
+
   function initJourney() {
     const root = document.querySelector('[data-journey]');
     if (!root) return;
@@ -570,6 +593,7 @@
     });
   }
 
+  initHeroVideo();
   initJourney();
   initConfigurator();
   initCars();
