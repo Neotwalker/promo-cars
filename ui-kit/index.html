@@ -284,6 +284,63 @@
                   </div>
                 </header>
               </article>
+
+              <article class="header-specimen header-specimen--live">
+                <span class="header-specimen__label">Approved live · desktop</span>
+                <header class="site-header site-header--inverse site-header--burger site-header--specimen">
+                  <div class="site-header__inner">
+                    <a class="site-header__brand" href="#components">NEXROUTE AUTO</a>
+                    <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Открыть меню">
+                      <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+                    </button>
+                  </div>
+                </header>
+              </article>
+            </div>
+          </section>
+
+
+          <section class="kit-component-group" aria-labelledby="kit-live-cars">
+            <h2 class="type-h3" id="kit-live-cars">Cars · approved desktop baseline</h2>
+            <div class="kit-live-catalog" data-cars-catalog>
+              <div class="kit-live-catalog__controls">
+                <div class="cars__filters" role="group" aria-label="Фильтр автомобилей">
+                  <button class="cars__filter cars__filter--active" type="button" data-car-filter="all" aria-pressed="true">Все модели</button>
+                  <button class="cars__filter" type="button" data-car-filter="electric" aria-pressed="false">Электромобили</button>
+                </div>
+                <div class="cars__sort" data-car-sort>
+                  <button class="cars__sort-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="kit-cars-sort-options" data-car-sort-trigger>
+                    <span data-car-sort-label>Сначала популярные</span><span class="cars__sort-chevron" aria-hidden="true"></span>
+                  </button>
+                  <div class="cars__sort-menu" id="kit-cars-sort-options" role="listbox" aria-label="Сортировка автомобилей" data-car-sort-menu hidden>
+                    <button class="cars__sort-option cars__sort-option--active" type="button" role="option" aria-selected="true" data-car-sort-option="popular">Сначала популярные</button>
+                    <button class="cars__sort-option" type="button" role="option" aria-selected="false" data-car-sort-option="price-asc">Сначала дешевле</button>
+                    <button class="cars__sort-option" type="button" role="option" aria-selected="false" data-car-sort-option="price-desc">Сначала дороже</button>
+                    <button class="cars__sort-option" type="button" role="option" aria-selected="false" data-car-sort-option="delivery">По сроку доставки</button>
+                  </div>
+                </div>
+              </div>
+              <div class="kit-live-catalog__grid" data-car-grid>
+                <article class="car-card car-card--catalog" data-car-card data-category="electric liftback" data-price="6490000" data-delivery="30" data-order="1">
+                  <div class="car-card__media"><img src="../live/assets/hero/cars/zeekr-001.webp" alt="Zeekr 001" loading="lazy" decoding="async"></div>
+                  <div class="car-card__content">
+                    <div class="car-card__heading"><div><h3 class="car-card__title">Zeekr 001</h3></div><span class="car-card__arrow" aria-hidden="true">→</span></div>
+                    <p class="car-card__description">Быстрый универсальный электромобиль для города и дальних поездок — с полным приводом, большой батареей и комфортной подвеской.</p>
+                    <dl class="car-card__specs">
+                      <div class="car-card__spec"><span class="car-card__spec-icon" aria-hidden="true"><img src="../live/assets/icons/specs/drivetrain.svg" alt=""></span><div><dt>Привод</dt><dd>AWD</dd></div></div>
+                      <div class="car-card__spec"><span class="car-card__spec-icon" aria-hidden="true"><img src="../live/assets/icons/specs/battery.svg" alt=""></span><div><dt>Батарея</dt><dd>100 кВт·ч</dd></div></div>
+                      <div class="car-card__spec"><span class="car-card__spec-icon" aria-hidden="true"><img src="../live/assets/icons/specs/body.svg" alt=""></span><div><dt>Кузов</dt><dd>Лифтбек</dd></div></div>
+                    </dl>
+                    <div class="car-card__price"><strong>6 490 000 ₽</strong><span>под ключ · 30–38 дней</span></div>
+                    <button class="button button--primary car-card__cta" type="button">Получить расчёт <span aria-hidden="true">→</span></button>
+                  </div>
+                </article>
+              </div>
+              <aside class="cars-pick" aria-label="Подбор автомобиля">
+                <div class="cars-pick__copy"><p class="cars-pick__eyebrow">Подбор автомобиля</p><h3>Поможем выбрать автомобиль под ваш бюджет и задачи.</h3></div>
+                <div class="cars-pick__action"><p>Соберём подходящие варианты, рассчитаем полную стоимость и сроки доставки.</p><button class="button button--primary cars-pick__button" type="button">Получить подбор <span aria-hidden="true">→</span></button></div>
+                <div class="cars-pick__media" aria-hidden="true"><img src="../live/assets/hero/cars/cta-cars-tiny.webp" alt="" loading="lazy" decoding="async"></div>
+              </aside>
             </div>
           </section>
 
