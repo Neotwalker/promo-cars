@@ -140,10 +140,24 @@
 
       const paint = ({ lastIndex, stepDistance }) => {
         const visualRatio = lastIndex ? visualStep / lastIndex : 0;
-        const activeIndex = Math.min(lastIndex, Math.floor(visualStep + .001));
+        const activeIndex = Math.min(lastIndex, Math.round(visualStep));
 
         journey.style.setProperty('--journey-progress', visualRatio.toFixed(4));
         setActive(activeIndex);
+
+        panels.forEach((panel, index) => {
+          if (reduceMotion.matches) {
+            panel.style.opacity = index === activeIndex ? '1' : '0';
+            panel.style.transform = 'none';
+            return;
+          }
+
+          const distance = Math.min(1, Math.abs(index - visualStep));
+          const opacity = 1 - distance * .5;
+          const scale = 1 - distance * .028;
+          panel.style.opacity = opacity.toFixed(3);
+          panel.style.transform = 'scale(' + scale.toFixed(4) + ')';
+        });
 
         if (reduceMotion.matches) {
           track.style.transform = 'translate3d(0,0,0)';
