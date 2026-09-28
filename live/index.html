@@ -22,6 +22,7 @@
         <div class="menu-panel__layout">
           <nav class="menu-panel__nav" aria-label="Навигация">
             <a href="#hero"><span>01</span>Главная</a>
+            <a href="#cars"><span>02</span>Автомобили</a>
           </nav>
 
           <aside class="menu-panel__contact" aria-label="Контакты">
@@ -77,6 +78,135 @@
             <button class="button button--ghost button--inverse hero__action" type="button">Смотреть маршрут <span class="hero__action-icon" aria-hidden="true">→</span></button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="cars" id="cars" data-cars-catalog>
+      <div class="container cars__inner">
+        <header class="cars__header">
+          <div class="cars__intro">
+            <h2 class="cars__title">То, что хочется привезти.</h2>
+            <p class="cars__lead">Несколько автомобилей для ориентира по цене, комплектации и сроку. Нужна другая модель — укажите её в расчёте, и мы соберём маршрут под неё.</p>
+          </div>
+
+          <div class="cars__controls">
+            <div class="cars__filters" role="group" aria-label="Фильтр автомобилей">
+              <button class="cars__filter cars__filter--active" type="button" data-car-filter="all" aria-pressed="true">Все модели</button>
+              <button class="cars__filter" type="button" data-car-filter="electric" aria-pressed="false">Электромобили</button>
+              <button class="cars__filter" type="button" data-car-filter="hybrid" aria-pressed="false">Гибриды</button>
+              <button class="cars__filter" type="button" data-car-filter="suv" aria-pressed="false">SUV</button>
+              <button class="cars__filter" type="button" data-car-filter="sedan" aria-pressed="false">Седаны</button>
+            </div>
+
+            <label class="cars__sort">
+              <span class="cars__sort-label">Сортировка</span>
+              <select class="cars__sort-select" data-car-sort aria-label="Сортировка автомобилей">
+                <option value="popular">Сначала популярные</option>
+                <option value="price-asc">Сначала дешевле</option>
+                <option value="price-desc">Сначала дороже</option>
+                <option value="delivery">По сроку доставки</option>
+              </select>
+            </label>
+          </div>
+        </header>
+
+        <div class="cars__grid" data-car-grid>
+          <article class="car-card" data-car-card data-category="electric liftback" data-price="6490000" data-delivery="30" data-order="1">
+            <div class="car-card__media" aria-hidden="true"></div>
+            <div class="car-card__content">
+              <div class="car-card__heading">
+                <div>
+                  <p class="car-card__meta">2025 · новый</p>
+                  <h3 class="car-card__title">Zeekr 001 AWD</h3>
+                </div>
+                <span class="car-card__arrow" aria-hidden="true">→</span>
+              </div>
+
+              <p class="car-card__description">Быстрый универсальный электромобиль для города и дальних поездок — с полным приводом, большой батареей и комфортной подвеской.</p>
+
+              <dl class="car-card__specs">
+                <div><dt>Привод</dt><dd>AWD</dd></div>
+                <div><dt>Батарея</dt><dd>100 кВт·ч</dd></div>
+                <div><dt>Кузов</dt><dd>Лифтбек</dd></div>
+              </dl>
+
+              <div class="car-card__price">
+                <strong>6 490 000 ₽</strong>
+                <span>под ключ · 30–38 дней</span>
+              </div>
+
+              <button class="button button--primary car-card__cta" type="button" data-car-select="Zeekr 001 AWD">Получить расчёт <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+
+          <article class="car-card" data-car-card data-category="electric sedan" data-price="5890000" data-delivery="28" data-order="2">
+            <div class="car-card__media" aria-hidden="true"></div>
+            <div class="car-card__content">
+              <div class="car-card__heading">
+                <div>
+                  <p class="car-card__meta">2025 · новый</p>
+                  <h3 class="car-card__title">Xiaomi SU7 Max</h3>
+                </div>
+                <span class="car-card__arrow" aria-hidden="true">→</span>
+              </div>
+
+              <p class="car-card__description">Низкий электрический седан с акцентом на динамику, электронику и дальние поездки.</p>
+
+              <dl class="car-card__specs">
+                <div><dt>Привод</dt><dd>AWD</dd></div>
+                <div><dt>Батарея</dt><dd>101 кВт·ч</dd></div>
+                <div><dt>Система</dt><dd>800 V</dd></div>
+              </dl>
+
+              <div class="car-card__price">
+                <strong>5 890 000 ₽</strong>
+                <span>под ключ · 28–36 дней</span>
+              </div>
+
+              <button class="button button--primary car-card__cta" type="button" data-car-select="Xiaomi SU7 Max">Получить расчёт <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+
+          <article class="car-card" data-car-card data-category="hybrid suv" data-price="5390000" data-delivery="32" data-order="3">
+            <div class="car-card__media" aria-hidden="true"></div>
+            <div class="car-card__content">
+              <div class="car-card__heading">
+                <div>
+                  <p class="car-card__meta">2025 · новый</p>
+                  <h3 class="car-card__title">Li Auto L6 Pro</h3>
+                </div>
+                <span class="car-card__arrow" aria-hidden="true">→</span>
+              </div>
+
+              <p class="car-card__description">Семейный кроссовер с электрической тягой в городе и бензиновым генератором для дальних маршрутов.</p>
+
+              <dl class="car-card__specs">
+                <div><dt>Система</dt><dd>EREV</dd></div>
+                <div><dt>Привод</dt><dd>AWD</dd></div>
+                <div><dt>Салон</dt><dd>5 мест</dd></div>
+              </dl>
+
+              <div class="car-card__price">
+                <strong>5 390 000 ₽</strong>
+                <span>под ключ · 32–40 дней</span>
+              </div>
+
+              <button class="button button--primary car-card__cta" type="button" data-car-select="Li Auto L6 Pro">Получить расчёт <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+        </div>
+
+        <aside class="cars-pick" aria-label="Подбор автомобиля">
+          <div class="cars-pick__copy">
+            <p class="cars-pick__eyebrow">Подбор автомобиля</p>
+            <h3>Поможем выбрать автомобиль под ваш бюджет и задачи.</h3>
+          </div>
+          <div class="cars-pick__action">
+            <p>Соберём подходящие варианты, рассчитаем полную стоимость и сроки доставки.</p>
+            <button class="button button--primary cars-pick__button" type="button">Получить подбор <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="cars-pick__media" aria-hidden="true"></div>
+        </aside>
       </div>
     </section>
   </main>
