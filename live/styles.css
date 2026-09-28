@@ -372,8 +372,8 @@
 .journey__panel{
   flex:0 0 100%;
   min-width:0;
-  opacity:.42;
-  transform:scale(.972);
+  opacity:.28;
+  transform:scale(.94);
   transform-origin:center;
   will-change:transform,opacity;
 }
@@ -385,7 +385,7 @@
 
 .journey__workspace{
   display:grid;
-  grid-template-columns:minmax(0,1.46fr) minmax(27rem,.94fr);
+  grid-template-columns:minmax(0,1.34fr) minmax(30rem,1.06fr);
   min-height:clamp(27rem,31vw,34rem);
   gap:1rem;
 }
