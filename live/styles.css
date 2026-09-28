@@ -214,6 +214,12 @@
   border-color:var(--color-line);
 }
 
+.cars__filter--active:hover{
+  background:var(--color-ink);
+  border-color:var(--color-ink);
+  color:var(--color-white);
+}
+
 .cars__filter:focus-visible{
   outline:2px solid var(--color-signal);
   outline-offset:.2rem;
@@ -231,33 +237,87 @@
   min-width:0;
 }
 
-.cars__sort-label{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border:0;
-}
-
-.cars__sort-select{
+.cars__sort-trigger{
   width:100%;
   min-height:3rem;
-  padding:.7rem 2.75rem .7rem 1rem;
+  padding:.7rem 1rem;
+  border:1px solid var(--color-line);
+  border-radius:999px;
+  background:var(--color-white);
+  color:var(--color-ink);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  font-size:.9rem;
+  line-height:1.2;
+  text-align:left;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard);
+}
+
+.cars__sort-trigger:hover{
+  border-color:rgba(16,18,22,.28);
+  background:#fbfaf8;
+}
+
+.cars__sort-trigger:focus-visible{
+  outline:2px solid var(--color-signal);
+  outline-offset:.2rem;
+}
+
+.cars__sort-chevron{
+  width:.5rem;
+  height:.5rem;
+  flex:0 0 .5rem;
+  border-right:1.5px solid currentColor;
+  border-bottom:1.5px solid currentColor;
+  transform:translateY(-.12rem) rotate(45deg);
+  transition:transform var(--motion-fast) var(--ease-standard);
+}
+
+.cars__sort-trigger[aria-expanded="true"] .cars__sort-chevron{
+  transform:translateY(.12rem) rotate(225deg);
+}
+
+.cars__sort-menu{
+  position:absolute;
+  top:calc(100% + .5rem);
+  right:0;
+  z-index:20;
+  width:100%;
+  min-width:13.5rem;
+  padding:.35rem;
   border:1px solid var(--color-line);
   border-radius:var(--radius-md);
   background:var(--color-white);
-  color:var(--color-ink);
-  font-size:.9rem;
-  line-height:1.2;
+  box-shadow:0 1rem 2.5rem rgba(16,18,22,.12);
 }
 
-.cars__sort-select:focus-visible{
-  outline:2px solid var(--color-signal);
-  outline-offset:.2rem;
+.cars__sort-option{
+  width:100%;
+  min-height:2.65rem;
+  padding:.65rem .8rem;
+  border:0;
+  border-radius:calc(var(--radius-md) - .2rem);
+  background:transparent;
+  color:var(--color-ink);
+  display:flex;
+  align-items:center;
+  font-size:.9rem;
+  line-height:1.2;
+  text-align:left;
+}
+
+.cars__sort-option:hover,
+.cars__sort-option:focus-visible{
+  background:var(--color-paper);
+  outline:none;
+}
+
+.cars__sort-option--active{
+  font-weight:600;
 }
 
 .cars__grid{
@@ -699,6 +759,13 @@
 
   .cars__sort{
     width:100%;
+    min-width:0;
+    flex-basis:auto;
+  }
+
+  .cars__sort-menu{
+    left:0;
+    right:0;
     min-width:0;
   }
 
