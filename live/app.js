@@ -169,9 +169,14 @@
     if (!grid || !filters.length || !sort) return;
 
     const cards = [...grid.querySelectorAll('[data-car-card]')];
+    const sortTrigger = sort.querySelector('[data-car-sort-trigger]');
+    const sortMenu = sort.querySelector('[data-car-sort-menu]');
+    const sortLabel = sort.querySelector('[data-car-sort-label]');
+    const sortOptions = [...sort.querySelectorAll('[data-car-sort-option]')];
+    let sortMode = 'popular';
 
-    const sortCards = () => {
-      const mode = sort.value;
+    const sortCards = (mode = sortMode) => {
+      sortMode = mode;
       const sorted = [...cards].sort((a, b) => {
         if (mode === 'price-asc') return Number(a.dataset.price) - Number(b.dataset.price);
         if (mode === 'price-desc') return Number(b.dataset.price) - Number(a.dataset.price);
@@ -199,6 +204,75 @@
       button.addEventListener('click', () => applyFilter(button.dataset.carFilter));
     });
 
-    sort.addEventListener('change', sortCards);
+    if (!sortTrigger || !sortMenu || !sortLabel || !sortOptions.length) return;
+
+    const setSortOpen = (open, focusOption = false) => {
+      sortTrigger.setAttribute('aria-expanded', String(open));
+      sortMenu.hidden = !open;
+
+      if (open && focusOption) {
+        const active = sortOptions.find((option) => option.getAttribute('aria-selected') === 'true') || sortOptions[0];
+        requestAnimationFrame(() => active.focus());
+      }
+    };
+
+    const selectSort = (option) => {
+      const mode = option.dataset.carSortOption;
+      if (!mode) return;
+
+      sortOptions.forEach((item) => {
+        const selected = item === option;
+        item.classList.toggle('cars__sort-option--active', selected);
+        item.setAttribute('aria-selected', String(selected));
+      });
+
+      sortLabel.textContent = option.textContent.trim();
+      sortCards(mode);
+      setSortOpen(false);
+      sortTrigger.focus();
+    };
+
+    sortTrigger.addEventListener('click', () => {
+      setSortOpen(sortTrigger.getAttribute('aria-expanded') !== 'true');
+    });
+
+    sortTrigger.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+      event.preventDefault();
+      setSortOpen(true, true);
+    });
+
+    sortOptions.forEach((option) => {
+      option.addEventListener('click', () => selectSort(option));
+    });
+
+    sortMenu.addEventListener('keydown', (event) => {
+      const current = sortOptions.indexOf(document.activeElement);
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setSortOpen(false);
+        sortTrigger.focus();
+        return;
+      }
+
+      if (event.key === 'Tab') {
+        setSortOpen(false);
+        return;
+      }
+
+      let next = current;
+      if (event.key === 'ArrowDown') next = current < sortOptions.length - 1 ? current + 1 : 0;
+      else if (event.key === 'ArrowUp') next = current > 0 ? current - 1 : sortOptions.length - 1;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = sortOptions.length - 1;
+      else return;
+
+      event.preventDefault();
+      sortOptions[next].focus();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!sort.contains(event.target)) setSortOpen(false);
+    });
   });
 })();
