@@ -136,8 +136,53 @@
   font-weight:400;
 }
 
-@media(max-width:64rem){
+@media(min-width:64.5625rem) and (max-width:80rem){
+  .hero__media{inset:0 0 0 -22%}
+}
+
+@media(min-width:48rem) and (max-width:64.5rem){
   .site-header--hero .site-header__inner{min-height:5.25rem}
+
+  .hero__inner{
+    min-height:100svh;
+    padding-top:7rem;
+    padding-bottom:4rem;
+  }
+
+  .hero__copy{width:min(34rem,52%)}
+
+  .hero__title{
+    max-width:none;
+    font-size:clamp(3.2rem,6.2vw,4rem);
+  }
+
+  .hero__lead{
+    max-width:30rem;
+    font-size:clamp(1.05rem,1.4vw,1.2rem);
+  }
+
+  .hero__actions{width:min(24rem,100%)}
+
+  .hero__media{
+    position:absolute;
+    inset:0 0 0 32%;
+    width:auto;
+    aspect-ratio:auto;
+    z-index:-3;
+  }
+
+  .hero__shade{
+    z-index:-2;
+    background:
+      linear-gradient(90deg,var(--color-night) 0%,rgba(11,21,29,.98) 30%,rgba(11,21,29,.8) 46%,rgba(11,21,29,.2) 70%,rgba(11,21,29,0) 84%),
+      linear-gradient(180deg,rgba(11,21,29,.2) 0%,rgba(11,21,29,0) 48%,rgba(11,21,29,.2) 100%);
+  }
+}
+
+@media(max-width:47.9375rem){
+  .site-header--hero .site-header__inner{min-height:4.75rem}
+  .site-header--hero .site-header__brand{font-size:1rem}
+  .site-header--hero .menu-toggle{width:3.25rem;height:3.25rem}
 
   .hero{
     min-height:auto;
@@ -148,49 +193,11 @@
   .hero__inner{
     min-height:auto;
     order:1;
-    padding-top:9rem;
-    padding-bottom:3rem;
-  }
-
-  .hero__copy{width:min(44rem,100%)}
-
-  .hero__title{
-    max-width:12ch;
-    font-size:clamp(3.6rem,8.2vw,5.5rem);
-  }
-
-  .hero__lead{max-width:38rem}
-
-  .hero__media{
-    position:relative;
-    inset:auto;
-    order:2;
-    width:100%;
-    aspect-ratio:4/3;
-    z-index:-1;
-  }
-
-  .hero__shade{
-    z-index:0;
-    background:linear-gradient(180deg,var(--color-night) 0%,var(--color-night) 47%,rgba(11,21,29,0) 68%);
-  }
-
-  .hero__inner,
-  .hero__media{
-    position:relative;
-    z-index:1;
-  }
-}
-
-@media(max-width:48rem){
-  .site-header--hero .site-header__inner{min-height:4.75rem}
-  .site-header--hero .site-header__brand{font-size:1rem}
-  .site-header--hero .menu-toggle{width:3.25rem;height:3.25rem}
-
-  .hero__inner{
     padding-top:8rem;
     padding-bottom:2.25rem;
   }
+
+  .hero__copy{width:100%}
 
   .hero__eyebrow{
     margin-bottom:1.5rem;
@@ -205,6 +212,7 @@
   }
 
   .hero__lead{
+    max-width:36rem;
     margin-top:2rem;
     font-size:1.05rem;
   }
@@ -219,5 +227,23 @@
     padding-inline:1.5rem;
   }
 
-  .hero__media{aspect-ratio:1/1}
+  .hero__media{
+    position:relative;
+    inset:auto;
+    order:2;
+    width:100%;
+    aspect-ratio:1/1;
+    z-index:-1;
+  }
+
+  .hero__shade{
+    z-index:0;
+    background:linear-gradient(180deg,var(--color-night) 0%,var(--color-night) 47%,rgba(11,21,29,0) 68%);
+  }
+
+  .hero__inner,
+  .hero__media{
+    position:relative;
+    z-index:1;
+  }
 }
