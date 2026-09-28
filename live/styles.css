@@ -192,6 +192,14 @@
 
   .hero__copy{width:100%}
 
+  .hero__media{inset:0 0 0 -105%}
+
+  .hero__shade{
+    background:
+      linear-gradient(90deg,rgba(11,21,29,.98) 0%,rgba(11,21,29,.96) 46%,rgba(11,21,29,.82) 68%,rgba(11,21,29,.48) 86%,rgba(11,21,29,.24) 100%),
+      linear-gradient(180deg,rgba(11,21,29,.32) 0%,rgba(11,21,29,.08) 46%,rgba(11,21,29,.24) 100%);
+  }
+
   .hero__eyebrow{
     margin-bottom:1.5rem;
     font-size:.82rem;
