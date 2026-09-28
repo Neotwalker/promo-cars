@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="NEXROUTE AUTO — подбор и доставка автомобилей из Китая в Россию">
   <title>NEXROUTE AUTO — автомобили из Китая</title>
+  <link rel="stylesheet" href="../ui-kit/styles.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header site-header--hero">
     <div class="container site-header__inner">
       <a class="site-header__brand" href="#hero" aria-label="NEXROUTE AUTO — на первый экран">NEXROUTE AUTO</a>
-      <div class="site-header__menu-toggle" aria-hidden="true">
-        <span class="site-header__menu-line"></span>
-        <span class="site-header__menu-line"></span>
-      </div>
+      <button class="menu-toggle site-header__menu-toggle" type="button" aria-label="Открыть меню">
+        <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
     </div>
   </header>
 
@@ -42,8 +42,8 @@
           <h1 class="hero__title">Вы выбираете<br>автомобиль.<br>Остальное —<br>маршрут.</h1>
           <p class="hero__lead">Подбор, проверка, выкуп, логистика и оформление — в одном маршруте. До старта фиксируем расчёт и показываем, из чего складывается цена.</p>
           <div class="hero__actions" aria-label="Основные действия">
-            <span class="hero__action hero__action--primary">Получить расчёт <span class="hero__action-icon" aria-hidden="true">→</span></span>
-            <span class="hero__action hero__action--secondary">Смотреть маршрут <span class="hero__action-icon" aria-hidden="true">→</span></span>
+            <button class="button button--primary button--inverse hero__action" type="button">Получить расчёт <span class="hero__action-icon" aria-hidden="true">→</span></button>
+            <button class="button button--ghost button--inverse hero__action" type="button">Смотреть маршрут <span class="hero__action-icon" aria-hidden="true">→</span></button>
           </div>
         </div>
       </div>

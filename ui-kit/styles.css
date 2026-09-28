@@ -1,4 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@font-face{
+  font-family:"Inter Tight";
+  src:url("./assets/fonts/InterTight-Regular.woff2") format("woff2"),
+      url("./assets/fonts/InterTight-Regular.ttf") format("truetype");
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Inter Tight";
+  src:url("./assets/fonts/InterTight-Medium.woff2") format("woff2"),
+      url("./assets/fonts/InterTight-Medium.ttf") format("truetype");
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Inter Tight";
+  src:url("./assets/fonts/InterTight-SemiBold.woff2") format("woff2"),
+      url("./assets/fonts/InterTight-SemiBold.ttf") format("truetype");
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Inter Tight";
+  src:url("./assets/fonts/InterTight-Bold.woff2") format("woff2"),
+      url("./assets/fonts/InterTight-Bold.ttf") format("truetype");
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+}
 
 /* 01 — TOKENS */
 :root {
@@ -36,7 +67,7 @@
   --radius-xs:2px;
   --radius-sm:4px;
   --radius-md:8px;
-  --font-sans:Inter,"Helvetica Neue",Arial,sans-serif;
+  --font-sans:"Inter Tight",Arial,sans-serif;
 
   --type-h1:clamp(2.5rem,calc(1.944rem + 2.286vw),4.5rem);
   --type-h1-lh:clamp(2.75rem,calc(2.194rem + 2.286vw),5rem);
