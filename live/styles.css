@@ -482,14 +482,14 @@
 }
 
 .cars-pick{
-  min-height:7.25rem;
-  margin-top:-.5rem;
+  height:12.5rem;
+  min-height:0;
   display:grid;
-  grid-template-columns:minmax(0,1.3fr) minmax(0,.62fr) minmax(0,1.2fr);
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.62fr) minmax(0,1.15fr);
   overflow:hidden;
   border:1px solid var(--color-line);
   border-radius:var(--radius-md);
-  background:var(--color-white);
+  background:#f4f3f1;
 }
 
 .cars-pick__copy,
@@ -541,7 +541,7 @@
 }
 
 .cars-pick__media{
-  min-height:7.25rem;
+  min-height:0;
   overflow:hidden;
 }
 
@@ -663,6 +663,7 @@
   }
 
   .cars-pick{
+    height:auto;
     grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
   }
 
@@ -840,6 +841,7 @@
   }
 
   .cars-pick{
+    height:auto;
     margin-top:0;
   }
 
