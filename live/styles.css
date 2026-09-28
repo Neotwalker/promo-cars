@@ -1,3 +1,36 @@
+@font-face{
+  font-family:"Inter Tight";
+  src:url("./assets/fonts/InterTight-Regular.woff2") format("woff2"),
+      url("./assets/fonts/InterTight-Regular.ttf") format("truetype");
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Inter Tight";
+  src:url("./assets/fonts/InterTight-Medium.woff2") format("woff2"),
+      url("./assets/fonts/InterTight-Medium.ttf") format("truetype");
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Inter Tight";
+  src:url("./assets/fonts/InterTight-SemiBold.woff2") format("woff2"),
+      url("./assets/fonts/InterTight-SemiBold.ttf") format("truetype");
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Inter Tight";
+  src:url("./assets/fonts/InterTight-Bold.woff2") format("woff2"),
+      url("./assets/fonts/InterTight-Bold.ttf") format("truetype");
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+}
+
 :root{
   --night:#071118;
   --white:#fcfbf8;
@@ -16,7 +49,8 @@ body{
   min-width:20rem;
   background:var(--night);
   color:var(--white);
-  font-family:Arial,"Helvetica Neue",sans-serif;
+  font-family:"Inter Tight",Arial,sans-serif;
+  font-synthesis:none;
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit}
@@ -40,10 +74,10 @@ button,input,textarea,select{font:inherit}
   gap:2rem;
 }
 .site-header__brand{
-  font-size:1rem;
+  font-size:1.05rem;
   line-height:1;
   font-weight:700;
-  letter-spacing:-.02em;
+  letter-spacing:-.025em;
   text-decoration:none;
 }
 .site-header__menu-mark{
@@ -107,19 +141,19 @@ button,input,textarea,select{font:inherit}
 .hero__eyebrow{
   margin:0 0 1.75rem;
   color:var(--soft);
-  font-size:.95rem;
+  font-size:.92rem;
   line-height:1.2;
   font-weight:500;
-  letter-spacing:.16em;
+  letter-spacing:.12em;
   text-transform:uppercase;
 }
 .hero h1{
   margin:0;
   max-width:none;
   width:100%;
-  font-size:clamp(3.6rem,4.75vw,5.25rem);
-  line-height:.94;
-  letter-spacing:-.055em;
+  font-size:clamp(3.9rem,5vw,5.7rem);
+  line-height:.92;
+  letter-spacing:-.045em;
   font-weight:700;
   text-wrap:balance;
 }
@@ -127,8 +161,8 @@ button,input,textarea,select{font:inherit}
   max-width:31rem;
   margin:2.35rem 0 0;
   color:var(--muted);
-  font-size:clamp(1.05rem,1.2vw,1.3rem);
-  line-height:1.48;
+  font-size:clamp(1.08rem,1.2vw,1.32rem);
+  line-height:1.44;
 }
 .hero__actions{
   width:min(25rem,100%);
@@ -144,7 +178,7 @@ button,input,textarea,select{font:inherit}
   justify-content:space-between;
   gap:1.5rem;
   border:1px solid var(--line);
-  font-size:1rem;
+  font-size:1.02rem;
   font-weight:600;
   line-height:1;
   user-select:none;
