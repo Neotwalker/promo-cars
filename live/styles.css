@@ -540,8 +540,6 @@
 .cars-pick__media{
   min-height:8.5rem;
   overflow:hidden;
-  background:#e1dfda;
-  border-left:1px solid var(--color-line);
 }
 
 .cars-pick__media img{
