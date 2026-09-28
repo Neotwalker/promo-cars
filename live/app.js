@@ -161,4 +161,44 @@
       }
     });
   });
+
+  document.querySelectorAll('[data-cars-catalog]').forEach((root) => {
+    const grid = root.querySelector('[data-car-grid]');
+    const filters = [...root.querySelectorAll('[data-car-filter]')];
+    const sort = root.querySelector('[data-car-sort]');
+    if (!grid || !filters.length || !sort) return;
+
+    const cards = [...grid.querySelectorAll('[data-car-card]')];
+
+    const sortCards = () => {
+      const mode = sort.value;
+      const sorted = [...cards].sort((a, b) => {
+        if (mode === 'price-asc') return Number(a.dataset.price) - Number(b.dataset.price);
+        if (mode === 'price-desc') return Number(b.dataset.price) - Number(a.dataset.price);
+        if (mode === 'delivery') return Number(a.dataset.delivery) - Number(b.dataset.delivery);
+        return Number(a.dataset.order) - Number(b.dataset.order);
+      });
+
+      sorted.forEach((card) => grid.append(card));
+    };
+
+    const applyFilter = (filter) => {
+      filters.forEach((button) => {
+        const active = button.dataset.carFilter === filter;
+        button.classList.toggle('cars__filter--active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+
+      cards.forEach((card) => {
+        const categories = card.dataset.category?.split(' ') || [];
+        card.hidden = filter !== 'all' && !categories.includes(filter);
+      });
+    };
+
+    filters.forEach((button) => {
+      button.addEventListener('click', () => applyFilter(button.dataset.carFilter));
+    });
+
+    sort.addEventListener('change', sortCards);
+  });
 })();
