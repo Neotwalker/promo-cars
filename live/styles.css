@@ -192,7 +192,13 @@
 
   .hero__copy{width:100%}
 
-  .hero__media{inset:0 0 0 -105%}
+  .hero__media{
+    inset:0;
+    background-image:url("./assets/hero/hero-mob.webp");
+    background-position:center;
+  }
+
+  .hero__video{display:none}
 
   .hero__shade{
     background:
