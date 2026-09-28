@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="site-header site-header--hero" data-menu>
+  <header class="site-header site-header--inverse site-header--burger site-header--hero" data-menu>
     <div class="container site-header__inner">
       <a class="site-header__brand" href="#hero" aria-label="NEXROUTE AUTO — на первый экран">NEXROUTE AUTO</a>
       <button class="menu-toggle site-header__menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Открыть меню" data-menu-toggle>
@@ -114,7 +114,7 @@
         </header>
 
         <div class="cars__grid" data-car-grid>
-          <article class="car-card" data-car-card data-category="electric liftback" data-price="6490000" data-delivery="30" data-order="1">
+          <article class="car-card car-card--catalog" data-car-card data-category="electric liftback" data-price="6490000" data-delivery="30" data-order="1">
             <div class="car-card__media"><img src="./assets/hero/cars/zeekr-001.webp" alt="Zeekr 001" loading="lazy" decoding="async"></div>
             <div class="car-card__content">
               <div class="car-card__heading">
@@ -141,7 +141,7 @@
             </div>
           </article>
 
-          <article class="car-card" data-car-card data-category="electric sedan" data-price="5890000" data-delivery="28" data-order="2">
+          <article class="car-card car-card--catalog" data-car-card data-category="electric sedan" data-price="5890000" data-delivery="28" data-order="2">
             <div class="car-card__media"><img src="./assets/hero/cars/xiaomi-su7.webp" alt="Xiaomi SU7" loading="lazy" decoding="async"></div>
             <div class="car-card__content">
               <div class="car-card__heading">
@@ -168,7 +168,7 @@
             </div>
           </article>
 
-          <article class="car-card" data-car-card data-category="hybrid suv" data-price="5390000" data-delivery="32" data-order="3">
+          <article class="car-card car-card--catalog" data-car-card data-category="hybrid suv" data-price="5390000" data-delivery="32" data-order="3">
             <div class="car-card__media"><img src="./assets/hero/cars/li-auto-l6.webp" alt="Li Auto L6" loading="lazy" decoding="async"></div>
             <div class="car-card__content">
               <div class="car-card__heading">
@@ -211,6 +211,7 @@
     </section>
   </main>
 
+  <script src="../ui-kit/app.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>
