@@ -71,7 +71,7 @@ button,input,textarea,select{font:inherit}
 .hero__media{
   position:absolute;
   z-index:-3;
-  inset:0 0 0 31%;
+  inset:0 0 0 5%;
   overflow:hidden;
   background:var(--night) url("./assets/hero/hero-poster.webp") center/cover no-repeat;
 }
@@ -99,7 +99,7 @@ button,input,textarea,select{font:inherit}
   padding-bottom:4rem;
 }
 .hero__copy{
-  width:min(38rem,48%);
+  width:min(46rem,54%);
   display:flex;
   flex-direction:column;
   align-items:flex-start;
@@ -115,7 +115,8 @@ button,input,textarea,select{font:inherit}
 }
 .hero h1{
   margin:0;
-  max-width:11ch;
+  max-width:none;
+  width:100%;
   font-size:clamp(3.6rem,4.75vw,5.25rem);
   line-height:.94;
   letter-spacing:-.055em;
