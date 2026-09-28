@@ -165,7 +165,7 @@
 
   .hero__media{
     position:absolute;
-    inset:0 0 0 32%;
+    inset:0 0 0 -95%;
     width:auto;
     aspect-ratio:auto;
     z-index:-3;
@@ -184,15 +184,8 @@
   .site-header--hero .site-header__brand{font-size:1rem}
   .site-header--hero .menu-toggle{width:3.25rem;height:3.25rem}
 
-  .hero{
-    min-height:auto;
-    display:flex;
-    flex-direction:column;
-  }
-
   .hero__inner{
-    min-height:auto;
-    order:1;
+    min-height:100svh;
     padding-top:8rem;
     padding-bottom:2.25rem;
   }
@@ -225,25 +218,5 @@
   .hero__action{
     min-height:4rem;
     padding-inline:1.5rem;
-  }
-
-  .hero__media{
-    position:relative;
-    inset:auto;
-    order:2;
-    width:100%;
-    aspect-ratio:1/1;
-    z-index:-1;
-  }
-
-  .hero__shade{
-    z-index:0;
-    background:linear-gradient(180deg,var(--color-night) 0%,var(--color-night) 47%,rgba(11,21,29,0) 68%);
-  }
-
-  .hero__inner,
-  .hero__media{
-    position:relative;
-    z-index:1;
   }
 }
