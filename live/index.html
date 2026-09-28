@@ -98,15 +98,18 @@
               <button class="cars__filter" type="button" data-car-filter="sedan" aria-pressed="false">Седаны</button>
             </div>
 
-            <label class="cars__sort">
-              <span class="cars__sort-label">Сортировка</span>
-              <select class="cars__sort-select" data-car-sort aria-label="Сортировка автомобилей">
-                <option value="popular">Сначала популярные</option>
-                <option value="price-asc">Сначала дешевле</option>
-                <option value="price-desc">Сначала дороже</option>
-                <option value="delivery">По сроку доставки</option>
-              </select>
-            </label>
+            <div class="cars__sort" data-car-sort>
+              <button class="cars__sort-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="cars-sort-options" data-car-sort-trigger>
+                <span data-car-sort-label>Сначала популярные</span>
+                <span class="cars__sort-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="cars__sort-menu" id="cars-sort-options" role="listbox" aria-label="Сортировка автомобилей" data-car-sort-menu hidden>
+                <button class="cars__sort-option cars__sort-option--active" type="button" role="option" aria-selected="true" data-car-sort-option="popular">Сначала популярные</button>
+                <button class="cars__sort-option" type="button" role="option" aria-selected="false" data-car-sort-option="price-asc">Сначала дешевле</button>
+                <button class="cars__sort-option" type="button" role="option" aria-selected="false" data-car-sort-option="price-desc">Сначала дороже</button>
+                <button class="cars__sort-option" type="button" role="option" aria-selected="false" data-car-sort-option="delivery">По сроку доставки</button>
+              </div>
+            </div>
           </div>
         </header>
 
