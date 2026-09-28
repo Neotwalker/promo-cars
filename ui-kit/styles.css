@@ -773,5 +773,17 @@ body.menu-open{overflow:hidden}
 .menu-panel--specimen .menu-panel__nav a{font-size:var(--type-h3);line-height:var(--type-h3-lh);padding:var(--space-3) 0}
 .menu-panel--specimen .menu-panel__contact{padding:var(--space-3);gap:var(--space-3)}
 
+
+.header-specimen--live{background:var(--color-night);border-color:var(--color-line-inverse)}
+.header-specimen--live .header-specimen__label{border-color:var(--color-line-inverse);color:rgba(252,251,248,.5)}
+.header-specimen--live .site-header--specimen{background:transparent;border-bottom:0;backdrop-filter:none}
+.header-specimen--live .site-header__inner{min-height:5.25rem}
+.header-specimen--live .menu-toggle{width:3.5rem;height:3.5rem}
+.kit-live-catalog{display:flex;flex-direction:column;gap:var(--space-4)}
+.kit-live-catalog__controls{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4)}
+.kit-live-catalog__controls .cars__filters{display:flex;flex-wrap:wrap;gap:.45rem}
+.kit-live-catalog__grid{display:grid;grid-template-columns:minmax(0,30rem);gap:var(--space-4)}
+.kit-live-catalog .cars-pick{width:100%}
+
 @media(max-width:64rem){.kit-grid--colors{grid-template-columns:repeat(3,1fr)}.kit-grid--three{grid-template-columns:1fr}.kit-state-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.kit-header-specimens{grid-template-columns:1fr}.kit-nav{display:none}}
 @media(max-width:48rem){.kit-grid--colors,.kit-grid--two,.kit-state-grid,.kit-menu-specimens{grid-template-columns:1fr}.kit-type>div{grid-template-columns:1fr;gap:var(--space-1)}}
