@@ -73,7 +73,7 @@ button,input,textarea,select{font:inherit}
   z-index:-3;
   inset:0 0 0 31%;
   overflow:hidden;
-  background:var(--night) url("./assets/hero/hero-poster.avif") center/cover no-repeat;
+  background:var(--night) url("./assets/hero/hero-poster.webp") center/cover no-repeat;
 }
 .hero__video{
   width:100%;
