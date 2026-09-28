@@ -331,19 +331,35 @@
 }
 
 .car-card__specs{
-  margin:1.4rem 0 0;
-  padding:1.2rem 0 0;
+  margin:1.1rem 0 0;
+  padding:1.05rem 0 0;
   border-top:1px solid var(--color-line);
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:.75rem;
 }
 
-.car-card__specs div{
+.car-card__spec{
+  min-width:0;
+  display:grid;
+  grid-template-columns:1.85rem minmax(0,1fr);
+  gap:.65rem;
+  align-items:center;
+}
+
+.car-card__spec>div{
   min-width:0;
   display:flex;
   flex-direction:column;
   gap:.18rem;
+}
+
+.car-card__spec-icon{
+  width:1.85rem;
+  height:1.85rem;
+  border:1px solid var(--color-line);
+  border-radius:.4rem;
+  background:transparent;
 }
 
 .car-card__specs dt,
@@ -365,8 +381,8 @@
 }
 
 .car-card__price{
-  margin-top:auto;
-  padding-top:1.5rem;
+  margin-top:1.25rem;
+  padding-top:0;
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
@@ -397,10 +413,10 @@
 }
 
 .cars-pick{
-  min-height:9.75rem;
-  margin-top:-1rem;
+  min-height:8.5rem;
+  margin-top:-.5rem;
   display:grid;
-  grid-template-columns:minmax(0,1.15fr) minmax(16rem,.75fr) minmax(18rem,.95fr);
+  grid-template-columns:minmax(0,1.2fr) minmax(14rem,.56fr) minmax(22rem,1.08fr);
   overflow:hidden;
   border:1px solid var(--color-line);
   border-radius:var(--radius-md);
@@ -409,7 +425,7 @@
 
 .cars-pick__copy,
 .cars-pick__action{
-  padding:clamp(1.5rem,2.4vw,2.4rem);
+  padding:clamp(1.25rem,1.8vw,1.75rem);
 }
 
 .cars-pick__copy{
@@ -438,7 +454,7 @@
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  gap:1.25rem;
+  gap:.9rem;
 }
 
 .cars-pick__action p{
@@ -453,7 +469,7 @@
 }
 
 .cars-pick__media{
-  min-height:9.75rem;
+  min-height:8.5rem;
   background:#e1dfda;
   border-left:1px solid var(--color-line);
 }
@@ -479,7 +495,7 @@
   }
 
   .car-card__description{
-    min-height:5.8rem;
+    min-height:4.8rem;
   }
 
   .car-card__price{
@@ -568,7 +584,7 @@
   }
 
   .cars-pick{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
   }
 
   .cars-pick__media{
