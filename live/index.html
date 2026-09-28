@@ -23,6 +23,7 @@
           <nav class="menu-panel__nav" aria-label="Навигация">
             <a href="#hero"><span>01</span>Главная</a>
             <a href="#cars"><span>02</span>Автомобили</a>
+            <a href="#journey"><span>03</span>Маршрут</a>
           </nav>
 
           <aside class="menu-panel__contact" aria-label="Контакты">
@@ -75,7 +76,7 @@
           <p class="hero__lead">Подбор, проверка, выкуп, логистика и оформление — в одном маршруте. До старта фиксируем расчёт и показываем, из чего складывается цена.</p>
           <div class="hero__actions" aria-label="Основные действия">
             <button class="button button--primary button--inverse hero__action" type="button">Получить расчёт <span class="hero__action-icon" aria-hidden="true">→</span></button>
-            <button class="button button--ghost button--inverse hero__action" type="button">Смотреть маршрут <span class="hero__action-icon" aria-hidden="true">→</span></button>
+            <a class="button button--ghost button--inverse hero__action" href="#journey">Смотреть маршрут <span class="hero__action-icon" aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -207,6 +208,220 @@
           </div>
           <div class="cars-pick__media" aria-hidden="true"><img src="./assets/hero/cars/cta-cars-tiny.webp" alt="" loading="lazy" decoding="async"></div>
         </aside>
+      </div>
+    </section>
+
+    <section class="journey" id="journey" data-journey>
+      <div class="journey__sticky" data-journey-sticky>
+        <div class="container journey__inner">
+          <header class="journey__header">
+            <div class="journey__heading">
+              <p class="journey__eyebrow">Маршрут доставки</p>
+              <h2 class="journey__title">Понимаете маршрут<br>на каждом этапе.</h2>
+            </div>
+            <p class="journey__lead">Вы всегда знаете, где находится ваш автомобиль и что происходит дальше. Мы берём на себя координацию и документы, а вы получаете прозрачный и предсказуемый процесс.</p>
+          </header>
+
+          <ol class="journey__stages" data-journey-stages>
+            <li class="journey__stage-item journey__stage-item--active" data-journey-item>
+              <button class="journey__stage" type="button" data-journey-step="0" aria-current="step">
+                <span class="journey__stage-index">01</span><i class="journey__stage-dot" aria-hidden="true"></i><b>Подбор</b>
+              </button>
+            </li>
+            <li class="journey__stage-item" data-journey-item>
+              <button class="journey__stage" type="button" data-journey-step="1">
+                <span class="journey__stage-index">02</span><i class="journey__stage-dot" aria-hidden="true"></i><b>Проверка</b>
+              </button>
+            </li>
+            <li class="journey__stage-item" data-journey-item>
+              <button class="journey__stage" type="button" data-journey-step="2">
+                <span class="journey__stage-index">03</span><i class="journey__stage-dot" aria-hidden="true"></i><b>Выкуп</b>
+              </button>
+            </li>
+            <li class="journey__stage-item" data-journey-item>
+              <button class="journey__stage" type="button" data-journey-step="3">
+                <span class="journey__stage-index">04</span><i class="journey__stage-dot" aria-hidden="true"></i><b>Страхование</b>
+              </button>
+            </li>
+            <li class="journey__stage-item" data-journey-item>
+              <button class="journey__stage" type="button" data-journey-step="4">
+                <span class="journey__stage-index">05</span><i class="journey__stage-dot" aria-hidden="true"></i><b>Граница</b>
+              </button>
+            </li>
+            <li class="journey__stage-item" data-journey-item>
+              <button class="journey__stage" type="button" data-journey-step="5">
+                <span class="journey__stage-index">06</span><i class="journey__stage-dot" aria-hidden="true"></i><b>Таможня</b>
+              </button>
+            </li>
+            <li class="journey__stage-item" data-journey-item>
+              <button class="journey__stage" type="button" data-journey-step="6">
+                <span class="journey__stage-index">07</span><i class="journey__stage-dot" aria-hidden="true"></i><b>ЭПТС</b>
+              </button>
+            </li>
+            <li class="journey__stage-item" data-journey-item>
+              <button class="journey__stage" type="button" data-journey-step="7">
+                <span class="journey__stage-index">08</span><i class="journey__stage-dot" aria-hidden="true"></i><b>Выдача</b>
+              </button>
+            </li>
+          </ol>
+
+          <div class="journey__mobile-progress" data-journey-mobile-progress role="progressbar" aria-label="Этап маршрута" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1">
+            <div class="journey__mobile-progress-copy">
+              <span><b data-journey-mobile-index>01</b> / 08</span>
+              <strong data-journey-mobile-title>Подбор</strong>
+              <span data-journey-mobile-next>Далее: Проверка</span>
+            </div>
+            <div class="journey__mobile-progress-bar" aria-hidden="true"><span></span></div>
+          </div>
+
+          <div class="journey__viewport" data-journey-viewport>
+            <div class="journey__track" data-journey-track>
+              <article class="journey__panel journey__panel--active" data-journey-panel aria-labelledby="journey-panel-01-title">
+                <div class="journey__workspace">
+                  <div class="journey__visual" aria-hidden="true"><span>01</span><small>Китай → Россия</small></div>
+                  <div class="journey__detail-card">
+                    <div class="journey__detail-topline"><span>Текущий этап</span><span class="journey__eta">1–3 дня</span></div>
+                    <h3 class="journey__detail-title" id="journey-panel-01-title"><span>01</span> Подбор</h3>
+                    <p class="journey__detail-lead">Сверяем модель, комплектацию, цвет, бюджет и город получения. На выходе — конкретный автомобиль и предварительный расчёт.</p>
+                    <div class="journey__route-meta"><div><span>Текущее состояние</span><strong>Параметры зафиксированы</strong></div><div><span>Следующий этап</span><strong>Проверка автомобиля</strong></div></div>
+                    <ol class="journey__timeline">
+                      <li class="is-complete"><span>Получили задачу и бюджет</span><b>Готово</b></li>
+                      <li class="is-complete"><span>Собрали подходящие варианты</span><b>Готово</b></li>
+                      <li class="is-active"><span>Согласование автомобиля</span><b>В процессе</b></li>
+                      <li><span>Фиксация предварительного расчёта</span><b>Ожидается</b></li>
+                    </ol>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-02-title">
+                <div class="journey__workspace">
+                  <div class="journey__visual" aria-hidden="true"><span>02</span><small>Китай → Россия</small></div>
+                  <div class="journey__detail-card">
+                    <div class="journey__detail-topline"><span>Текущий этап</span><span class="journey__eta">1–2 дня</span></div>
+                    <h3 class="journey__detail-title" id="journey-panel-02-title"><span>02</span> Проверка</h3>
+                    <p class="journey__detail-lead">Запрашиваем фото и видео, сверяем VIN, комплектацию и состояние. При критичных расхождениях возвращаемся к подбору.</p>
+                    <div class="journey__route-meta"><div><span>Текущее состояние</span><strong>Автомобиль найден</strong></div><div><span>Следующий этап</span><strong>Выкуп</strong></div></div>
+                    <ol class="journey__timeline">
+                      <li class="is-complete"><span>Получены фото и видео</span><b>Готово</b></li>
+                      <li class="is-complete"><span>VIN и комплектация сверены</span><b>Готово</b></li>
+                      <li class="is-active"><span>Проверка состояния автомобиля</span><b>В процессе</b></li>
+                      <li><span>Финальное подтверждение</span><b>Ожидается</b></li>
+                    </ol>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-03-title">
+                <div class="journey__workspace">
+                  <div class="journey__visual" aria-hidden="true"><span>03</span><small>Китай → Россия</small></div>
+                  <div class="journey__detail-card">
+                    <div class="journey__detail-topline"><span>Текущий этап</span><span class="journey__eta">1–2 дня</span></div>
+                    <h3 class="journey__detail-title" id="journey-panel-03-title"><span>03</span> Выкуп</h3>
+                    <p class="journey__detail-lead">После согласования фиксируем автомобиль и проводим оплату по согласованной схеме.</p>
+                    <div class="journey__route-meta"><div><span>Текущее состояние</span><strong>Инвойс согласован</strong></div><div><span>Следующий этап</span><strong>Страхование</strong></div></div>
+                    <ol class="journey__timeline">
+                      <li class="is-complete"><span>Условия сделки подтверждены</span><b>Готово</b></li>
+                      <li class="is-complete"><span>Инвойс получен</span><b>Готово</b></li>
+                      <li class="is-active"><span>Проведение оплаты</span><b>В процессе</b></li>
+                      <li><span>Закрепление автомобиля</span><b>Ожидается</b></li>
+                    </ol>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-04-title">
+                <div class="journey__workspace">
+                  <div class="journey__visual" aria-hidden="true"><span>04</span><small>Китай → Россия</small></div>
+                  <div class="journey__detail-card">
+                    <div class="journey__detail-topline"><span>Текущий этап</span><span class="journey__eta">до 1 дня</span></div>
+                    <h3 class="journey__detail-title" id="journey-panel-04-title"><span>04</span> Страхование</h3>
+                    <p class="journey__detail-lead">Перед отправкой оформляем страхование перевозки и фиксируем состояние автомобиля.</p>
+                    <div class="journey__route-meta"><div><span>Текущее состояние</span><strong>Состояние зафиксировано</strong></div><div><span>Следующий этап</span><strong>Граница</strong></div></div>
+                    <ol class="journey__timeline">
+                      <li class="is-complete"><span>Фотофиксация перед отправкой</span><b>Готово</b></li>
+                      <li class="is-complete"><span>Данные автомобиля сверены</span><b>Готово</b></li>
+                      <li class="is-active"><span>Оформление страхования</span><b>В процессе</b></li>
+                      <li><span>Передача в логистику</span><b>Ожидается</b></li>
+                    </ol>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-05-title">
+                <div class="journey__workspace">
+                  <div class="journey__visual" aria-hidden="true"><span>05</span><small>Китай → Россия</small></div>
+                  <div class="journey__detail-card">
+                    <div class="journey__detail-topline"><span>Текущий этап</span><span class="journey__eta">1–2 дня</span></div>
+                    <h3 class="journey__detail-title" id="journey-panel-05-title"><span>05</span> Граница</h3>
+                    <p class="journey__detail-lead">Автомобиль идёт к границе и проходит экспортное оформление для дальнейшего таможенного оформления в России.</p>
+                    <div class="journey__route-meta"><div><span>Текущее состояние</span><strong>Экспортное оформление</strong></div><div><span>Следующий этап</span><strong>Таможня</strong></div></div>
+                    <ol class="journey__timeline">
+                      <li class="is-complete"><span>Прибытие на пограничный терминал</span><b>Готово</b></li>
+                      <li class="is-complete"><span>Подача экспортных документов</span><b>Готово</b></li>
+                      <li class="is-active"><span>Прохождение пограничного контроля</span><b>В процессе</b></li>
+                      <li><span>Передача на таможенный терминал РФ</span><b>Ожидается</b></li>
+                    </ol>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-06-title">
+                <div class="journey__workspace">
+                  <div class="journey__visual" aria-hidden="true"><span>06</span><small>Китай → Россия</small></div>
+                  <div class="journey__detail-card">
+                    <div class="journey__detail-topline"><span>Текущий этап</span><span class="journey__eta">3–7 дней</span></div>
+                    <h3 class="journey__detail-title" id="journey-panel-06-title"><span>06</span> Таможня</h3>
+                    <p class="journey__detail-lead">Подаём документы, оформляем таможенные платежи и выпускаем автомобиль на территорию России.</p>
+                    <div class="journey__route-meta"><div><span>Текущее состояние</span><strong>Таможенный терминал РФ</strong></div><div><span>Следующий этап</span><strong>ЭПТС</strong></div></div>
+                    <ol class="journey__timeline">
+                      <li class="is-complete"><span>Документы приняты</span><b>Готово</b></li>
+                      <li class="is-complete"><span>Расчёт платежей подтверждён</span><b>Готово</b></li>
+                      <li class="is-active"><span>Таможенное оформление</span><b>В процессе</b></li>
+                      <li><span>Выпуск автомобиля</span><b>Ожидается</b></li>
+                    </ol>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-07-title">
+                <div class="journey__workspace">
+                  <div class="journey__visual" aria-hidden="true"><span>07</span><small>Китай → Россия</small></div>
+                  <div class="journey__detail-card">
+                    <div class="journey__detail-topline"><span>Текущий этап</span><span class="journey__eta">2–5 дней</span></div>
+                    <h3 class="journey__detail-title" id="journey-panel-07-title"><span>07</span> ЭПТС</h3>
+                    <p class="journey__detail-lead">Оформляем электронный ПТС и комплект документов, необходимых для постановки автомобиля на учёт.</p>
+                    <div class="journey__route-meta"><div><span>Текущее состояние</span><strong>Документы оформляются</strong></div><div><span>Следующий этап</span><strong>Выдача</strong></div></div>
+                    <ol class="journey__timeline">
+                      <li class="is-complete"><span>Данные автомобиля переданы</span><b>Готово</b></li>
+                      <li class="is-complete"><span>Комплект документов собран</span><b>Готово</b></li>
+                      <li class="is-active"><span>Оформление электронного ПТС</span><b>В процессе</b></li>
+                      <li><span>Финальная проверка комплекта</span><b>Ожидается</b></li>
+                    </ol>
+                  </div>
+                </div>
+              </article>
+
+              <article class="journey__panel" data-journey-panel aria-labelledby="journey-panel-08-title">
+                <div class="journey__workspace">
+                  <div class="journey__visual" aria-hidden="true"><span>08</span><small>Китай → Россия</small></div>
+                  <div class="journey__detail-card">
+                    <div class="journey__detail-topline"><span>Текущий этап</span><span class="journey__eta">1 день</span></div>
+                    <h3 class="journey__detail-title" id="journey-panel-08-title"><span>08</span> Выдача</h3>
+                    <p class="journey__detail-lead">Проверяем комплектность, передаём автомобиль и документы или организуем доставку в другой город.</p>
+                    <div class="journey__route-meta"><div><span>Текущее состояние</span><strong>Автомобиль готов к передаче</strong></div><div><span>Следующий этап</span><strong>Маршрут завершён</strong></div></div>
+                    <ol class="journey__timeline">
+                      <li class="is-complete"><span>Автомобиль прибыл в город выдачи</span><b>Готово</b></li>
+                      <li class="is-complete"><span>Финальная проверка выполнена</span><b>Готово</b></li>
+                      <li class="is-active"><span>Передача автомобиля и документов</span><b>В процессе</b></li>
+                      <li><span>Завершение маршрута</span><b>Ожидается</b></li>
+                    </ol>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
