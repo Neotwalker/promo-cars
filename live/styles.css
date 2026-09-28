@@ -1,13 +1,18 @@
 /* /live/ adds only visual composition over the shared UI-kit foundation. */
 
 .site-header--hero{
+  --menu-offset:6.25rem;
   position:absolute;
   inset:0 0 auto;
-  z-index:10;
+  z-index:50;
   border-bottom:0;
   background:transparent;
   color:var(--color-white);
   backdrop-filter:none;
+}
+
+.site-header--hero.menu--open{
+  background:var(--color-night);
 }
 
 .site-header--hero .site-header__inner{
@@ -141,6 +146,7 @@
 }
 
 @media(min-width:48rem) and (max-width:64.5rem){
+  .site-header--hero{--menu-offset:5.25rem}
   .site-header--hero .site-header__inner{min-height:5.25rem}
 
   .hero__inner{
@@ -180,6 +186,7 @@
 }
 
 @media(max-width:47.9375rem){
+  .site-header--hero{--menu-offset:4.75rem}
   .site-header--hero .site-header__inner{min-height:4.75rem}
   .site-header--hero .site-header__brand{font-size:1rem}
   .site-header--hero .menu-toggle{width:3.25rem;height:3.25rem}
