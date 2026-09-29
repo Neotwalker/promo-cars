@@ -66,6 +66,8 @@
       let resizeTimer = 0;
       let preservedResizeStep = 0;
       let preservedResizePhase = 'pre-lock';
+      let compactViewportHeight = window.innerHeight;
+      let layoutWidth = window.innerWidth;
 
       const setActive = (index) => {
         const safeIndex = Math.max(0, Math.min(index, panels.length - 1));
@@ -113,7 +115,7 @@
 
       let compactRunway = 1;
 
-      const syncCompactGeometry = () => {
+      const syncCompactGeometry = ({ refreshViewportHeight = false } = {}) => {
         if (!compactJourney.matches) {
           journey.style.removeProperty('--journey-scene-top');
           shell.style.removeProperty('height');
@@ -121,17 +123,16 @@
           return;
         }
 
+        if (refreshViewportHeight) compactViewportHeight = window.innerHeight;
+
         const edgeGap = 16;
         const sceneHeight = scene.offsetHeight;
-        const sceneTop = Math.min(edgeGap, window.innerHeight - sceneHeight - edgeGap);
+        const sceneTop = Math.min(edgeGap, compactViewportHeight - sceneHeight - edgeGap);
         compactRunway = Math.max(1, panels.length - 1) * compactStepScroll();
 
-        // Journey is currently the last page section. The shell therefore needs
-        // an extra release tail equal to the free viewport space below the sticky
-        // scene; otherwise the browser reaches document-end before step 08 can.
         const releaseTail = Math.max(
           edgeGap,
-          window.innerHeight - sceneHeight - sceneTop
+          compactViewportHeight - sceneHeight - sceneTop
         );
 
         journey.style.setProperty('--journey-scene-top', sceneTop.toFixed(2) + 'px');
@@ -140,7 +141,6 @@
 
       const metrics = () => {
         if (compactJourney.matches) {
-          syncCompactGeometry();
           const sceneTop = Number.parseFloat(getComputedStyle(scene).top) || 0;
           const shellTop = shell.getBoundingClientRect().top + window.scrollY;
 
@@ -249,7 +249,7 @@
         if (!raf) raf = requestAnimationFrame(frame);
       };
 
-      syncCompactGeometry();
+      syncCompactGeometry({ refreshViewportHeight:true });
       const initial = readTarget();
       targetStep = initial.step;
       visualStep = initial.step;
@@ -269,6 +269,15 @@
       resizeObserver?.observe(scene);
 
       addEventListener('resize', () => {
+        const nextWidth = window.innerWidth;
+        const widthChanged = Math.abs(nextWidth - layoutWidth) > 1;
+
+        if (compactJourney.matches && !widthChanged) {
+          return;
+        }
+
+        layoutWidth = nextWidth;
+
         if (!resizing) {
           resizing = true;
           preservedResizeStep = targetStep;
@@ -276,7 +285,7 @@
         }
 
         clearTimeout(resizeTimer);
-        syncCompactGeometry();
+        syncCompactGeometry({ refreshViewportHeight:true });
 
         resizeTimer = setTimeout(() => {
           if (raf) {
@@ -285,7 +294,7 @@
           }
 
           lastFrame = 0;
-          syncCompactGeometry();
+          syncCompactGeometry({ refreshViewportHeight:true });
 
           if (preservedResizePhase === 'locked') {
             const { start, max } = metrics();
@@ -306,7 +315,8 @@
       }, { passive:true });
 
       compactJourney.addEventListener?.('change', () => {
-        syncCompactGeometry();
+        layoutWidth = window.innerWidth;
+        syncCompactGeometry({ refreshViewportHeight:true });
         lastFrame = 0;
         scheduleJourney();
       });
