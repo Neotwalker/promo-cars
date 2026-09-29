@@ -1206,74 +1206,38 @@
 @media(max-width:64rem){
   .journey{
     --journey-compact-top:1rem;
+    --journey-runway:168rem;
+    height:auto;
   }
 
   .journey__sticky{
     position:relative;
     top:auto;
-    height:100%;
-    min-height:100%;
+    height:auto;
+    min-height:0;
     display:block;
-    padding:2.5rem 0 1.5rem;
+    padding:4.5rem 0 0;
     overflow:visible;
   }
 
   .journey__inner{
-    height:100%;
-    min-height:100%;
+    height:auto;
+    min-height:0;
+    padding-bottom:var(--journey-runway);
   }
 
   .journey__lead{
     display:block;
-    padding-top:0;
-  }
-
-  .journey__mobile-progress{
-    margin-top:1.5rem;
   }
 
   .journey__viewport{
     position:sticky;
     top:var(--journey-compact-top);
-    margin-top:1.5rem;
     overflow:visible;
   }
 
   .journey__visual{
     display:none;
-  }
-
-  .journey__detail-card{
-    height:auto;
-    min-height:0;
-    padding:clamp(1rem,1.6vw,1.35rem);
-  }
-
-  .journey__detail-title{
-    margin-top:.7rem;
-    font-size:clamp(2.05rem,4.2vw,2.6rem);
-  }
-
-  .journey__detail-lead{
-    margin-top:.7rem;
-    font-size:.92rem;
-    line-height:1.4;
-  }
-
-  .journey__route-meta{
-    margin-top:.8rem;
-    padding:.85rem;
-    gap:.6rem;
-  }
-
-  .journey__timeline{
-    padding-top:.8rem;
-  }
-
-  .journey__timeline li{
-    min-height:2.1rem;
-    font-size:.86rem;
-    line-height:1.35;
   }
 }
 

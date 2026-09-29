@@ -94,24 +94,23 @@
           return;
         }
 
-        const bottomGap = 16;
-        const minTop = 12;
+        const edgeGap = 16;
         const viewportHeight = viewport.offsetHeight;
-        const top = Math.max(minTop, window.innerHeight - viewportHeight - bottomGap);
+        const top = Math.min(edgeGap, window.innerHeight - viewportHeight - edgeGap);
         journey.style.setProperty('--journey-compact-top', top.toFixed(2) + 'px');
       };
 
       const metrics = () => {
         if (viewport && compactJourney.matches) {
           syncCompactViewportTop();
-          const compactTop = Number.parseFloat(getComputedStyle(viewport).top) || 12;
+          const compactTop = Number.parseFloat(getComputedStyle(viewport).top) || 0;
+          const runway = Number.parseFloat(getComputedStyle(journey.querySelector('.journey__inner')).paddingBottom) || 1;
           const start = journey.offsetTop + viewport.offsetTop - compactTop;
-          const end = journey.offsetTop + journey.offsetHeight - viewport.offsetHeight - compactTop;
 
           return {
             stickyTop:compactTop,
             start,
-            max:Math.max(1, end - start)
+            max:Math.max(1, runway)
           };
         }
 
@@ -232,58 +231,66 @@
       visualStep = initial.step;
       paint(initial);
 
-      addEventListener('scroll', scheduleJourney, { passive:true });
+      addEventListener('scroll', () => {
+        if (!resizing) scheduleJourney();
+      }, { passive:true });
 
-      let resizeRaf = 0;
-      let preservedResizeStep = null;
+      let resizeTimer = 0;
+      let resizing = false;
+      let preservedResizeStep = 0;
       let preservedResizeEngaged = false;
 
+      const paintPreservedStep = () => {
+        const lastIndex = Math.max(0, panels.length - 1);
+        const stepDistance = panels.length > 1
+          ? panels[1].offsetLeft - panels[0].offsetLeft
+          : track.clientWidth;
+
+        targetStep = preservedResizeStep;
+        visualStep = preservedResizeStep;
+        paint({ lastIndex, stepDistance });
+      };
+
       addEventListener('resize', () => {
-        if (preservedResizeStep === null) {
+        if (!resizing) {
+          resizing = true;
           preservedResizeStep = targetStep;
           preservedResizeEngaged = progressEngaged;
         }
-        if (resizeRaf) cancelAnimationFrame(resizeRaf);
 
-        resizeRaf = requestAnimationFrame(() => {
-          resizeRaf = 0;
+        clearTimeout(resizeTimer);
+        syncCompactViewportTop();
+        paintPreservedStep();
 
+        resizeTimer = setTimeout(() => {
           if (raf) {
             cancelAnimationFrame(raf);
             raf = 0;
           }
 
-          const preservedStep = Math.max(0, Math.min(
-            preservedResizeStep ?? targetStep,
-            panels.length - 1
-          ));
-          const wasEngaged = preservedResizeEngaged;
-          preservedResizeStep = null;
-          preservedResizeEngaged = false;
           lastFrame = 0;
+          syncCompactViewportTop();
 
-          const beforeRect = journey.getBoundingClientRect();
-          const journeyVisible = beforeRect.bottom > 0 && beforeRect.top < window.innerHeight;
-          const { start, max } = metrics();
-
-          if (journeyVisible && wasEngaged) {
+          if (preservedResizeEngaged) {
+            const { start, max } = metrics();
             const lastIndex = Math.max(0, panels.length - 1);
-            const ratio = lastIndex ? preservedStep / lastIndex : 0;
-            const targetY = start + ratio * max;
-            window.scrollTo({ top:Math.max(0, targetY), behavior:'auto' });
+            const ratio = lastIndex ? preservedResizeStep / lastIndex : 0;
+            window.scrollTo({
+              top:Math.max(0, start + ratio * max),
+              behavior:'auto'
+            });
           }
 
+          resizing = false;
           const state = readTarget();
           targetStep = state.step;
           visualStep = state.step;
           paint(state);
-        });
+        }, 140);
       }, { passive:true });
 
       compactJourney.addEventListener?.('change', () => {
         syncCompactViewportTop();
-        lastFrame = 0;
-        scheduleJourney();
       });
 
       reduceMotion.addEventListener?.('change', () => {
