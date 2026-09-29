@@ -943,13 +943,14 @@
   }
 
   .car-card__price{
-    align-items:flex-start;
-    flex-direction:column;
-    gap:.4rem;
+    align-items:flex-end;
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:.4rem 1rem;
   }
 
   .car-card__price span{
-    text-align:left;
+    text-align:right;
   }
 
   .cars-pick{
@@ -978,7 +979,7 @@
     height:7.5rem;
     min-height:0;
     border-left:0;
-    border-top:1px solid var(--color-line);
+    border-top:0;
   }
 }
 
