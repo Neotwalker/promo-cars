@@ -111,20 +111,31 @@
         return rootSize * 20;
       };
 
+      let compactRunway = 1;
+
       const syncCompactGeometry = () => {
         if (!compactJourney.matches) {
           journey.style.removeProperty('--journey-scene-top');
           shell.style.removeProperty('height');
+          compactRunway = 1;
           return;
         }
 
         const edgeGap = 16;
         const sceneHeight = scene.offsetHeight;
         const sceneTop = Math.min(edgeGap, window.innerHeight - sceneHeight - edgeGap);
-        const runway = Math.max(1, panels.length - 1) * compactStepScroll();
+        compactRunway = Math.max(1, panels.length - 1) * compactStepScroll();
+
+        // Journey is currently the last page section. The shell therefore needs
+        // an extra release tail equal to the free viewport space below the sticky
+        // scene; otherwise the browser reaches document-end before step 08 can.
+        const releaseTail = Math.max(
+          edgeGap,
+          window.innerHeight - sceneHeight - sceneTop
+        );
 
         journey.style.setProperty('--journey-scene-top', sceneTop.toFixed(2) + 'px');
-        shell.style.height = (sceneHeight + runway).toFixed(2) + 'px';
+        shell.style.height = (sceneHeight + compactRunway + releaseTail).toFixed(2) + 'px';
       };
 
       const metrics = () => {
@@ -135,7 +146,7 @@
 
           return {
             start:shellTop - sceneTop,
-            max:Math.max(1, shell.offsetHeight - scene.offsetHeight)
+            max:Math.max(1, compactRunway)
           };
         }
 
