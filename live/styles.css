@@ -1135,6 +1135,166 @@
   }
 }
 
+@media(max-height:50rem){
+  .journey__sticky{
+    height:100svh;
+    min-height:0;
+    box-sizing:border-box;
+    padding:1rem 0 1.25rem;
+  }
+
+  .journey__inner{
+    height:100%;
+    min-height:0;
+  }
+
+  .journey__eyebrow{
+    margin-bottom:.7rem;
+  }
+
+  .journey__lead{
+    padding-top:1.2rem;
+  }
+
+  .journey__stages{
+    margin-top:1rem;
+  }
+
+  .journey__viewport{
+    flex:1 1 auto;
+    min-height:0;
+    margin-top:1rem;
+  }
+
+  .journey__track,
+  .journey__panel,
+  .journey__workspace{
+    height:100%;
+    min-height:0;
+  }
+
+  .journey__workspace{
+    min-height:0;
+  }
+
+  .journey__visual,
+  .journey__detail-card{
+    min-height:0;
+  }
+
+  .journey__detail-card{
+    padding:clamp(1.25rem,1.6vw,1.75rem);
+  }
+
+  .journey__detail-title{
+    margin-top:.85rem;
+  }
+
+  .journey__detail-lead{
+    margin-top:.8rem;
+  }
+
+  .journey__route-meta{
+    margin-top:1rem;
+  }
+
+  .journey__timeline{
+    padding-top:1rem;
+  }
+}
+
+@media(max-width:64rem) and (max-height:50rem){
+  .journey__sticky{
+    padding:.9rem 0 1rem;
+  }
+
+  .journey__lead{
+    display:none;
+  }
+
+  .journey__header{
+    gap:0;
+  }
+
+  .journey__title{
+    font-size:clamp(2.6rem,6vw,3.6rem);
+  }
+
+  .journey__mobile-progress{
+    margin-top:1rem;
+  }
+
+  .journey__viewport{
+    margin-top:1rem;
+  }
+
+  .journey__visual{
+    display:none;
+  }
+
+  .journey__detail-card{
+    height:100%;
+    min-height:0;
+  }
+}
+
+@media(max-width:47.9375rem) and (max-height:42rem){
+  .journey__sticky{
+    padding:.65rem 0 .75rem;
+  }
+
+  .journey__eyebrow{
+    margin-bottom:.45rem;
+  }
+
+  .journey__title{
+    font-size:clamp(2.2rem,10vw,2.85rem);
+  }
+
+  .journey__mobile-progress{
+    margin-top:.7rem;
+  }
+
+  .journey__mobile-progress-bar{
+    margin-top:.55rem;
+  }
+
+  .journey__viewport{
+    margin-top:.7rem;
+  }
+
+  .journey__detail-card{
+    padding:1rem;
+  }
+
+  .journey__detail-title{
+    margin-top:.65rem;
+    font-size:2.05rem;
+  }
+
+  .journey__detail-lead{
+    margin-top:.65rem;
+    font-size:.9rem;
+    line-height:1.4;
+  }
+
+  .journey__route-meta{
+    margin-top:.8rem;
+    padding:.8rem;
+    gap:.6rem;
+  }
+
+  .journey__timeline{
+    padding-top:.8rem;
+  }
+
+  .journey__timeline li{
+    min-height:2.05rem;
+    font-size:.84rem;
+    line-height:1.3;
+  }
+}
+
 @media(prefers-reduced-motion:reduce){
   .journey{
     height:auto;
