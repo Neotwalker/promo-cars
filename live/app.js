@@ -48,7 +48,7 @@
     const panels = [...journey.querySelectorAll('[data-journey-panel]')];
     const track = journey.querySelector('[data-journey-track]');
     const viewport = journey.querySelector('.journey__viewport');
-    const compactJourney = window.matchMedia('(max-width: 64rem) and (max-height: 56rem)');
+    const compactJourney = window.matchMedia('(max-width: 64rem)');
     const mobileProgress = journey.querySelector('[data-journey-mobile-progress]');
     const mobileIndex = journey.querySelector('[data-journey-mobile-index]');
     const mobileTitle = journey.querySelector('[data-journey-mobile-title]');
@@ -145,9 +145,13 @@
         return fallback;
       };
 
+      let progressEngaged = false;
+
       const readTarget = () => {
         const { start, max } = metrics();
-        const passed = Math.min(Math.max(window.scrollY - start, 0), max);
+        const rawPassed = window.scrollY - start;
+        progressEngaged = rawPassed >= 0 && rawPassed <= max;
+        const passed = Math.min(Math.max(rawPassed, 0), max);
         const ratio = passed / max;
         const lastIndex = Math.max(0, panels.length - 1);
         const stepDistance = panels.length > 1
@@ -232,9 +236,13 @@
 
       let resizeRaf = 0;
       let preservedResizeStep = null;
+      let preservedResizeEngaged = false;
 
       addEventListener('resize', () => {
-        if (preservedResizeStep === null) preservedResizeStep = targetStep;
+        if (preservedResizeStep === null) {
+          preservedResizeStep = targetStep;
+          preservedResizeEngaged = progressEngaged;
+        }
         if (resizeRaf) cancelAnimationFrame(resizeRaf);
 
         resizeRaf = requestAnimationFrame(() => {
@@ -249,14 +257,16 @@
             preservedResizeStep ?? targetStep,
             panels.length - 1
           ));
+          const wasEngaged = preservedResizeEngaged;
           preservedResizeStep = null;
+          preservedResizeEngaged = false;
           lastFrame = 0;
 
           const beforeRect = journey.getBoundingClientRect();
           const journeyVisible = beforeRect.bottom > 0 && beforeRect.top < window.innerHeight;
           const { start, max } = metrics();
 
-          if (journeyVisible) {
+          if (journeyVisible && wasEngaged) {
             const lastIndex = Math.max(0, panels.length - 1);
             const ratio = lastIndex ? preservedStep / lastIndex : 0;
             const targetY = start + ratio * max;

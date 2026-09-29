@@ -1203,7 +1203,7 @@
   }
 }
 
-@media(max-width:64rem) and (max-height:56rem){
+@media(max-width:64rem){
   .journey{
     --journey-compact-top:1rem;
   }
