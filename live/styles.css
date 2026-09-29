@@ -696,6 +696,25 @@
     min-height:4.8rem;
   }
 
+  .car-card__specs{
+    gap:.5rem;
+  }
+
+  .car-card--catalog .car-card__spec{
+    grid-template-columns:1.6rem minmax(0,1fr);
+    gap:.5rem;
+  }
+
+  .car-card--catalog .car-card__spec-icon{
+    width:1.6rem;
+    height:1.6rem;
+  }
+
+  .car-card--catalog .car-card__specs dd{
+    font-size:.86rem;
+    white-space:nowrap;
+  }
+
   .car-card__price{
     align-items:flex-start;
     flex-direction:column;
@@ -704,6 +723,10 @@
 
   .car-card__price span{
     text-align:left;
+  }
+
+  .cars-pick__media img{
+    object-position:20% center;
   }
 }
 
