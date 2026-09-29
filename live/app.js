@@ -47,7 +47,8 @@
     const stageItems = [...journey.querySelectorAll('[data-journey-item]')];
     const panels = [...journey.querySelectorAll('[data-journey-panel]')];
     const track = journey.querySelector('[data-journey-track]');
-    const viewport = journey.querySelector('.journey__viewport');
+    const viewport = journey.querySelector('[data-journey-viewport]');
+    const lockPoint = journey.querySelector('[data-journey-lock-point]');
     const compactJourney = window.matchMedia('(max-width: 64rem)');
     const mobileProgress = journey.querySelector('[data-journey-mobile-progress]');
     const mobileIndex = journey.querySelector('[data-journey-mobile-index]');
@@ -101,11 +102,14 @@
       };
 
       const metrics = () => {
-        if (viewport && compactJourney.matches) {
+        if (viewport && lockPoint && compactJourney.matches) {
           syncCompactViewportTop();
-          const compactTop = Number.parseFloat(getComputedStyle(viewport).top) || 0;
+          const viewportStyle = getComputedStyle(viewport);
+          const compactTop = Number.parseFloat(viewportStyle.top) || 0;
+          const viewportMarginTop = Number.parseFloat(viewportStyle.marginTop) || 0;
           const runway = Number.parseFloat(getComputedStyle(journey.querySelector('.journey__inner')).paddingBottom) || 1;
-          const start = journey.offsetTop + viewport.offsetTop - compactTop;
+          const lockPointTop = lockPoint.getBoundingClientRect().top + window.scrollY;
+          const start = lockPointTop + viewportMarginTop - compactTop;
 
           return {
             stickyTop:compactTop,
@@ -144,21 +148,29 @@
         return fallback;
       };
 
-      let progressEngaged = false;
+      let journeyPhase = 'pre-lock';
 
       const readTarget = () => {
         const { start, max } = metrics();
         const rawPassed = window.scrollY - start;
-        progressEngaged = rawPassed >= 0 && rawPassed <= max;
-        const passed = Math.min(Math.max(rawPassed, 0), max);
-        const ratio = passed / max;
         const lastIndex = Math.max(0, panels.length - 1);
         const stepDistance = panels.length > 1
           ? panels[1].offsetLeft - panels[0].offsetLeft
           : track.clientWidth;
 
+        if (rawPassed <= 0) {
+          journeyPhase = 'pre-lock';
+          return { step:0, lastIndex, stepDistance };
+        }
+
+        if (rawPassed >= max) {
+          journeyPhase = 'post-lock';
+          return { step:lastIndex, lastIndex, stepDistance };
+        }
+
+        journeyPhase = 'locked';
         return {
-          step:ratio * lastIndex,
+          step:(rawPassed / max) * lastIndex,
           lastIndex,
           stepDistance
         };
@@ -238,7 +250,7 @@
       let resizeTimer = 0;
       let resizing = false;
       let preservedResizeStep = 0;
-      let preservedResizeEngaged = false;
+      let preservedResizePhase = 'pre-lock';
 
       const paintPreservedStep = () => {
         const lastIndex = Math.max(0, panels.length - 1);
@@ -255,7 +267,7 @@
         if (!resizing) {
           resizing = true;
           preservedResizeStep = targetStep;
-          preservedResizeEngaged = progressEngaged;
+          preservedResizePhase = journeyPhase;
         }
 
         clearTimeout(resizeTimer);
@@ -271,7 +283,7 @@
           lastFrame = 0;
           syncCompactViewportTop();
 
-          if (preservedResizeEngaged) {
+          if (preservedResizePhase === 'locked') {
             const { start, max } = metrics();
             const lastIndex = Math.max(0, panels.length - 1);
             const ratio = lastIndex ? preservedResizeStep / lastIndex : 0;
