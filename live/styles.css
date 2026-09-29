@@ -1061,6 +1061,14 @@
 }
 
 @media(max-width:47.9375rem){
+  .journey__mobile-progress-copy{
+    display:none;
+  }
+
+  .journey__mobile-progress-bar{
+    margin-top:0;
+  }
+
   .journey__eyebrow{
     margin-bottom:1rem;
     font-size:.76rem;
