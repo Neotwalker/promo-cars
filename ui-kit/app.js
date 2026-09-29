@@ -135,11 +135,15 @@
 
   document.querySelectorAll('[data-cars-catalog]').forEach((root) => {
     const grid = root.querySelector('[data-car-grid]');
-    const filters = [...root.querySelectorAll('[data-car-filter]')];
+    const filterSelect = root.querySelector('[data-car-filter-select]');
     const sort = root.querySelector('[data-car-sort]');
-    if (!grid || !filters.length || !sort) return;
+    if (!grid || !filterSelect || !sort) return;
 
     const cards = [...grid.querySelectorAll('[data-car-card]')];
+    const filterTrigger = filterSelect.querySelector('[data-car-filter-trigger]');
+    const filterMenu = filterSelect.querySelector('[data-car-filter-menu]');
+    const filterLabel = filterSelect.querySelector('[data-car-filter-label]');
+    const filterOptions = [...filterSelect.querySelectorAll('[data-car-filter]')];
     const sortTrigger = sort.querySelector('[data-car-sort-trigger]');
     const sortMenu = sort.querySelector('[data-car-sort-menu]');
     const sortLabel = sort.querySelector('[data-car-sort-label]');
@@ -159,91 +163,124 @@
     };
 
     const applyFilter = (filter) => {
-      filters.forEach((button) => {
-        const active = button.dataset.carFilter === filter;
-        button.classList.toggle('cars__filter--active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
-
       cards.forEach((card) => {
         const categories = card.dataset.category?.split(' ') || [];
         card.hidden = filter !== 'all' && !categories.includes(filter);
       });
     };
 
-    filters.forEach((button) => {
-      button.addEventListener('click', () => applyFilter(button.dataset.carFilter));
-    });
+    const initListbox = ({
+      container,
+      trigger,
+      menu,
+      label,
+      options,
+      activeClass,
+      valueOf,
+      onSelect
+    }) => {
+      if (!trigger || !menu || !label || !options.length) return null;
 
-    if (!sortTrigger || !sortMenu || !sortLabel || !sortOptions.length) return;
+      const setOpen = (open, focusOption = false) => {
+        trigger.setAttribute('aria-expanded', String(open));
+        menu.hidden = !open;
 
-    const setSortOpen = (open, focusOption = false) => {
-      sortTrigger.setAttribute('aria-expanded', String(open));
-      sortMenu.hidden = !open;
+        if (open && focusOption) {
+          const active = options.find((option) => option.getAttribute('aria-selected') === 'true') || options[0];
+          requestAnimationFrame(() => active.focus());
+        }
+      };
 
-      if (open && focusOption) {
-        const active = sortOptions.find((option) => option.getAttribute('aria-selected') === 'true') || sortOptions[0];
-        requestAnimationFrame(() => active.focus());
-      }
-    };
+      const select = (option) => {
+        const value = valueOf(option);
+        if (!value) return;
 
-    const selectSort = (option) => {
-      const mode = option.dataset.carSortOption;
-      if (!mode) return;
+        options.forEach((item) => {
+          const selected = item === option;
+          item.classList.toggle(activeClass, selected);
+          item.setAttribute('aria-selected', String(selected));
+        });
 
-      sortOptions.forEach((item) => {
-        const selected = item === option;
-        item.classList.toggle('cars__sort-option--active', selected);
-        item.setAttribute('aria-selected', String(selected));
+        label.textContent = option.textContent.trim();
+        onSelect(value);
+        setOpen(false);
+        trigger.focus();
+      };
+
+      trigger.addEventListener('click', () => {
+        setOpen(trigger.getAttribute('aria-expanded') !== 'true');
       });
 
-      sortLabel.textContent = option.textContent.trim();
-      sortCards(mode);
-      setSortOpen(false);
-      sortTrigger.focus();
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+        event.preventDefault();
+        setOpen(true, true);
+      });
+
+      options.forEach((option) => {
+        option.addEventListener('click', () => select(option));
+      });
+
+      menu.addEventListener('keydown', (event) => {
+        const current = options.indexOf(document.activeElement);
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          setOpen(false);
+          trigger.focus();
+          return;
+        }
+
+        if (event.key === 'Tab') {
+          setOpen(false);
+          return;
+        }
+
+        if (event.key === 'Enter' || event.key === ' ') {
+          if (current < 0) return;
+          event.preventDefault();
+          select(options[current]);
+          return;
+        }
+
+        let next = current;
+        if (event.key === 'ArrowDown') next = current < options.length - 1 ? current + 1 : 0;
+        else if (event.key === 'ArrowUp') next = current > 0 ? current - 1 : options.length - 1;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = options.length - 1;
+        else return;
+
+        event.preventDefault();
+        options[next].focus();
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!container.contains(event.target)) setOpen(false);
+      });
+
+      return { setOpen };
     };
 
-    sortTrigger.addEventListener('click', () => {
-      setSortOpen(sortTrigger.getAttribute('aria-expanded') !== 'true');
+    initListbox({
+      container:filterSelect,
+      trigger:filterTrigger,
+      menu:filterMenu,
+      label:filterLabel,
+      options:filterOptions,
+      activeClass:'cars__filter-option--active',
+      valueOf:(option) => option.dataset.carFilter,
+      onSelect:applyFilter
     });
 
-    sortTrigger.addEventListener('keydown', (event) => {
-      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
-      event.preventDefault();
-      setSortOpen(true, true);
-    });
-
-    sortOptions.forEach((option) => {
-      option.addEventListener('click', () => selectSort(option));
-    });
-
-    sortMenu.addEventListener('keydown', (event) => {
-      const current = sortOptions.indexOf(document.activeElement);
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        setSortOpen(false);
-        sortTrigger.focus();
-        return;
-      }
-
-      if (event.key === 'Tab') {
-        setSortOpen(false);
-        return;
-      }
-
-      let next = current;
-      if (event.key === 'ArrowDown') next = current < sortOptions.length - 1 ? current + 1 : 0;
-      else if (event.key === 'ArrowUp') next = current > 0 ? current - 1 : sortOptions.length - 1;
-      else if (event.key === 'Home') next = 0;
-      else if (event.key === 'End') next = sortOptions.length - 1;
-      else return;
-
-      event.preventDefault();
-      sortOptions[next].focus();
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!sort.contains(event.target)) setSortOpen(false);
+    initListbox({
+      container:sort,
+      trigger:sortTrigger,
+      menu:sortMenu,
+      label:sortLabel,
+      options:sortOptions,
+      activeClass:'cars__sort-option--active',
+      valueOf:(option) => option.dataset.carSortOption,
+      onSelect:sortCards
     });
   });
 

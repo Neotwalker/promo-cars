@@ -91,12 +91,18 @@
           </div>
 
           <div class="cars__controls">
-            <div class="cars__filters" role="group" aria-label="Фильтр автомобилей">
-              <button class="cars__filter cars__filter--active" type="button" data-car-filter="all" aria-pressed="true">Все модели</button>
-              <button class="cars__filter" type="button" data-car-filter="electric" aria-pressed="false">Электромобили</button>
-              <button class="cars__filter" type="button" data-car-filter="hybrid" aria-pressed="false">Гибриды</button>
-              <button class="cars__filter" type="button" data-car-filter="suv" aria-pressed="false">SUV</button>
-              <button class="cars__filter" type="button" data-car-filter="sedan" aria-pressed="false">Седаны</button>
+            <div class="cars__filter-select" data-car-filter-select>
+              <button class="cars__filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="cars-filter-options" data-car-filter-trigger>
+                <span data-car-filter-label>Все модели</span>
+                <span class="cars__filter-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="cars__filter-menu" id="cars-filter-options" role="listbox" aria-label="Фильтр автомобилей" data-car-filter-menu hidden>
+                <button class="cars__filter-option cars__filter-option--active" type="button" role="option" aria-selected="true" data-car-filter="all">Все модели</button>
+                <button class="cars__filter-option" type="button" role="option" aria-selected="false" data-car-filter="electric">Электромобили</button>
+                <button class="cars__filter-option" type="button" role="option" aria-selected="false" data-car-filter="hybrid">Гибриды</button>
+                <button class="cars__filter-option" type="button" role="option" aria-selected="false" data-car-filter="suv">SUV</button>
+                <button class="cars__filter-option" type="button" role="option" aria-selected="false" data-car-filter="sedan">Седаны</button>
+              </div>
             </div>
 
             <div class="cars__sort" data-car-sort>
