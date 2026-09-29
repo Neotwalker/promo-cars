@@ -327,11 +327,10 @@
   content:"";
   position:absolute;
   inset:50% auto auto 50%;
-  width:.88rem;
-  height:.88rem;
+  width:1.1rem;
+  height:1.1rem;
   border-radius:50%;
-  background:
-    radial-gradient(circle,#f8f7f4 0 18%,var(--color-signal) 20% 100%);
+  background:radial-gradient(circle,#f8f7f4 0 35%,var(--color-signal) 20% 100%);
   opacity:0;
   transform:translate(-50%,-50%) scale(.56);
   transition:
@@ -650,8 +649,7 @@
 
 .journey__timeline li.is-active::before{
   border-color:var(--color-signal);
-  background:
-    radial-gradient(circle,#f8f7f4 0 18%,var(--color-signal) 20% 100%);
+  background:radial-gradient(circle,#f8f7f4 0 35%,var(--color-signal) 20% 100%);
   box-shadow:none;
 }
 
