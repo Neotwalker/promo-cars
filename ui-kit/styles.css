@@ -685,6 +685,32 @@ body.menu-open{overflow:hidden}
 }
 
 /* 07 — A11Y / REDUCED MOTION */
+@media(min-width:48rem) and (max-width:64.5rem){
+  .car-card--catalog .car-card__specs{
+    gap:.35rem;
+  }
+
+  .car-card--catalog .car-card__spec{
+    grid-template-columns:1.35rem minmax(0,1fr);
+    gap:.35rem;
+  }
+
+  .car-card--catalog .car-card__spec-icon{
+    width:1.35rem;
+    height:1.35rem;
+  }
+
+  .car-card--catalog .car-card__specs dt{
+    font-size:.68rem;
+  }
+
+  .car-card--catalog .car-card__specs dd{
+    min-width:0;
+    font-size:.82rem;
+    overflow-wrap:anywhere;
+  }
+}
+
 @media(max-width:64rem){
   .grid--3{grid-template-columns:repeat(2,minmax(0,1fr))}
   .site-header__inner{grid-template-columns:1fr auto}

@@ -1054,7 +1054,7 @@
   }
 
   .journey__visual{
-    min-height:14rem;
+    display:none;
   }
 
   .journey__detail-card{
