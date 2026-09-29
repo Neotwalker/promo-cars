@@ -357,7 +357,6 @@
   border:1.5px solid var(--color-signal);
   background-color:#f8f7f4;
   box-shadow:none;
-  transform:scale(1.06);
 }
 
 .journey__stage-item--active .journey__stage-dot::after{
@@ -636,10 +635,10 @@
 .journey__timeline-check{
   position:absolute;
   z-index:1;
-  left:.375rem;
-  top:.375rem;
-  width:.65rem;
-  height:.65rem;
+  left:.1rem;
+  top:.1rem;
+  width:1.2rem;
+  height:1.2rem;
   display:block;
   pointer-events:none;
 }
@@ -650,9 +649,9 @@
 }
 
 .journey__timeline li.is-active::before{
-  border:1.5px solid var(--color-signal);
+  border-color:var(--color-signal);
   background:
-    radial-gradient(circle,#f8f7f4 0 18%,var(--color-signal) 20% 38%,#f8f7f4 40% 100%);
+    radial-gradient(circle,#f8f7f4 0 18%,var(--color-signal) 20% 100%);
   box-shadow:none;
 }
 
