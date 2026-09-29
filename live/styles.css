@@ -766,31 +766,19 @@
   }
 
   .cars__controls{
-    align-items:flex-start;
-    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    flex-direction:row;
   }
 
   .cars__filter-select,
   .cars__sort{
-    width:min(20rem,100%);
-    flex-basis:auto;
+    width:auto;
+    flex:0 1 20rem;
   }
 
   .cars__grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  .car-card:last-child{
-    grid-column:1 / -1;
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  }
-
-  .car-card:last-child .car-card__media{
-    aspect-ratio:auto;
-    min-height:100%;
-    border-bottom:0;
-    border-right:1px solid var(--color-line);
   }
 
   .cars-pick{
@@ -802,7 +790,6 @@
     grid-column:1 / -1;
     min-height:10rem;
     border-left:0;
-    border-top:1px solid var(--color-line);
   }
 }
 
