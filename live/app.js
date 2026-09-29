@@ -200,9 +200,46 @@
       paint(initial);
 
       addEventListener('scroll', scheduleJourney, { passive:true });
+
+      let resizeRaf = 0;
+      let preservedResizeStep = null;
+
       addEventListener('resize', () => {
-        lastFrame = 0;
-        scheduleJourney();
+        if (preservedResizeStep === null) preservedResizeStep = targetStep;
+        if (resizeRaf) cancelAnimationFrame(resizeRaf);
+
+        resizeRaf = requestAnimationFrame(() => {
+          resizeRaf = 0;
+
+          if (raf) {
+            cancelAnimationFrame(raf);
+            raf = 0;
+          }
+
+          const preservedStep = Math.max(0, Math.min(
+            preservedResizeStep ?? targetStep,
+            panels.length - 1
+          ));
+          preservedResizeStep = null;
+          lastFrame = 0;
+
+          const rect = journey.getBoundingClientRect();
+          const { stickyTop, max } = metrics();
+          const isJourneyActive = rect.top <= stickyTop + 1 && rect.bottom > window.innerHeight;
+
+          if (isJourneyActive) {
+            const lastIndex = Math.max(0, panels.length - 1);
+            const ratio = lastIndex ? preservedStep / lastIndex : 0;
+            const sectionTop = window.scrollY + rect.top;
+            const targetY = sectionTop - stickyTop + ratio * max;
+            window.scrollTo({ top:Math.max(0, targetY), behavior:'auto' });
+          }
+
+          const state = readTarget();
+          targetStep = state.step;
+          visualStep = state.step;
+          paint(state);
+        });
       }, { passive:true });
 
       reduceMotion.addEventListener?.('change', () => {
