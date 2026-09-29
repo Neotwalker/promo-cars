@@ -1433,21 +1433,34 @@
 }
 .configurator__choices--cars,
 .configurator__choices--cities{
-  padding-right:.35rem;
+  padding-right:.45rem;
   overflow-y:auto;
   overscroll-behavior:contain;
   scrollbar-gutter:stable;
   scrollbar-width:thin;
-  scrollbar-color:#b9bab7 transparent;
+  scrollbar-color:#8f9396 #efeee9;
 }
 .configurator__choices--cars{max-height:19rem}
 .configurator__choices--cities{max-height:17.5rem}
 .configurator__choices--cars::-webkit-scrollbar,
-.configurator__choices--cities::-webkit-scrollbar{width:.42rem}
+.configurator__choices--cities::-webkit-scrollbar{
+  width:.55rem;
+}
+.configurator__choices--cars::-webkit-scrollbar-track,
+.configurator__choices--cities::-webkit-scrollbar-track{
+  border-radius:999px;
+  background:#efeee9;
+}
 .configurator__choices--cars::-webkit-scrollbar-thumb,
 .configurator__choices--cities::-webkit-scrollbar-thumb{
+  min-height:3.25rem;
+  border:.16rem solid #efeee9;
   border-radius:999px;
-  background:#b9bab7;
+  background:#8f9396;
+}
+.configurator__choices--cars::-webkit-scrollbar-thumb:hover,
+.configurator__choices--cities::-webkit-scrollbar-thumb:hover{
+  background:#666b70;
 }
 .configurator__choice{
   position:relative;
@@ -1746,8 +1759,8 @@
   .configurator__summary{display:none}
   .configurator__form>.configurator__summary{
     display:flex;
-    margin:1.25rem 0;
-    border-radius:var(--radius-sm);
+    margin:1.25rem -1.2rem;
+    border-radius:0;
     overflow:hidden;
   }
   .configurator__summary-media,

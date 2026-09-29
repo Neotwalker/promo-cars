@@ -424,6 +424,7 @@
       city:configurator.querySelector('[data-config-city]'),
       cityOptions:[...configurator.querySelectorAll('[data-config-choice="city"] [data-value]')],
       contact:configurator.querySelector('[data-config-contact]'),
+      contactLabel:configurator.querySelector('[data-config-contact-label]'),
       back:configurator.querySelector('[data-config-back]'),
       next:configurator.querySelector('[data-config-next]'),
       submit:configurator.querySelector('[data-config-submit]'),
@@ -474,6 +475,49 @@
         const visible = !normalized || button.dataset.value.toLowerCase().includes(normalized);
         button.hidden = !visible;
       });
+    };
+
+    const phoneDigits = (value = '') => {
+      let digits = value.replace(/\D/g,'');
+      if (digits.startsWith('7') || digits.startsWith('8')) digits = digits.slice(1);
+      return digits.slice(0,10);
+    };
+
+    const formatPhone = (value = '') => {
+      const digits = phoneDigits(value);
+      if (!digits) return '';
+
+      let result = '+7 (';
+      result += digits.slice(0,3);
+      if (digits.length >= 3) result += ')';
+      if (digits.length > 3) result += ' ' + digits.slice(3,6);
+      if (digits.length > 6) result += '-' + digits.slice(6,8);
+      if (digits.length > 8) result += '-' + digits.slice(8,10);
+      return result;
+    };
+
+    const contactValues = {
+      'Телефон':'',
+      'Telegram':''
+    };
+
+    const syncContactMode = () => {
+      const isPhone = state.channel === 'Телефон';
+      refs.contactLabel.textContent = isPhone ? 'Телефон' : 'Username в Telegram';
+      refs.contact.placeholder = isPhone ? '+7 (___) ___-__-__' : '@username';
+      refs.contact.autocomplete = isPhone ? 'tel' : 'off';
+      refs.contact.inputMode = isPhone ? 'tel' : 'text';
+      refs.contact.maxLength = isPhone ? 18 : 64;
+
+      if (isPhone) {
+        refs.contact.value = formatPhone(contactValues['Телефон']);
+        state.contact = phoneDigits(contactValues['Телефон']);
+      } else {
+        refs.contact.value = contactValues['Telegram'];
+        state.contact = contactValues['Telegram'].trim();
+      }
+
+      clearFieldError(refs.contact,'Контакт нужен только для отправки расчёта.');
     };
 
     const clearFieldError = (input, messageText) => {
@@ -652,8 +696,7 @@
         }
 
         if (key === 'channel') {
-          refs.contact.placeholder = value === 'Telegram' ? '@username' : '+7 999 000-00-00';
-          refs.contact.autocomplete = value === 'Telegram' ? 'off' : 'tel';
+          syncContactMode();
         }
 
         renderSummary();
@@ -695,7 +738,16 @@
     });
 
     refs.contact.addEventListener('input', () => {
-      state.contact = refs.contact.value.trim();
+      if (state.channel === 'Телефон') {
+        const digits = phoneDigits(refs.contact.value);
+        contactValues['Телефон'] = digits;
+        refs.contact.value = formatPhone(digits);
+        state.contact = digits;
+      } else {
+        contactValues['Telegram'] = refs.contact.value;
+        state.contact = refs.contact.value.trim();
+      }
+
       clearFieldError(refs.contact,'Контакт нужен только для отправки расчёта.');
     });
 
@@ -720,7 +772,11 @@
         return;
       }
       if (!state.contact) {
-        fieldError(refs.contact,'Укажите контакт.');
+        fieldError(refs.contact,state.channel === 'Телефон' ? 'Укажите номер телефона.' : 'Укажите username в Telegram.');
+        return;
+      }
+      if (state.channel === 'Телефон' && phoneDigits(state.contact).length !== 10) {
+        fieldError(refs.contact,'Введите номер полностью: +7 (___) ___-__-__.');
         return;
       }
 
@@ -763,6 +819,7 @@
 
     compactSummary.addEventListener?.('change', syncSummaryPlacement);
 
+    syncContactMode();
     renderStep();
   }
 
