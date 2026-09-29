@@ -782,15 +782,20 @@
   }
 
   .cars-pick{
-    height:auto;
-    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+    height:12.5rem;
+    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr) clamp(13rem,25vw,16rem);
   }
 
   .cars-pick__media{
-    grid-column:1 / -1;
-    height:12rem;
+    grid-column:auto;
+    grid-row:1;
+    height:auto;
     min-height:0;
     border-left:0;
+  }
+
+  .cars-pick__media img{
+    object-position:0% center;
   }
 }
 
