@@ -720,6 +720,35 @@ body.menu-open{overflow:hidden}
   .menu-toggle{display:inline-flex}
 }
 @media(max-width:48rem){
+  .car-card--catalog .car-card__specs{
+    gap:.5rem;
+  }
+
+  .car-card--catalog .car-card__spec{
+    grid-template-columns:1fr;
+    gap:.4rem;
+    align-items:start;
+  }
+
+  .car-card--catalog .car-card__spec-icon{
+    width:1.45rem;
+    height:1.45rem;
+  }
+
+  .car-card--catalog .car-card__spec>div{
+    gap:.12rem;
+  }
+
+  .car-card--catalog .car-card__specs dt{
+    font-size:.74rem;
+    line-height:1.25;
+  }
+
+  .car-card--catalog .car-card__specs dd{
+    font-size:.9rem;
+    line-height:1.2;
+  }
+
   .grid--2,.grid--3{grid-template-columns:1fr}
   .site-header__brand{font-size:var(--type-small)}
   .site-footer__grid{grid-template-columns:1fr}

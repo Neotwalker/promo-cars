@@ -866,16 +866,18 @@
 
   .hero__actions{
     width:100%;
-    margin-top:2rem;
+    margin-top:1.6rem;
+    gap:.65rem;
   }
 
   .hero__action{
-    min-height:4rem;
-    padding-inline:1.5rem;
+    min-height:3.5rem;
+    padding-inline:1.25rem;
+    font-size:1rem;
   }
 
   .cars{
-    padding:4.25rem 0 5rem;
+    padding:4.25rem 0 3.5rem;
   }
 
   .cars__inner{
@@ -900,6 +902,7 @@
   .cars__controls{
     align-items:stretch;
     flex-direction:column;
+    gap:.75rem;
   }
 
   .cars__filter-select,
@@ -972,7 +975,8 @@
   }
 
   .cars-pick__media{
-    min-height:9rem;
+    height:7.5rem;
+    min-height:0;
     border-left:0;
     border-top:1px solid var(--color-line);
   }
@@ -1069,6 +1073,10 @@
     margin-top:0;
   }
 
+  .journey__header{
+    gap:1rem;
+  }
+
   .journey__eyebrow{
     margin-bottom:1rem;
     font-size:.76rem;
@@ -1079,11 +1087,12 @@
   }
 
   .journey__lead{
+    padding-top:0;
     font-size:.98rem;
   }
 
   .journey__viewport{
-    --journey-panel-gap:1.5rem;
+    --journey-panel-gap:.75rem;
   }
 
   .journey__visual{
@@ -1093,6 +1102,14 @@
   .journey__detail-card{
     min-height:29rem;
     padding:1.25rem;
+  }
+
+  .journey__detail-topline{
+    justify-content:flex-end;
+  }
+
+  .journey__detail-topline>span:first-child{
+    display:none;
   }
 
   .journey__detail-title{
@@ -1106,8 +1123,14 @@
 
   .journey__route-meta{
     grid-template-columns:1fr;
-    gap:.85rem;
-    margin-top:1.25rem;
+    gap:.65rem;
+    margin-top:1rem;
+    padding:.9rem 1rem;
+  }
+
+  .journey__route-meta>div{
+    min-height:2.5rem;
+    gap:.18rem;
   }
 
   .journey__route-meta>div+div{
@@ -1123,7 +1146,7 @@
   }
 
   .journey__timeline{
-    padding-top:1.25rem;
+    padding-top:1rem;
   }
 
   .journey__timeline li{
@@ -1256,7 +1279,7 @@
 
 @media(max-width:47.9375rem){
   .journey__sticky{
-    padding-top:3.5rem;
+    padding-top:3rem;
   }
 
   .journey__scroll-shell{

@@ -50,6 +50,7 @@
     const panels = [...journey.querySelectorAll('[data-journey-panel]')];
     const track = journey.querySelector('[data-journey-track]');
     const compactJourney = window.matchMedia('(max-width: 64rem)');
+    const smallMobileJourney = window.matchMedia('(max-width: 30rem)');
     const mobileProgress = journey.querySelector('[data-journey-mobile-progress]');
     const mobileIndex = journey.querySelector('[data-journey-mobile-index]');
     const mobileTitle = journey.querySelector('[data-journey-mobile-title]');
@@ -212,8 +213,10 @@
           }
 
           const distance = Math.min(1, Math.abs(index - visualStep));
-          panel.style.opacity = (1 - distance * .82).toFixed(3);
-          panel.style.transform = 'scale(' + (1 - distance * .14).toFixed(4) + ')';
+          const opacityDrop = smallMobileJourney.matches ? .72 : .82;
+          const scaleDrop = smallMobileJourney.matches ? .08 : .14;
+          panel.style.opacity = (1 - distance * opacityDrop).toFixed(3);
+          panel.style.transform = 'scale(' + (1 - distance * scaleDrop).toFixed(4) + ')';
         });
 
         track.style.transform = reduceMotion.matches
@@ -317,6 +320,11 @@
       compactJourney.addEventListener?.('change', () => {
         layoutWidth = window.innerWidth;
         syncCompactGeometry({ refreshViewportHeight:true });
+        lastFrame = 0;
+        scheduleJourney();
+      });
+
+      smallMobileJourney.addEventListener?.('change', () => {
         lastFrame = 0;
         scheduleJourney();
       });
