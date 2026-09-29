@@ -47,6 +47,8 @@
     const stageItems = [...journey.querySelectorAll('[data-journey-item]')];
     const panels = [...journey.querySelectorAll('[data-journey-panel]')];
     const track = journey.querySelector('[data-journey-track]');
+    const viewport = journey.querySelector('.journey__viewport');
+    const compactJourney = window.matchMedia('(max-width: 64rem) and (max-height: 56rem)');
     const mobileProgress = journey.querySelector('[data-journey-mobile-progress]');
     const mobileIndex = journey.querySelector('[data-journey-mobile-index]');
     const mobileTitle = journey.querySelector('[data-journey-mobile-title]');
@@ -86,18 +88,45 @@
         }
       };
 
+      const syncCompactViewportTop = () => {
+        if (!viewport || !compactJourney.matches) {
+          journey.style.removeProperty('--journey-compact-top');
+          return;
+        }
+
+        const bottomGap = 16;
+        const minTop = 12;
+        const viewportHeight = viewport.offsetHeight;
+        const top = Math.max(minTop, window.innerHeight - viewportHeight - bottomGap);
+        journey.style.setProperty('--journey-compact-top', top.toFixed(2) + 'px');
+      };
+
       const metrics = () => {
+        if (viewport && compactJourney.matches) {
+          syncCompactViewportTop();
+          const compactTop = Number.parseFloat(getComputedStyle(viewport).top) || 12;
+          const start = journey.offsetTop + viewport.offsetTop - compactTop;
+          const end = journey.offsetTop + journey.offsetHeight - viewport.offsetHeight - compactTop;
+
+          return {
+            stickyTop:compactTop,
+            start,
+            max:Math.max(1, end - start)
+          };
+        }
+
         const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
         return {
           stickyTop,
+          start:journey.offsetTop - stickyTop,
           max:Math.max(1, journey.offsetHeight - window.innerHeight)
         };
       };
 
       const scrollToStep = (index) => {
-        const { stickyTop, max } = metrics();
+        const { start, max } = metrics();
         const denominator = Math.max(1, panels.length - 1);
-        const target = journey.offsetTop - stickyTop + (index / denominator) * max;
+        const target = start + (index / denominator) * max;
         window.scrollTo({
           top:Math.max(0, target),
           behavior:reduceMotion.matches ? 'auto' : 'smooth'
@@ -117,9 +146,8 @@
       };
 
       const readTarget = () => {
-        const { stickyTop, max } = metrics();
-        const rect = journey.getBoundingClientRect();
-        const passed = Math.min(Math.max(-rect.top + stickyTop, 0), max);
+        const { start, max } = metrics();
+        const passed = Math.min(Math.max(window.scrollY - start, 0), max);
         const ratio = passed / max;
         const lastIndex = Math.max(0, panels.length - 1);
         const stepDistance = panels.length > 1
@@ -194,6 +222,7 @@
         if (!raf) raf = requestAnimationFrame(frame);
       };
 
+      syncCompactViewportTop();
       const initial = readTarget();
       targetStep = initial.step;
       visualStep = initial.step;
@@ -223,15 +252,14 @@
           preservedResizeStep = null;
           lastFrame = 0;
 
-          const rect = journey.getBoundingClientRect();
-          const { stickyTop, max } = metrics();
-          const isJourneyActive = rect.top <= stickyTop + 1 && rect.bottom > window.innerHeight;
+          const beforeRect = journey.getBoundingClientRect();
+          const journeyVisible = beforeRect.bottom > 0 && beforeRect.top < window.innerHeight;
+          const { start, max } = metrics();
 
-          if (isJourneyActive) {
+          if (journeyVisible) {
             const lastIndex = Math.max(0, panels.length - 1);
             const ratio = lastIndex ? preservedStep / lastIndex : 0;
-            const sectionTop = window.scrollY + rect.top;
-            const targetY = sectionTop - stickyTop + ratio * max;
+            const targetY = start + ratio * max;
             window.scrollTo({ top:Math.max(0, targetY), behavior:'auto' });
           }
 
@@ -241,6 +269,12 @@
           paint(state);
         });
       }, { passive:true });
+
+      compactJourney.addEventListener?.('change', () => {
+        syncCompactViewportTop();
+        lastFrame = 0;
+        scheduleJourney();
+      });
 
       reduceMotion.addEventListener?.('change', () => {
         lastFrame = 0;
