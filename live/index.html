@@ -534,10 +534,30 @@
                 </span>
                 <span class="configurator__field-copy">
                   <span class="configurator__field-label">Город получения</span>
-                  <input class="configurator__field-control" name="city" value="Москва" autocomplete="address-level2" data-config-city aria-describedby="config-city-message">
+                  <input class="configurator__field-control" name="city" value="Москва" autocomplete="off" data-config-city aria-describedby="config-city-message" aria-controls="config-city-options">
                 </span>
               </label>
-              <small class="configurator__message" id="config-city-message" data-field-message>Региональная доставка будет отдельной строкой.</small>
+              <small class="configurator__message" id="config-city-message" data-field-message>Доставка доступна в города-миллионники. Начните вводить название или выберите город из списка.</small>
+
+              <div class="configurator__choices configurator__choices--cities" id="config-city-options" data-config-choice="city" aria-label="Доступные города доставки">
+                <button class="configurator__choice" type="button" data-value="Москва" aria-pressed="true"><span>Москва</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Санкт-Петербург" aria-pressed="false"><span>Санкт-Петербург</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Новосибирск" aria-pressed="false"><span>Новосибирск</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Екатеринбург" aria-pressed="false"><span>Екатеринбург</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Казань" aria-pressed="false"><span>Казань</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Красноярск" aria-pressed="false"><span>Красноярск</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Нижний Новгород" aria-pressed="false"><span>Нижний Новгород</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Челябинск" aria-pressed="false"><span>Челябинск</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Уфа" aria-pressed="false"><span>Уфа</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Краснодар" aria-pressed="false"><span>Краснодар</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Самара" aria-pressed="false"><span>Самара</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Ростов-на-Дону" aria-pressed="false"><span>Ростов-на-Дону</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Омск" aria-pressed="false"><span>Омск</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Воронеж" aria-pressed="false"><span>Воронеж</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Пермь" aria-pressed="false"><span>Пермь</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Волгоград" aria-pressed="false"><span>Волгоград</span><i aria-hidden="true"></i></button>
+              </div>
+              <small class="configurator__choice-message" data-choice-message="city"></small>
             </section>
 
             <section class="configurator__step" data-config-step="contact" aria-labelledby="config-contact-title" hidden>

@@ -1431,6 +1431,24 @@
   display:grid;
   gap:.55rem;
 }
+.configurator__choices--cars,
+.configurator__choices--cities{
+  padding-right:.35rem;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  scrollbar-width:thin;
+  scrollbar-color:#b9bab7 transparent;
+}
+.configurator__choices--cars{max-height:19rem}
+.configurator__choices--cities{max-height:17.5rem}
+.configurator__choices--cars::-webkit-scrollbar,
+.configurator__choices--cities::-webkit-scrollbar{width:.42rem}
+.configurator__choices--cars::-webkit-scrollbar-thumb,
+.configurator__choices--cities::-webkit-scrollbar-thumb{
+  border-radius:999px;
+  background:#b9bab7;
+}
 .configurator__choice{
   position:relative;
   width:100%;
@@ -1520,12 +1538,36 @@
   padding-top:1.5rem;
   border-top:1px solid #e2e2df;
   display:grid;
-  grid-template-columns:minmax(9rem,.7fr) minmax(12rem,1fr);
+  grid-template-columns:minmax(10rem,15rem) minmax(14rem,18rem);
+  justify-content:space-between;
   gap:1rem;
 }
-.configurator__actions .button{min-height:3.75rem}
+.configurator__actions .button{
+  width:100%;
+  min-height:3.55rem;
+  border-radius:var(--radius-sm);
+}
+.configurator__back{
+  background:#fff;
+  border-color:#d7d8d4;
+  color:#666a70;
+}
+.configurator__back:hover:not(:disabled){
+  background:#f6f5f2;
+  border-color:#b8bab6;
+}
 .configurator__next,
-.configurator__submit{justify-content:space-between}
+.configurator__submit{
+  justify-content:space-between;
+  background:var(--color-signal);
+  border-color:var(--color-signal);
+  color:#fff;
+}
+.configurator__next:hover,
+.configurator__submit:hover{
+  background:#e7551b;
+  border-color:#e7551b;
+}
 .configurator__summary{
   min-width:0;
   display:flex;
@@ -1656,7 +1698,22 @@
   line-height:1.45;
 }
 .configurator__summary-note strong{color:#f8f7f4}
-.configurator__toasts{z-index:120}
+.configurator__toasts{
+  position:fixed;
+  left:max(1rem,env(safe-area-inset-left));
+  bottom:max(1rem,env(safe-area-inset-bottom));
+  z-index:120;
+  width:min(26.25rem,calc(100vw - 2rem));
+  display:grid;
+  gap:.75rem;
+  pointer-events:none;
+}
+.configurator__toasts .toast{
+  width:100%;
+  min-width:0;
+  max-width:none;
+  pointer-events:auto;
+}
 
 @media(max-width:64rem){
   .configurator{padding:5.5rem 0}
@@ -1678,6 +1735,8 @@
   .configurator__step{margin-top:1.5rem}
   .configurator__question{font-size:clamp(2.25rem,10vw,3rem)}
   .configurator__choice{min-height:3.65rem}
+  .configurator__choices--cars{max-height:16.5rem}
+  .configurator__choices--cities{max-height:15rem}
   .configurator__choice--car{grid-template-columns:5.9rem minmax(0,1fr) 1.25rem}
   .configurator__choice--car img{width:5.7rem;height:2.5rem}
   .configurator__choice:not(.configurator__choice--car):has(.configurator__choice-search){grid-template-columns:1.5rem minmax(0,1fr) 1.25rem}

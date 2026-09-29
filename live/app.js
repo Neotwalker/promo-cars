@@ -380,6 +380,25 @@
       }
     };
 
+    const deliveryCities = [
+      'Москва',
+      'Санкт-Петербург',
+      'Новосибирск',
+      'Екатеринбург',
+      'Казань',
+      'Красноярск',
+      'Нижний Новгород',
+      'Челябинск',
+      'Уфа',
+      'Краснодар',
+      'Самара',
+      'Ростов-на-Дону',
+      'Омск',
+      'Воронеж',
+      'Пермь',
+      'Волгоград'
+    ];
+
     const money = (value) => new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
     const form = configurator.querySelector('[data-config-form]');
     const layout = configurator.querySelector('[data-config-layout]');
@@ -403,6 +422,7 @@
     const refs = {
       model:configurator.querySelector('[data-config-model]'),
       city:configurator.querySelector('[data-config-city]'),
+      cityOptions:[...configurator.querySelectorAll('[data-config-choice="city"] [data-value]')],
       contact:configurator.querySelector('[data-config-contact]'),
       back:configurator.querySelector('[data-config-back]'),
       next:configurator.querySelector('[data-config-next]'),
@@ -446,6 +466,14 @@
     const setChoice = (groupName, value) => {
       state[groupName] = value;
       setPressed(groupName, value);
+    };
+
+    const filterCityOptions = (query = '') => {
+      const normalized = query.trim().toLowerCase();
+      refs.cityOptions.forEach((button) => {
+        const visible = !normalized || button.dataset.value.toLowerCase().includes(normalized);
+        button.hidden = !visible;
+      });
     };
 
     const clearFieldError = (input, messageText) => {
@@ -573,23 +601,29 @@
       if (name === 'budget' && !state.budget) {
         return choiceError('budget','Выберите бюджет или вариант «Нужен ориентир».');
       }
-      if (name === 'city' && !state.city) {
-        return fieldError(refs.city,'Укажите город получения.');
+      if (name === 'city' && !deliveryCities.includes(state.city)) {
+        return fieldError(refs.city,'Выберите город из списка доступной доставки.');
       }
       return true;
     };
 
     const showToast = (title, message, type = 'success') => {
       if (!refs.toasts) return;
+
+      refs.toasts.replaceChildren();
+
       const toast = document.createElement('div');
-      toast.className = 'toast';
+      toast.className = 'toast toast--' + type;
       toast.dataset.toastItem = '';
+      toast.setAttribute('role',type === 'error' ? 'alert' : 'status');
       toast.innerHTML = '<strong></strong><span></span>';
       toast.querySelector('strong').textContent = title;
       toast.querySelector('span').textContent = message;
-      if (type === 'error') toast.setAttribute('role','alert');
       refs.toasts.append(toast);
-      setTimeout(() => toast.remove(), type === 'error' ? 6500 : 4200);
+
+      setTimeout(() => {
+        if (toast.isConnected) toast.remove();
+      }, type === 'error' ? 6500 : 4200);
     };
 
     configurator.querySelectorAll('[data-config-choice]').forEach((group) => {
@@ -608,6 +642,13 @@
           const known = pricing[value];
           state.power = known?.power || '';
           setPressed('power',state.power);
+        }
+
+        if (key === 'city') {
+          refs.city.value = value;
+          state.city = value;
+          filterCityOptions();
+          clearFieldError(refs.city,'Доставка доступна в города-миллионники. Начните вводить название или выберите город из списка.');
         }
 
         if (key === 'channel') {
@@ -638,9 +679,18 @@
       renderSummary();
     });
 
+    refs.city.addEventListener('focus', () => {
+      filterCityOptions();
+    });
+
     refs.city.addEventListener('input', () => {
-      state.city = refs.city.value.trim();
-      clearFieldError(refs.city,'Региональная доставка будет отдельной строкой.');
+      const query = refs.city.value.trim();
+      const exact = deliveryCities.find((city) => city.toLowerCase() === query.toLowerCase());
+
+      state.city = exact || '';
+      setPressed('city',state.city);
+      filterCityOptions(query);
+      clearFieldError(refs.city,'Доставка доступна в города-миллионники. Начните вводить название или выберите город из списка.');
       renderSummary();
     });
 
@@ -651,7 +701,6 @@
 
     refs.next.addEventListener('click', () => {
       state.model = state.model || refs.model.value.trim();
-      state.city = refs.city.value.trim();
       if (!validateCurrent()) return;
       current += 1;
       renderStep({focusQuestion:true});
