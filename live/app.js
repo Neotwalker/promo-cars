@@ -43,21 +43,29 @@
 
   if (journey) {
     const sticky = journey.querySelector('[data-journey-sticky]');
+    const shell = journey.querySelector('[data-journey-shell]');
+    const scene = journey.querySelector('[data-journey-scene]');
     const stages = [...journey.querySelectorAll('[data-journey-step]')];
     const stageItems = [...journey.querySelectorAll('[data-journey-item]')];
     const panels = [...journey.querySelectorAll('[data-journey-panel]')];
     const track = journey.querySelector('[data-journey-track]');
-    const viewport = journey.querySelector('[data-journey-viewport]');
-    const lockPoint = journey.querySelector('[data-journey-lock-point]');
-    const runway = journey.querySelector('[data-journey-runway]');
     const compactJourney = window.matchMedia('(max-width: 64rem)');
     const mobileProgress = journey.querySelector('[data-journey-mobile-progress]');
     const mobileIndex = journey.querySelector('[data-journey-mobile-index]');
     const mobileTitle = journey.querySelector('[data-journey-mobile-title]');
     const mobileNext = journey.querySelector('[data-journey-mobile-next]');
 
-    if (sticky && track && panels.length) {
+    if (sticky && shell && scene && track && panels.length) {
       let current = -1;
+      let targetStep = 0;
+      let visualStep = 0;
+      let journeyPhase = 'pre-lock';
+      let raf = 0;
+      let lastFrame = 0;
+      let resizing = false;
+      let resizeTimer = 0;
+      let preservedResizeStep = 0;
+      let preservedResizePhase = 'pre-lock';
 
       const setActive = (index) => {
         const safeIndex = Math.max(0, Math.min(index, panels.length - 1));
@@ -80,8 +88,8 @@
         });
 
         if (changed && mobileProgress) {
-          const title = panels[safeIndex]?.querySelector('h3')?.textContent?.replace(/^\d{2}\s*/, '').trim() || '';
-          const nextTitle = panels[safeIndex + 1]?.querySelector('h3')?.textContent?.replace(/^\d{2}\s*/, '').trim();
+          const title = panels[safeIndex]?.querySelector('h3')?.textContent?.replace(/^\\d{2}\\s*/, '').trim() || '';
+          const nextTitle = panels[safeIndex + 1]?.querySelector('h3')?.textContent?.replace(/^\\d{2}\\s*/, '').trim();
 
           mobileProgress.setAttribute('aria-valuenow', String(safeIndex + 1));
           if (mobileIndex) mobileIndex.textContent = String(safeIndex + 1).padStart(2, '0');
@@ -89,56 +97,6 @@
           if (mobileNext) mobileNext.textContent = nextTitle ? 'Далее: ' + nextTitle : 'Маршрут завершён';
         }
       };
-
-      const syncCompactViewportTop = () => {
-        if (!viewport || !compactJourney.matches) {
-          journey.style.removeProperty('--journey-compact-top');
-          return;
-        }
-
-        const edgeGap = 16;
-        const viewportHeight = viewport.offsetHeight;
-        const top = Math.min(edgeGap, window.innerHeight - viewportHeight - edgeGap);
-        journey.style.setProperty('--journey-compact-top', top.toFixed(2) + 'px');
-      };
-
-      const metrics = () => {
-        if (viewport && lockPoint && runway && compactJourney.matches) {
-          syncCompactViewportTop();
-          const viewportStyle = getComputedStyle(viewport);
-          const compactTop = Number.parseFloat(viewportStyle.top) || 0;
-          const viewportMarginTop = Number.parseFloat(viewportStyle.marginTop) || 0;
-          const lockPointTop = lockPoint.getBoundingClientRect().top + window.scrollY;
-          const start = lockPointTop + viewportMarginTop - compactTop;
-
-          return {
-            stickyTop:compactTop,
-            start,
-            max:Math.max(1, runway.offsetHeight)
-          };
-        }
-
-        const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
-        return {
-          stickyTop,
-          start:journey.offsetTop - stickyTop,
-          max:Math.max(1, journey.offsetHeight - window.innerHeight)
-        };
-      };
-
-      const scrollToStep = (index) => {
-        const { start, max } = metrics();
-        const denominator = Math.max(1, panels.length - 1);
-        const target = start + (index / denominator) * max;
-        window.scrollTo({
-          top:Math.max(0, target),
-          behavior:reduceMotion.matches ? 'auto' : 'smooth'
-        });
-      };
-
-      stages.forEach((stage) => {
-        stage.addEventListener('click', () => scrollToStep(Number(stage.dataset.journeyStep)));
-      });
 
       const motionMs = (name, fallback) => {
         const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -148,7 +106,45 @@
         return fallback;
       };
 
-      let journeyPhase = 'pre-lock';
+      const compactStepScroll = () => {
+        const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        return rootSize * 20;
+      };
+
+      const syncCompactGeometry = () => {
+        if (!compactJourney.matches) {
+          journey.style.removeProperty('--journey-scene-top');
+          shell.style.removeProperty('height');
+          return;
+        }
+
+        const edgeGap = 16;
+        const sceneHeight = scene.offsetHeight;
+        const sceneTop = Math.min(edgeGap, window.innerHeight - sceneHeight - edgeGap);
+        const runway = Math.max(1, panels.length - 1) * compactStepScroll();
+
+        journey.style.setProperty('--journey-scene-top', sceneTop.toFixed(2) + 'px');
+        shell.style.height = (sceneHeight + runway).toFixed(2) + 'px';
+      };
+
+      const metrics = () => {
+        if (compactJourney.matches) {
+          syncCompactGeometry();
+          const sceneTop = Number.parseFloat(getComputedStyle(scene).top) || 0;
+          const shellTop = shell.getBoundingClientRect().top + window.scrollY;
+
+          return {
+            start:shellTop - sceneTop,
+            max:Math.max(1, shell.offsetHeight - scene.offsetHeight)
+          };
+        }
+
+        const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
+        return {
+          start:journey.offsetTop - stickyTop,
+          max:Math.max(1, journey.offsetHeight - window.innerHeight)
+        };
+      };
 
       const readTarget = () => {
         const { start, max } = metrics();
@@ -176,10 +172,19 @@
         };
       };
 
-      let targetStep = 0;
-      let visualStep = 0;
-      let raf = 0;
-      let lastFrame = 0;
+      const scrollToStep = (index) => {
+        const { start, max } = metrics();
+        const denominator = Math.max(1, panels.length - 1);
+        const target = start + (index / denominator) * max;
+        window.scrollTo({
+          top:Math.max(0, target),
+          behavior:reduceMotion.matches ? 'auto' : 'smooth'
+        });
+      };
+
+      stages.forEach((stage) => {
+        stage.addEventListener('click', () => scrollToStep(Number(stage.dataset.journeyStep)));
+      });
 
       const paint = ({ lastIndex, stepDistance }) => {
         const visualRatio = lastIndex ? visualStep / lastIndex : 0;
@@ -196,17 +201,13 @@
           }
 
           const distance = Math.min(1, Math.abs(index - visualStep));
-          const opacity = 1 - distance * .82;
-          const scale = 1 - distance * .14;
-          panel.style.opacity = opacity.toFixed(3);
-          panel.style.transform = 'scale(' + scale.toFixed(4) + ')';
+          panel.style.opacity = (1 - distance * .82).toFixed(3);
+          panel.style.transform = 'scale(' + (1 - distance * .14).toFixed(4) + ')';
         });
 
-        if (reduceMotion.matches) {
-          track.style.transform = 'translate3d(0,0,0)';
-        } else {
-          track.style.transform = 'translate3d(' + (-visualStep * stepDistance).toFixed(2) + 'px,0,0)';
-        }
+        track.style.transform = reduceMotion.matches
+          ? 'translate3d(0,0,0)'
+          : 'translate3d(' + (-visualStep * stepDistance).toFixed(2) + 'px,0,0)';
       };
 
       const frame = (time) => {
@@ -237,7 +238,7 @@
         if (!raf) raf = requestAnimationFrame(frame);
       };
 
-      syncCompactViewportTop();
+      syncCompactGeometry();
       const initial = readTarget();
       targetStep = initial.step;
       visualStep = initial.step;
@@ -247,21 +248,14 @@
         if (!resizing) scheduleJourney();
       }, { passive:true });
 
-      let resizeTimer = 0;
-      let resizing = false;
-      let preservedResizeStep = 0;
-      let preservedResizePhase = 'pre-lock';
+      const resizeObserver = 'ResizeObserver' in window
+        ? new ResizeObserver(() => {
+            syncCompactGeometry();
+            if (!resizing) scheduleJourney();
+          })
+        : null;
 
-      const paintPreservedStep = () => {
-        const lastIndex = Math.max(0, panels.length - 1);
-        const stepDistance = panels.length > 1
-          ? panels[1].offsetLeft - panels[0].offsetLeft
-          : track.clientWidth;
-
-        targetStep = preservedResizeStep;
-        visualStep = preservedResizeStep;
-        paint({ lastIndex, stepDistance });
-      };
+      resizeObserver?.observe(scene);
 
       addEventListener('resize', () => {
         if (!resizing) {
@@ -271,8 +265,7 @@
         }
 
         clearTimeout(resizeTimer);
-        syncCompactViewportTop();
-        paintPreservedStep();
+        syncCompactGeometry();
 
         resizeTimer = setTimeout(() => {
           if (raf) {
@@ -281,7 +274,7 @@
           }
 
           lastFrame = 0;
-          syncCompactViewportTop();
+          syncCompactGeometry();
 
           if (preservedResizePhase === 'locked') {
             const { start, max } = metrics();
@@ -298,11 +291,13 @@
           targetStep = state.step;
           visualStep = state.step;
           paint(state);
-        }, 140);
+        }, 120);
       }, { passive:true });
 
       compactJourney.addEventListener?.('change', () => {
-        syncCompactViewportTop();
+        syncCompactGeometry();
+        lastFrame = 0;
+        scheduleJourney();
       });
 
       reduceMotion.addEventListener?.('change', () => {
