@@ -49,6 +49,7 @@
     const track = journey.querySelector('[data-journey-track]');
     const viewport = journey.querySelector('[data-journey-viewport]');
     const lockPoint = journey.querySelector('[data-journey-lock-point]');
+    const runway = journey.querySelector('[data-journey-runway]');
     const compactJourney = window.matchMedia('(max-width: 64rem)');
     const mobileProgress = journey.querySelector('[data-journey-mobile-progress]');
     const mobileIndex = journey.querySelector('[data-journey-mobile-index]');
@@ -102,19 +103,18 @@
       };
 
       const metrics = () => {
-        if (viewport && lockPoint && compactJourney.matches) {
+        if (viewport && lockPoint && runway && compactJourney.matches) {
           syncCompactViewportTop();
           const viewportStyle = getComputedStyle(viewport);
           const compactTop = Number.parseFloat(viewportStyle.top) || 0;
           const viewportMarginTop = Number.parseFloat(viewportStyle.marginTop) || 0;
-          const runway = Number.parseFloat(getComputedStyle(journey.querySelector('.journey__inner')).paddingBottom) || 1;
           const lockPointTop = lockPoint.getBoundingClientRect().top + window.scrollY;
           const start = lockPointTop + viewportMarginTop - compactTop;
 
           return {
             stickyTop:compactTop,
             start,
-            max:Math.max(1, runway)
+            max:Math.max(1, runway.offsetHeight)
           };
         }
 
