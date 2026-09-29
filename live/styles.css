@@ -1114,10 +1114,14 @@
 
   .journey__route-meta>div+div{
     margin-left:0;
-    padding-left:0;
-    padding-top:.85rem;
+    padding-left:3rem;
+    padding-top:0;
     border-left:0;
-    border-top:1px solid var(--color-line);
+    border-top:0;
+  }
+
+  .journey__route-meta>div+div .journey__route-icon{
+    left:0;
   }
 
   .journey__timeline{
@@ -1136,7 +1140,7 @@
   }
 }
 
-@media(max-height:50rem){
+@media(max-height:52rem){
   .journey__sticky{
     height:100svh;
     min-height:0;
@@ -1210,7 +1214,7 @@
   }
 }
 
-@media(max-width:64rem) and (max-height:50rem){
+@media(max-width:64rem) and (max-height:52rem){
   .journey__sticky{
     padding:.9rem 0 1rem;
   }
