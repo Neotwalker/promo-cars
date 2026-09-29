@@ -954,6 +954,8 @@
   }
 
   .cars-pick{
+    height:auto;
+    margin-top:0;
     grid-template-columns:1fr;
   }
 
@@ -968,11 +970,6 @@
 
   .cars-pick__button{
     width:100%;
-  }
-
-  .cars-pick{
-    height:auto;
-    margin-top:0;
   }
 
   .cars-pick__media{
@@ -1002,7 +999,7 @@
   .journey__stages{display:none}
 
   .journey__mobile-progress{
-    margin-top:2.2rem;
+    margin-top:0;
     display:block;
   }
 
@@ -1056,15 +1053,49 @@
     min-height:0;
   }
 
-  .journey__visual{
-    display:none;
-  }
-
   .journey__detail-card{
     min-height:25rem;
   }
-}
 
+  .journey{
+    --journey-scene-top:1rem;
+    height:auto;
+  }
+
+  .journey__sticky{
+    position:relative;
+    top:auto;
+    min-height:0;
+    display:block;
+    padding:4.5rem 0 0;
+    overflow:visible;
+  }
+
+  .journey__inner{
+    display:block;
+  }
+
+  .journey__intro{
+    display:block;
+  }
+
+  .journey__scroll-shell{
+    position:relative;
+    display:block;
+    margin-top:2.2rem;
+  }
+
+  .journey__scene{
+    position:sticky;
+    top:var(--journey-scene-top);
+    z-index:1;
+    display:block;
+  }
+
+  .journey__visual{
+    display:none;
+  }
+}
 @media(max-width:47.9375rem){
   .journey__mobile-progress-copy{
     display:none;
@@ -1168,8 +1199,15 @@
     white-space:nowrap;
     border:0;
   }
-}
 
+  .journey__sticky{
+    padding-top:3rem;
+  }
+
+  .journey__scroll-shell{
+    margin-top:1.75rem;
+  }
+}
 @media(min-width:64.0625rem) and (max-height:52rem){
   .journey__sticky{
     height:100svh;
@@ -1233,86 +1271,48 @@
   }
 }
 
-@media(max-width:64rem){
+
+
+@media(prefers-reduced-motion:reduce){
   .journey{
-    --journey-scene-top:1rem;
     height:auto;
   }
 
   .journey__sticky{
     position:relative;
     top:auto;
-    min-height:0;
-    display:block;
-    padding:4.5rem 0 0;
-    overflow:visible;
-  }
-
-  .journey__inner{
-    display:block;
-  }
-
-  .journey__intro{
-    display:block;
-  }
-
-  .journey__scroll-shell{
-    position:relative;
-    display:block;
-    margin-top:2.2rem;
-  }
-
-  .journey__scene{
-    position:sticky;
-    top:var(--journey-scene-top);
-    z-index:1;
-    display:block;
-  }
-
-  .journey__mobile-progress{
-    margin-top:0;
-  }
-
-  .journey__visual{
-    display:none;
-  }
-}
-
-@media(max-width:47.9375rem){
-  .journey__sticky{
-    padding-top:3rem;
-  }
-
-  .journey__scroll-shell{
-    margin-top:1.75rem;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-  .journey{
-    height:auto;
-  }
-
-  .journey__sticky{
-    position:relative;
     min-height:auto;
   }
 
-  .journey__panel[hidden]{
+  .journey__scroll-shell{
+    height:auto;
+  }
+
+  .journey__scene{
+    position:relative;
+    top:auto;
+  }
+
+  .journey__mobile-progress{
     display:none;
   }
 
   .journey__track{
-    transform:none!important;
+    display:grid;
+    gap:1rem;
+    transform:none;
+    will-change:auto;
+  }
+
+  .journey__panel,
+  .journey__panel[hidden]{
+    display:block;
+    opacity:1;
+    transform:none;
+    will-change:auto;
   }
 
   .journey__stage-dot{
-    transition:none;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-  .cars__filter{
     transition:none;
   }
 }

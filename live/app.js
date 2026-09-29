@@ -57,6 +57,18 @@
     const mobileNext = journey.querySelector('[data-journey-mobile-next]');
 
     if (sticky && shell && scene && track && panels.length) {
+      const lastIndex = Math.max(0, panels.length - 1);
+      const rootStyle = getComputedStyle(document.documentElement);
+      const rootSize = Number.parseFloat(rootStyle.fontSize) || 16;
+      const motionValue = rootStyle.getPropertyValue('--motion-normal').trim();
+      const motionMs = motionValue.endsWith('ms')
+        ? Number.parseFloat(motionValue)
+        : motionValue.endsWith('s')
+          ? Number.parseFloat(motionValue) * 1000
+          : 520;
+      const motionResponse = Math.max(90, motionMs * .3);
+      const compactStepScroll = rootSize * 20;
+
       let current = -1;
       let targetStep = 0;
       let visualStep = 0;
@@ -69,10 +81,14 @@
       let preservedResizePhase = 'pre-lock';
       let compactViewportHeight = window.innerHeight;
       let layoutWidth = window.innerWidth;
+      let journeyStart = 0;
+      let journeyRange = 1;
+      let stepDistance = track.clientWidth;
 
-      const setActive = (index) => {
-        const safeIndex = Math.max(0, Math.min(index, panels.length - 1));
-        const changed = safeIndex !== current;
+      const setActive = (index, force = false) => {
+        const safeIndex = Math.max(0, Math.min(index, lastIndex));
+        if (!force && safeIndex === current) return;
+
         current = safeIndex;
 
         stages.forEach((stage, i) => {
@@ -85,12 +101,11 @@
         });
 
         panels.forEach((panel, i) => {
-          const active = i === safeIndex;
-          panel.classList.toggle('journey__panel--active', active);
-          panel.hidden = reduceMotion.matches ? !active : false;
+          panel.classList.toggle('journey__panel--active', i === safeIndex);
+          panel.hidden = false;
         });
 
-        if (changed && mobileProgress) {
+        if (mobileProgress) {
           const title = panels[safeIndex]?.querySelector('h3')?.textContent?.replace(/^\\d{2}\\s*/, '').trim() || '';
           const nextTitle = panels[safeIndex + 1]?.querySelector('h3')?.textContent?.replace(/^\\d{2}\\s*/, '').trim();
 
@@ -101,96 +116,86 @@
         }
       };
 
-      const motionMs = (name, fallback) => {
-        const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-        if (!value) return fallback;
-        if (value.endsWith('ms')) return Number.parseFloat(value);
-        if (value.endsWith('s')) return Number.parseFloat(value) * 1000;
-        return fallback;
-      };
+      const refreshGeometry = ({ refreshViewportHeight = false } = {}) => {
+        stepDistance = panels.length > 1
+          ? panels[1].offsetLeft - panels[0].offsetLeft
+          : track.clientWidth;
 
-      const compactStepScroll = () => {
-        const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-        return rootSize * 20;
-      };
-
-      let compactRunway = 1;
-
-      const syncCompactGeometry = ({ refreshViewportHeight = false } = {}) => {
-        if (!compactJourney.matches) {
+        if (reduceMotion.matches) {
           journey.style.removeProperty('--journey-scene-top');
           shell.style.removeProperty('height');
-          compactRunway = 1;
+          journeyStart = 0;
+          journeyRange = 1;
           return;
         }
 
-        if (refreshViewportHeight) compactViewportHeight = window.innerHeight;
-
-        const edgeGap = 16;
-        const sceneHeight = scene.offsetHeight;
-        const sceneTop = Math.min(edgeGap, compactViewportHeight - sceneHeight - edgeGap);
-        compactRunway = Math.max(1, panels.length - 1) * compactStepScroll();
-
-        const releaseTail = Math.max(
-          edgeGap,
-          compactViewportHeight - sceneHeight - sceneTop
-        );
-
-        journey.style.setProperty('--journey-scene-top', sceneTop.toFixed(2) + 'px');
-        shell.style.height = (sceneHeight + compactRunway + releaseTail).toFixed(2) + 'px';
-      };
-
-      const metrics = () => {
         if (compactJourney.matches) {
-          const sceneTop = Number.parseFloat(getComputedStyle(scene).top) || 0;
-          const shellTop = shell.getBoundingClientRect().top + window.scrollY;
+          if (refreshViewportHeight) compactViewportHeight = window.innerHeight;
 
-          return {
-            start:shellTop - sceneTop,
-            max:Math.max(1, compactRunway)
-          };
+          const edgeGap = 16;
+          const sceneHeight = scene.offsetHeight;
+          const sceneTop = Math.min(edgeGap, compactViewportHeight - sceneHeight - edgeGap);
+          const compactRunway = Math.max(1, lastIndex) * compactStepScroll;
+          const releaseTail = Math.max(
+            edgeGap,
+            compactViewportHeight - sceneHeight - sceneTop
+          );
+
+          journey.style.setProperty('--journey-scene-top', sceneTop.toFixed(2) + 'px');
+          shell.style.height = (sceneHeight + compactRunway + releaseTail).toFixed(2) + 'px';
+
+          journeyStart = shell.getBoundingClientRect().top + window.scrollY - sceneTop;
+          journeyRange = Math.max(1, compactRunway);
+          return;
         }
 
+        journey.style.removeProperty('--journey-scene-top');
+        shell.style.removeProperty('height');
+
         const stickyTop = Number.parseFloat(getComputedStyle(sticky).top) || 0;
-        return {
-          start:journey.offsetTop - stickyTop,
-          max:Math.max(1, journey.offsetHeight - window.innerHeight)
-        };
+        journeyStart = journey.offsetTop - stickyTop;
+        journeyRange = Math.max(1, journey.offsetHeight - window.innerHeight);
       };
 
       const readTarget = () => {
-        const { start, max } = metrics();
-        const rawPassed = window.scrollY - start;
-        const lastIndex = Math.max(0, panels.length - 1);
-        const stepDistance = panels.length > 1
-          ? panels[1].offsetLeft - panels[0].offsetLeft
-          : track.clientWidth;
+        if (reduceMotion.matches) {
+          journeyPhase = 'pre-lock';
+          return { step:0, lastIndex, stepDistance };
+        }
+
+        const rawPassed = window.scrollY - journeyStart;
 
         if (rawPassed <= 0) {
           journeyPhase = 'pre-lock';
           return { step:0, lastIndex, stepDistance };
         }
 
-        if (rawPassed >= max) {
+        if (rawPassed >= journeyRange) {
           journeyPhase = 'post-lock';
           return { step:lastIndex, lastIndex, stepDistance };
         }
 
         journeyPhase = 'locked';
         return {
-          step:(rawPassed / max) * lastIndex,
+          step:(rawPassed / journeyRange) * lastIndex,
           lastIndex,
           stepDistance
         };
       };
 
       const scrollToStep = (index) => {
-        const { start, max } = metrics();
-        const denominator = Math.max(1, panels.length - 1);
-        const target = start + (index / denominator) * max;
+        const safeIndex = Math.max(0, Math.min(index, lastIndex));
+
+        if (reduceMotion.matches) {
+          panels[safeIndex]?.scrollIntoView({ behavior:'auto', block:'start' });
+          return;
+        }
+
+        const denominator = Math.max(1, lastIndex);
+        const target = journeyStart + (safeIndex / denominator) * journeyRange;
         window.scrollTo({
           top:Math.max(0, target),
-          behavior:reduceMotion.matches ? 'auto' : 'smooth'
+          behavior:'smooth'
         });
       };
 
@@ -198,30 +203,32 @@
         stage.addEventListener('click', () => scrollToStep(Number(stage.dataset.journeyStep)));
       });
 
-      const paint = ({ lastIndex, stepDistance }) => {
-        const visualRatio = lastIndex ? visualStep / lastIndex : 0;
-        const activeIndex = Math.min(lastIndex, Math.round(visualStep));
+      const paint = ({ lastIndex: stateLastIndex, stepDistance: stateStepDistance }) => {
+        const visualRatio = stateLastIndex ? visualStep / stateLastIndex : 0;
+        const activeIndex = Math.min(stateLastIndex, Math.round(visualStep));
 
         journey.style.setProperty('--journey-progress', visualRatio.toFixed(4));
         setActive(activeIndex);
 
-        panels.forEach((panel, index) => {
-          if (reduceMotion.matches) {
-            panel.style.opacity = index === activeIndex ? '1' : '0';
+        if (reduceMotion.matches) {
+          panels.forEach((panel) => {
+            panel.style.opacity = '1';
             panel.style.transform = 'none';
-            return;
-          }
+          });
+          track.style.transform = 'none';
+          return;
+        }
 
+        const opacityDrop = smallMobileJourney.matches ? .72 : .82;
+        const scaleDrop = smallMobileJourney.matches ? .08 : .14;
+
+        panels.forEach((panel, index) => {
           const distance = Math.min(1, Math.abs(index - visualStep));
-          const opacityDrop = smallMobileJourney.matches ? .72 : .82;
-          const scaleDrop = smallMobileJourney.matches ? .08 : .14;
           panel.style.opacity = (1 - distance * opacityDrop).toFixed(3);
           panel.style.transform = 'scale(' + (1 - distance * scaleDrop).toFixed(4) + ')';
         });
 
-        track.style.transform = reduceMotion.matches
-          ? 'translate3d(0,0,0)'
-          : 'translate3d(' + (-visualStep * stepDistance).toFixed(2) + 'px,0,0)';
+        track.style.transform = 'translate3d(' + (-visualStep * stateStepDistance).toFixed(2) + 'px,0,0)';
       };
 
       const frame = (time) => {
@@ -230,7 +237,7 @@
         targetStep = state.step;
 
         if (reduceMotion.matches) {
-          visualStep = targetStep;
+          visualStep = 0;
           lastFrame = time;
           paint(state);
           return;
@@ -238,8 +245,7 @@
 
         const elapsed = lastFrame ? Math.min(time - lastFrame, 64) : 16.67;
         lastFrame = time;
-        const response = Math.max(90, motionMs('--motion-normal', 520) * .3);
-        const alpha = 1 - Math.exp(-elapsed / response);
+        const alpha = 1 - Math.exp(-elapsed / motionResponse);
         visualStep += (targetStep - visualStep) * alpha;
 
         if (Math.abs(targetStep - visualStep) < .001) visualStep = targetStep;
@@ -252,20 +258,35 @@
         if (!raf) raf = requestAnimationFrame(frame);
       };
 
-      syncCompactGeometry({ refreshViewportHeight:true });
-      const initial = readTarget();
-      targetStep = initial.step;
-      visualStep = initial.step;
-      paint(initial);
+      const resetJourney = ({ refreshViewportHeight = false } = {}) => {
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+
+        lastFrame = 0;
+        refreshGeometry({ refreshViewportHeight });
+
+        const state = readTarget();
+        targetStep = state.step;
+        visualStep = reduceMotion.matches ? 0 : state.step;
+        setActive(reduceMotion.matches ? 0 : Math.round(visualStep), true);
+        paint({
+          lastIndex,
+          stepDistance
+        });
+      };
+
+      resetJourney({ refreshViewportHeight:true });
 
       addEventListener('scroll', () => {
-        if (!resizing) scheduleJourney();
+        if (!resizing && !reduceMotion.matches) scheduleJourney();
       }, { passive:true });
 
       const resizeObserver = 'ResizeObserver' in window
         ? new ResizeObserver(() => {
-            syncCompactGeometry();
-            if (!resizing) scheduleJourney();
+            refreshGeometry();
+            if (!resizing && !reduceMotion.matches) scheduleJourney();
           })
         : null;
 
@@ -275,9 +296,7 @@
         const nextWidth = window.innerWidth;
         const widthChanged = Math.abs(nextWidth - layoutWidth) > 1;
 
-        if (compactJourney.matches && !widthChanged) {
-          return;
-        }
+        if (compactJourney.matches && !widthChanged) return;
 
         layoutWidth = nextWidth;
 
@@ -288,7 +307,7 @@
         }
 
         clearTimeout(resizeTimer);
-        syncCompactGeometry({ refreshViewportHeight:true });
+        refreshGeometry({ refreshViewportHeight:true });
 
         resizeTimer = setTimeout(() => {
           if (raf) {
@@ -297,14 +316,12 @@
           }
 
           lastFrame = 0;
-          syncCompactGeometry({ refreshViewportHeight:true });
+          refreshGeometry({ refreshViewportHeight:true });
 
-          if (preservedResizePhase === 'locked') {
-            const { start, max } = metrics();
-            const lastIndex = Math.max(0, panels.length - 1);
+          if (!reduceMotion.matches && preservedResizePhase === 'locked') {
             const ratio = lastIndex ? preservedResizeStep / lastIndex : 0;
             window.scrollTo({
-              top:Math.max(0, start + ratio * max),
+              top:Math.max(0, journeyStart + ratio * journeyRange),
               behavior:'auto'
             });
           }
@@ -312,26 +329,25 @@
           resizing = false;
           const state = readTarget();
           targetStep = state.step;
-          visualStep = state.step;
-          paint(state);
+          visualStep = reduceMotion.matches ? 0 : state.step;
+          setActive(reduceMotion.matches ? 0 : Math.round(visualStep), true);
+          paint({ lastIndex, stepDistance });
         }, 120);
       }, { passive:true });
 
       compactJourney.addEventListener?.('change', () => {
         layoutWidth = window.innerWidth;
-        syncCompactGeometry({ refreshViewportHeight:true });
-        lastFrame = 0;
-        scheduleJourney();
+        resetJourney({ refreshViewportHeight:true });
       });
 
       smallMobileJourney.addEventListener?.('change', () => {
-        lastFrame = 0;
-        scheduleJourney();
+        if (!reduceMotion.matches) scheduleJourney();
       });
 
       reduceMotion.addEventListener?.('change', () => {
-        lastFrame = 0;
-        scheduleJourney();
+        clearTimeout(resizeTimer);
+        resizing = false;
+        resetJourney({ refreshViewportHeight:true });
       });
     }
   }
