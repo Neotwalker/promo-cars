@@ -153,8 +153,8 @@
           }
 
           const distance = Math.min(1, Math.abs(index - visualStep));
-          const opacity = 1 - distance * .72;
-          const scale = 1 - distance * .06;
+          const opacity = 1 - distance * .82;
+          const scale = 1 - distance * .14;
           panel.style.opacity = opacity.toFixed(3);
           panel.style.transform = 'scale(' + scale.toFixed(4) + ')';
         });
