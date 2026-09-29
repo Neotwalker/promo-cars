@@ -352,4 +352,369 @@
     }
   }
 
+
+  const configurator = document.querySelector('[data-configurator]');
+
+  if (configurator) {
+    const pricing = {
+      'Zeekr 001 AWD': {
+        power:'Электромобиль',
+        total:6490000,
+        eta:'30–38 дней',
+        image:'./assets/configurator/configurator-right-1.webp',
+        parts:[4820000,355000,930000,3400,61600,320000]
+      },
+      'Xiaomi SU7 Max': {
+        power:'Электромобиль',
+        total:5890000,
+        eta:'28–36 дней',
+        image:'./assets/configurator/configurator-right-2.webp',
+        parts:[4320000,350000,840000,3400,56600,320000]
+      },
+      'Li Auto L6 Pro': {
+        power:'Гибрид / EREV',
+        total:5390000,
+        eta:'32–40 дней',
+        image:'./assets/configurator/configurator-right-3.webp',
+        parts:[3870000,350000,790000,3400,56600,320000]
+      }
+    };
+
+    const money = (value) => new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
+    const form = configurator.querySelector('[data-config-form]');
+    const layout = configurator.querySelector('[data-config-layout]');
+    const summary = configurator.querySelector('[data-config-summary]');
+    const steps = [...configurator.querySelectorAll('[data-config-step]')];
+    const compactSummary = window.matchMedia('(max-width: 47.9375rem)');
+    const allOrder = ['model','condition','power','budget','city','contact'];
+
+    const state = {
+      model:'Zeekr 001 AWD',
+      condition:'Новый',
+      power:'Электромобиль',
+      budget:'5 500 000–6 500 000 ₽',
+      city:'Москва',
+      channel:'Telegram',
+      contact:''
+    };
+
+    let current = 0;
+
+    const refs = {
+      model:configurator.querySelector('[data-config-model]'),
+      city:configurator.querySelector('[data-config-city]'),
+      contact:configurator.querySelector('[data-config-contact]'),
+      back:configurator.querySelector('[data-config-back]'),
+      next:configurator.querySelector('[data-config-next]'),
+      submit:configurator.querySelector('[data-config-submit]'),
+      progress:configurator.querySelector('[data-config-progress]'),
+      progressbar:configurator.querySelector('[data-config-progressbar]'),
+      progressCount:configurator.querySelector('[data-config-progress-count]'),
+      summaryMedia:configurator.querySelector('[data-config-summary-media]'),
+      summaryImage:configurator.querySelector('[data-summary-image]'),
+      summaryModel:configurator.querySelector('[data-summary-model]'),
+      summaryMeta:configurator.querySelector('[data-summary-meta]'),
+      summaryTotal:configurator.querySelector('[data-summary-total]'),
+      summaryEta:configurator.querySelector('[data-summary-eta]'),
+      summaryNote:configurator.querySelector('[data-summary-note]'),
+      regional:configurator.querySelector('[data-summary-regional]'),
+      regionalLabel:configurator.querySelector('[data-summary-regional-label]'),
+      breakdown:configurator.querySelector('[data-summary-breakdown]'),
+      toasts:document.querySelector('[data-config-toasts]')
+    };
+
+    Object.values(pricing).forEach((item) => {
+      const preload = new Image();
+      preload.src = item.image;
+    });
+
+    const visibleOrder = () => pricing[state.model]
+      ? ['model','condition','budget','city','contact']
+      : allOrder;
+
+    const activeName = () => visibleOrder()[Math.max(0, Math.min(current, visibleOrder().length - 1))];
+
+    const setPressed = (groupName, value) => {
+      configurator.querySelectorAll('[data-config-choice="' + groupName + '"] [data-value]').forEach((button) => {
+        const selected = button.dataset.value === value;
+        button.setAttribute('aria-pressed', String(selected));
+      });
+      const message = configurator.querySelector('[data-choice-message="' + groupName + '"]');
+      if (message) message.textContent = '';
+    };
+
+    const setChoice = (groupName, value) => {
+      state[groupName] = value;
+      setPressed(groupName, value);
+    };
+
+    const clearFieldError = (input, messageText) => {
+      const field = input?.closest('[data-field]');
+      field?.classList.remove('is-error');
+      input?.removeAttribute('aria-invalid');
+      const message = field?.nextElementSibling;
+      if (message?.matches('[data-field-message]') && messageText !== undefined) {
+        message.textContent = messageText;
+      }
+    };
+
+    const fieldError = (input, messageText) => {
+      const field = input.closest('[data-field]');
+      const message = field?.nextElementSibling;
+      field?.classList.add('is-error');
+      input.setAttribute('aria-invalid','true');
+      if (message?.matches('[data-field-message]')) message.textContent = messageText;
+      input.focus();
+      return false;
+    };
+
+    const choiceError = (groupName, messageText) => {
+      const message = configurator.querySelector('[data-choice-message="' + groupName + '"]');
+      if (message) message.textContent = messageText;
+      configurator.querySelector('[data-config-choice="' + groupName + '"] [data-value]')?.focus();
+      return false;
+    };
+
+    const renderSummary = () => {
+      const known = pricing[state.model];
+      const city = state.city || 'Город не выбран';
+      const power = known?.power || state.power || 'Тип уточним';
+      const condition = state.condition || 'Состояние не выбрано';
+      const budget = state.budget || 'Бюджет не выбран';
+      const isMoscow = city.trim().toLowerCase() === 'москва';
+      const dds = [...refs.breakdown.querySelectorAll('div:not(.configurator__regional) dd')];
+
+      refs.summaryModel.textContent = state.model || 'Автомобиль не выбран';
+      refs.summaryMeta.textContent = [condition,power,budget,city].join(' · ');
+
+      if (known) {
+        known.parts.forEach((value,index) => {
+          if (dds[index]) dds[index].textContent = money(value);
+        });
+
+        refs.summaryMedia.classList.remove('is-generic');
+        if (refs.summaryImage.getAttribute('src') !== known.image) refs.summaryImage.src = known.image;
+        refs.summaryTotal.textContent = money(known.total) + (isMoscow ? '' : ' + доставка');
+        refs.summaryEta.textContent = known.eta;
+        refs.summaryNote.textContent = 'Финальная смета зависит от конкретного автомобиля, курса на момент выкупа и города получения.';
+      } else if (state.model === 'Нужен подбор') {
+        dds.forEach((dd) => { dd.textContent = '—'; });
+        refs.summaryMedia.classList.add('is-generic');
+        refs.summaryTotal.textContent = 'Подберём варианты';
+        refs.summaryEta.textContent = 'после подбора';
+        refs.summaryNote.textContent = 'Подберём несколько вариантов в вашем бюджете и покажем для каждого цену под ключ, комплектацию и срок доставки.';
+      } else {
+        dds.forEach((dd) => { dd.textContent = '—'; });
+        refs.summaryMedia.classList.add('is-generic');
+        refs.summaryTotal.textContent = state.model ? 'Расчёт после проверки модели' : 'Сначала выберите автомобиль';
+        refs.summaryEta.textContent = 'уточним';
+        refs.summaryNote.textContent = 'Конкретную сумму покажем после проверки модели. Структура сметы останется той же.';
+      }
+
+      refs.regional.hidden = !state.city || isMoscow;
+      if (!refs.regional.hidden) refs.regionalLabel.textContent = 'Доставка до ' + state.city;
+    };
+
+    const syncSummaryPlacement = () => {
+      const contactStep = configurator.querySelector('[data-config-step="contact"]');
+
+      if (compactSummary.matches && activeName() === 'contact') {
+        if (summary.parentElement !== form) contactStep.before(summary);
+      } else if (summary.parentElement !== layout) {
+        layout.append(summary);
+      }
+    };
+
+    const renderStep = ({ focusQuestion = false } = {}) => {
+      const list = visibleOrder();
+      current = Math.max(0, Math.min(current, list.length - 1));
+      const name = list[current];
+
+      steps.forEach((step) => {
+        const active = step.dataset.configStep === name;
+        step.hidden = !active;
+        step.classList.toggle('configurator__step--active', active);
+      });
+
+      refs.back.disabled = current === 0;
+      const isLast = current === list.length - 1;
+      refs.next.hidden = isLast;
+      refs.submit.hidden = !isLast;
+
+      const progress = ((current + 1) / list.length) * 100;
+      refs.progress.style.width = progress.toFixed(2) + '%';
+      refs.progressbar.setAttribute('aria-valuemax', String(list.length));
+      refs.progressbar.setAttribute('aria-valuenow', String(current + 1));
+      refs.progressCount.textContent = (current + 1) + ' из ' + list.length;
+
+      renderSummary();
+      syncSummaryPlacement();
+
+      if (focusQuestion) {
+        const activeStep = steps.find((step) => step.dataset.configStep === name);
+        const question = activeStep?.querySelector('.configurator__question');
+        question?.setAttribute('tabindex','-1');
+        question?.focus({preventScroll:true});
+      }
+    };
+
+    const validateCurrent = () => {
+      const name = activeName();
+
+      if (name === 'model' && !state.model) {
+        return fieldError(refs.model,'Укажите модель или выберите «нужен подбор».');
+      }
+      if (name === 'condition' && !state.condition) {
+        return choiceError('condition','Выберите состояние автомобиля.');
+      }
+      if (name === 'power' && !state.power) {
+        return choiceError('power','Выберите тип силовой установки.');
+      }
+      if (name === 'budget' && !state.budget) {
+        return choiceError('budget','Выберите бюджет или вариант «Нужен ориентир».');
+      }
+      if (name === 'city' && !state.city) {
+        return fieldError(refs.city,'Укажите город получения.');
+      }
+      return true;
+    };
+
+    const showToast = (title, message, type = 'success') => {
+      if (!refs.toasts) return;
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.dataset.toastItem = '';
+      toast.innerHTML = '<strong></strong><span></span>';
+      toast.querySelector('strong').textContent = title;
+      toast.querySelector('span').textContent = message;
+      if (type === 'error') toast.setAttribute('role','alert');
+      refs.toasts.append(toast);
+      setTimeout(() => toast.remove(), type === 'error' ? 6500 : 4200);
+    };
+
+    configurator.querySelectorAll('[data-config-choice]').forEach((group) => {
+      group.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-value]');
+        if (!button) return;
+        const key = group.dataset.configChoice;
+        const value = button.dataset.value;
+
+        setChoice(key,value);
+
+        if (key === 'model') {
+          state.model = value;
+          refs.model.value = value === 'Нужен подбор' ? '' : value;
+          clearFieldError(refs.model,'Можно указать любую марку или модель.');
+          const known = pricing[value];
+          state.power = known?.power || '';
+          setPressed('power',state.power);
+        }
+
+        if (key === 'channel') {
+          refs.contact.placeholder = value === 'Telegram' ? '@username' : '+7 999 000-00-00';
+          refs.contact.autocomplete = value === 'Telegram' ? 'off' : 'tel';
+        }
+
+        renderSummary();
+      });
+    });
+
+    refs.model.addEventListener('input', () => {
+      const value = refs.model.value.trim();
+      const exact = Object.keys(pricing).find((name) => name.toLowerCase() === value.toLowerCase());
+      state.model = exact || value;
+
+      if (exact) {
+        setPressed('model',exact);
+        state.power = pricing[exact].power;
+        setPressed('power',state.power);
+      } else {
+        setPressed('model','');
+        state.power = '';
+        setPressed('power','');
+      }
+
+      clearFieldError(refs.model,'Можно указать любую марку или модель.');
+      renderSummary();
+    });
+
+    refs.city.addEventListener('input', () => {
+      state.city = refs.city.value.trim();
+      clearFieldError(refs.city,'Региональная доставка будет отдельной строкой.');
+      renderSummary();
+    });
+
+    refs.contact.addEventListener('input', () => {
+      state.contact = refs.contact.value.trim();
+      clearFieldError(refs.contact,'Контакт нужен только для отправки расчёта.');
+    });
+
+    refs.next.addEventListener('click', () => {
+      state.model = state.model || refs.model.value.trim();
+      state.city = refs.city.value.trim();
+      if (!validateCurrent()) return;
+      current += 1;
+      renderStep({focusQuestion:true});
+    });
+
+    refs.back.addEventListener('click', () => {
+      current -= 1;
+      renderStep({focusQuestion:true});
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      state.contact = refs.contact.value.trim();
+
+      if (!state.channel) {
+        choiceError('channel','Выберите телефон или Telegram.');
+        return;
+      }
+      if (!state.contact) {
+        fieldError(refs.contact,'Укажите контакт.');
+        return;
+      }
+
+      clearFieldError(refs.contact,'Контакт нужен только для отправки расчёта.');
+      showToast('Заявка отправлена.','Параметры расчёта сохранены — свяжемся выбранным способом.');
+    });
+
+    const selectCar = (model) => {
+      if (!pricing[model]) return;
+      state.model = model;
+      state.condition = 'Новый';
+      state.power = pricing[model].power;
+      refs.model.value = model;
+      setPressed('model',model);
+      setPressed('condition','Новый');
+      setPressed('power',state.power);
+      current = 0;
+      renderStep();
+      configurator.scrollIntoView({behavior:reduceMotion.matches ? 'auto' : 'smooth',block:'start'});
+    };
+
+    document.querySelectorAll('[data-car-select]').forEach((button) => {
+      button.addEventListener('click', () => selectCar(button.dataset.carSelect));
+    });
+
+    document.querySelector('[data-config-open]')?.addEventListener('click', () => {
+      configurator.scrollIntoView({behavior:reduceMotion.matches ? 'auto' : 'smooth',block:'start'});
+    });
+
+    document.querySelector('[data-config-pick]')?.addEventListener('click', () => {
+      state.model = 'Нужен подбор';
+      state.power = '';
+      refs.model.value = '';
+      setPressed('model','Нужен подбор');
+      setPressed('power','');
+      current = 0;
+      renderStep();
+      configurator.scrollIntoView({behavior:reduceMotion.matches ? 'auto' : 'smooth',block:'start'});
+    });
+
+    compactSummary.addEventListener?.('change', syncSummaryPlacement);
+
+    renderStep();
+  }
+
 })();

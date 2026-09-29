@@ -75,7 +75,7 @@
           <h1 class="hero__title">Вы выбираете<br>автомобиль.<br>Остальное —<br>маршрут.</h1>
           <p class="hero__lead">Подбор, проверка, выкуп, логистика и оформление — в одном маршруте. До старта фиксируем расчёт и показываем, из чего складывается цена.</p>
           <div class="hero__actions" aria-label="Основные действия">
-            <button class="button button--primary button--inverse hero__action" type="button">Получить расчёт <span class="hero__action-icon" aria-hidden="true">→</span></button>
+            <button class="button button--primary button--inverse hero__action" type="button" data-config-open>Получить расчёт <span class="hero__action-icon" aria-hidden="true">→</span></button>
             <a class="button button--ghost button--inverse hero__action" href="#journey">Смотреть маршрут <span class="hero__action-icon" aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -210,7 +210,7 @@
           </div>
           <div class="cars-pick__action">
             <p>Соберём подходящие варианты, рассчитаем полную стоимость и сроки доставки.</p>
-            <button class="button button--primary cars-pick__button" type="button">Получить подбор <span aria-hidden="true">→</span></button>
+            <button class="button button--primary cars-pick__button" type="button" data-config-pick>Получить подбор <span aria-hidden="true">→</span></button>
           </div>
           <div class="cars-pick__media" aria-hidden="true"><img src="./assets/hero/cars/cta-cars-tiny.webp" alt="" loading="lazy" decoding="async"></div>
         </aside>
@@ -437,6 +437,180 @@
         </div>
       </div>
     </section>
+
+
+    <section class="configurator" id="configurator" data-configurator>
+      <div class="container configurator__inner">
+        <header class="configurator__header">
+          <p class="configurator__eyebrow">Конфигуратор</p>
+          <h2 class="configurator__title">Соберите расчёт под себя.</h2>
+          <p class="configurator__lead">Только параметры, которые влияют на подбор и итоговую смету. Контакт попросим после того, как вы увидите выбранные условия и ориентир стоимости.</p>
+        </header>
+
+        <div class="configurator__layout" data-config-layout>
+          <form class="configurator__form" novalidate data-config-form>
+            <div class="configurator__progress-row">
+              <div class="configurator__progress" role="progressbar" aria-label="Шаг конфигуратора" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" data-config-progressbar>
+                <span data-config-progress></span>
+              </div>
+              <span class="configurator__progress-count" data-config-progress-count>1 из 5</span>
+            </div>
+
+            <section class="configurator__step configurator__step--active" data-config-step="model" aria-labelledby="config-model-title">
+              <h3 class="configurator__question" id="config-model-title">Какой автомобиль рассматриваете?</h3>
+
+              <label class="configurator__field" data-field>
+                <span class="configurator__field-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.25 4.25"></path></svg>
+                </span>
+                <span class="configurator__field-copy">
+                  <span class="configurator__field-label">Марка или модель</span>
+                  <input class="configurator__field-control" name="model" value="Zeekr 001 AWD" autocomplete="off" data-config-model aria-describedby="config-model-message">
+                </span>
+              </label>
+              <small class="configurator__message" id="config-model-message" data-field-message>Можно указать любую марку или модель.</small>
+
+              <div class="configurator__choices configurator__choices--cars" data-config-choice="model" aria-label="Быстрый выбор автомобиля">
+                <button class="configurator__choice configurator__choice--car" type="button" data-value="Zeekr 001 AWD" aria-pressed="true">
+                  <img src="./assets/configurator/car-icon-1.webp" alt="" width="156" height="46">
+                  <span>Zeekr 001 AWD</span>
+                  <i aria-hidden="true"></i>
+                </button>
+                <button class="configurator__choice configurator__choice--car" type="button" data-value="Xiaomi SU7 Max" aria-pressed="false">
+                  <img src="./assets/configurator/car-icon-2.webp" alt="" width="156" height="46">
+                  <span>Xiaomi SU7 Max</span>
+                  <i aria-hidden="true"></i>
+                </button>
+                <button class="configurator__choice configurator__choice--car" type="button" data-value="Li Auto L6 Pro" aria-pressed="false">
+                  <img src="./assets/configurator/car-icon-3.webp" alt="" width="156" height="46">
+                  <span>Li Auto L6 Pro</span>
+                  <i aria-hidden="true"></i>
+                </button>
+                <button class="configurator__choice" type="button" data-value="Нужен подбор" aria-pressed="false">
+                  <span class="configurator__choice-search" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.25 4.25"></path></svg>
+                  </span>
+                  <span>Не определился — нужен подбор</span>
+                  <i aria-hidden="true"></i>
+                </button>
+              </div>
+            </section>
+
+            <section class="configurator__step" data-config-step="condition" aria-labelledby="config-condition-title" hidden>
+              <h3 class="configurator__question" id="config-condition-title">Состояние автомобиля</h3>
+              <div class="configurator__choices" data-config-choice="condition">
+                <button class="configurator__choice" type="button" data-value="Новый" aria-pressed="true"><span>Новый</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="С пробегом" aria-pressed="false"><span>С пробегом</span><i aria-hidden="true"></i></button>
+              </div>
+              <small class="configurator__choice-message" data-choice-message="condition"></small>
+            </section>
+
+            <section class="configurator__step" data-config-step="power" aria-labelledby="config-power-title" hidden>
+              <h3 class="configurator__question" id="config-power-title">Тип силовой установки</h3>
+              <div class="configurator__choices" data-config-choice="power">
+                <button class="configurator__choice" type="button" data-value="Электромобиль" aria-pressed="false"><span>Электромобиль</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Гибрид / EREV" aria-pressed="false"><span>Гибрид / EREV</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Не принципиально" aria-pressed="false"><span>Не принципиально</span><i aria-hidden="true"></i></button>
+              </div>
+              <small class="configurator__choice-message" data-choice-message="power"></small>
+            </section>
+
+            <section class="configurator__step" data-config-step="budget" aria-labelledby="config-budget-title" hidden>
+              <h3 class="configurator__question" id="config-budget-title">Бюджет под ключ</h3>
+              <div class="configurator__choices" data-config-choice="budget">
+                <button class="configurator__choice" type="button" data-value="До 5 500 000 ₽" aria-pressed="false"><span>До 5 500 000 ₽</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="5 500 000–6 500 000 ₽" aria-pressed="true"><span>5 500 000–6 500 000 ₽</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="От 6 500 000 ₽" aria-pressed="false"><span>От 6 500 000 ₽</span><i aria-hidden="true"></i></button>
+                <button class="configurator__choice" type="button" data-value="Нужен ориентир" aria-pressed="false"><span>Нужен ориентир</span><i aria-hidden="true"></i></button>
+              </div>
+              <small class="configurator__choice-message" data-choice-message="budget"></small>
+            </section>
+
+            <section class="configurator__step" data-config-step="city" aria-labelledby="config-city-title" hidden>
+              <h3 class="configurator__question" id="config-city-title">Где будете получать автомобиль?</h3>
+              <label class="configurator__field" data-field>
+                <span class="configurator__field-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false"><path d="M12 21s6-5.4 6-11a6 6 0 1 0-12 0c0 5.6 6 11 6 11Z"></path><circle cx="12" cy="10" r="2"></circle></svg>
+                </span>
+                <span class="configurator__field-copy">
+                  <span class="configurator__field-label">Город получения</span>
+                  <input class="configurator__field-control" name="city" value="Москва" autocomplete="address-level2" data-config-city aria-describedby="config-city-message">
+                </span>
+              </label>
+              <small class="configurator__message" id="config-city-message" data-field-message>Региональная доставка будет отдельной строкой.</small>
+            </section>
+
+            <section class="configurator__step" data-config-step="contact" aria-labelledby="config-contact-title" hidden>
+              <h3 class="configurator__question" id="config-contact-title">Куда отправить подборку и расчёт?</h3>
+
+              <div class="configurator__contact-channels" data-config-choice="channel">
+                <button class="configurator__channel" type="button" data-value="Телефон" aria-pressed="false">
+                  <span>Телефон</span><i aria-hidden="true"></i>
+                </button>
+                <button class="configurator__channel" type="button" data-value="Telegram" aria-pressed="true">
+                  <span>Telegram</span><i aria-hidden="true"></i>
+                </button>
+              </div>
+              <small class="configurator__choice-message" data-choice-message="channel"></small>
+
+              <label class="configurator__field" data-field>
+                <span class="configurator__field-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false"><path d="M7.5 4.5 10 8l-1.6 2.1a15.2 15.2 0 0 0 5.5 5.5L16 14l3.5 2.5-.8 3c-.2.8-1 1.4-1.8 1.4C9.2 20.9 3.1 14.8 3.1 7.1c0-.8.6-1.6 1.4-1.8l3-.8Z"></path></svg>
+                </span>
+                <span class="configurator__field-copy">
+                  <span class="configurator__field-label">Телефон или username в Telegram</span>
+                  <input class="configurator__field-control" name="contact" placeholder="@username" autocomplete="tel" data-config-contact aria-describedby="config-contact-message">
+                </span>
+              </label>
+              <small class="configurator__message" id="config-contact-message" data-field-message>Контакт нужен только для отправки расчёта.</small>
+            </section>
+
+            <div class="configurator__actions">
+              <button class="button button--ghost configurator__back" type="button" data-config-back disabled>Назад</button>
+              <button class="button button--primary configurator__next" type="button" data-config-next>Далее <span aria-hidden="true">→</span></button>
+              <button class="button button--primary configurator__submit" type="submit" data-config-submit hidden>Получить расчёт <span aria-hidden="true">→</span></button>
+            </div>
+          </form>
+
+          <aside class="configurator__summary" aria-live="polite" data-config-summary>
+            <div class="configurator__summary-media" data-config-summary-media>
+              <img src="./assets/configurator/configurator-right-1.webp" alt="" decoding="async" data-summary-image>
+              <div class="configurator__summary-heading">
+                <span>Ваш расчёт</span>
+                <strong data-summary-model>Zeekr 001 AWD</strong>
+                <p data-summary-meta>Новый · Электромобиль · 5 500 000–6 500 000 ₽ · Москва</p>
+              </div>
+            </div>
+
+            <dl class="configurator__breakdown" data-summary-breakdown>
+              <div><dt>Автомобиль</dt><dd>4 820 000 ₽</dd></div>
+              <div><dt>Логистика Китай → Россия</dt><dd>355 000 ₽</dd></div>
+              <div><dt>Таможня и оформление</dt><dd>930 000 ₽</dd></div>
+              <div><dt>Утильсбор</dt><dd>3 400 ₽</dd></div>
+              <div><dt>Доставка до Москвы</dt><dd>61 600 ₽</dd></div>
+              <div><dt>Сервис NEXROUTE</dt><dd>320 000 ₽</dd></div>
+              <div class="configurator__regional" data-summary-regional hidden><dt data-summary-regional-label>Доставка до города</dt><dd>Уточним</dd></div>
+            </dl>
+
+            <div class="configurator__total">
+              <span>Итого <small>под ключ</small></span>
+              <strong data-summary-total>6 490 000 ₽</strong>
+            </div>
+
+            <div class="configurator__summary-note configurator__summary-note--eta">
+              <img src="./assets/configurator/configurator-icon-1.webp" alt="" width="32" height="32">
+              <p>Ориентир доставки: <strong data-summary-eta>30–38 дней</strong></p>
+            </div>
+            <div class="configurator__summary-note">
+              <img src="./assets/configurator/configurator-icon-2.webp" alt="" width="32" height="32">
+              <p data-summary-note>Финальная смета зависит от конкретного автомобиля, курса на момент выкупа и города получения.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast-stack configurator__toasts" aria-live="polite" aria-atomic="true" data-config-toasts></div>
   </main>
 
   <script src="../ui-kit/app.js"></script>
