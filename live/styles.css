@@ -1433,34 +1433,52 @@
 }
 .configurator__choices--cars,
 .configurator__choices--cities{
-  padding-right:.45rem;
+  padding-right:.5rem;
   overflow-y:auto;
   overscroll-behavior:contain;
   scrollbar-gutter:stable;
-  scrollbar-width:thin;
-  scrollbar-color:#8f9396 #efeee9;
 }
 .configurator__choices--cars{max-height:19rem}
 .configurator__choices--cities{max-height:17.5rem}
 .configurator__choices--cars::-webkit-scrollbar,
 .configurator__choices--cities::-webkit-scrollbar{
-  width:.55rem;
+  width:.62rem;
 }
 .configurator__choices--cars::-webkit-scrollbar-track,
 .configurator__choices--cities::-webkit-scrollbar-track{
   border-radius:999px;
-  background:#efeee9;
+  background:#e9e7e1;
+  box-shadow:inset 0 0 0 1px rgba(16,18,22,.05);
 }
 .configurator__choices--cars::-webkit-scrollbar-thumb,
 .configurator__choices--cities::-webkit-scrollbar-thumb{
-  min-height:3.25rem;
-  border:.16rem solid #efeee9;
+  min-height:3.5rem;
+  border:.13rem solid #e9e7e1;
   border-radius:999px;
-  background:#8f9396;
+  background:#62676b;
+  background-clip:padding-box;
 }
 .configurator__choices--cars::-webkit-scrollbar-thumb:hover,
 .configurator__choices--cities::-webkit-scrollbar-thumb:hover{
-  background:#666b70;
+  background:#3e4347;
+  background-clip:padding-box;
+}
+.configurator__choices--cars::-webkit-scrollbar-button,
+.configurator__choices--cities::-webkit-scrollbar-button{
+  width:0;
+  height:0;
+  display:none;
+}
+.configurator__choices--cars::-webkit-scrollbar-corner,
+.configurator__choices--cities::-webkit-scrollbar-corner{
+  background:transparent;
+}
+@supports (scrollbar-color:#62676b #e9e7e1) and (not selector(::-webkit-scrollbar)){
+  .configurator__choices--cars,
+  .configurator__choices--cities{
+    scrollbar-width:thin;
+    scrollbar-color:#62676b #e9e7e1;
+  }
 }
 .configurator__choice{
   position:relative;
