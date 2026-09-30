@@ -1566,17 +1566,19 @@
 }
 .configurator__actions{
   margin-top:auto;
-  padding-top:1.5rem;
+  padding-top:1.25rem;
   border-top:1px solid #e2e2df;
   display:grid;
-  grid-template-columns:minmax(10rem,15rem) minmax(14rem,18rem);
+  grid-template-columns:minmax(9rem,13.5rem) minmax(12rem,16.5rem);
   justify-content:space-between;
-  gap:1rem;
+  gap:.85rem;
 }
 .configurator__actions .button{
   width:100%;
-  min-height:3.55rem;
+  min-height:3.25rem;
+  padding-inline:1.15rem;
   border-radius:var(--radius-sm);
+  font-size:.95rem;
 }
 .configurator__back{
   background:#fff;
@@ -1794,14 +1796,23 @@
   .configurator__choice--car img{width:5.7rem;height:2.5rem}
   .configurator__choice:not(.configurator__choice--car):has(.configurator__choice-search){grid-template-columns:1.5rem minmax(0,1fr) 1.25rem}
   .configurator__contact-channels{grid-template-columns:1fr}
-  .configurator__actions{grid-template-columns:1fr 1fr;gap:.65rem}
-  .configurator__actions .button{min-width:0;padding-inline:1rem}
+  .configurator__actions{
+    grid-template-columns:minmax(0,.78fr) minmax(0,1fr);
+    gap:.55rem;
+  }
+  .configurator__actions .button{
+    min-width:0;
+    min-height:3.05rem;
+    padding-inline:.85rem;
+    font-size:.9rem;
+  }
   .configurator__summary{display:none}
   .configurator__form>.configurator__summary{
     display:flex;
     margin:1.25rem -1.2rem;
     border-radius:0;
     overflow:hidden;
+    scroll-margin-top:1rem;
   }
   .configurator__summary-media,
   .configurator__summary-heading{min-height:10.5rem}

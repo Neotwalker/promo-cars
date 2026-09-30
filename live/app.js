@@ -589,6 +589,15 @@
 
       refs.summaryMedia.classList.remove('is-generic');
 
+      const summaryIsVisible = !compactSummary.matches || summary.parentElement === form;
+      if (!summaryIsVisible) {
+        resetSummaryImageTransition();
+        refs.summaryImage.src = nextSrc;
+        summaryImageActiveSrc = nextSrc;
+        refs.summaryImage.style.removeProperty('opacity');
+        return;
+      }
+
       if (nextSrc === summaryImageActiveSrc && !summaryImageTransitioning) {
         refs.summaryImage.style.removeProperty('opacity');
         return;
@@ -717,6 +726,17 @@
 
       renderSummary();
       syncSummaryPlacement();
+
+      const revealMobileSummary = compactSummary.matches && name === 'contact' && summary.parentElement === form;
+      if (revealMobileSummary) {
+        requestAnimationFrame(() => {
+          summary.scrollIntoView({
+            behavior:reduceMotion.matches ? 'auto' : 'smooth',
+            block:'start'
+          });
+        });
+        return;
+      }
 
       if (focusQuestion) {
         const activeStep = steps.find((step) => step.dataset.configStep === name);
