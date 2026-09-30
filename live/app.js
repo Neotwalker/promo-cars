@@ -1015,33 +1015,35 @@
 
   const materialMap = {
     zeekr:[
-      ['Видео осмотра','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.'],
-      ['Сверка комплектации','document','./assets/img/proof/proof-zeekr-spec-check-test.webp','Сопоставление выбранной комплектации с фактическим автомобилем перед выкупом.'],
-      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.'],
-      ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.'],
-      ['Таможенные документы','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.'],
-      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.'],
-      ['Фото выдачи','media',null,'Финальная фотофиксация автомобиля на этапе передачи клиенту.']
+      ['Видео осмотра','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.','video'],
+      ['Сверка комплектации','document','./assets/img/proof/proof-zeekr-spec-check-test.webp','Сопоставление выбранной комплектации с фактическим автомобилем перед выкупом.','checklist'],
+      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
+      ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.','insurance'],
+      ['Таможенные документы','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
+      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.','epts'],
+      ['Фото выдачи','media',null,'Финальная фотофиксация автомобиля на этапе передачи клиенту.','photo']
     ],
     xiaomi:[
-      ['Фото и видео проверки','media',null,'Фото- и видеофиксация автомобиля на этапе проверки перед выкупом.'],
-      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.'],
-      ['Страхование','document',null,'Документ по страхованию автомобиля на этапе перевозки.'],
-      ['Статусы маршрута','document',null,'Зафиксированные этапы движения автомобиля по маршруту доставки.'],
-      ['Таможенное оформление','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.'],
-      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.'],
-      ['Выдача в Казани','media',null,'Финальная фиксация автомобиля на этапе передачи клиенту.']
+      ['Фото и видео проверки','media',null,'Фото- и видеофиксация автомобиля на этапе проверки перед выкупом.','video'],
+      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
+      ['Страхование','document',null,'Документ по страхованию автомобиля на этапе перевозки.','insurance'],
+      ['Статусы маршрута','document',null,'Зафиксированные этапы движения автомобиля по маршруту доставки.','checklist'],
+      ['Таможенное оформление','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
+      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.','epts'],
+      ['Выдача в Казани','media',null,'Финальная фиксация автомобиля на этапе передачи клиенту.','photo']
     ],
     'li-auto':[
-      ['Осмотр автомобиля','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.'],
-      ['Сверка VIN и комплектации','document',null,'Сопоставление VIN и выбранной комплектации с фактическим автомобилем.'],
-      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.'],
-      ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.'],
-      ['Таможенные документы','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.'],
-      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.'],
-      ['Фото передачи клиенту','media',null,'Финальная фотофиксация автомобиля на этапе передачи клиенту.']
+      ['Осмотр автомобиля','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.','video'],
+      ['Сверка VIN и комплектации','document',null,'Сопоставление VIN и выбранной комплектации с фактическим автомобилем.','checklist'],
+      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
+      ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.','insurance'],
+      ['Таможенные документы','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
+      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.','epts'],
+      ['Фото передачи клиенту','media',null,'Финальная фотофиксация автомобиля на этапе передачи клиенту.','photo']
     ]
   };
+
+  const proofIconSrc = (key) => './assets/icons/proof/' + key + '.svg';
 
   const buildDetail = (card) => {
     const key = card.dataset.proofCase;
@@ -1092,15 +1094,16 @@
     details.innerHTML = '<div class="case-card__details-inner"><div class="case-card__active-material"><p class="case-card__active-type" data-active-material-type></p><h3 class="case-card__active-title" data-active-material-title></h3><p class="case-card__active-description" data-active-material-description></p><p class="case-card__active-hint" data-active-material-hint hidden>Нажмите на документ слева, чтобы открыть его крупнее.</p></div></div>';
     body.insertBefore(details,toggle);
 
-    materials.forEach(([title,kind,asset],index) => {
+    materials.forEach(([title,kind,asset,description,iconKey],index) => {
       const thumb = document.createElement('button');
       thumb.type = 'button';
       thumb.className = 'case-card__thumb';
       thumb.dataset.materialIndex = String(index);
       thumb.dataset.kind = kind;
       thumb.setAttribute('aria-pressed',String(index === 0));
-      thumb.innerHTML = '<span class="case-card__thumb-preview"></span><span></span>';
+      thumb.innerHTML = '<span class="case-card__thumb-preview"><span class="case-card__thumb-icon" aria-hidden="true"><img alt="" width="24" height="24"></span></span><span></span>';
       thumb.querySelector('span:last-child').textContent = title;
+      thumb.querySelector('.case-card__thumb-icon img').src = proofIconSrc(iconKey);
       if (asset) {
         thumb.classList.add('has-preview');
         thumb.style.setProperty('--material-preview','url("' + asset + '")');
