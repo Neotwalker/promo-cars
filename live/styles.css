@@ -2554,6 +2554,10 @@ html:has(.proof-document-modal[aria-hidden="false"])::-webkit-scrollbar{
 body:has(.proof-document-modal[aria-hidden="false"]){
   background:#0d1215;
 }
+.proof-document-modal__body>img[hidden],
+.proof-document-modal__video[hidden]{
+  display:none;
+}
 .proof-document-modal__body>img{
   display:block;
   width:min(100%,52rem);
