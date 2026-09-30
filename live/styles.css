@@ -2242,7 +2242,8 @@
   background:rgba(247,247,244,.035);
 }
 .case-card__thumb[data-kind="media"] .case-card__thumb-preview,
-.case-card__thumb[data-kind="video"] .case-card__thumb-preview{
+.case-card__thumb[data-kind="video"] .case-card__thumb-preview,
+.case-card__thumb[data-kind="photo"] .case-card__thumb-preview{
   background:
     linear-gradient(rgba(13,18,21,.3),rgba(13,18,21,.3)),
     var(--case-image) center/cover no-repeat;
@@ -2385,7 +2386,8 @@
   font-weight:500;
   backdrop-filter:blur(8px);
 }
-.case-card__viewer-video{
+.case-card__viewer-video,
+.case-card__viewer-photo{
   position:absolute;
   left:50%;
   top:50%;
@@ -2412,13 +2414,16 @@
     border-color var(--motion-fast) var(--ease-standard),
     transform var(--motion-normal) var(--ease-emphasized);
 }
-.case-card__viewer-video[hidden]{display:none}
-.case-card__viewer-video:hover{
+.case-card__viewer-video[hidden],
+.case-card__viewer-photo[hidden]{display:none}
+.case-card__viewer-video:hover,
+.case-card__viewer-photo:hover{
   background:rgba(8,12,16,.9);
   border-color:rgba(247,247,244,.48);
   transform:translate(-50%,-50%) scale(1.02);
 }
-.case-card__viewer-video:focus-visible{
+.case-card__viewer-video:focus-visible,
+.case-card__viewer-photo:focus-visible{
   outline:2px solid var(--color-signal);
   outline-offset:.25rem;
 }
@@ -2589,6 +2594,21 @@ body:has(.proof-document-modal[aria-hidden="false"]){
   scrollbar-gutter:auto;
   background:#000;
 }
+.proof-document-modal.is-photo .proof-document-modal__dialog{
+  height:auto;
+}
+.proof-document-modal.is-photo .proof-document-modal__body{
+  overflow:hidden;
+  place-items:center;
+  scrollbar-gutter:auto;
+}
+.proof-document-modal.is-photo .proof-document-modal__body>img{
+  width:100%;
+  max-width:72rem;
+  max-height:calc(100dvh - 10rem);
+  object-fit:contain;
+  background:#0d1215;
+}
 
 @media(max-width:72rem){
   .proof-document-modal{
@@ -2740,6 +2760,7 @@ body:has(.proof-document-modal[aria-hidden="false"]){
   .case-card__details,
   .case-card__viewer-state,
   .case-card__viewer-video,
+  .case-card__viewer-photo,
   .case-card__media img{
     transition:none;
   }

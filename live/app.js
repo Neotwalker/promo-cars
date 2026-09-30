@@ -1016,12 +1016,12 @@
   const materialMap = {
     zeekr:[
       ['Видео осмотра','video',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.','video','https://rutube.ru/play/embed/14d8f4c11a0eadb1fa29bfbe0881eca4'],
-      ['Сверка комплектации','document','./assets/img/proof/proof-zeekr-spec-check-test.webp','Сопоставление выбранной комплектации с фактическим автомобилем перед выкупом.','checklist'],
-      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
-      ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.','insurance'],
-      ['Таможенные документы','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
-      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.','epts'],
-      ['Фото выдачи','media',null,'Финальная фотофиксация автомобиля на этапе передачи клиенту.','photo']
+      ['Сверка комплектации','document','./assets/img/proof/proof-zeekr-checklist.svg','Сопоставление выбранной комплектации с фактическим автомобилем перед выкупом.','checklist'],
+      ['Инвойс','document','./assets/img/proof/proof-zeekr-invoice.svg','Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
+      ['Страхование перевозки','document','./assets/img/proof/proof-zeekr-insurance.svg','Документ по страхованию автомобиля на этапе перевозки.','insurance'],
+      ['Таможенные документы','document','./assets/img/proof/proof-zeekr-customs.svg','Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
+      ['ЭПТС','document','./assets/img/proof/proof-zeekr-epts.svg','Электронный паспорт транспортного средства после оформления.','epts'],
+      ['Фото выдачи','photo','./assets/img/proof/proof-zeekr-001-1440.webp','Финальная фотофиксация автомобиля на этапе передачи клиенту.','photo']
     ],
     xiaomi:[
       ['Фото и видео проверки','media',null,'Фото- и видеофиксация автомобиля на этапе проверки перед выкупом.','video'],
@@ -1061,6 +1061,7 @@
     modalTitle.textContent = title;
     modalMeta.textContent = meta;
     materialModal.classList.toggle('is-video',mode === 'video');
+    materialModal.classList.toggle('is-photo',mode === 'image');
 
     if (mode === 'video' && videoUrl) {
       modalDocument.hidden = true;
@@ -1201,7 +1202,7 @@
     viewerState.className = 'case-card__viewer-state';
     viewerState.setAttribute('aria-hidden','true');
     viewerState.inert = true;
-    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><button class="case-card__viewer-video" type="button" hidden><span class="case-card__viewer-video-icon" aria-hidden="true"><img src="./assets/icons/proof/video.svg" alt=""></span><span>Смотреть видео</span></button><button class="case-card__viewer-document" type="button" disabled><img data-document-preview alt=""><span class="case-card__viewer-open-hint">Открыть документ ↗</span><span data-document-fallback><strong></strong><span>Материал кейса</span></span></button>';
+    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><button class="case-card__viewer-video" type="button" hidden><span class="case-card__viewer-video-icon" aria-hidden="true"><img src="./assets/icons/proof/video.svg" alt=""></span><span>Смотреть видео</span></button><button class="case-card__viewer-photo" type="button" hidden><span class="case-card__viewer-video-icon" aria-hidden="true"><img src="./assets/icons/proof/photo.svg" alt=""></span><span>Открыть фото</span></button><button class="case-card__viewer-document" type="button" disabled><img data-document-preview alt=""><span class="case-card__viewer-open-hint">Открыть документ ↗</span><span data-document-fallback><strong></strong><span>Материал кейса</span></span></button>';
     media.append(viewerState);
 
     const thumbs = document.createElement('div');
@@ -1269,14 +1270,16 @@
         button.setAttribute('aria-pressed',String(Number(button.dataset.materialIndex) === index));
       });
 
-      details.querySelector('[data-active-material-type]').textContent = kind === 'document' ? 'Документ' : kind === 'video' ? 'Видео' : 'Медиа';
+      details.querySelector('[data-active-material-type]').textContent = kind === 'document' ? 'Документ' : kind === 'video' ? 'Видео' : kind === 'photo' ? 'Фото' : 'Медиа';
       details.querySelector('[data-active-material-title]').textContent = title;
       details.querySelector('[data-active-material-description]').textContent = description || '';
       const activeHint = details.querySelector('[data-active-material-hint]');
       activeHint.hidden = !asset && !embedUrl;
       activeHint.textContent = embedUrl
         ? 'Откройте видео в плеере, чтобы посмотреть материал целиком.'
-        : 'Нажмите на документ слева, чтобы открыть его крупнее.';
+        : kind === 'photo'
+          ? 'Откройте фото, чтобы посмотреть материал крупнее.'
+          : 'Нажмите на документ слева, чтобы открыть его крупнее.';
 
       if (card.classList.contains('is-expanded') && window.matchMedia('(max-width:72rem)').matches) {
         const selectedThumb = thumbsInner.querySelector('[data-material-index="' + index + '"]');
@@ -1291,13 +1294,15 @@
       const documentPreview = documentView.querySelector('[data-document-preview]');
       const documentFallback = documentView.querySelector('[data-document-fallback]');
       const videoView = viewerState.querySelector('.case-card__viewer-video');
+      const photoView = viewerState.querySelector('.case-card__viewer-photo');
 
       media.classList.toggle('is-document',kind === 'document');
       media.classList.toggle('is-video',kind === 'video');
+      media.classList.toggle('is-photo',kind === 'photo');
       viewerState.querySelector('.case-card__viewer-label').textContent = title;
       documentFallback.querySelector('strong').textContent = title;
 
-      if (asset) {
+      if (kind === 'document' && asset) {
         documentView.classList.add('has-preview');
         documentView.disabled = false;
         documentView.dataset.modalOpen = 'proof-document-modal';
@@ -1326,6 +1331,19 @@
         videoView.removeAttribute('aria-label');
       }
 
+      photoView.hidden = !(kind === 'photo' && asset);
+      if (!photoView.hidden) {
+        photoView.dataset.modalOpen = 'proof-document-modal';
+        photoView.setAttribute('aria-label','Открыть фото «' + title + '»');
+        photoView.dataset.photoSrc = asset;
+        photoView.dataset.photoTitle = title;
+      } else {
+        delete photoView.dataset.modalOpen;
+        delete photoView.dataset.photoSrc;
+        delete photoView.dataset.photoTitle;
+        photoView.removeAttribute('aria-label');
+      }
+
       if (!reduceMotion.matches) {
         viewerAnimation?.cancel();
         viewerAnimation = media.animate(
@@ -1337,6 +1355,7 @@
 
     const documentView = viewerState.querySelector('.case-card__viewer-document');
     const videoView = viewerState.querySelector('.case-card__viewer-video');
+    const photoView = viewerState.querySelector('.case-card__viewer-photo');
     const cardTitle = card.querySelector('.case-card__title')?.textContent.trim() || '';
     const cardMeta = card.querySelector('.case-card__meta')?.textContent.replace(/\s+/g,' ').trim() || '';
     const modalCardMeta = [cardTitle,cardMeta].filter(Boolean).join(' · ');
@@ -1360,6 +1379,17 @@
         title:videoView.dataset.videoTitle || 'Видео',
         meta:modalCardMeta,
         videoUrl:videoView.dataset.videoUrl
+      });
+    });
+
+    photoView.addEventListener('click',() => {
+      if (photoView.hidden || !photoView.dataset.photoSrc) return;
+      prepareProofModal({
+        mode:'image',
+        title:photoView.dataset.photoTitle || 'Фото',
+        meta:modalCardMeta,
+        documentSrc:photoView.dataset.photoSrc,
+        documentAlt:(photoView.dataset.photoTitle || 'Фото') + ' — Zeekr 001 AWD'
       });
     });
 
