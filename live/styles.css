@@ -2289,49 +2289,38 @@
   min-height:0;
   overflow:hidden;
 }
-.case-card__materials{
+.case-card__active-material{
+  width:100%;
+  padding:var(--space-3) 0;
   border-top:1px solid rgba(247,247,244,.14);
   border-bottom:1px solid rgba(247,247,244,.14);
 }
-.case-card__materials-title{
-  padding:var(--space-2) 0;
-  border-bottom:1px solid rgba(247,247,244,.14);
-  font-size:var(--type-body);
-  line-height:var(--type-body-lh);
-  font-weight:600;
-}
-.case-card__material{
-  width:100%;
-  min-height:2.75rem;
-  padding:.55rem 0;
-  border:0;
-  border-bottom:1px solid rgba(247,247,244,.1);
-  background:transparent;
-  color:rgba(247,247,244,.72);
-  display:grid;
-  grid-template-columns:1.75rem minmax(0,1fr) auto;
-  align-items:center;
-  gap:var(--space-1);
-  text-align:left;
+.case-card__active-type{
+  margin:0;
+  color:var(--color-signal);
   font-size:var(--type-small);
   line-height:var(--type-small-lh);
+  text-transform:uppercase;
+  letter-spacing:.08em;
 }
-.case-card__material:last-child{border-bottom:0}
-.case-card__material-index{
-  color:rgba(247,247,244,.38);
-  font-variant-numeric:tabular-nums;
+.case-card__active-title{
+  margin:var(--space-1) 0 0;
+  font-size:var(--type-h3);
+  line-height:var(--type-h3-lh);
+  font-weight:600;
 }
-.case-card__material-arrow{
-  color:rgba(247,247,244,.44);
-  font-size:1rem;
+.case-card__active-description{
+  max-width:36rem;
+  margin:var(--space-2) 0 0;
+  color:rgba(247,247,244,.7);
+  font-size:var(--type-body);
+  line-height:var(--type-body-lh);
 }
-.case-card__material[aria-pressed="true"]{
-  color:var(--color-signal);
-  background:rgba(255,91,53,.055);
-}
-.case-card__material[aria-pressed="true"] .case-card__material-index,
-.case-card__material[aria-pressed="true"] .case-card__material-arrow{
-  color:var(--color-signal);
+.case-card__active-hint{
+  margin:var(--space-2) 0 0;
+  color:rgba(247,247,244,.5);
+  font-size:var(--type-small);
+  line-height:var(--type-small-lh);
 }
 .case-card__viewer-state{
   position:absolute;
@@ -2571,10 +2560,7 @@
     grid-auto-columns:minmax(8rem,42vw);
     gap:.5rem;
   }
-  .case-card__material{
-    grid-template-columns:1.5rem minmax(0,1fr) auto;
-    padding-inline:var(--space-2);
-  }
+  .case-card__viewer-label{display:none}
   .case-card__viewer-document{
     inset:10% 9%;
   }

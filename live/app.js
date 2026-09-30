@@ -980,31 +980,31 @@
 
   const materialMap = {
     zeekr:[
-      ['Видео осмотра','media'],
-      ['Сверка комплектации','document','./assets/img/proof/proof-zeekr-spec-check-test.webp'],
-      ['Инвойс','document'],
-      ['Страхование перевозки','document'],
-      ['Таможенные документы','document'],
-      ['ЭПТС','document'],
-      ['Фото выдачи','media']
+      ['Видео осмотра','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.'],
+      ['Сверка комплектации','document','./assets/img/proof/proof-zeekr-spec-check-test.webp','Сопоставление выбранной комплектации с фактическим автомобилем перед выкупом.'],
+      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.'],
+      ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.'],
+      ['Таможенные документы','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.'],
+      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.'],
+      ['Фото выдачи','media',null,'Финальная фотофиксация автомобиля на этапе передачи клиенту.']
     ],
     xiaomi:[
-      ['Фото и видео проверки','media'],
-      ['Инвойс','document'],
-      ['Страхование','document'],
-      ['Статусы маршрута','document'],
-      ['Таможенное оформление','document'],
-      ['ЭПТС','document'],
-      ['Выдача в Казани','media']
+      ['Фото и видео проверки','media',null,'Фото- и видеофиксация автомобиля на этапе проверки перед выкупом.'],
+      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.'],
+      ['Страхование','document',null,'Документ по страхованию автомобиля на этапе перевозки.'],
+      ['Статусы маршрута','document',null,'Зафиксированные этапы движения автомобиля по маршруту доставки.'],
+      ['Таможенное оформление','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.'],
+      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.'],
+      ['Выдача в Казани','media',null,'Финальная фиксация автомобиля на этапе передачи клиенту.']
     ],
     'li-auto':[
-      ['Осмотр автомобиля','media'],
-      ['Сверка VIN и комплектации','document'],
-      ['Инвойс','document'],
-      ['Страхование перевозки','document'],
-      ['Таможенные документы','document'],
-      ['ЭПТС','document'],
-      ['Фото передачи клиенту','media']
+      ['Осмотр автомобиля','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.'],
+      ['Сверка VIN и комплектации','document',null,'Сопоставление VIN и выбранной комплектации с фактическим автомобилем.'],
+      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.'],
+      ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.'],
+      ['Таможенные документы','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.'],
+      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.'],
+      ['Фото передачи клиенту','media',null,'Финальная фотофиксация автомобиля на этапе передачи клиенту.']
     ]
   };
 
@@ -1054,10 +1054,8 @@
     details.id = toggle.getAttribute('aria-controls');
     details.setAttribute('aria-hidden','true');
     details.inert = true;
-    details.innerHTML = '<div class="case-card__details-inner"><div class="case-card__materials"><p class="case-card__materials-title">Материалы кейса</p><div data-material-list></div></div></div>';
+    details.innerHTML = '<div class="case-card__details-inner"><div class="case-card__active-material"><p class="case-card__active-type" data-active-material-type></p><h3 class="case-card__active-title" data-active-material-title></h3><p class="case-card__active-description" data-active-material-description></p><p class="case-card__active-hint" data-active-material-hint hidden>Нажмите на документ слева, чтобы открыть его крупнее.</p></div></div>';
     body.insertBefore(details,toggle);
-
-    const list = details.querySelector('[data-material-list]');
 
     materials.forEach(([title,kind,asset],index) => {
       const thumb = document.createElement('button');
@@ -1074,26 +1072,22 @@
       }
       thumbsInner.append(thumb);
 
-      const row = document.createElement('button');
-      row.type = 'button';
-      row.className = 'case-card__material';
-      row.dataset.materialIndex = String(index);
-      row.setAttribute('aria-pressed',String(index === 0));
-      row.innerHTML = '<span class="case-card__material-index"></span><span class="case-card__material-title"></span><span class="case-card__material-arrow" aria-hidden="true">→</span>';
-      row.querySelector('.case-card__material-index').textContent = String(index + 1).padStart(2,'0');
-      row.querySelector('.case-card__material-title').textContent = title;
-      list.append(row);
     });
 
     let viewerAnimation = null;
 
     const selectMaterial = (index) => {
-      const [title,kind,asset] = materials[index] || materials[0];
+      const [title,kind,asset,description] = materials[index] || materials[0];
       card.querySelectorAll('[data-material-index]').forEach((button) => {
         button.setAttribute('aria-pressed',String(Number(button.dataset.materialIndex) === index));
       });
 
-      if (card.classList.contains('is-expanded') && window.matchMedia('(max-width:64rem)').matches) {
+      details.querySelector('[data-active-material-type]').textContent = kind === 'document' ? 'Документ' : 'Медиа';
+      details.querySelector('[data-active-material-title]').textContent = title;
+      details.querySelector('[data-active-material-description]').textContent = description || '';
+      details.querySelector('[data-active-material-hint]').hidden = !asset;
+
+      if (card.classList.contains('is-expanded') && window.matchMedia('(max-width:72rem)').matches) {
         const selectedThumb = thumbsInner.querySelector('[data-material-index="' + index + '"]');
         selectedThumb?.scrollIntoView({
           behavior:reduceMotion.matches ? 'auto' : 'smooth',
