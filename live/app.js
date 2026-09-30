@@ -1015,7 +1015,7 @@
 
   const materialMap = {
     zeekr:[
-      ['Видео осмотра','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.','video'],
+      ['Видео осмотра','video',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.','video','https://rutube.ru/play/embed/14d8f4c11a0eadb1fa29bfbe0881eca4'],
       ['Сверка комплектации','document','./assets/img/proof/proof-zeekr-spec-check-test.webp','Сопоставление выбранной комплектации с фактическим автомобилем перед выкупом.','checklist'],
       ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
       ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.','insurance'],
@@ -1045,6 +1045,60 @@
 
   const proofIconSrc = (key) => './assets/icons/proof/' + key + '.svg';
 
+  const materialModal = document.querySelector('[data-modal="proof-document-modal"]');
+  const modalTitle = materialModal?.querySelector('[data-proof-modal-title]');
+  const modalMeta = materialModal?.querySelector('[data-proof-modal-meta]');
+  const modalDocument = materialModal?.querySelector('[data-proof-modal-document]');
+  const modalVideo = materialModal?.querySelector('[data-proof-modal-video]');
+
+  const clearProofVideo = () => {
+    modalVideo?.replaceChildren();
+  };
+
+  const prepareProofModal = ({mode,title,meta,documentSrc,documentAlt,videoUrl}) => {
+    if (!materialModal || !modalTitle || !modalMeta || !modalDocument || !modalVideo) return;
+
+    modalTitle.textContent = title;
+    modalMeta.textContent = meta;
+    materialModal.classList.toggle('is-video',mode === 'video');
+
+    if (mode === 'video' && videoUrl) {
+      modalDocument.hidden = true;
+      modalVideo.hidden = false;
+      clearProofVideo();
+
+      const iframe = document.createElement('iframe');
+      iframe.src = videoUrl;
+      iframe.title = title + ' — RUTUBE';
+      iframe.allow = 'clipboard-write; autoplay; fullscreen; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('frameborder','0');
+      iframe.setAttribute('referrerpolicy','strict-origin-when-cross-origin');
+      modalVideo.append(iframe);
+      return;
+    }
+
+    clearProofVideo();
+    modalVideo.hidden = true;
+    modalDocument.hidden = false;
+    materialModal.classList.remove('is-video');
+    if (documentSrc) modalDocument.src = documentSrc;
+    modalDocument.alt = documentAlt || title;
+  };
+
+  if (materialModal) {
+    const stopVideoOnDismiss = (event) => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'click' && !event.target.closest('[data-modal-close]') && !event.target.matches('[data-modal-backdrop]')) return;
+      clearProofVideo();
+    };
+    materialModal.addEventListener('click',stopVideoOnDismiss);
+    document.addEventListener('keydown',stopVideoOnDismiss);
+    new MutationObserver(() => {
+      if (materialModal.getAttribute('aria-hidden') === 'true') clearProofVideo();
+    }).observe(materialModal,{attributes:true,attributeFilter:['aria-hidden']});
+  }
+
   const buildDetail = (card) => {
     const key = card.dataset.proofCase;
     const materials = materialMap[key];
@@ -1069,7 +1123,7 @@
     viewerState.className = 'case-card__viewer-state';
     viewerState.setAttribute('aria-hidden','true');
     viewerState.inert = true;
-    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><button class="case-card__viewer-document" type="button" disabled><img data-document-preview alt=""><span class="case-card__viewer-open-hint">Открыть документ ↗</span><span data-document-fallback><strong></strong><span>Материал кейса</span></span></button>';
+    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><button class="case-card__viewer-video" type="button" hidden><span class="case-card__viewer-video-icon" aria-hidden="true"><img src="./assets/icons/proof/video.svg" alt=""></span><span>Смотреть видео</span></button><button class="case-card__viewer-document" type="button" disabled><img data-document-preview alt=""><span class="case-card__viewer-open-hint">Открыть документ ↗</span><span data-document-fallback><strong></strong><span>Материал кейса</span></span></button>';
     media.append(viewerState);
 
     const thumbs = document.createElement('div');
@@ -1111,7 +1165,7 @@
     details.innerHTML = '<div class="case-card__details-inner"><div class="case-card__active-material"><p class="case-card__active-type" data-active-material-type></p><h3 class="case-card__active-title" data-active-material-title></h3><p class="case-card__active-description" data-active-material-description></p><p class="case-card__active-hint" data-active-material-hint hidden>Нажмите на документ слева, чтобы открыть его крупнее.</p></div></div>';
     storyState.after(details);
 
-    materials.forEach(([title,kind,asset,description,iconKey],index) => {
+    materials.forEach(([title,kind,asset,description,iconKey,embedUrl],index) => {
       const thumb = document.createElement('button');
       thumb.type = 'button';
       thumb.className = 'case-card__thumb';
@@ -1132,15 +1186,19 @@
     let viewerAnimation = null;
 
     const selectMaterial = (index) => {
-      const [title,kind,asset,description] = materials[index] || materials[0];
+      const [title,kind,asset,description,iconKey,embedUrl] = materials[index] || materials[0];
       card.querySelectorAll('[data-material-index]').forEach((button) => {
         button.setAttribute('aria-pressed',String(Number(button.dataset.materialIndex) === index));
       });
 
-      details.querySelector('[data-active-material-type]').textContent = kind === 'document' ? 'Документ' : 'Медиа';
+      details.querySelector('[data-active-material-type]').textContent = kind === 'document' ? 'Документ' : kind === 'video' ? 'Видео' : 'Медиа';
       details.querySelector('[data-active-material-title]').textContent = title;
       details.querySelector('[data-active-material-description]').textContent = description || '';
-      details.querySelector('[data-active-material-hint]').hidden = !asset;
+      const activeHint = details.querySelector('[data-active-material-hint]');
+      activeHint.hidden = !asset && !embedUrl;
+      activeHint.textContent = embedUrl
+        ? 'Откройте видео в плеере, чтобы посмотреть материал целиком.'
+        : 'Нажмите на документ слева, чтобы открыть его крупнее.';
 
       if (card.classList.contains('is-expanded') && window.matchMedia('(max-width:72rem)').matches) {
         const selectedThumb = thumbsInner.querySelector('[data-material-index="' + index + '"]');
@@ -1154,8 +1212,10 @@
       const documentView = viewerState.querySelector('.case-card__viewer-document');
       const documentPreview = documentView.querySelector('[data-document-preview]');
       const documentFallback = documentView.querySelector('[data-document-fallback]');
+      const videoView = viewerState.querySelector('.case-card__viewer-video');
 
       media.classList.toggle('is-document',kind === 'document');
+      media.classList.toggle('is-video',kind === 'video');
       viewerState.querySelector('.case-card__viewer-label').textContent = title;
       documentFallback.querySelector('strong').textContent = title;
 
@@ -1175,6 +1235,19 @@
         documentPreview.alt = '';
       }
 
+      videoView.hidden = !(kind === 'video' && embedUrl);
+      if (!videoView.hidden) {
+        videoView.dataset.modalOpen = 'proof-document-modal';
+        videoView.setAttribute('aria-label','Открыть видео «' + title + '»');
+        videoView.dataset.videoUrl = embedUrl;
+        videoView.dataset.videoTitle = title;
+      } else {
+        delete videoView.dataset.modalOpen;
+        delete videoView.dataset.videoUrl;
+        delete videoView.dataset.videoTitle;
+        videoView.removeAttribute('aria-label');
+      }
+
       if (!reduceMotion.matches) {
         viewerAnimation?.cancel();
         viewerAnimation = media.animate(
@@ -1183,6 +1256,34 @@
         );
       }
     };
+
+    const documentView = viewerState.querySelector('.case-card__viewer-document');
+    const videoView = viewerState.querySelector('.case-card__viewer-video');
+    const cardTitle = card.querySelector('.case-card__title')?.textContent.trim() || '';
+    const cardMeta = card.querySelector('.case-card__meta')?.textContent.replace(/\s+/g,' ').trim() || '';
+    const modalCardMeta = [cardTitle,cardMeta].filter(Boolean).join(' · ');
+
+    documentView.addEventListener('click',() => {
+      if (documentView.disabled) return;
+      const preview = documentView.querySelector('[data-document-preview]');
+      prepareProofModal({
+        mode:'document',
+        title:viewerState.querySelector('.case-card__viewer-label').textContent || 'Документ',
+        meta:modalCardMeta,
+        documentSrc:preview.currentSrc || preview.src,
+        documentAlt:preview.alt
+      });
+    });
+
+    videoView.addEventListener('click',() => {
+      if (videoView.hidden || !videoView.dataset.videoUrl) return;
+      prepareProofModal({
+        mode:'video',
+        title:videoView.dataset.videoTitle || 'Видео',
+        meta:modalCardMeta,
+        videoUrl:videoView.dataset.videoUrl
+      });
+    });
 
     card.addEventListener('click',(event) => {
       const materialButton = event.target.closest('[data-material-index]');

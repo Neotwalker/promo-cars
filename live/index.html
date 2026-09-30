@@ -762,13 +762,14 @@
       <header class="proof-document-modal__header">
         <div class="proof-document-modal__copy">
           <p class="eyebrow">Материал кейса</p>
-          <h2 class="type-h3" id="proof-document-modal-title">Сверка комплектации</h2>
-          <p>Zeekr 001 AWD · Москва · 2025</p>
+          <h2 class="type-h3" id="proof-document-modal-title" data-proof-modal-title>Сверка комплектации</h2>
+          <p data-proof-modal-meta>Zeekr 001 AWD · Москва · 2025</p>
         </div>
-        <button class="modal__close" type="button" data-modal-close aria-label="Закрыть документ">×</button>
+        <button class="modal__close" type="button" data-modal-close aria-label="Закрыть материал">×</button>
       </header>
       <div class="proof-document-modal__body">
-        <img src="./assets/img/proof/proof-zeekr-spec-check-test.webp" alt="Документ сверки комплектации Zeekr 001 AWD">
+        <img data-proof-modal-document src="./assets/img/proof/proof-zeekr-spec-check-test.webp" alt="Документ сверки комплектации Zeekr 001 AWD">
+        <div class="proof-document-modal__video" data-proof-modal-video hidden></div>
       </div>
     </section>
   </div>
