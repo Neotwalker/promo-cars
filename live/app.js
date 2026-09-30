@@ -1097,6 +1097,37 @@
     new MutationObserver(() => {
       if (materialModal.getAttribute('aria-hidden') === 'true') clearProofVideo();
     }).observe(materialModal,{attributes:true,attributeFilter:['aria-hidden']});
+
+    window.addEventListener('message',(event) => {
+      const iframe = modalVideo?.querySelector('iframe');
+      if (!iframe || event.source !== iframe.contentWindow) return;
+
+      let isRutube = false;
+      try {
+        const host = new URL(event.origin).hostname;
+        isRutube = host === 'rutube.ru' || host.endsWith('.rutube.ru');
+      } catch {
+        return;
+      }
+      if (!isRutube) return;
+
+      let message = event.data;
+      if (typeof message === 'string') {
+        try {
+          message = JSON.parse(message);
+        } catch {
+          return;
+        }
+      }
+
+      if (message?.type !== 'player:playComplete' || iframe.dataset.endHandled === 'true') return;
+
+      iframe.dataset.endHandled = 'true';
+      iframe.contentWindow?.postMessage(
+        JSON.stringify({type:'player:stop',data:{}}),
+        event.origin
+      );
+    });
   }
 
   const buildDetail = (card) => {
