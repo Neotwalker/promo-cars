@@ -1101,8 +1101,8 @@
       thumb.dataset.materialIndex = String(index);
       thumb.dataset.kind = kind;
       thumb.setAttribute('aria-pressed',String(index === 0));
-      thumb.innerHTML = '<span class="case-card__thumb-preview"><span class="case-card__thumb-icon" aria-hidden="true"><img alt="" width="24" height="24"></span></span><span></span>';
-      thumb.querySelector('span:last-child').textContent = title;
+      thumb.innerHTML = '<span class="case-card__thumb-preview"><span class="case-card__thumb-icon" aria-hidden="true"><img alt="" width="24" height="24"></span></span><span class="case-card__thumb-label"></span>';
+      thumb.querySelector('.case-card__thumb-label').textContent = title;
       thumb.querySelector('.case-card__thumb-icon img').src = proofIconSrc(iconKey);
       if (asset) {
         thumb.classList.add('has-preview');
