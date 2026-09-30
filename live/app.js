@@ -1067,6 +1067,8 @@
 
     const viewerState = document.createElement('div');
     viewerState.className = 'case-card__viewer-state';
+    viewerState.setAttribute('aria-hidden','true');
+    viewerState.inert = true;
     viewerState.innerHTML = '<span class="case-card__viewer-label"></span><button class="case-card__viewer-document" type="button" disabled><img data-document-preview alt=""><span class="case-card__viewer-open-hint">Открыть документ ↗</span><span data-document-fallback><strong></strong><span>Материал кейса</span></span></button>';
     media.append(viewerState);
 
@@ -1084,7 +1086,22 @@
     back.type = 'button';
     back.dataset.caseClose = '';
     back.textContent = '← Вернуться к истории';
+    back.setAttribute('aria-hidden','true');
+    back.inert = true;
     body.prepend(back);
+
+    const story = body.querySelector('.case-card__story');
+    const quote = body.querySelector('.case-card__quote');
+    if (!story || !quote) return null;
+
+    const storyState = document.createElement('div');
+    storyState.className = 'case-card__story-state';
+    storyState.setAttribute('aria-hidden','false');
+    const storyStateInner = document.createElement('div');
+    storyStateInner.className = 'case-card__story-state-inner';
+    story.before(storyState);
+    storyState.append(storyStateInner);
+    storyStateInner.append(story,quote,toggle);
 
     const details = document.createElement('div');
     details.className = 'case-card__details';
@@ -1092,7 +1109,7 @@
     details.setAttribute('aria-hidden','true');
     details.inert = true;
     details.innerHTML = '<div class="case-card__details-inner"><div class="case-card__active-material"><p class="case-card__active-type" data-active-material-type></p><h3 class="case-card__active-title" data-active-material-title></h3><p class="case-card__active-description" data-active-material-description></p><p class="case-card__active-hint" data-active-material-hint hidden>Нажмите на документ слева, чтобы открыть его крупнее.</p></div></div>';
-    body.insertBefore(details,toggle);
+    storyState.after(details);
 
     materials.forEach(([title,kind,asset,description,iconKey],index) => {
       const thumb = document.createElement('button');
@@ -1173,7 +1190,7 @@
     });
 
     selectMaterial(0);
-    return {toggle,back,details,thumbs,visual};
+    return {toggle,back,details,thumbs,visual,storyState,viewerState};
   };
 
   const states = new Map(cards.map((card) => [card,buildDetail(card)]));
@@ -1184,21 +1201,22 @@
 
     card.classList.toggle('is-expanded',open);
     state.toggle.setAttribute('aria-expanded',String(open));
+    state.storyState.setAttribute('aria-hidden',String(open));
     state.details.setAttribute('aria-hidden',String(!open));
     state.thumbs.setAttribute('aria-hidden',String(!open));
+    state.viewerState.setAttribute('aria-hidden',String(!open));
+    state.back.setAttribute('aria-hidden',String(!open));
+
+    state.storyState.inert = open;
     state.details.inert = !open;
     state.thumbs.inert = !open;
+    state.viewerState.inert = !open;
+    state.back.inert = !open;
 
     if (open) {
       cards.forEach((other) => {
         if (other !== card && other.classList.contains('is-expanded')) setOpen(other,false);
       });
-      if (!reduceMotion.matches) {
-        card.animate(
-          {opacity:[.94,1]},
-          {duration:220,easing:'ease-out'}
-        );
-      }
       if (focus) state.back.focus({preventScroll:true});
 
       if (compactCase.matches) {
