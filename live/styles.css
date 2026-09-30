@@ -1628,9 +1628,17 @@
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:opacity var(--motion-fast) var(--ease-standard);
+  transition:opacity 420ms var(--ease-standard);
 }
 .configurator__summary-media.is-generic img{opacity:0}
+.configurator__summary-media .configurator__summary-image--incoming{
+  z-index:0;
+  opacity:0;
+  pointer-events:none;
+}
+.configurator__summary-media .configurator__summary-image--incoming.is-visible{
+  opacity:1;
+}
 .configurator__summary-heading{
   position:relative;
   z-index:1;
@@ -1813,6 +1821,7 @@
   .configurator__choice,
   .configurator__field,
   .configurator__summary-media img,
+  .configurator__summary-media .configurator__summary-image--incoming,
   .configurator__toasts .toast{
     transition:none;
   }

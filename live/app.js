@@ -545,6 +545,66 @@
       return false;
     };
 
+    let summaryImageSwapId = 0;
+
+    const clearIncomingSummaryImage = () => {
+      refs.summaryMedia.querySelectorAll('.configurator__summary-image--incoming').forEach((image) => image.remove());
+    };
+
+    const hideSummaryImage = () => {
+      summaryImageSwapId += 1;
+      clearIncomingSummaryImage();
+      refs.summaryImage.style.removeProperty('opacity');
+      refs.summaryMedia.classList.add('is-generic');
+    };
+
+    const swapSummaryImage = (nextSrc) => {
+      if (!nextSrc || refs.summaryImage.getAttribute('src') === nextSrc) {
+        refs.summaryMedia.classList.remove('is-generic');
+        refs.summaryImage.style.removeProperty('opacity');
+        return;
+      }
+
+      const swapId = ++summaryImageSwapId;
+      clearIncomingSummaryImage();
+
+      const wasGeneric = refs.summaryMedia.classList.contains('is-generic');
+      if (wasGeneric) refs.summaryImage.style.opacity = '0';
+      refs.summaryMedia.classList.remove('is-generic');
+
+      if (reduceMotion.matches) {
+        refs.summaryImage.src = nextSrc;
+        refs.summaryImage.style.removeProperty('opacity');
+        return;
+      }
+
+      const incoming = document.createElement('img');
+      incoming.className = 'configurator__summary-image--incoming';
+      incoming.alt = '';
+      incoming.decoding = 'async';
+
+      const reveal = () => {
+        if (swapId !== summaryImageSwapId) return;
+        refs.summaryMedia.insertBefore(incoming, refs.summaryMedia.querySelector('.configurator__summary-heading'));
+
+        requestAnimationFrame(() => {
+          if (swapId !== summaryImageSwapId) return;
+          incoming.classList.add('is-visible');
+        });
+
+        window.setTimeout(() => {
+          if (swapId !== summaryImageSwapId) return;
+          refs.summaryImage.src = nextSrc;
+          refs.summaryImage.style.removeProperty('opacity');
+          incoming.remove();
+        }, 440);
+      };
+
+      incoming.addEventListener('load', reveal, {once:true});
+      incoming.src = nextSrc;
+      if (incoming.complete) reveal();
+    };
+
     const renderSummary = () => {
       const known = pricing[state.model];
       const city = state.city || 'Город не выбран';
@@ -562,20 +622,19 @@
           if (dds[index]) dds[index].textContent = money(value);
         });
 
-        refs.summaryMedia.classList.remove('is-generic');
-        if (refs.summaryImage.getAttribute('src') !== known.image) refs.summaryImage.src = known.image;
+        swapSummaryImage(known.image);
         refs.summaryTotal.textContent = money(known.total) + (isMoscow ? '' : ' + доставка');
         refs.summaryEta.textContent = known.eta;
         refs.summaryNote.textContent = 'Финальная смета зависит от конкретного автомобиля, курса на момент выкупа и города получения.';
       } else if (state.model === 'Нужен подбор') {
         dds.forEach((dd) => { dd.textContent = '—'; });
-        refs.summaryMedia.classList.add('is-generic');
+        hideSummaryImage();
         refs.summaryTotal.textContent = 'Подберём варианты';
         refs.summaryEta.textContent = 'после подбора';
         refs.summaryNote.textContent = 'Подберём несколько вариантов в вашем бюджете и покажем для каждого цену под ключ, комплектацию и срок доставки.';
       } else {
         dds.forEach((dd) => { dd.textContent = '—'; });
-        refs.summaryMedia.classList.add('is-generic');
+        hideSummaryImage();
         refs.summaryTotal.textContent = state.model ? 'Расчёт после проверки модели' : 'Сначала выберите автомобиль';
         refs.summaryEta.textContent = 'уточним';
         refs.summaryNote.textContent = 'Конкретную сумму покажем после проверки модели. Структура сметы останется той же.';
