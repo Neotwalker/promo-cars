@@ -1120,13 +1120,60 @@
         }
       }
 
-      if (message?.type !== 'player:playComplete' || iframe.dataset.endHandled === 'true') return;
+      const postPlayerCommand = (type,data = {}) => {
+        iframe.contentWindow?.postMessage(
+          JSON.stringify({type,data}),
+          event.origin
+        );
+      };
 
-      iframe.dataset.endHandled = 'true';
-      iframe.contentWindow?.postMessage(
-        JSON.stringify({type:'player:stop',data:{}}),
-        event.origin
-      );
+      if (message?.type === 'player:durationChange') {
+        const duration = Number(message.data?.duration);
+        if (Number.isFinite(duration) && duration > 0) {
+          iframe.dataset.videoDuration = String(duration);
+        }
+        return;
+      }
+
+      if (message?.type === 'player:currentTime') {
+        const duration = Number(iframe.dataset.videoDuration);
+        const time = Number(message.data?.time);
+        if (
+          iframe.dataset.endHandled !== 'true' &&
+          Number.isFinite(duration) &&
+          Number.isFinite(time) &&
+          duration > 0 &&
+          time >= duration - .35
+        ) {
+          iframe.dataset.endHandled = 'true';
+          const holdAt = Math.max(0,duration - .2);
+          postPlayerCommand('player:setCurrentTime',{time:holdAt});
+          postPlayerCommand('player:pause');
+        }
+        return;
+      }
+
+      if (
+        message?.type === 'player:changeState' &&
+        message.data?.state === 'stopped' &&
+        iframe.dataset.endHandled !== 'true'
+      ) {
+        iframe.dataset.endHandled = 'true';
+        postPlayerCommand('player:pause');
+        return;
+      }
+
+      if (
+        message?.type === 'player:changeState' &&
+        message.data?.state === 'playing' &&
+        iframe.dataset.endHandled === 'true'
+      ) {
+        const duration = Number(iframe.dataset.videoDuration);
+        if (Number.isFinite(duration) && duration > 0) {
+          postPlayerCommand('player:setCurrentTime',{time:Math.max(0,duration - .2)});
+        }
+        postPlayerCommand('player:pause');
+      }
     });
   }
 
