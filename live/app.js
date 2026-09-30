@@ -546,63 +546,102 @@
     };
 
     let summaryImageSwapId = 0;
+    let summaryImageTransitioning = false;
+    let summaryImageQueuedSrc = '';
+    let summaryImageActiveSrc = refs.summaryImage.getAttribute('src') || '';
 
     const clearIncomingSummaryImage = () => {
       refs.summaryMedia.querySelectorAll('.configurator__summary-image--incoming').forEach((image) => image.remove());
     };
 
-    const hideSummaryImage = () => {
+    const resetSummaryImageTransition = () => {
       summaryImageSwapId += 1;
+      summaryImageTransitioning = false;
+      summaryImageQueuedSrc = '';
       clearIncomingSummaryImage();
+    };
+
+    const hideSummaryImage = () => {
+      resetSummaryImageTransition();
       refs.summaryImage.style.removeProperty('opacity');
       refs.summaryMedia.classList.add('is-generic');
     };
 
+    const finishSummaryImageSwap = (incoming, nextSrc, swapId) => {
+      if (swapId !== summaryImageSwapId || !incoming.isConnected) return;
+
+      refs.summaryImage.src = nextSrc;
+      summaryImageActiveSrc = nextSrc;
+      refs.summaryImage.style.removeProperty('opacity');
+      incoming.remove();
+      summaryImageTransitioning = false;
+
+      const queuedSrc = summaryImageQueuedSrc;
+      summaryImageQueuedSrc = '';
+
+      if (queuedSrc && queuedSrc !== summaryImageActiveSrc) {
+        swapSummaryImage(queuedSrc);
+      }
+    };
+
     const swapSummaryImage = (nextSrc) => {
-      if (!nextSrc || refs.summaryImage.getAttribute('src') === nextSrc) {
-        refs.summaryMedia.classList.remove('is-generic');
+      if (!nextSrc) return;
+
+      refs.summaryMedia.classList.remove('is-generic');
+
+      if (nextSrc === summaryImageActiveSrc && !summaryImageTransitioning) {
+        refs.summaryImage.style.removeProperty('opacity');
+        return;
+      }
+
+      if (summaryImageTransitioning) {
+        summaryImageQueuedSrc = nextSrc;
+        return;
+      }
+
+      if (reduceMotion.matches) {
+        resetSummaryImageTransition();
+        refs.summaryImage.src = nextSrc;
+        summaryImageActiveSrc = nextSrc;
         refs.summaryImage.style.removeProperty('opacity');
         return;
       }
 
       const swapId = ++summaryImageSwapId;
-      clearIncomingSummaryImage();
-
-      const wasGeneric = refs.summaryMedia.classList.contains('is-generic');
-      if (wasGeneric) refs.summaryImage.style.opacity = '0';
-      refs.summaryMedia.classList.remove('is-generic');
-
-      if (reduceMotion.matches) {
-        refs.summaryImage.src = nextSrc;
-        refs.summaryImage.style.removeProperty('opacity');
-        return;
-      }
+      summaryImageTransitioning = true;
+      summaryImageQueuedSrc = '';
 
       const incoming = document.createElement('img');
       incoming.className = 'configurator__summary-image--incoming';
       incoming.alt = '';
       incoming.decoding = 'async';
+      incoming.src = nextSrc;
 
       const reveal = () => {
-        if (swapId !== summaryImageSwapId) return;
+        if (swapId !== summaryImageSwapId || !summaryImageTransitioning) return;
+
+        clearIncomingSummaryImage();
         refs.summaryMedia.insertBefore(incoming, refs.summaryMedia.querySelector('.configurator__summary-heading'));
 
         requestAnimationFrame(() => {
-          if (swapId !== summaryImageSwapId) return;
+          if (swapId !== summaryImageSwapId || !incoming.isConnected) return;
           incoming.classList.add('is-visible');
         });
 
+        const onTransitionEnd = (event) => {
+          if (event.propertyName !== 'opacity') return;
+          incoming.removeEventListener('transitionend', onTransitionEnd);
+          finishSummaryImageSwap(incoming, nextSrc, swapId);
+        };
+
+        incoming.addEventListener('transitionend', onTransitionEnd);
+
         window.setTimeout(() => {
-          if (swapId !== summaryImageSwapId) return;
-          refs.summaryImage.src = nextSrc;
-          refs.summaryImage.style.removeProperty('opacity');
-          incoming.remove();
-        }, 440);
+          finishSummaryImageSwap(incoming, nextSrc, swapId);
+        }, 520);
       };
 
-      incoming.addEventListener('load', reveal, {once:true});
-      incoming.src = nextSrc;
-      if (incoming.complete) reveal();
+      incoming.decode().then(reveal).catch(reveal);
     };
 
     const renderSummary = () => {
