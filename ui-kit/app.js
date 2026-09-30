@@ -292,28 +292,8 @@
   let modalRestoreFocus = null;
   let modalAnimations = [];
 
-  const measureScrollbar = () => {
-    const current = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
-    if (current) return current;
-    if (document.documentElement.scrollHeight <= window.innerHeight) return 0;
-
-    const probe = document.createElement('div');
-    probe.setAttribute('aria-hidden', 'true');
-    probe.style.cssText = 'position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll;';
-    document.body.append(probe);
-    const width = Math.max(0, probe.offsetWidth - probe.clientWidth);
-    probe.remove();
-    return width;
-  };
-
   const setModalScrollLock = (locked) => {
-    if (locked) {
-      document.documentElement.style.setProperty('--modal-scrollbar-compensation', measureScrollbar() + 'px');
-      document.body.classList.add('modal-open');
-      return;
-    }
-    document.body.classList.remove('modal-open');
-    document.documentElement.style.removeProperty('--modal-scrollbar-compensation');
+    document.body.classList.toggle('modal-open', locked);
   };
 
   const modalFocusable = (modal) => [
