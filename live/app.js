@@ -1093,6 +1093,15 @@
         button.setAttribute('aria-pressed',String(Number(button.dataset.materialIndex) === index));
       });
 
+      if (card.classList.contains('is-expanded') && window.matchMedia('(max-width:64rem)').matches) {
+        const selectedThumb = thumbsInner.querySelector('[data-material-index="' + index + '"]');
+        selectedThumb?.scrollIntoView({
+          behavior:reduceMotion.matches ? 'auto' : 'smooth',
+          block:'nearest',
+          inline:'nearest'
+        });
+      }
+
       const documentView = viewerState.querySelector('.case-card__viewer-document');
       const documentPreview = documentView.querySelector('[data-document-preview]');
       const documentFallback = documentView.querySelector('[data-document-fallback]');

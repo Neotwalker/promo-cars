@@ -2531,12 +2531,25 @@
 
 @media(max-width:64rem){
   .case-card__thumbs-inner{
-    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-columns:none;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(8.75rem,11.5rem);
+    overflow-x:auto;
+    overflow-y:hidden;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x proximity;
+    scrollbar-gutter:stable;
+    padding-bottom:.35rem;
+    -webkit-overflow-scrolling:touch;
+  }
+  .case-card__thumb{
+    scroll-snap-align:start;
   }
 }
 @media(max-width:47.9375rem){
   .case-card__thumbs-inner{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-auto-columns:minmax(8rem,42vw);
+    gap:.5rem;
   }
   .case-card__material{
     grid-template-columns:1.5rem minmax(0,1fr) auto;
