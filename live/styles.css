@@ -1757,7 +1757,7 @@
 }
 .configurator__toasts .toast.is-leaving{
   opacity:0;
-  transform:translateX(calc(-100% - 2rem));
+  transform:translateX(calc(100% + 2rem));
 }
 
 @media(max-width:64rem){
