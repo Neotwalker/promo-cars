@@ -970,3 +970,164 @@
   }
 
 })();
+
+
+(() => {
+  const cards = [...document.querySelectorAll('[data-proof-case]')];
+  if (!cards.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const materialMap = {
+    zeekr:[
+      ['Видео осмотра','media'],
+      ['Сверка комплектации','document'],
+      ['Инвойс','document'],
+      ['Страхование перевозки','document'],
+      ['Таможенные документы','document'],
+      ['ЭПТС','document'],
+      ['Фото выдачи','media']
+    ],
+    xiaomi:[
+      ['Фото и видео проверки','media'],
+      ['Инвойс','document'],
+      ['Страхование','document'],
+      ['Статусы маршрута','document'],
+      ['Таможенное оформление','document'],
+      ['ЭПТС','document'],
+      ['Выдача в Казани','media']
+    ],
+    'li-auto':[
+      ['Осмотр автомобиля','media'],
+      ['Сверка VIN и комплектации','document'],
+      ['Инвойс','document'],
+      ['Страхование перевозки','document'],
+      ['Таможенные документы','document'],
+      ['ЭПТС','document'],
+      ['Фото передачи клиенту','media']
+    ]
+  };
+
+  const buildDetail = (card) => {
+    const key = card.dataset.proofCase;
+    const materials = materialMap[key];
+    const media = card.querySelector('.case-card__media');
+    const image = media?.querySelector('img');
+    const body = card.querySelector('.case-card__body');
+    const toggle = card.querySelector('[data-case-toggle]');
+    if (!materials || !media || !image || !body || !toggle) return null;
+
+    const visual = document.createElement('div');
+    visual.className = 'case-card__visual';
+    visual.style.setProperty('--case-image', 'url("' + image.currentSrc + '")');
+    media.before(visual);
+    visual.append(media);
+
+    const viewerState = document.createElement('div');
+    viewerState.className = 'case-card__viewer-state';
+    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><div class="case-card__viewer-document"><div><strong></strong><span>Материал кейса</span></div></div>';
+    media.append(viewerState);
+
+    const thumbs = document.createElement('div');
+    thumbs.className = 'case-card__thumbs';
+    thumbs.setAttribute('aria-hidden','true');
+    thumbs.inert = true;
+    const thumbsInner = document.createElement('div');
+    thumbsInner.className = 'case-card__thumbs-inner';
+    thumbs.append(thumbsInner);
+    visual.append(thumbs);
+
+    const back = document.createElement('button');
+    back.className = 'case-card__back';
+    back.type = 'button';
+    back.dataset.caseClose = '';
+    back.textContent = '← Вернуться к истории';
+    body.prepend(back);
+
+    const details = document.createElement('div');
+    details.className = 'case-card__details';
+    details.id = toggle.getAttribute('aria-controls');
+    details.setAttribute('aria-hidden','true');
+    details.inert = true;
+    details.innerHTML = '<div class="case-card__details-inner"><div class="case-card__materials"><p class="case-card__materials-title">Материалы кейса</p><div data-material-list></div></div></div>';
+    body.insertBefore(details,toggle);
+
+    const list = details.querySelector('[data-material-list]');
+
+    materials.forEach(([title,kind],index) => {
+      const thumb = document.createElement('button');
+      thumb.type = 'button';
+      thumb.className = 'case-card__thumb';
+      thumb.dataset.materialIndex = String(index);
+      thumb.dataset.kind = kind;
+      thumb.setAttribute('aria-pressed',String(index === 0));
+      thumb.innerHTML = '<span class="case-card__thumb-preview"></span><span></span>';
+      thumb.querySelector('span:last-child').textContent = title;
+      thumbsInner.append(thumb);
+
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'case-card__material';
+      row.dataset.materialIndex = String(index);
+      row.setAttribute('aria-pressed',String(index === 0));
+      row.innerHTML = '<span class="case-card__material-index"></span><span class="case-card__material-title"></span><span class="case-card__material-arrow" aria-hidden="true">→</span>';
+      row.querySelector('.case-card__material-index').textContent = String(index + 1).padStart(2,'0');
+      row.querySelector('.case-card__material-title').textContent = title;
+      list.append(row);
+    });
+
+    const selectMaterial = (index) => {
+      const [title,kind] = materials[index] || materials[0];
+      card.querySelectorAll('[data-material-index]').forEach((button) => {
+        button.setAttribute('aria-pressed',String(Number(button.dataset.materialIndex) === index));
+      });
+      media.classList.toggle('is-document',kind === 'document');
+      viewerState.querySelector('.case-card__viewer-label').textContent = title;
+      viewerState.querySelector('.case-card__viewer-document strong').textContent = title;
+    };
+
+    card.addEventListener('click',(event) => {
+      const materialButton = event.target.closest('[data-material-index]');
+      if (materialButton) selectMaterial(Number(materialButton.dataset.materialIndex));
+    });
+
+    selectMaterial(0);
+    return {toggle,back,details,thumbs};
+  };
+
+  const states = new Map(cards.map((card) => [card,buildDetail(card)]));
+
+  const setOpen = (card,open,{focus=false} = {}) => {
+    const state = states.get(card);
+    if (!state) return;
+
+    card.classList.toggle('is-expanded',open);
+    state.toggle.setAttribute('aria-expanded',String(open));
+    state.details.setAttribute('aria-hidden',String(!open));
+    state.thumbs.setAttribute('aria-hidden',String(!open));
+    state.details.inert = !open;
+    state.thumbs.inert = !open;
+
+    if (open) {
+      cards.forEach((other) => {
+        if (other !== card && other.classList.contains('is-expanded')) setOpen(other,false);
+      });
+      if (!reduceMotion.matches) {
+        card.animate(
+          {opacity:[.94,1]},
+          {duration:220,easing:'ease-out'}
+        );
+      }
+      if (focus) state.back.focus({preventScroll:true});
+    } else if (focus) {
+      state.toggle.focus({preventScroll:true});
+    }
+  };
+
+  cards.forEach((card) => {
+    const state = states.get(card);
+    if (!state) return;
+    state.toggle.addEventListener('click',() => setOpen(card,true,{focus:true}));
+    state.back.addEventListener('click',() => setOpen(card,false,{focus:true}));
+  });
+})();
