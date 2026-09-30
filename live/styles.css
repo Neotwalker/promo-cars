@@ -2104,17 +2104,6 @@
   min-width:15.5rem;
   margin-top:var(--space-3);
   justify-content:space-between;
-  background:var(--color-signal);
-  border-color:var(--color-signal);
-  color:#101417;
-}
-.case-card__action[aria-disabled="true"]{
-  opacity:1;
-  cursor:default;
-}
-.case-card__action:hover{
-  background:var(--color-signal);
-  border-color:var(--color-signal);
 }
 
 @media(max-width:64rem){
