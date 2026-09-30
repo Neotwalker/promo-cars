@@ -1030,7 +1030,7 @@
 
     const viewerState = document.createElement('div');
     viewerState.className = 'case-card__viewer-state';
-    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><div class="case-card__viewer-document"><img data-document-preview alt=""><div data-document-fallback><strong></strong><span>Материал кейса</span></div></div>';
+    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><button class="case-card__viewer-document" type="button" disabled><img data-document-preview alt=""><span class="case-card__viewer-open-hint">Открыть документ ↗</span><span data-document-fallback><strong></strong><span>Материал кейса</span></span></button>';
     media.append(viewerState);
 
     const thumbs = document.createElement('div');
@@ -1103,10 +1103,16 @@
 
       if (asset) {
         documentView.classList.add('has-preview');
+        documentView.disabled = false;
+        documentView.dataset.modalOpen = 'proof-document-modal';
+        documentView.setAttribute('aria-label','Открыть документ «' + title + '»');
         documentPreview.src = asset;
         documentPreview.alt = 'Тестовый preview документа «' + title + '»';
       } else {
         documentView.classList.remove('has-preview');
+        documentView.disabled = true;
+        delete documentView.dataset.modalOpen;
+        documentView.removeAttribute('aria-label');
         documentPreview.removeAttribute('src');
         documentPreview.alt = '';
       }
