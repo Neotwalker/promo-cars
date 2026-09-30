@@ -2265,15 +2265,8 @@
 .case-card__back{
   display:none;
   width:max-content;
-  margin:0 0 var(--space-2);
-  padding:0;
-  border:0;
-  background:transparent;
-  color:rgba(247,247,244,.66);
-  font-size:var(--type-small);
-  line-height:var(--type-small-lh);
+  margin:0 0 var(--space-3);
 }
-.case-card__back:hover{color:var(--color-white)}
 .case-card__details{
   width:100%;
   display:grid;

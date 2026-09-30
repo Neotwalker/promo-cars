@@ -979,6 +979,40 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const compactCase = window.matchMedia('(max-width:47.9375rem)');
 
+  let revealScrollRaf = 0;
+  const revealMobileCase = (target) => {
+    if (!(target instanceof HTMLElement)) return;
+
+    const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    const headerOffset = (Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h-compact')) || (4 * rootSize)) + (.75 * rootSize);
+    const startY = window.scrollY;
+    const endY = Math.max(0,target.getBoundingClientRect().top + startY - headerOffset);
+
+    cancelAnimationFrame(revealScrollRaf);
+
+    if (reduceMotion.matches) {
+      window.scrollTo(0,endY);
+      return;
+    }
+
+    const distance = endY - startY;
+    if (Math.abs(distance) < 4) return;
+
+    const duration = Math.min(900,Math.max(650,Math.abs(distance) * .9));
+    const startTime = performance.now();
+    const ease = (t) => t < .5
+      ? 4 * t * t * t
+      : 1 - Math.pow(-2 * t + 2,3) / 2;
+
+    const step = (now) => {
+      const progress = Math.min(1,(now - startTime) / duration);
+      window.scrollTo(0,startY + distance * ease(progress));
+      if (progress < 1) revealScrollRaf = requestAnimationFrame(step);
+    };
+
+    revealScrollRaf = requestAnimationFrame(step);
+  };
+
   const materialMap = {
     zeekr:[
       ['Видео осмотра','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.'],
@@ -1044,7 +1078,7 @@
     visual.append(thumbs);
 
     const back = document.createElement('button');
-    back.className = 'case-card__back';
+    back.className = 'button button--ghost button--inverse case-card__back';
     back.type = 'button';
     back.dataset.caseClose = '';
     back.textContent = '← Вернуться к истории';
@@ -1166,12 +1200,7 @@
 
       if (compactCase.matches) {
         requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            state.visual.scrollIntoView({
-              behavior:reduceMotion.matches ? 'auto' : 'smooth',
-              block:'start'
-            });
-          });
+          requestAnimationFrame(() => revealMobileCase(state.visual));
         });
       }
     } else if (focus) {
