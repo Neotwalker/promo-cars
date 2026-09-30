@@ -2556,6 +2556,9 @@
   }
 }
 @media(max-width:47.9375rem){
+  .case-card__visual{
+    scroll-margin-top:calc(var(--header-h-compact) + var(--space-2));
+  }
   .case-card__thumbs-inner{
     grid-auto-columns:minmax(8rem,42vw);
     gap:.5rem;

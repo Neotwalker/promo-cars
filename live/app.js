@@ -977,6 +977,7 @@
   if (!cards.length) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const compactCase = window.matchMedia('(max-width:47.9375rem)');
 
   const materialMap = {
     zeekr:[
@@ -1135,7 +1136,7 @@
     });
 
     selectMaterial(0);
-    return {toggle,back,details,thumbs};
+    return {toggle,back,details,thumbs,visual};
   };
 
   const states = new Map(cards.map((card) => [card,buildDetail(card)]));
@@ -1162,6 +1163,17 @@
         );
       }
       if (focus) state.back.focus({preventScroll:true});
+
+      if (compactCase.matches) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            state.visual.scrollIntoView({
+              behavior:reduceMotion.matches ? 'auto' : 'smooth',
+              block:'start'
+            });
+          });
+        });
+      }
     } else if (focus) {
       state.toggle.focus({preventScroll:true});
     }
