@@ -2548,17 +2548,6 @@
   border-radius:999px;
   background:rgba(247,247,244,.42);
 }
-html:has(.proof-document-modal[aria-hidden="false"]){
-  scrollbar-width:none;
-  background:#0d1215;
-}
-html:has(.proof-document-modal[aria-hidden="false"])::-webkit-scrollbar{
-  width:0;
-  height:0;
-}
-body:has(.proof-document-modal[aria-hidden="false"]){
-  background:#0d1215;
-}
 .proof-document-modal__body>img[hidden],
 .proof-document-modal__video[hidden]{
   display:none;

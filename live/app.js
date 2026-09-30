@@ -1139,6 +1139,8 @@
       if (message?.type === 'player:currentTime') {
         const duration = Number(iframe.dataset.videoDuration);
         const time = Number(message.data?.time);
+        if (Number.isFinite(time)) iframe.dataset.videoTime = String(time);
+
         if (
           iframe.dataset.endHandled !== 'true' &&
           Number.isFinite(duration) &&
@@ -1147,20 +1149,16 @@
           time >= duration - .35
         ) {
           iframe.dataset.endHandled = 'true';
-          const holdAt = Math.max(0,duration - .2);
-          postPlayerCommand('player:setCurrentTime',{time:holdAt});
-          postPlayerCommand('player:pause');
+          postPlayerCommand('player:stop');
         }
         return;
       }
 
       if (
         message?.type === 'player:changeState' &&
-        message.data?.state === 'stopped' &&
-        iframe.dataset.endHandled !== 'true'
+        message.data?.state === 'stopped'
       ) {
         iframe.dataset.endHandled = 'true';
-        postPlayerCommand('player:pause');
         return;
       }
 
@@ -1170,10 +1168,17 @@
         iframe.dataset.endHandled === 'true'
       ) {
         const duration = Number(iframe.dataset.videoDuration);
-        if (Number.isFinite(duration) && duration > 0) {
-          postPlayerCommand('player:setCurrentTime',{time:Math.max(0,duration - .2)});
+        const time = Number(iframe.dataset.videoTime);
+        iframe.dataset.endHandled = 'false';
+
+        if (
+          Number.isFinite(duration) &&
+          Number.isFinite(time) &&
+          duration > 0 &&
+          time >= duration - .5
+        ) {
+          postPlayerCommand('player:setCurrentTime',{time:0});
         }
-        postPlayerCommand('player:pause');
       }
     });
   }
