@@ -981,7 +981,7 @@
   const materialMap = {
     zeekr:[
       ['Видео осмотра','media'],
-      ['Сверка комплектации','document'],
+      ['Сверка комплектации','document','./assets/img/proof/proof-zeekr-spec-check-test.webp'],
       ['Инвойс','document'],
       ['Страхование перевозки','document'],
       ['Таможенные документы','document'],
@@ -1019,13 +1019,18 @@
 
     const visual = document.createElement('div');
     visual.className = 'case-card__visual';
-    visual.style.setProperty('--case-image', 'url("' + image.currentSrc + '")');
+    const syncCaseImage = () => {
+      const src = image.currentSrc || image.src;
+      if (src) visual.style.setProperty('--case-image', 'url("' + src + '")');
+    };
+    syncCaseImage();
+    image.addEventListener('load',syncCaseImage);
     media.before(visual);
     visual.append(media);
 
     const viewerState = document.createElement('div');
     viewerState.className = 'case-card__viewer-state';
-    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><div class="case-card__viewer-document"><div><strong></strong><span>Материал кейса</span></div></div>';
+    viewerState.innerHTML = '<span class="case-card__viewer-label"></span><div class="case-card__viewer-document"><img data-document-preview alt=""><div data-document-fallback><strong></strong><span>Материал кейса</span></div></div>';
     media.append(viewerState);
 
     const thumbs = document.createElement('div');
@@ -1054,7 +1059,7 @@
 
     const list = details.querySelector('[data-material-list]');
 
-    materials.forEach(([title,kind],index) => {
+    materials.forEach(([title,kind,asset],index) => {
       const thumb = document.createElement('button');
       thumb.type = 'button';
       thumb.className = 'case-card__thumb';
@@ -1063,6 +1068,10 @@
       thumb.setAttribute('aria-pressed',String(index === 0));
       thumb.innerHTML = '<span class="case-card__thumb-preview"></span><span></span>';
       thumb.querySelector('span:last-child').textContent = title;
+      if (asset) {
+        thumb.classList.add('has-preview');
+        thumb.style.setProperty('--material-preview','url("' + asset + '")');
+      }
       thumbsInner.append(thumb);
 
       const row = document.createElement('button');
@@ -1076,14 +1085,39 @@
       list.append(row);
     });
 
+    let viewerAnimation = null;
+
     const selectMaterial = (index) => {
-      const [title,kind] = materials[index] || materials[0];
+      const [title,kind,asset] = materials[index] || materials[0];
       card.querySelectorAll('[data-material-index]').forEach((button) => {
         button.setAttribute('aria-pressed',String(Number(button.dataset.materialIndex) === index));
       });
+
+      const documentView = viewerState.querySelector('.case-card__viewer-document');
+      const documentPreview = documentView.querySelector('[data-document-preview]');
+      const documentFallback = documentView.querySelector('[data-document-fallback]');
+
       media.classList.toggle('is-document',kind === 'document');
       viewerState.querySelector('.case-card__viewer-label').textContent = title;
-      viewerState.querySelector('.case-card__viewer-document strong').textContent = title;
+      documentFallback.querySelector('strong').textContent = title;
+
+      if (asset) {
+        documentView.classList.add('has-preview');
+        documentPreview.src = asset;
+        documentPreview.alt = 'Тестовый preview документа «' + title + '»';
+      } else {
+        documentView.classList.remove('has-preview');
+        documentPreview.removeAttribute('src');
+        documentPreview.alt = '';
+      }
+
+      if (!reduceMotion.matches) {
+        viewerAnimation?.cancel();
+        viewerAnimation = media.animate(
+          {opacity:[.72,1]},
+          {duration:180,easing:'ease-out'}
+        );
+      }
     };
 
     card.addEventListener('click',(event) => {
