@@ -1990,7 +1990,6 @@
   gap:clamp(2rem,3.4vw,4rem);
   align-items:center;
 }
-.case-card:first-child{padding-top:0}
 .case-card__media{
   min-width:0;
   aspect-ratio:1.95/1;
