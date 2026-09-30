@@ -1935,25 +1935,25 @@
 
 /* PROOF + CLIENT STORIES */
 .proof{
-  padding:clamp(6.5rem,9vw,9.5rem) 0;
+  padding:clamp(4rem,7.78vw,8rem) 0;
   background:#0d1215;
   color:#f7f7f4;
 }
 .proof__inner{
   display:flex;
   flex-direction:column;
-  gap:clamp(3.25rem,5vw,5rem);
+  gap:var(--space-5);
 }
 .proof__header{
   max-width:68rem;
 }
 .proof__eyebrow{
-  margin:0 0 1.15rem;
+  margin:0 0 var(--space-3);
   color:var(--color-signal);
-  font-size:.78rem;
-  line-height:1;
-  font-weight:600;
-  letter-spacing:.18em;
+  font-size:var(--type-small);
+  line-height:var(--type-small-lh);
+  font-weight:400;
+  letter-spacing:.08em;
   text-transform:uppercase;
 }
 .proof__eyebrow::after{
@@ -1966,17 +1966,18 @@
   background:rgba(255,92,42,.7);
 }
 .proof__title{
-  max-width:21ch;
-  font-size:clamp(3rem,4.7vw,5.1rem);
-  line-height:.96;
-  letter-spacing:-.052em;
+  max-width:none;
+  font-size:var(--type-h2);
+  line-height:var(--type-h2-lh);
+  font-weight:600;
+  letter-spacing:-.035em;
 }
 .proof__lead{
   max-width:60rem;
-  margin-top:1.2rem;
+  margin-top:var(--space-3);
   color:rgba(247,247,244,.7);
-  font-size:clamp(1rem,1.2vw,1.2rem);
-  line-height:1.5;
+  font-size:var(--type-body);
+  line-height:var(--type-body-lh);
 }
 .proof__cases{
   border-top:1px solid rgba(247,247,244,.14);
@@ -2012,14 +2013,16 @@
 }
 .case-card__header{width:100%}
 .case-card__title{
-  font-size:clamp(2rem,2.4vw,3rem);
-  line-height:1;
-  letter-spacing:-.04em;
+  font-size:var(--type-h3);
+  line-height:var(--type-h3-lh);
+  font-weight:600;
+  letter-spacing:-.02em;
 }
 .case-card__meta{
-  margin-top:.5rem;
+  margin-top:var(--space-1);
   color:rgba(247,247,244,.68);
-  font-size:.95rem;
+  font-size:var(--type-small);
+  line-height:var(--type-small-lh);
 }
 .case-card__meta span{
   margin:0 .35rem;
@@ -2027,7 +2030,7 @@
 }
 .case-card__facts{
   width:100%;
-  margin-top:1.15rem;
+  margin-top:var(--space-3);
   display:grid;
   grid-template-columns:minmax(0,1.55fr) minmax(7rem,.7fr) minmax(8rem,.75fr);
   align-items:center;
@@ -2049,27 +2052,29 @@
 }
 .case-card__price strong,
 .case-card__fact strong{
-  font-size:clamp(1.5rem,1.8vw,2rem);
-  line-height:1;
+  font-size:var(--type-h3);
+  line-height:var(--type-h3-lh);
+  font-weight:600;
   white-space:nowrap;
 }
 .case-card__price span,
 .case-card__fact span{
   color:rgba(247,247,244,.7);
-  font-size:.9rem;
+  font-size:var(--type-small);
+  line-height:var(--type-small-lh);
   white-space:nowrap;
 }
 .case-card__story{
   max-width:40rem;
-  margin-top:1.45rem;
+  margin-top:var(--space-4);
   color:rgba(247,247,244,.7);
-  font-size:.98rem;
-  line-height:1.48;
+  font-size:var(--type-body);
+  line-height:var(--type-body-lh);
 }
 .case-card__quote{
   position:relative;
   max-width:42rem;
-  margin:1.15rem 0 0;
+  margin:var(--space-3) 0 0;
   padding-left:2.15rem;
   color:rgba(247,247,244,.86);
 }
@@ -2084,21 +2089,21 @@
   font-weight:700;
 }
 .case-card__quote p{
-  font-size:.94rem;
-  line-height:1.45;
+  font-size:var(--type-body);
+  line-height:var(--type-body-lh);
   font-style:italic;
 }
 .case-card__quote footer{
-  margin-top:.4rem;
+  margin-top:var(--space-1);
   color:rgba(247,247,244,.62);
-  font-size:.86rem;
+  font-size:var(--type-small);
+  line-height:var(--type-small-lh);
   font-style:normal;
 }
 .case-card__action{
   min-width:15.5rem;
-  margin-top:1.25rem;
+  margin-top:var(--space-3);
   justify-content:space-between;
-  border-radius:var(--radius-sm);
   background:var(--color-signal);
   border-color:var(--color-signal);
   color:#101417;
@@ -2123,23 +2128,15 @@
 }
 
 @media(max-width:47.9375rem){
-  .proof{padding:4.75rem 0}
-  .proof__inner{gap:2.5rem}
   .proof__eyebrow{
-    margin-bottom:.9rem;
-    font-size:.72rem;
+    margin-bottom:var(--space-2);
   }
   .proof__eyebrow::after{
     width:2.75rem;
     margin-left:.7rem;
   }
-  .proof__title{
-    max-width:12ch;
-    font-size:clamp(2.65rem,12vw,3.8rem);
-  }
   .proof__lead{
-    margin-top:1rem;
-    font-size:.98rem;
+    margin-top:var(--space-2);
   }
   .case-card{
     padding:1.5rem 0;
@@ -2149,12 +2146,8 @@
     aspect-ratio:1.55/1;
     border-radius:calc(var(--radius-sm) * .8);
   }
-  .case-card__title{
-    font-size:clamp(2rem,9vw,2.6rem);
-  }
   .case-card__meta{
-    margin-top:.4rem;
-    font-size:.87rem;
+    margin-top:var(--space-1);
   }
   .case-card__facts{
     margin-top:1rem;
@@ -2175,23 +2168,16 @@
     padding-left:1rem;
     border-left:1px solid rgba(247,247,244,.18);
   }
-  .case-card__price strong,
-  .case-card__fact strong{
-    font-size:1.45rem;
-  }
   .case-card__story{
-    margin-top:1.15rem;
-    font-size:.94rem;
+    margin-top:var(--space-3);
   }
   .case-card__quote{
-    margin-top:1rem;
+    margin-top:var(--space-3);
     padding-left:1.75rem;
   }
-  .case-card__quote p{font-size:.9rem}
   .case-card__action{
     width:auto;
     min-width:13rem;
-    min-height:3.2rem;
-    margin-top:1rem;
+    margin-top:var(--space-3);
   }
 }
