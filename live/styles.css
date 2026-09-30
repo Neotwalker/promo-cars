@@ -2530,6 +2530,9 @@
 }
 
 @media(max-width:64rem){
+  .case-card__thumbs{
+    margin-inline:calc(var(--page-pad) * -1);
+  }
   .case-card__thumbs-inner{
     grid-template-columns:none;
     grid-auto-flow:column;
@@ -2538,8 +2541,9 @@
     overflow-y:hidden;
     overscroll-behavior-x:contain;
     scroll-snap-type:x proximity;
+    scroll-padding-inline:var(--page-pad);
     scrollbar-gutter:stable;
-    padding-bottom:.35rem;
+    padding:0 var(--page-pad) .35rem;
     -webkit-overflow-scrolling:touch;
   }
   .case-card__thumb{
