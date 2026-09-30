@@ -1744,6 +1744,20 @@
   min-width:0;
   max-width:none;
   pointer-events:auto;
+  opacity:0;
+  transform:translateX(calc(100% + 2rem));
+  transition:
+    transform 360ms cubic-bezier(.2,.7,.2,1),
+    opacity 240ms ease;
+  will-change:transform,opacity;
+}
+.configurator__toasts .toast.is-visible{
+  opacity:1;
+  transform:translateX(0);
+}
+.configurator__toasts .toast.is-leaving{
+  opacity:0;
+  transform:translateX(calc(-100% - 2rem));
 }
 
 @media(max-width:64rem){
@@ -1798,7 +1812,17 @@
   .configurator__progress span,
   .configurator__choice,
   .configurator__field,
-  .configurator__summary-media img{transition:none}
+  .configurator__summary-media img,
+  .configurator__toasts .toast{
+    transition:none;
+  }
+
+  .configurator__toasts .toast,
+  .configurator__toasts .toast.is-visible,
+  .configurator__toasts .toast.is-leaving{
+    opacity:1;
+    transform:none;
+  }
 
   .journey{
     height:auto;

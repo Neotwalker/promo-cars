@@ -649,10 +649,34 @@
       return true;
     };
 
+    let toastTimer = 0;
+    let toastRemoveTimer = 0;
+
+    const removeToast = (toast) => {
+      if (!toast?.isConnected) return;
+
+      if (reduceMotion.matches) {
+        toast.remove();
+        return;
+      }
+
+      toast.classList.remove('is-visible');
+      toast.classList.add('is-leaving');
+
+      clearTimeout(toastRemoveTimer);
+      toastRemoveTimer = window.setTimeout(() => {
+        if (toast.isConnected) toast.remove();
+      }, 380);
+    };
+
     const showToast = (title, message, type = 'success') => {
       if (!refs.toasts) return;
 
-      refs.toasts.replaceChildren();
+      clearTimeout(toastTimer);
+      clearTimeout(toastRemoveTimer);
+
+      const existing = refs.toasts.querySelector('[data-toast-item]');
+      if (existing) existing.remove();
 
       const toast = document.createElement('div');
       toast.className = 'toast toast--' + type;
@@ -663,8 +687,14 @@
       toast.querySelector('span').textContent = message;
       refs.toasts.append(toast);
 
-      setTimeout(() => {
-        if (toast.isConnected) toast.remove();
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          toast.classList.add('is-visible');
+        });
+      });
+
+      toastTimer = window.setTimeout(() => {
+        removeToast(toast);
       }, type === 'error' ? 6500 : 4200);
     };
 
