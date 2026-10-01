@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1584" viewBox="0 0 1120 1584">
+<style>
+  .brand{font:700 24px Arial,sans-serif;fill:#ff5b35;letter-spacing:2px}
+  .eyebrow{font:700 13px Arial,sans-serif;fill:#7c7c78;letter-spacing:1.6px;text-transform:uppercase}
+  .title{font:700 42px Arial,sans-serif;fill:#171b1f}
+  .subtitle{font:400 18px Arial,sans-serif;fill:#686a68}
+  .meta{font:500 16px Arial,sans-serif;fill:#303330}
+  .section{font:700 21px Arial,sans-serif;fill:#171b1f}
+  .cell{font:400 15px Arial,sans-serif;fill:#272a28}
+  .cell.strong{font-weight:700}
+  .cell.muted{fill:#686a68}
+  .body{font:400 15px Arial,sans-serif;fill:#3d403d}
+  .foot{font:400 13px Arial,sans-serif;fill:#777a77}
+</style>
+<rect width="1120" height="1584" fill="#fdfdfb"/>
+<rect x="0" y="0" width="1120" height="12" fill="#ff5b35"/>
+<text x="80" y="76" class="brand">NEXROUTE</text>
+<text x="80" y="112" class="eyebrow">МАТЕРИАЛ КЕЙСА · NX-SU7-8M7</text>
+<text x="80" y="176" class="title">Статусы маршрута</text>
+<text x="80" y="210" class="subtitle">Зафиксированные этапы движения автомобиля до выдачи в Казани</text>
+<text x="760" y="76" class="meta">Xiaomi SU7 Max</text>
+<text x="760" y="104" class="meta">VIN ····8M7</text>
+<text x="760" y="132" class="meta">24.05.2025</text>
+<line x1="80" y1="228" x2="1040" y2="228" stroke="#cfd1ce" stroke-width="2"/>
+<text x="80" y="250" class="section">1. Автомобиль</text><rect x="80" y="260" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="284" class="cell muted">Модель</text><text x="430" y="284" class="cell strong">Xiaomi SU7 Max</text><line x1="720" y1="260" x2="720" y2="298" stroke="#ddddda"/><text x="740" y="284" class="cell muted">2025</text><rect x="80" y="298" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="322" class="cell muted">VIN</text><text x="430" y="322" class="cell strong">····8M7</text><line x1="720" y1="298" x2="720" y2="336" stroke="#ddddda"/><text x="740" y="322" class="cell muted">маскировано</text><rect x="80" y="336" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="360" class="cell muted">Пункт выдачи</text><text x="430" y="360" class="cell strong">Казань</text><line x1="720" y1="336" x2="720" y2="374" stroke="#ddddda"/><text x="740" y="360" class="cell muted">Россия</text><text x="80" y="432" class="section">2. Этапы маршрута</text><rect x="80" y="442" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="466" class="cell muted">Подбор завершён</text><text x="430" y="466" class="cell strong">21.04.2025</text><line x1="720" y1="442" x2="720" y2="480" stroke="#ddddda"/><text x="740" y="466" class="cell muted">✓</text><rect x="80" y="480" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="504" class="cell muted">Выкуп подтверждён</text><text x="430" y="504" class="cell strong">22.04.2025</text><line x1="720" y1="480" x2="720" y2="518" stroke="#ddddda"/><text x="740" y="504" class="cell muted">✓</text><rect x="80" y="518" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="542" class="cell muted">Отправка из Китая</text><text x="430" y="542" class="cell strong">25.04.2025</text><line x1="720" y1="518" x2="720" y2="556" stroke="#ddddda"/><text x="740" y="542" class="cell muted">✓</text><rect x="80" y="556" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="580" class="cell muted">Таможенное оформление</text><text x="430" y="580" class="cell strong">13.05.2025</text><line x1="720" y1="556" x2="720" y2="594" stroke="#ddddda"/><text x="740" y="580" class="cell muted">✓</text><rect x="80" y="594" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="618" class="cell muted">Передача на автовоз</text><text x="430" y="618" class="cell strong">19.05.2025</text><line x1="720" y1="594" x2="720" y2="632" stroke="#ddddda"/><text x="740" y="618" class="cell muted">✓</text><rect x="80" y="632" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="656" class="cell muted">Выдача в Казани</text><text x="430" y="656" class="cell strong">24.05.2025</text><line x1="720" y1="632" x2="720" y2="670" stroke="#ddddda"/><text x="740" y="656" class="cell muted">✓</text><text x="80" y="728" class="section">3. Итог</text><rect x="80" y="752" width="960" height="78" rx="8" fill="#faf8f5" stroke="#e2ddd7"/><text x="102" y="778" class="body">Маршрут завершён. Автомобиль передан клиенту в Казани на 33-й день после старта кейса.</text>
+<line x1="80" y1="1450" x2="1040" y2="1450" stroke="#d9d9d6"/>
+<text x="80" y="1490" class="foot">Сводный материал кейса. Персональные и идентифицирующие данные сокращены.</text>
+<text x="80" y="1522" class="foot">NEXROUTE · автомобили из Китая · маршрут завершён за 33 дней</text>
+</svg>
