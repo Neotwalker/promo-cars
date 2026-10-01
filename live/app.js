@@ -1024,22 +1024,22 @@
       ['Фото выдачи','photo','./assets/img/proof/proof-zeekr-001-1440.webp','Финальная фотофиксация автомобиля на этапе передачи клиенту.','photo']
     ],
     xiaomi:[
-      ['Фото и видео проверки','media',null,'Фото- и видеофиксация автомобиля на этапе проверки перед выкупом.','video'],
-      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
-      ['Страхование','document',null,'Документ по страхованию автомобиля на этапе перевозки.','insurance'],
-      ['Статусы маршрута','document',null,'Зафиксированные этапы движения автомобиля по маршруту доставки.','checklist'],
-      ['Таможенное оформление','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
-      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.','epts'],
-      ['Выдача в Казани','media',null,'Финальная фиксация автомобиля на этапе передачи клиенту.','photo']
+      ['Фото и видео проверки','video',null,'Фото- и видеофиксация автомобиля на этапе проверки перед выкупом.','video','https://rutube.ru/play/embed/14d8f4c11a0eadb1fa29bfbe0881eca4'],
+      ['Инвойс','document','./assets/img/proof/proof-xiaomi-invoice.svg','Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
+      ['Страхование','document','./assets/img/proof/proof-xiaomi-insurance.svg','Документ по страхованию автомобиля на этапе перевозки.','insurance'],
+      ['Статусы маршрута','document','./assets/img/proof/proof-xiaomi-route.svg','Зафиксированные этапы движения автомобиля по маршруту доставки.','checklist'],
+      ['Таможенное оформление','document','./assets/img/proof/proof-xiaomi-customs.svg','Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
+      ['ЭПТС','document','./assets/img/proof/proof-xiaomi-epts.svg','Электронный паспорт транспортного средства после оформления.','epts'],
+      ['Выдача в Казани','photo','./assets/img/proof/proof-xiaomi-su7-1440.webp','Финальная фиксация автомобиля на этапе передачи клиенту.','photo']
     ],
     'li-auto':[
-      ['Осмотр автомобиля','media',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.','video'],
-      ['Сверка VIN и комплектации','document',null,'Сопоставление VIN и выбранной комплектации с фактическим автомобилем.','checklist'],
-      ['Инвойс','document',null,'Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
-      ['Страхование перевозки','document',null,'Документ по страхованию автомобиля на этапе перевозки.','insurance'],
-      ['Таможенные документы','document',null,'Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
-      ['ЭПТС','document',null,'Электронный паспорт транспортного средства после оформления.','epts'],
-      ['Фото передачи клиенту','media',null,'Финальная фотофиксация автомобиля на этапе передачи клиенту.','photo']
+      ['Осмотр автомобиля','video',null,'Фиксация состояния автомобиля перед выкупом и отправкой по маршруту.','video','https://rutube.ru/play/embed/14d8f4c11a0eadb1fa29bfbe0881eca4'],
+      ['Сверка VIN и комплектации','document','./assets/img/proof/proof-li-auto-checklist.svg','Сопоставление VIN и выбранной комплектации с фактическим автомобилем.','checklist'],
+      ['Инвойс','document','./assets/img/proof/proof-li-auto-invoice.svg','Расчётный документ по автомобилю в составе материалов сделки.','invoice'],
+      ['Страхование перевозки','document','./assets/img/proof/proof-li-auto-insurance.svg','Документ по страхованию автомобиля на этапе перевозки.','insurance'],
+      ['Таможенные документы','document','./assets/img/proof/proof-li-auto-customs.svg','Материалы, относящиеся к таможенному оформлению автомобиля.','customs'],
+      ['ЭПТС','document','./assets/img/proof/proof-li-auto-epts.svg','Электронный паспорт транспортного средства после оформления.','epts'],
+      ['Фото передачи клиенту','photo','./assets/img/proof/proof-li-auto-l6-1440.webp','Финальная фотофиксация автомобиля на этапе передачи клиенту.','photo']
     ]
   };
 
@@ -1394,7 +1394,7 @@
         title:photoView.dataset.photoTitle || 'Фото',
         meta:modalCardMeta,
         documentSrc:photoView.dataset.photoSrc,
-        documentAlt:(photoView.dataset.photoTitle || 'Фото') + ' — Zeekr 001 AWD'
+        documentAlt:(photoView.dataset.photoTitle || 'Фото') + (cardTitle ? ' — ' + cardTitle : '')
       });
     });
 
