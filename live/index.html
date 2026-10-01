@@ -762,85 +762,77 @@
         </header>
 
         <div class="security__content">
-          <article class="security__primary" aria-labelledby="security-contract-title">
-            <div class="security__primary-head">
-              <span class="security__number" aria-hidden="true">01</span>
+          <section class="security__deal" aria-labelledby="security-contract-title">
+            <div class="security__deal-copy">
               <h3 class="type-h3" id="security-contract-title">Договор до первого платежа</h3>
+              <p>В договоре фиксируем выбранный сценарий покупки, стоимость услуг NEXROUTE, порядок платежей, действия при неуспешной проверке, ответственность на маршруте и комплект документов на выдаче.</p>
+              <button class="link security__document-link" type="button" data-modal-open="security-document-modal">
+                <span class="security__document-link-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false"><path d="M6 3.5h8l4 4V20.5H6z"></path><path d="M14 3.5v4h4M9 12h6M9 15.5h6"></path></svg>
+                </span>
+                <span>Посмотреть договор</span>
+                <span aria-hidden="true">↗</span>
+              </button>
             </div>
 
-            <div class="security__primary-grid">
-              <div class="security__contract-copy">
-                <p>В договоре фиксируем выбранный сценарий покупки, стоимость услуг NEXROUTE, порядок платежей, действия при неуспешной проверке, ответственность на маршруте и комплект документов на выдаче.</p>
-                <button class="link security__document-link" type="button" data-modal-open="security-document-modal">
-                  <span class="security__document-link-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" focusable="false"><path d="M6 3.5h8l4 4V20.5H6z"></path><path d="M14 3.5v4h4M9 12h6M9 15.5h6"></path></svg>
-                  </span>
-                  <span>Посмотреть договор</span>
-                  <span aria-hidden="true">↗</span>
-                </button>
-              </div>
-
-              <div class="security__payments">
-                <h4>Оплата по этапам</h4>
-                <ol class="security__payment-list">
-                  <li><span>После проверки</span><strong>Стоимость автомобиля по инвойсу</strong></li>
-                  <li><span>Перед отправкой</span><strong>Логистика и страхование</strong></li>
-                  <li><span>Перед таможней</span><strong>Таможенные платежи и утильсбор</strong></li>
-                </ol>
-                <p>Сервис NEXROUTE — 320 000 ₽ по договору.</p>
-              </div>
+            <div class="security__payments">
+              <h3 class="security__subheading">Оплата по этапам</h3>
+              <ol class="security__payment-list">
+                <li><span>После проверки</span><strong>Стоимость автомобиля по инвойсу</strong></li>
+                <li><span>Перед отправкой</span><strong>Логистика и страхование</strong></li>
+                <li><span>Перед таможней</span><strong>Таможенные платежи и утильсбор</strong></li>
+              </ol>
+              <p>Сервис NEXROUTE — 320 000 ₽ по договору.</p>
             </div>
+          </section>
 
-            <div class="security__terms">
-              <div class="security__terms-head">
-                <p class="security__terms-label">Что фиксируем до оплаты</p>
-                <p class="security__terms-note">Пять условий, которые должны быть понятны до перевода денег.</p>
-              </div>
-              <dl>
-                <div><dt>Автомобиль</dt><dd>Выбранный сценарий покупки</dd></div>
-                <div><dt>Стоимость</dt><dd>Услуги и порядок платежей</dd></div>
-                <div><dt>Проверка</dt><dd>Действия при замечаниях</dd></div>
-                <div><dt>Маршрут</dt><dd>Ответственность и страхование</dd></div>
-                <div><dt>Финал</dt><dd>Комплект документов на выдаче</dd></div>
-              </dl>
+          <section class="security__terms" aria-labelledby="security-terms-title">
+            <div class="security__section-head">
+              <h3 class="type-h3" id="security-terms-title">Что фиксируем до оплаты</h3>
+              <p>Пять условий, которые должны быть понятны до перевода денег.</p>
             </div>
-
+            <dl class="security__terms-grid">
+              <div><dt>Автомобиль</dt><dd>Выбранный сценарий покупки</dd></div>
+              <div><dt>Стоимость</dt><dd>Услуги и порядок платежей</dd></div>
+              <div><dt>Проверка</dt><dd>Действия при замечаниях</dd></div>
+              <div><dt>Маршрут</dt><dd>Ответственность и страхование</dd></div>
+              <div><dt>Финал</dt><dd>Комплект документов на выдаче</dd></div>
+            </dl>
             <p class="security__rule">Каждый платёж привязан к конкретному этапу и документу. Сумма не появляется «по ходу сделки» без объяснения, из чего она сложилась.</p>
-          </article>
+          </section>
 
-          <div class="security__rows">
-            <article class="security__row">
-              <span class="security__number" aria-hidden="true">02</span>
-              <h3 class="type-h3">Если автомобиль не проходит проверку</h3>
-              <div class="security__row-copy">
+          <section class="security__scenarios" aria-labelledby="security-scenarios-title">
+            <div class="security__section-head">
+              <h3 class="type-h3" id="security-scenarios-title">Проверка, перевозка, страхование и выдача</h3>
+              <p>Что происходит в критичных точках сделки.</p>
+            </div>
+
+            <div class="security__scenarios-grid">
+              <article class="security__scenario">
+                <p class="security__scenario-label">Проверка</p>
+                <h4>Если автомобиль не проходит проверку</h4>
                 <p>Автомобиль не выкупаем. Показываем, что именно не совпало с заявленным состоянием или комплектацией, и возвращаемся к подбору. Новый вариант ищем без повторной сервисной комиссии.</p>
-              </div>
-            </article>
+              </article>
 
-            <article class="security__row">
-              <span class="security__number" aria-hidden="true">03</span>
-              <h3 class="type-h3">Кто отвечает в перевозке</h3>
-              <div class="security__row-copy">
+              <article class="security__scenario">
+                <p class="security__scenario-label">Перевозка</p>
+                <h4>Кто отвечает в перевозке</h4>
                 <p>Состояние автомобиля фиксируется перед отправкой. Ответственность на маршруте закрепляется в договоре и сопроводительных документах.</p>
-              </div>
-            </article>
+              </article>
 
-            <article class="security__row">
-              <span class="security__number" aria-hidden="true">04</span>
-              <h3 class="type-h3">Как работает страхование</h3>
-              <div class="security__row-copy">
+              <article class="security__scenario">
+                <p class="security__scenario-label">Страхование</p>
+                <h4>Как работает страхование</h4>
                 <p>Если в пути появляется повреждение, составляется акт и запускается страховой сценарий. До выдачи клиент получает статус по ситуации и дальнейшим действиям.</p>
-              </div>
-            </article>
+              </article>
 
-            <article class="security__row">
-              <span class="security__number" aria-hidden="true">05</span>
-              <h3 class="type-h3">Что получает клиент на выдаче</h3>
-              <div class="security__row-copy">
+              <article class="security__scenario">
+                <p class="security__scenario-label">Выдача</p>
+                <h4>Что получает клиент на выдаче</h4>
                 <p>Инвойс / документы покупки, комплект таможенных документов, выписка из ЭПТС, документы по оплатам и акт выдачи автомобиля.</p>
-              </div>
-            </article>
-          </div>
+              </article>
+            </div>
+          </section>
 
           <p class="security__closing">Условия сделки видны до оплаты. Документы появляются по мере прохождения маршрута, а не только в день выдачи.</p>
         </div>
