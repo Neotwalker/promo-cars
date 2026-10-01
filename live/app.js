@@ -939,6 +939,7 @@
         detail:{
           model:state.model === 'Нужен подбор' ? 'Пока не определился — нужен подбор' : state.model,
           city:state.city,
+          channel:state.channel,
           contact:refs.contact.value.trim()
         }
       }));
@@ -1487,6 +1488,9 @@
   const success = section.querySelector('[data-final-success]');
   const edit = section.querySelector('[data-final-edit]');
   const submit = section.querySelector('[data-final-submit]');
+  const consent = form.querySelector('[data-final-consent]');
+  const channels = [...form.querySelectorAll('[data-final-channel]')];
+  const contactLabel = form.querySelector('[data-final-contact-label]');
 
   const inputs = {
     model:form.querySelector('[data-final-input="model"]'),
@@ -1497,6 +1501,7 @@
   };
 
   const fieldFor = (input) => input?.closest('[data-final-field]');
+  const activeChannel = () => channels.find((radio) => radio.checked)?.value || 'Телефон';
 
   const restoreMessage = (input) => {
     const field = fieldFor(input);
@@ -1517,21 +1522,67 @@
     return false;
   };
 
+  const syncContactMode = ({clearValue = false} = {}) => {
+    const channel = activeChannel();
+    const isPhone = channel === 'Телефон';
+    const message = fieldFor(inputs.contact)?.querySelector('[data-final-message]');
+
+    contactLabel.textContent = channel;
+    inputs.contact.placeholder = isPhone ? '+7 915 123-45-67' : '@username';
+    inputs.contact.autocomplete = isPhone ? 'tel' : 'off';
+    inputs.contact.inputMode = isPhone ? 'tel' : 'text';
+
+    if (clearValue) inputs.contact.value = '';
+
+    if (message) {
+      const helper = isPhone
+        ? 'Укажите номер телефона — только для ответа по расчёту.'
+        : 'Укажите Telegram username — только для ответа по расчёту.';
+      message.dataset.defaultMessage = helper;
+      message.textContent = helper;
+    }
+
+    restoreMessage(inputs.contact);
+  };
+
   const validContact = (value) => {
     const trimmed = value.trim();
-    const digits = trimmed.replace(/\D/g,'');
-    const telegram = trimmed.replace(/^@/,'');
-    return digits.length >= 10 || /^[a-zA-Z0-9_]{5,32}$/.test(telegram);
+
+    if (activeChannel() === 'Телефон') {
+      const digits = trimmed.replace(/\D/g,'');
+      return digits.length === 10 || (digits.length === 11 && /^[78]/.test(digits));
+    }
+
+    return /^@[a-zA-Z0-9_]{5,32}$/.test(trimmed);
+  };
+
+  const syncConsent = () => {
+    submit.disabled = !consent.checked;
   };
 
   Object.values(inputs).forEach((input) => {
     input?.addEventListener('input', () => restoreMessage(input));
   });
 
+  channels.forEach((radio) => {
+    radio.addEventListener('change', () => syncContactMode({clearValue:true}));
+  });
+
+  consent.addEventListener('change', syncConsent);
+
   document.addEventListener('nexroute:prefill-final', (event) => {
     const detail = event.detail || {};
+
     if (detail.model) inputs.model.value = detail.model;
     if (detail.city) inputs.city.value = detail.city;
+
+    if (detail.channel) {
+      const matchingChannel = channels.find((radio) => radio.value === detail.channel);
+      if (matchingChannel) matchingChannel.checked = true;
+    }
+
+    syncContactMode();
+
     if (detail.contact) inputs.contact.value = detail.contact;
 
     [inputs.model,inputs.city,inputs.contact].forEach((input) => restoreMessage(input));
@@ -1539,6 +1590,12 @@
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    if (!consent.checked) {
+      syncConsent();
+      consent.focus();
+      return;
+    }
 
     let firstInvalid = null;
 
@@ -1555,10 +1612,20 @@
       firstInvalid ||= inputs.name;
     }
     if (!inputs.contact.value.trim()) {
-      fieldError(inputs.contact,'Укажите телефон или Telegram для ответа.');
+      fieldError(
+        inputs.contact,
+        activeChannel() === 'Телефон'
+          ? 'Укажите номер телефона для ответа.'
+          : 'Укажите Telegram username для ответа.'
+      );
       firstInvalid ||= inputs.contact;
     } else if (!validContact(inputs.contact.value)) {
-      fieldError(inputs.contact,'Проверьте номер телефона или Telegram username.');
+      fieldError(
+        inputs.contact,
+        activeChannel() === 'Телефон'
+          ? 'Проверьте номер телефона.'
+          : 'Укажите Telegram username в формате @username.'
+      );
       firstInvalid ||= inputs.contact;
     }
 
@@ -1578,7 +1645,6 @@
     form.hidden = true;
     success.hidden = false;
     success.focus({preventScroll:true});
-    submit.disabled = false;
 
     document.dispatchEvent(new CustomEvent('nexroute:toast',{
       detail:{
@@ -1591,6 +1657,8 @@
   edit?.addEventListener('click', () => {
     success.hidden = true;
     form.hidden = false;
+    syncConsent();
+
     requestAnimationFrame(() => {
       inputs.model.focus({preventScroll:true});
       section.scrollIntoView({
@@ -1599,4 +1667,7 @@
       });
     });
   });
+
+  syncContactMode();
+  syncConsent();
 })();

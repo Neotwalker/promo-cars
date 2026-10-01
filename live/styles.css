@@ -3184,7 +3184,9 @@
 /* FINAL CTA + FORM */
 .final-cta{
   padding:var(--space-section) 0;
-  background:var(--color-ink);
+  background:
+    radial-gradient(circle at 48% 34%,rgba(252,251,248,.055),transparent 38rem),
+    linear-gradient(135deg,#121418 0%,var(--color-ink) 52%,#0d0f12 100%);
   color:var(--color-white);
 }
 .final-cta__layout{
@@ -3212,6 +3214,9 @@
 .final-cta__title{
   max-width:11.5ch;
   color:var(--color-white);
+  font-size:clamp(3.5rem,4.55vw,5.75rem);
+  line-height:.98;
+  letter-spacing:-.055em;
 }
 .final-cta__lead{
   max-width:36rem;
@@ -3244,25 +3249,63 @@
 .final-cta__form .field{
   gap:var(--space-1);
 }
+.final-cta__form .field__label,
+.final-cta__contact-mode legend{
+  font-size:var(--type-body);
+  line-height:var(--type-body-lh);
+}
 .final-cta__form .field__control{
-  min-height:3.75rem;
+  min-height:4.25rem;
+  font-size:1.0625rem;
 }
 .final-cta__form .field__control--textarea{
-  min-height:7rem;
+  min-height:8.25rem;
+}
+.final-cta__contact-mode{
+  margin:0;
+  padding:0;
+  border:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-2) var(--space-5);
+}
+.final-cta__contact-mode legend{
+  width:100%;
+  margin-bottom:var(--space-1);
+  color:var(--color-white);
+  font-weight:500;
+}
+.final-cta__contact-mode .selection-control{
+  min-height:auto;
+  align-items:center;
+  color:rgba(252,251,248,.74);
+}
+.final-cta__contact-mode .selection-control:has(input:checked){
+  color:var(--color-white);
+}
+.final-cta__contact-mode .selection-control input{
+  margin:0;
 }
 .final-cta__optional{
   margin-left:.35rem;
   color:rgba(252,251,248,.42);
   font-weight:400;
 }
-.final-cta__submit{
-  width:100%;
-  min-height:3.75rem;
+.final-cta__consent-wrap{
   margin-top:var(--space-1);
-  font-weight:600;
 }
 .final-cta__consent{
-  color:rgba(252,251,248,.46);
+  min-height:auto;
+  color:rgba(252,251,248,.64);
+}
+.final-cta__consent:focus-within{
+  color:var(--color-white);
+}
+.final-cta__submit{
+  width:100%;
+  min-height:4.25rem;
+  margin-top:var(--space-1);
+  font-weight:600;
 }
 .final-cta__success{
   min-height:31rem;
@@ -3335,14 +3378,25 @@
   .final-cta__form{
     gap:var(--space-3);
   }
+  .final-cta__title{
+    font-size:var(--type-h1);
+    line-height:var(--type-h1-lh);
+    letter-spacing:-.045em;
+  }
+  .final-cta__form .field__label,
+  .final-cta__contact-mode legend{
+    font-size:var(--type-small);
+    line-height:var(--type-small-lh);
+  }
   .final-cta__form .field__control{
-    min-height:3.5rem;
+    min-height:3.75rem;
+    font-size:var(--type-body);
   }
   .final-cta__form .field__control--textarea{
-    min-height:6.5rem;
+    min-height:7rem;
   }
   .final-cta__submit{
-    min-height:3.5rem;
+    min-height:3.75rem;
   }
   .final-cta__success{
     min-height:24rem;

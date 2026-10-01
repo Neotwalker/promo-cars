@@ -925,10 +925,22 @@
               <small class="field__message" id="final-name-message" data-final-message data-default-message=""></small>
             </label>
 
+            <fieldset class="final-cta__contact-mode">
+              <legend>Как удобнее связаться</legend>
+              <label class="selection-control selection-control--inverse">
+                <input type="radio" name="contact-channel" value="Телефон" checked data-final-channel>
+                <span>Телефон</span>
+              </label>
+              <label class="selection-control selection-control--inverse">
+                <input type="radio" name="contact-channel" value="Telegram" data-final-channel>
+                <span>Telegram</span>
+              </label>
+            </fieldset>
+
             <label class="field field--inverse" data-final-field="contact">
-              <span class="field__label">Телефон / Telegram</span>
-              <input class="field__control" type="text" name="contact" placeholder="+7 915 123-45-67 или @username" autocomplete="off" aria-describedby="final-contact-message" data-final-input="contact">
-              <small class="field__message" id="final-contact-message" data-final-message data-default-message="Укажите телефон или Telegram — только для ответа по расчёту.">Укажите телефон или Telegram — только для ответа по расчёту.</small>
+              <span class="field__label" data-final-contact-label>Телефон</span>
+              <input class="field__control" type="text" name="contact" placeholder="+7 915 123-45-67" autocomplete="tel" inputmode="tel" aria-describedby="final-contact-message" data-final-input="contact">
+              <small class="field__message" id="final-contact-message" data-final-message data-default-message="Укажите номер телефона — только для ответа по расчёту.">Укажите номер телефона — только для ответа по расчёту.</small>
             </label>
 
             <label class="field field--inverse" data-final-field="comment">
@@ -937,10 +949,15 @@
               <small class="field__message" id="final-comment-message" data-final-message data-default-message=""></small>
             </label>
 
-            <button class="button button--signal final-cta__submit" type="submit" data-final-submit>
+            <div class="final-cta__consent-wrap">
+              <label class="selection-control selection-control--inverse final-cta__consent">
+                <input type="checkbox" name="consent" data-final-consent>
+                <span>Согласен на обработку персональных данных.</span>
+              </label>
+            </div>
+            <button class="button button--signal final-cta__submit" type="submit" data-final-submit disabled>
               <span>Получить расчёт</span><span aria-hidden="true">→</span>
             </button>
-            <p class="type-small final-cta__consent">Отправляя форму, вы соглашаетесь на обработку персональных данных.</p>
           </form>
 
           <div class="final-cta__success" role="status" tabindex="-1" data-final-success hidden>
