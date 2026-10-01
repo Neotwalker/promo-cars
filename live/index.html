@@ -764,11 +764,11 @@
         </header>
 
         <div class="security__content">
-          <section class="security__deal" aria-labelledby="security-contract-title">
+          <section class="security__chapter security__chapter--deal" aria-labelledby="security-contract-title">
             <div class="security__deal-copy">
-              <p class="security__kicker">До первого платежа</p>
-              <h3 class="type-h3" id="security-contract-title">Договор и порядок оплаты</h3>
-              <p>В договоре фиксируем выбранный сценарий покупки, стоимость услуг NEXROUTE, порядок платежей, действия при неуспешной проверке, ответственность на маршруте и комплект документов на выдаче.</p>
+              <p class="security__chapter-number" aria-hidden="true">01</p>
+              <h3 class="security__chapter-title" id="security-contract-title">Договор и порядок оплаты</h3>
+              <p class="security__chapter-copy">В договоре фиксируем выбранный сценарий покупки, стоимость услуг NEXROUTE, порядок платежей, действия при неуспешной проверке, ответственность на маршруте и комплект документов на выдаче.</p>
               <button class="link security__document-link" type="button" data-modal-open="security-document-modal">
                 <span class="security__document-link-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" focusable="false"><path d="M6 3.5h8l4 4V20.5H6z"></path><path d="M14 3.5v4h4M9 12h6M9 15.5h6"></path></svg>
@@ -779,7 +779,7 @@
             </div>
 
             <div class="security__payments">
-              <p class="security__kicker">Оплата по этапам</p>
+              <p class="security__payments-title">Оплата по этапам</p>
               <ol class="security__payment-list">
                 <li><span>После проверки</span><strong>Стоимость автомобиля по инвойсу</strong></li>
                 <li><span>Перед отправкой</span><strong>Логистика и страхование</strong></li>
@@ -789,10 +789,13 @@
             </div>
           </section>
 
-          <section class="security__terms" aria-labelledby="security-terms-title">
-            <div class="security__section-head">
-              <h3 class="type-h3" id="security-terms-title">Что фиксируем до оплаты</h3>
-              <p>Пять вещей, которые должны быть понятны до перевода денег.</p>
+          <section class="security__chapter security__chapter--terms" aria-labelledby="security-terms-title">
+            <div class="security__chapter-head">
+              <div>
+                <p class="security__chapter-number" aria-hidden="true">02</p>
+                <h3 class="security__chapter-title" id="security-terms-title">Что фиксируем до оплаты</h3>
+              </div>
+              <p class="security__chapter-note">Пять вещей, которые должны быть понятны до перевода денег.</p>
             </div>
 
             <dl class="security__terms-strip">
@@ -802,17 +805,18 @@
               <div><dt>Маршрут</dt><dd>Ответственность и страхование</dd></div>
               <div><dt>Финал</dt><dd>Комплект документов на выдаче</dd></div>
             </dl>
-
-            <p class="security__rule">Каждый платёж привязан к конкретному этапу и документу. Сумма не появляется «по ходу сделки» без объяснения, из чего она сложилась.</p>
           </section>
 
-          <section class="security__scenarios" aria-labelledby="security-scenarios-title">
-            <div class="security__section-head">
-              <h3 class="type-h3" id="security-scenarios-title">Критичные точки сделки</h3>
-              <p>Что происходит, когда ситуация выходит за обычный сценарий.</p>
+          <section class="security__chapter security__chapter--scenarios" aria-labelledby="security-scenarios-title">
+            <div class="security__chapter-head">
+              <div>
+                <p class="security__chapter-number" aria-hidden="true">03</p>
+                <h3 class="security__chapter-title" id="security-scenarios-title">Критичные точки сделки</h3>
+              </div>
+              <p class="security__chapter-note">Что происходит, когда ситуация выходит за обычный сценарий.</p>
             </div>
 
-            <div class="security__scenario-list">
+            <div class="security__scenario-table">
               <article class="security__scenario">
                 <p class="security__scenario-label">Проверка</p>
                 <h4>Если автомобиль не проходит проверку</h4>
