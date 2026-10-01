@@ -741,7 +741,7 @@
   }
 
   .hero__lead{
-    max-width:25rem;
+    max-width:30rem;
     font-size:clamp(1.05rem,1.4vw,1.2rem);
   }
 
@@ -2771,7 +2771,7 @@
 .security__intro{
   position:sticky;
   top:2.5rem;
-  max-width:30rem;
+  max-width:25rem;
 }
 .security__eyebrow{
   margin:0 0 var(--space-3);
