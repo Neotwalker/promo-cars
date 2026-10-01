@@ -3051,3 +3051,128 @@
     padding-top:var(--space-4);
   }
 }
+
+/* FAQ */
+.faq{
+  padding:var(--space-section) 0;
+  background:var(--color-white);
+  color:var(--color-ink);
+}
+.faq__layout{
+  display:grid;
+  grid-template-columns:minmax(18rem,.72fr) minmax(0,1.28fr);
+  gap:clamp(3.5rem,8vw,9rem);
+  align-items:start;
+}
+.faq__intro{
+  position:sticky;
+  top:calc(var(--header-h) + var(--space-4));
+}
+.faq__eyebrow{
+  margin-bottom:var(--space-3);
+}
+.faq__eyebrow::after{
+  content:"";
+  display:inline-block;
+  width:2.2rem;
+  height:2px;
+  margin-left:.85rem;
+  vertical-align:middle;
+  background:var(--color-signal);
+}
+.faq__title{
+  max-width:10.5ch;
+}
+.faq__lead{
+  max-width:25rem;
+  margin-top:var(--space-4);
+  color:#6b7075;
+}
+.faq__content{
+  min-width:0;
+}
+.faq__list{
+  border-top:1px solid var(--color-line);
+}
+.faq__item{
+  border-top:0;
+}
+.faq__item[data-accordion-expanded="true"],
+.faq__item:not([data-accordion-expanded])[open]{
+  background:transparent;
+}
+.faq__trigger{
+  display:grid;
+  grid-template-columns:2.4rem minmax(0,1fr);
+  gap:var(--space-3);
+  align-items:start;
+  padding-top:var(--space-4);
+  padding-bottom:var(--space-4);
+}
+.faq__index{
+  padding-top:.22rem;
+  color:var(--color-signal);
+  font-variant-numeric:tabular-nums;
+}
+.faq__answer{
+  max-width:none;
+  padding-left:calc(2.4rem + var(--space-3));
+  padding-right:clamp(2rem,5vw,5rem);
+}
+.faq__transition{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:var(--space-4);
+  align-items:center;
+  padding:var(--space-4) 0 0 calc(2.4rem + var(--space-3));
+}
+.faq__transition p{
+  max-width:37rem;
+  color:#6b7075;
+}
+.faq__cta{
+  gap:.65rem;
+  color:var(--color-signal);
+  white-space:nowrap;
+}
+@media(max-width:64rem){
+  .faq__layout{
+    grid-template-columns:1fr;
+    gap:var(--space-5);
+  }
+  .faq__intro{
+    position:static;
+  }
+  .faq__title{
+    max-width:13ch;
+  }
+  .faq__lead{
+    max-width:40rem;
+  }
+}
+@media(max-width:47.9375rem){
+  .faq__layout{
+    gap:var(--space-4);
+  }
+  .faq__title{
+    max-width:11ch;
+  }
+  .faq__trigger{
+    grid-template-columns:2rem minmax(0,1fr);
+    gap:var(--space-2);
+    padding-right:calc(var(--space-4) + 1rem);
+  }
+  .faq__index{
+    padding-top:.12rem;
+  }
+  .faq__answer{
+    padding-left:calc(2rem + var(--space-2));
+    padding-right:var(--space-3);
+  }
+  .faq__transition{
+    grid-template-columns:1fr;
+    gap:var(--space-2);
+    padding-left:calc(2rem + var(--space-2));
+  }
+}
+

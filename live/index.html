@@ -847,6 +847,55 @@
       </div>
     </section>
 
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq__layout">
+        <header class="faq__intro">
+          <p class="eyebrow faq__eyebrow">FAQ</p>
+          <h2 class="type-h2 faq__title" id="faq-title">Осталось уточнить несколько вещей.</h2>
+          <p class="type-body faq__lead">Коротко о том, что ещё не закрыто выше на странице.</p>
+        </header>
+
+        <div class="faq__content" data-faq>
+          <div class="faq__list">
+            <details class="accordion faq__item" data-accordion>
+              <summary class="accordion__trigger faq__trigger" data-accordion-trigger>
+                <span class="type-small faq__index" aria-hidden="true">01</span>
+                <span>Какие автомобили можно привезти?</span>
+              </summary>
+              <div class="accordion__content faq__answer" data-accordion-content>
+                <p class="type-body">Не только модели из витрины. В расчёте можно указать любую марку и модель из Китая или выбрать «не определился — нужен подбор». Доступность конкретной версии проверяется перед расчётом.</p>
+              </div>
+            </details>
+
+            <details class="accordion faq__item" data-accordion open>
+              <summary class="accordion__trigger faq__trigger" data-accordion-trigger>
+                <span class="type-small faq__index" aria-hidden="true">02</span>
+                <span>Можно привезти автомобиль с пробегом?</span>
+              </summary>
+              <div class="accordion__content faq__answer" data-accordion-content>
+                <p class="type-body">Да. В Configurator можно выбрать новый автомобиль или с пробегом. Для автомобиля с пробегом проверка состояния становится отдельной частью решения о выкупе.</p>
+              </div>
+            </details>
+
+            <details class="accordion faq__item" data-accordion>
+              <summary class="accordion__trigger faq__trigger" data-accordion-trigger>
+                <span class="type-small faq__index" aria-hidden="true">03</span>
+                <span>Можно получить автомобиль не в Москве?</span>
+              </summary>
+              <div class="accordion__content faq__answer" data-accordion-content>
+                <p class="type-body">Да. После оформления организуем доставку в нужный город. В итоговом расчёте региональная доставка показывается отдельной строкой.</p>
+              </div>
+            </details>
+          </div>
+
+          <div class="faq__transition">
+            <p class="type-body">Не нашли ответ? Отправьте модель и город — вернёмся с предметным расчётом.</p>
+            <a class="link faq__cta" href="#configurator">Получить расчёт <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="toast-stack configurator__toasts" aria-live="polite" aria-atomic="true" data-config-toasts></div>
   </main>
 
