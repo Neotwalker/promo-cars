@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1584" viewBox="0 0 1120 1584">
+<style>
+  .brand{font:700 24px Arial,sans-serif;fill:#ff5b35;letter-spacing:2px}
+  .eyebrow{font:700 13px Arial,sans-serif;fill:#7c7c78;letter-spacing:1.6px;text-transform:uppercase}
+  .title{font:700 42px Arial,sans-serif;fill:#171b1f}
+  .subtitle{font:400 18px Arial,sans-serif;fill:#686a68}
+  .meta{font:500 16px Arial,sans-serif;fill:#303330}
+  .section{font:700 21px Arial,sans-serif;fill:#171b1f}
+  .cell{font:400 15px Arial,sans-serif;fill:#272a28}
+  .cell.strong{font-weight:700}
+  .cell.muted{fill:#686a68}
+  .body{font:400 15px Arial,sans-serif;fill:#3d403d}
+  .foot{font:400 13px Arial,sans-serif;fill:#777a77}
+</style>
+<rect width="1120" height="1584" fill="#fdfdfb"/>
+<rect x="0" y="0" width="1120" height="12" fill="#ff5b35"/>
+<text x="80" y="76" class="brand">NEXROUTE</text>
+<text x="80" y="112" class="eyebrow">МАТЕРИАЛ КЕЙСА · NX-L6-6P1</text>
+<text x="80" y="176" class="title">Инвойс</text>
+<text x="80" y="210" class="subtitle">Расчётный документ по автомобилю в составе сделки</text>
+<text x="760" y="76" class="meta">Li Auto L6 Pro</text>
+<text x="760" y="104" class="meta">VIN ····6P1</text>
+<text x="760" y="132" class="meta">11.04.2025</text>
+<line x1="80" y1="228" x2="1040" y2="228" stroke="#cfd1ce" stroke-width="2"/>
+<text x="80" y="250" class="section">1. Сделка</text><rect x="80" y="260" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="284" class="cell muted">Номер сделки</text><text x="430" y="284" class="cell strong">NX-L6-0411</text><line x1="720" y1="260" x2="720" y2="298" stroke="#ddddda"/><text x="740" y="284" class="cell muted">Екатеринбург</text><rect x="80" y="298" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="322" class="cell muted">Автомобиль</text><text x="430" y="322" class="cell strong">Li Auto L6 Pro</text><line x1="720" y1="298" x2="720" y2="336" stroke="#ddddda"/><text x="740" y="322" class="cell muted">VIN ····6P1</text><rect x="80" y="336" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="360" class="cell muted">Статус</text><text x="430" y="360" class="cell strong">выкуп подтверждён</text><line x1="720" y1="336" x2="720" y2="374" stroke="#ddddda"/><text x="740" y="360" class="cell muted">оплачено</text><rect x="80" y="374" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="398" class="cell muted">Стоимость автомобиля</text><text x="430" y="398" class="cell strong">3 870 000 ₽</text><line x1="720" y1="374" x2="720" y2="412" stroke="#ddddda"/><text x="740" y="398" class="cell muted">по расчёту</text><text x="80" y="470" class="section">2. Состав расчёта</text><rect x="80" y="480" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="504" class="cell muted">Автомобиль</text><text x="430" y="504" class="cell strong">3 870 000 ₽</text><line x1="720" y1="480" x2="720" y2="518" stroke="#ddddda"/><text x="740" y="504" class="cell muted"></text><rect x="80" y="518" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="542" class="cell muted">Логистика Китай → Россия</text><text x="430" y="542" class="cell strong">350 000 ₽</text><line x1="720" y1="518" x2="720" y2="556" stroke="#ddddda"/><text x="740" y="542" class="cell muted"></text><rect x="80" y="556" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="580" class="cell muted">Таможня и оформление</text><text x="430" y="580" class="cell strong">790 000 ₽</text><line x1="720" y1="556" x2="720" y2="594" stroke="#ddddda"/><text x="740" y="580" class="cell muted"></text><rect x="80" y="594" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="618" class="cell muted">Утильсбор</text><text x="430" y="618" class="cell strong">3 400 ₽</text><line x1="720" y1="594" x2="720" y2="632" stroke="#ddddda"/><text x="740" y="618" class="cell muted"></text><rect x="80" y="632" width="960" height="38" fill="#f6f6f4" stroke="#ddddda" stroke-width="1"/><text x="98" y="656" class="cell muted">Доставка до Екатеринбурга</text><text x="430" y="656" class="cell strong">126 600 ₽</text><line x1="720" y1="632" x2="720" y2="670" stroke="#ddddda"/><text x="740" y="656" class="cell muted"></text><rect x="80" y="670" width="960" height="38" fill="#ffffff" stroke="#ddddda" stroke-width="1"/><text x="98" y="694" class="cell muted">Сервис NEXROUTE</text><text x="430" y="694" class="cell strong">350 000 ₽</text><line x1="720" y1="670" x2="720" y2="708" stroke="#ddddda"/><text x="740" y="694" class="cell muted"></text><text x="80" y="766" class="section">3. Итог</text><rect x="80" y="790" width="960" height="78" rx="8" fill="#faf8f5" stroke="#e2ddd7"/><text x="102" y="816" class="body">Итоговая стоимость под ключ по кейсу: 5 490 000 ₽. Расчёт зафиксирован до запуска маршрута.</text>
+<line x1="80" y1="1450" x2="1040" y2="1450" stroke="#d9d9d6"/>
+<text x="80" y="1490" class="foot">Сводный материал кейса. Персональные и идентифицирующие данные сокращены.</text>
+<text x="80" y="1522" class="foot">NEXROUTE · автомобили из Китая · маршрут завершён за 37 дней</text>
+</svg>
