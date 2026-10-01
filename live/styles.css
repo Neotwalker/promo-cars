@@ -3200,7 +3200,7 @@
   height:100%;
   display:block;
   pointer-events:none;
-  opacity:.94;
+  opacity:1;
 }
 .final-cta__layout{
   position:relative;

@@ -1488,11 +1488,29 @@
   if (!ctx) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const volumes = [
-    {x:.16,y:.27,rx:.34,ry:.50,ax:.11,ay:.08,speed:.19,phase:.2,color:[252,251,248],alpha:.052},
-    {x:.66,y:.22,rx:.38,ry:.42,ax:.17,ay:.10,speed:.15,phase:1.7,color:[176,193,207],alpha:.042},
-    {x:.50,y:.78,rx:.46,ry:.34,ax:.15,ay:.09,speed:.12,phase:3.2,color:[252,251,248],alpha:.034},
-    {x:.84,y:.60,rx:.27,ry:.32,ax:.08,ay:.13,speed:.17,phase:4.4,color:[255,91,53],alpha:.026}
+
+  const lights = [
+    {
+      x:.24,y:.30,rx:.52,ry:.48,
+      ax:.31,ay:.11,
+      speed:.205,phase:.15,angle:-.10,
+      twist:.055,pulse:.07,
+      color:[252,251,248],alpha:.105
+    },
+    {
+      x:.74,y:.34,rx:.40,ry:.38,
+      ax:.25,ay:.19,
+      speed:.147,phase:2.05,angle:.18,
+      twist:.075,pulse:.09,
+      color:[168,188,204],alpha:.078
+    },
+    {
+      x:.78,y:.73,rx:.30,ry:.27,
+      ax:.10,ay:.12,
+      speed:.181,phase:4.35,angle:-.24,
+      twist:.06,pulse:.08,
+      color:[255,91,53],alpha:.050
+    }
   ];
 
   let width = 0;
@@ -1500,6 +1518,39 @@
   let frame = 0;
   let visible = false;
   let lastPaint = 0;
+  let grainPattern = null;
+
+  const createGrain = () => {
+    const grain = document.createElement('canvas');
+    const size = 128;
+    grain.width = size;
+    grain.height = size;
+
+    const grainCtx = grain.getContext('2d',{alpha:true});
+    if (!grainCtx) return null;
+
+    const image = grainCtx.createImageData(size,size);
+    let seed = 0x2f6e2b1;
+
+    const random = () => {
+      seed ^= seed << 13;
+      seed ^= seed >>> 17;
+      seed ^= seed << 5;
+      return (seed >>> 0) / 4294967295;
+    };
+
+    for (let i = 0; i < image.data.length; i += 4) {
+      const light = random() > .5;
+      const alpha = 2 + Math.floor(random() * 4);
+      image.data[i] = light ? 255 : 0;
+      image.data[i + 1] = light ? 255 : 0;
+      image.data[i + 2] = light ? 255 : 0;
+      image.data[i + 3] = alpha;
+    }
+
+    grainCtx.putImageData(image,0,0);
+    return ctx.createPattern(grain,'repeat');
+  };
 
   const resize = () => {
     const rect = section.getBoundingClientRect();
@@ -1512,27 +1563,31 @@
     canvas.width = Math.max(1,Math.round(width * dpr));
     canvas.height = Math.max(1,Math.round(height * dpr));
     ctx.setTransform(dpr,0,0,dpr,0,0);
+    grainPattern = createGrain();
   };
 
-  const drawVolume = (volume,time) => {
-    const driftX = Math.sin(time * volume.speed + volume.phase) * volume.ax;
-    const driftY = Math.cos(time * volume.speed * .78 + volume.phase * 1.13) * volume.ay;
-    const pulse = 1 + Math.sin(time * volume.speed * .62 + volume.phase) * .055;
+  const drawLight = (light,time) => {
+    const driftX = Math.sin(time * light.speed + light.phase) * light.ax;
+    const driftY = Math.cos(time * light.speed * .71 + light.phase * 1.21) * light.ay;
+    const pulse = 1 + Math.sin(time * light.speed * .54 + light.phase) * light.pulse;
+    const angle = light.angle + Math.sin(time * light.speed * .43 + light.phase) * light.twist;
 
-    const x = width * (volume.x + driftX);
-    const y = height * (volume.y + driftY);
-    const sx = Math.max(1,width * volume.rx * pulse);
-    const sy = Math.max(1,height * volume.ry / pulse);
-    const [r,g,b] = volume.color;
+    const x = width * (light.x + driftX);
+    const y = height * (light.y + driftY);
+    const sx = Math.max(1,width * light.rx * pulse);
+    const sy = Math.max(1,height * light.ry / pulse);
+    const [r,g,b] = light.color;
 
     ctx.save();
     ctx.translate(x,y);
+    ctx.rotate(angle);
     ctx.scale(sx,sy);
 
     const gradient = ctx.createRadialGradient(0,0,0,0,0,1);
-    gradient.addColorStop(0,`rgba(${r},${g},${b},${volume.alpha})`);
-    gradient.addColorStop(.34,`rgba(${r},${g},${b},${volume.alpha * .62})`);
-    gradient.addColorStop(.72,`rgba(${r},${g},${b},${volume.alpha * .17})`);
+    gradient.addColorStop(0,`rgba(${r},${g},${b},${light.alpha})`);
+    gradient.addColorStop(.20,`rgba(${r},${g},${b},${light.alpha * .90})`);
+    gradient.addColorStop(.48,`rgba(${r},${g},${b},${light.alpha * .48})`);
+    gradient.addColorStop(.76,`rgba(${r},${g},${b},${light.alpha * .13})`);
     gradient.addColorStop(1,`rgba(${r},${g},${b},0)`);
 
     ctx.fillStyle = gradient;
@@ -1540,14 +1595,32 @@
     ctx.restore();
   };
 
+  const drawGrain = (time) => {
+    if (!grainPattern) return;
+
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = .30;
+    ctx.translate(
+      reduceMotion.matches ? 0 : (time * 1.4) % 128,
+      reduceMotion.matches ? 0 : (time * .9) % 128
+    );
+    ctx.fillStyle = grainPattern;
+    ctx.fillRect(-128,-128,width + 256,height + 256);
+    ctx.restore();
+  };
+
   const draw = (timestamp = 0) => {
     ctx.clearRect(0,0,width,height);
-    ctx.globalCompositeOperation = 'lighter';
 
     const time = reduceMotion.matches ? 0 : timestamp * .001;
-    volumes.forEach((volume) => drawVolume(volume,time));
 
+    ctx.globalCompositeOperation = 'lighter';
+    lights.forEach((light) => drawLight(light,time));
+
+    drawGrain(time);
     ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
   };
 
   const canAnimate = () => visible && !document.hidden && !reduceMotion.matches;
@@ -1555,7 +1628,7 @@
   const tick = (timestamp) => {
     frame = 0;
 
-    if (timestamp - lastPaint >= 33) {
+    if (timestamp - lastPaint >= 40) {
       lastPaint = timestamp;
       draw(timestamp);
     }
