@@ -1481,6 +1481,137 @@
 
 (() => {
   const section = document.querySelector('#final-calculation');
+  const canvas = section?.querySelector('[data-final-cta-canvas]');
+  if (!section || !canvas) return;
+
+  const ctx = canvas.getContext('2d',{alpha:true,desynchronized:true});
+  if (!ctx) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const volumes = [
+    {x:.16,y:.27,rx:.34,ry:.50,ax:.11,ay:.08,speed:.19,phase:.2,color:[252,251,248],alpha:.052},
+    {x:.66,y:.22,rx:.38,ry:.42,ax:.17,ay:.10,speed:.15,phase:1.7,color:[176,193,207],alpha:.042},
+    {x:.50,y:.78,rx:.46,ry:.34,ax:.15,ay:.09,speed:.12,phase:3.2,color:[252,251,248],alpha:.034},
+    {x:.84,y:.60,rx:.27,ry:.32,ax:.08,ay:.13,speed:.17,phase:4.4,color:[255,91,53],alpha:.026}
+  ];
+
+  let width = 0;
+  let height = 0;
+  let frame = 0;
+  let visible = false;
+  let lastPaint = 0;
+
+  const resize = () => {
+    const rect = section.getBoundingClientRect();
+    width = Math.max(1,Math.round(rect.width));
+    height = Math.max(1,Math.round(rect.height));
+
+    const dprCap = width < 768 ? 1.25 : 1.5;
+    const dpr = Math.min(window.devicePixelRatio || 1,dprCap);
+
+    canvas.width = Math.max(1,Math.round(width * dpr));
+    canvas.height = Math.max(1,Math.round(height * dpr));
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  };
+
+  const drawVolume = (volume,time) => {
+    const driftX = Math.sin(time * volume.speed + volume.phase) * volume.ax;
+    const driftY = Math.cos(time * volume.speed * .78 + volume.phase * 1.13) * volume.ay;
+    const pulse = 1 + Math.sin(time * volume.speed * .62 + volume.phase) * .055;
+
+    const x = width * (volume.x + driftX);
+    const y = height * (volume.y + driftY);
+    const sx = Math.max(1,width * volume.rx * pulse);
+    const sy = Math.max(1,height * volume.ry / pulse);
+    const [r,g,b] = volume.color;
+
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.scale(sx,sy);
+
+    const gradient = ctx.createRadialGradient(0,0,0,0,0,1);
+    gradient.addColorStop(0,`rgba(${r},${g},${b},${volume.alpha})`);
+    gradient.addColorStop(.34,`rgba(${r},${g},${b},${volume.alpha * .62})`);
+    gradient.addColorStop(.72,`rgba(${r},${g},${b},${volume.alpha * .17})`);
+    gradient.addColorStop(1,`rgba(${r},${g},${b},0)`);
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(-1,-1,2,2);
+    ctx.restore();
+  };
+
+  const draw = (timestamp = 0) => {
+    ctx.clearRect(0,0,width,height);
+    ctx.globalCompositeOperation = 'lighter';
+
+    const time = reduceMotion.matches ? 0 : timestamp * .001;
+    volumes.forEach((volume) => drawVolume(volume,time));
+
+    ctx.globalCompositeOperation = 'source-over';
+  };
+
+  const canAnimate = () => visible && !document.hidden && !reduceMotion.matches;
+
+  const tick = (timestamp) => {
+    frame = 0;
+
+    if (timestamp - lastPaint >= 33) {
+      lastPaint = timestamp;
+      draw(timestamp);
+    }
+
+    if (canAnimate()) frame = requestAnimationFrame(tick);
+  };
+
+  const start = () => {
+    if (!canAnimate() || frame) return;
+    frame = requestAnimationFrame(tick);
+  };
+
+  const stop = () => {
+    if (!frame) return;
+    cancelAnimationFrame(frame);
+    frame = 0;
+  };
+
+  const refresh = () => {
+    resize();
+    draw(0);
+    if (canAnimate()) start();
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    visible = entries[0]?.isIntersecting ?? false;
+    if (canAnimate()) start();
+    else stop();
+  },{rootMargin:'12% 0px',threshold:.02});
+
+  observer.observe(section);
+
+  const resizeObserver = 'ResizeObserver' in window
+    ? new ResizeObserver(refresh)
+    : null;
+
+  resizeObserver?.observe(section);
+  if (!resizeObserver) window.addEventListener('resize',refresh,{passive:true});
+
+  document.addEventListener('visibilitychange',() => {
+    if (canAnimate()) start();
+    else stop();
+  });
+
+  reduceMotion.addEventListener?.('change',() => {
+    stop();
+    draw(0);
+    if (canAnimate()) start();
+  });
+
+  refresh();
+})();
+
+
+(() => {
+  const section = document.querySelector('#final-calculation');
   const form = section?.querySelector('[data-final-form]');
   if (!section || !form) return;
 
