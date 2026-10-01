@@ -2762,13 +2762,6 @@
   background:var(--color-paper);
   color:var(--color-ink);
 }
-.security__inner{
-  display:flex;
-  flex-direction:column;
-}
-.security__header{
-  max-width:100%;
-}
 .security__eyebrow{
   margin:0 0 var(--space-3);
 }
@@ -2809,10 +2802,6 @@
   line-height:var(--type-small-lh);
   font-weight:600;
   font-variant-numeric:tabular-nums;
-}
-.security__chapter-title{
-  margin:0;
-  color:var(--color-ink);
 }
 .security__chapter-copy,
 .security__chapter-note{
@@ -2858,10 +2847,6 @@
   padding-left:clamp(2rem,4vw,4.5rem);
   border-left:1px solid rgba(16,18,22,.14);
 }
-.security__payments-title{
-  margin:0;
-  color:#777d83;
-}
 .security__payment-list{
   position:relative;
   margin:var(--space-3) 0 0;
@@ -2902,7 +2887,6 @@
   display:block;
 }
 .security__payment-list span{
-  color:var(--color-ink);
   font-weight:600;
 }
 .security__payment-list strong{
@@ -2949,12 +2933,8 @@
 .security__terms-strip dd{
   margin:0;
 }
-.security__terms-strip dt{
-  color:#7f858a;
-}
 .security__terms-strip dd{
   margin-top:.4rem;
-  color:var(--color-ink);
   font-weight:500;
 }
 .security__scenario-table{
@@ -2969,17 +2949,6 @@
 }
 .security__scenario+.security__scenario{
   border-top:1px solid rgba(16,18,22,.11);
-}
-.security__scenario-label,
-.security__scenario h4,
-.security__scenario>p:last-child{
-  margin:0;
-}
-.security__scenario-label{
-  color:#7f858a;
-}
-.security__scenario h4{
-  color:var(--color-ink);
 }
 .security__scenario>p:last-child{
   max-width:46rem;
