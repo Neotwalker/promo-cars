@@ -3081,7 +3081,7 @@
   background:var(--color-signal);
 }
 .faq__title{
-  max-width:11.5ch;
+  max-width:13.5ch;
 }
 .faq__lead{
   max-width:27rem;
@@ -3108,8 +3108,8 @@
   grid-template-columns:3rem minmax(0,1fr);
   gap:var(--space-4);
   align-items:start;
-  padding-top:var(--space-5);
-  padding-bottom:var(--space-5);
+  padding-top:calc(var(--space-5) + .35rem);
+  padding-bottom:calc(var(--space-5) + .35rem);
   font-size:clamp(1.75rem,2.05vw,2.35rem);
   line-height:1.16;
   font-weight:500;
