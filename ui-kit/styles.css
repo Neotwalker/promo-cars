@@ -126,6 +126,8 @@ html [hidden]{display:none}
 .link:focus-visible,.link[data-ui-state="focus"]{outline:2px solid var(--color-signal);outline-offset:.25rem}
 .link[aria-disabled="true"]{opacity:.4;pointer-events:none}
 .link--nav{font-weight:500}
+.link--signal{color:var(--color-signal)}
+.link--signal:hover,.link--signal[data-ui-state="hover"]{color:var(--color-ink)}
 .link--inverse{color:var(--color-white)}
 .link--inverse:hover,.link--inverse[data-ui-state="hover"]{color:var(--color-signal)}
 
