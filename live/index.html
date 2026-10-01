@@ -755,16 +755,19 @@
 
     <section class="security" id="security" aria-labelledby="security-title">
       <div class="container security__inner">
-        <header class="security__intro">
+        <header class="security__header">
           <p class="eyebrow security__eyebrow">Условия сделки</p>
-          <h2 class="type-h2 security__title" id="security-title">Если что-то идёт не по плану.</h2>
-          <p class="security__lead">Риски не закрываем словом «надёжность». Ниже — что фиксируется до оплаты, как проходят платежи и что происходит, если автомобиль не проходит проверку или получает повреждение в пути.</p>
+          <div class="security__header-grid">
+            <h2 class="type-h2 security__title" id="security-title">Если что-то идёт не по плану.</h2>
+            <p class="security__lead">Риски не закрываем словом «надёжность». Ниже — что фиксируется до оплаты, как проходят платежи и что происходит, если автомобиль не проходит проверку или получает повреждение в пути.</p>
+          </div>
         </header>
 
         <div class="security__content">
           <section class="security__deal" aria-labelledby="security-contract-title">
             <div class="security__deal-copy">
-              <h3 class="type-h3" id="security-contract-title">Договор до первого платежа</h3>
+              <p class="security__kicker">До первого платежа</p>
+              <h3 class="type-h3" id="security-contract-title">Договор и порядок оплаты</h3>
               <p>В договоре фиксируем выбранный сценарий покупки, стоимость услуг NEXROUTE, порядок платежей, действия при неуспешной проверке, ответственность на маршруте и комплект документов на выдаче.</p>
               <button class="link security__document-link" type="button" data-modal-open="security-document-modal">
                 <span class="security__document-link-icon" aria-hidden="true">
@@ -776,38 +779,40 @@
             </div>
 
             <div class="security__payments">
-              <h3 class="security__subheading">Оплата по этапам</h3>
+              <p class="security__kicker">Оплата по этапам</p>
               <ol class="security__payment-list">
                 <li><span>После проверки</span><strong>Стоимость автомобиля по инвойсу</strong></li>
                 <li><span>Перед отправкой</span><strong>Логистика и страхование</strong></li>
                 <li><span>Перед таможней</span><strong>Таможенные платежи и утильсбор</strong></li>
               </ol>
-              <p>Сервис NEXROUTE — 320 000 ₽ по договору.</p>
+              <p class="security__payment-note">Сервис NEXROUTE — 320 000 ₽ по договору.</p>
             </div>
           </section>
 
           <section class="security__terms" aria-labelledby="security-terms-title">
             <div class="security__section-head">
               <h3 class="type-h3" id="security-terms-title">Что фиксируем до оплаты</h3>
-              <p>Пять условий, которые должны быть понятны до перевода денег.</p>
+              <p>Пять вещей, которые должны быть понятны до перевода денег.</p>
             </div>
-            <dl class="security__terms-grid">
+
+            <dl class="security__terms-strip">
               <div><dt>Автомобиль</dt><dd>Выбранный сценарий покупки</dd></div>
               <div><dt>Стоимость</dt><dd>Услуги и порядок платежей</dd></div>
               <div><dt>Проверка</dt><dd>Действия при замечаниях</dd></div>
               <div><dt>Маршрут</dt><dd>Ответственность и страхование</dd></div>
               <div><dt>Финал</dt><dd>Комплект документов на выдаче</dd></div>
             </dl>
+
             <p class="security__rule">Каждый платёж привязан к конкретному этапу и документу. Сумма не появляется «по ходу сделки» без объяснения, из чего она сложилась.</p>
           </section>
 
           <section class="security__scenarios" aria-labelledby="security-scenarios-title">
             <div class="security__section-head">
-              <h3 class="type-h3" id="security-scenarios-title">Проверка, перевозка, страхование и выдача</h3>
-              <p>Что происходит в критичных точках сделки.</p>
+              <h3 class="type-h3" id="security-scenarios-title">Критичные точки сделки</h3>
+              <p>Что происходит, когда ситуация выходит за обычный сценарий.</p>
             </div>
 
-            <div class="security__scenarios-grid">
+            <div class="security__scenario-list">
               <article class="security__scenario">
                 <p class="security__scenario-label">Проверка</p>
                 <h4>Если автомобиль не проходит проверку</h4>
