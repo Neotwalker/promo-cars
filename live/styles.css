@@ -741,7 +741,7 @@
   }
 
   .hero__lead{
-    max-width:30rem;
+    max-width:25rem;
     font-size:clamp(1.05rem,1.4vw,1.2rem);
   }
 
@@ -2764,7 +2764,7 @@
 }
 .security__inner{
   display:grid;
-  grid-template-columns:minmax(18rem,.52fr) minmax(0,1.48fr);
+  grid-template-columns:minmax(16rem,.42fr) minmax(0,1.58fr);
   gap:var(--space-layout-lg);
   align-items:start;
 }
@@ -2792,7 +2792,7 @@
   letter-spacing:-.035em;
 }
 .security__lead{
-  max-width:29rem;
+  max-width:25rem;
   margin:var(--space-4) 0 0;
   color:#666b70;
   font-size:var(--type-body);
@@ -2941,7 +2941,7 @@
 .security__document-area{
   margin-top:var(--space-5);
   display:grid;
-  grid-template-columns:minmax(22rem,1.28fr) minmax(17rem,.72fr);
+  grid-template-columns:minmax(20rem,1.1fr) minmax(18rem,.9fr);
   gap:var(--space-5);
   align-items:start;
 }
@@ -2986,12 +2986,10 @@
   display:block;
   width:100%;
   height:auto;
-  max-height:34rem;
   border:1px solid var(--color-line);
   border-radius:var(--radius-sm);
   background:var(--color-white);
-  object-fit:cover;
-  object-position:top;
+  object-fit:contain;
   box-shadow:0 1.25rem 3rem rgba(16,18,22,.1);
   transition:
     transform var(--motion-fast) var(--ease-standard),
@@ -2999,7 +2997,7 @@
     box-shadow var(--motion-fast) var(--ease-standard);
 }
 .security__terms{
-  margin-top:clamp(1.5rem,4vw,5rem);
+  margin-top:clamp(1rem,2.6vw,3.25rem);
   border-top:1px solid var(--color-line);
   border-bottom:1px solid var(--color-line);
 }
@@ -3015,10 +3013,10 @@
   margin:0;
 }
 .security__terms dl>div{
-  padding:.7rem 0;
+  padding:.82rem 0;
   border-top:1px solid var(--color-line);
   display:grid;
-  grid-template-columns:minmax(6.25rem,.72fr) minmax(0,1.28fr);
+  grid-template-columns:minmax(6.75rem,.68fr) minmax(0,1.32fr);
   gap:var(--space-3);
 }
 .security__terms dt,
@@ -3048,7 +3046,7 @@
   padding:var(--space-4) 0;
   border-bottom:1px solid var(--color-line);
   display:grid;
-  grid-template-columns:2.25rem minmax(16rem,.72fr) minmax(0,1.28fr);
+  grid-template-columns:2.25rem minmax(15rem,.68fr) minmax(0,1.32fr);
   gap:var(--space-3);
   align-items:start;
 }
@@ -3127,7 +3125,7 @@
     align-items:start;
   }
   .security__contract-preview img{
-    max-height:24rem;
+    max-height:none;
   }
   .security__terms{
     margin-top:0;
