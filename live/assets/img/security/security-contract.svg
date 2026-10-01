@@ -1,51 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1380" viewBox="0 0 1120 1380">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1030" viewBox="0 0 1280 1030">
 <style>
-  .brand{font:700 24px Arial,sans-serif;fill:#171b1f;letter-spacing:2px}
+  .brand{font:700 22px Arial,sans-serif;fill:#171b1f;letter-spacing:2.2px}
   .accent{fill:#ff5b35}
-  .eyebrow{font:700 13px Arial,sans-serif;fill:#7c7c78;letter-spacing:1.5px}
-  .title{font:700 48px Arial,sans-serif;fill:#171b1f}
-  .subtitle{font:400 17px Arial,sans-serif;fill:#686a68}
-  .roman{font:700 15px Arial,sans-serif;fill:#ff5b35}
-  .toc{font:500 18px Arial,sans-serif;fill:#272a28}
-  .small{font:400 13px Arial,sans-serif;fill:#777a77}
+  .eyebrow{font:700 12px Arial,sans-serif;fill:#858783;letter-spacing:1.5px}
+  .title{font:700 56px Georgia,'Times New Roman',serif;fill:#171b1f}
+  .subtitle{font:400 17px Arial,sans-serif;fill:#6d706d}
+  .roman{font:700 14px Georgia,'Times New Roman',serif;fill:#ff5b35}
+  .toc{font:400 19px Georgia,'Times New Roman',serif;fill:#272a28}
+  .page{font:400 13px Arial,sans-serif;fill:#92938f}
+  .small{font:400 12px Arial,sans-serif;fill:#858783}
 </style>
-<rect width="1120" height="1380" fill="#fdfdfb"/>
-<rect width="1120" height="10" fill="#ff5b35"/>
+<rect width="1280" height="1030" fill="#fdfdfb"/>
+<rect width="1280" height="8" fill="#ff5b35"/>
 
-<text x="84" y="84" class="brand">NEXROUTE <tspan class="accent">AUTO</tspan></text>
-<text x="84" y="122" class="eyebrow">УСЛОВИЯ СОПРОВОЖДЕНИЯ СДЕЛКИ</text>
+<text x="82" y="76" class="brand">NEXROUTE <tspan class="accent">AUTO</tspan></text>
+<text x="82" y="111" class="eyebrow">УСЛОВИЯ СОПРОВОЖДЕНИЯ СДЕЛКИ</text>
 
-<text x="84" y="236" class="title">Договор</text>
-<text x="84" y="294" class="title">на сопровождение сделки</text>
-<text x="84" y="344" class="subtitle">Условия покупки, оплаты, проверки, доставки и выдачи автомобиля.</text>
+<text x="82" y="210" class="title">Договор</text>
+<text x="82" y="272" class="title">на сопровождение сделки</text>
+<text x="82" y="318" class="subtitle">Условия покупки, оплаты, проверки, доставки и выдачи автомобиля.</text>
 
-<line x1="84" y1="398" x2="1036" y2="398" stroke="#cfd1ce" stroke-width="2"/>
+<line x1="82" y1="366" x2="1198" y2="366" stroke="#d3d3cf" stroke-width="2"/>
 
-<text x="84" y="474" class="roman">I</text>
-<text x="154" y="474" class="toc">Предмет договора</text>
-<line x1="84" y1="508" x2="1036" y2="508" stroke="#e1e1de"/>
+<text x="82" y="432" class="roman">I</text>
+<text x="154" y="432" class="toc">Предмет договора</text>
+<text x="1188" y="432" class="page" text-anchor="end">01</text>
+<line x1="82" y1="464" x2="1198" y2="464" stroke="#e3e3df"/>
 
-<text x="84" y="572" class="roman">II</text>
-<text x="154" y="572" class="toc">Стоимость услуг и порядок платежей</text>
-<line x1="84" y1="606" x2="1036" y2="606" stroke="#e1e1de"/>
+<text x="82" y="526" class="roman">II</text>
+<text x="154" y="526" class="toc">Стоимость услуг и порядок платежей</text>
+<text x="1188" y="526" class="page" text-anchor="end">03</text>
+<line x1="82" y1="558" x2="1198" y2="558" stroke="#e3e3df"/>
 
-<text x="84" y="670" class="roman">III</text>
-<text x="154" y="670" class="toc">Действия при неуспешной проверке</text>
-<line x1="84" y1="704" x2="1036" y2="704" stroke="#e1e1de"/>
+<text x="82" y="620" class="roman">III</text>
+<text x="154" y="620" class="toc">Действия при неуспешной проверке</text>
+<text x="1188" y="620" class="page" text-anchor="end">05</text>
+<line x1="82" y1="652" x2="1198" y2="652" stroke="#e3e3df"/>
 
-<text x="84" y="768" class="roman">IV</text>
-<text x="154" y="768" class="toc">Ответственность на маршруте и страхование</text>
-<line x1="84" y1="802" x2="1036" y2="802" stroke="#e1e1de"/>
+<text x="82" y="714" class="roman">IV</text>
+<text x="154" y="714" class="toc">Ответственность на маршруте и страхование</text>
+<text x="1188" y="714" class="page" text-anchor="end">07</text>
+<line x1="82" y1="746" x2="1198" y2="746" stroke="#e3e3df"/>
 
-<text x="84" y="866" class="roman">V</text>
-<text x="154" y="866" class="toc">Комплект документов на выдаче</text>
+<text x="82" y="808" class="roman">V</text>
+<text x="154" y="808" class="toc">Комплект документов на выдаче</text>
+<text x="1188" y="808" class="page" text-anchor="end">10</text>
 
-<rect x="84" y="970" width="952" height="138" rx="6" fill="#f7f5f1" stroke="#deddd9"/>
-<text x="112" y="1018" class="small">Условия сделки фиксируются до первого платежа.</text>
-<text x="112" y="1058" class="small">Платежи привязаны к конкретным этапам и документам.</text>
-<text x="112" y="1098" class="small">Ответственность и порядок действий описаны в договоре.</text>
-
-<line x1="84" y1="1262" x2="1036" y2="1262" stroke="#d9d9d6"/>
-<text x="84" y="1306" class="small">NEXROUTE AUTO</text>
-<text x="1036" y="1306" class="small" text-anchor="end">Сопровождение сделки</text>
+<line x1="82" y1="900" x2="1198" y2="900" stroke="#d9d9d5"/>
+<text x="82" y="944" class="small">NEXROUTE AUTO</text>
+<line x1="532" y1="940" x2="680" y2="940" stroke="#bebfbb"/>
+<text x="1198" y="944" class="small" text-anchor="end">Сопровождение сделки</text>
 </svg>
