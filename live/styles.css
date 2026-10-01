@@ -3068,7 +3068,7 @@
   position:sticky;
   top:calc(var(--header-h) + var(--space-4));
   width:100%;
-  max-width:30rem;
+  max-width:35rem;
 }
 .faq__eyebrow{
   margin-bottom:var(--space-3);
@@ -3083,7 +3083,7 @@
   background:var(--color-signal);
 }
 .faq__title{
-  max-width:11.5ch;
+  max-width:14.5ch;
 }
 .faq__lead{
   max-width:27rem;
