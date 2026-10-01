@@ -3060,13 +3060,15 @@
 }
 .faq__layout{
   display:grid;
-  grid-template-columns:minmax(20rem,.62fr) minmax(0,1.38fr);
+  grid-template-columns:minmax(25rem,.76fr) minmax(0,1.24fr);
   gap:clamp(3rem,5vw,6rem);
   align-items:start;
 }
 .faq__intro{
   position:sticky;
   top:calc(var(--header-h) + var(--space-4));
+  width:100%;
+  max-width:30rem;
 }
 .faq__eyebrow{
   margin-bottom:var(--space-3);
@@ -3081,7 +3083,7 @@
   background:var(--color-signal);
 }
 .faq__title{
-  max-width:13.5ch;
+  max-width:11.5ch;
 }
 .faq__lead{
   max-width:27rem;
