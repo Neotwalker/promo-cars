@@ -890,13 +890,70 @@
 
           <div class="faq__transition">
             <p class="type-body">Не нашли ответ? Отправьте модель и город<br>— вернёмся с предметным расчётом.</p>
-            <a class="link link--signal faq__cta" href="#configurator">Получить расчёт <span aria-hidden="true">↗</span></a>
+            <a class="link link--signal faq__cta" href="#final-calculation">Получить расчёт <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="toast-stack configurator__toasts" aria-live="polite" aria-atomic="true" data-config-toasts></div>
+    <section class="final-cta" id="final-calculation" aria-labelledby="final-calculation-title">
+      <div class="container final-cta__layout">
+        <header class="final-cta__intro">
+          <p class="eyebrow final-cta__eyebrow">Финальный расчёт</p>
+          <h2 class="type-h1 final-cta__title" id="final-calculation-title">Рассчитаем автомобиль под ваш запрос.</h2>
+          <p class="type-body final-cta__lead">Достаточно указать модель и город получения. Если ещё не определились, можно оставить запрос на подбор — вернёмся с расчётом стоимости, сроков и доступности конкретной версии.</p>
+          <p class="type-small final-cta__note">Вы получите актуальные цены, ориентировочные сроки и доступные комплектации под ваш запрос.</p>
+        </header>
+
+        <div class="final-cta__form-wrap">
+          <form class="final-cta__form" novalidate data-final-form>
+            <label class="field field--inverse" data-final-field="model">
+              <span class="field__label">Автомобиль</span>
+              <input class="field__control" type="text" name="model" placeholder="Zeekr 001 / пока не определился" autocomplete="off" aria-describedby="final-model-message" data-final-input="model">
+              <small class="field__message" id="final-model-message" data-final-message data-default-message="Укажите интересующую модель или напишите «пока не определился».">Укажите интересующую модель или напишите «пока не определился».</small>
+            </label>
+
+            <label class="field field--inverse" data-final-field="city">
+              <span class="field__label">Город получения</span>
+              <input class="field__control" type="text" name="city" placeholder="Например, Москва" autocomplete="address-level2" aria-describedby="final-city-message" data-final-input="city">
+              <small class="field__message" id="final-city-message" data-final-message data-default-message=""></small>
+            </label>
+
+            <label class="field field--inverse" data-final-field="name">
+              <span class="field__label">Имя</span>
+              <input class="field__control" type="text" name="name" placeholder="Иван" autocomplete="name" aria-describedby="final-name-message" data-final-input="name">
+              <small class="field__message" id="final-name-message" data-final-message data-default-message=""></small>
+            </label>
+
+            <label class="field field--inverse" data-final-field="contact">
+              <span class="field__label">Телефон / Telegram</span>
+              <input class="field__control" type="text" name="contact" placeholder="+7 915 123-45-67 или @username" autocomplete="off" aria-describedby="final-contact-message" data-final-input="contact">
+              <small class="field__message" id="final-contact-message" data-final-message data-default-message="Укажите телефон или Telegram — только для ответа по расчёту.">Укажите телефон или Telegram — только для ответа по расчёту.</small>
+            </label>
+
+            <label class="field field--inverse" data-final-field="comment">
+              <span class="field__label">Комментарий <span class="final-cta__optional">необязательно</span></span>
+              <textarea class="field__control field__control--textarea" name="comment" placeholder="Например, интересует определённая комплектация, цвет или бюджет" aria-describedby="final-comment-message" data-final-input="comment"></textarea>
+              <small class="field__message" id="final-comment-message" data-final-message data-default-message=""></small>
+            </label>
+
+            <button class="button button--signal final-cta__submit" type="submit" data-final-submit>
+              <span>Получить расчёт</span><span aria-hidden="true">→</span>
+            </button>
+            <p class="type-small final-cta__consent">Отправляя форму, вы соглашаетесь на обработку персональных данных.</p>
+          </form>
+
+          <div class="final-cta__success" role="status" tabindex="-1" data-final-success hidden>
+            <p class="eyebrow final-cta__success-eyebrow">Запрос принят</p>
+            <h3 class="type-h2">Запрос отправлен.</h3>
+            <p class="type-body">Проверим модель и условия по вашему городу. Вернёмся с предметным расчётом по указанному контакту.</p>
+            <button class="link link--inverse final-cta__edit" type="button" data-final-edit>Изменить данные <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast-stack" aria-live="polite" aria-atomic="true" data-site-toasts></div>
   </main>
 
   <div class="modal proof-document-modal" id="proof-document-modal" data-modal="proof-document-modal" aria-hidden="true" hidden>

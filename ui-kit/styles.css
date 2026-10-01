@@ -138,6 +138,8 @@ html [hidden]{display:none}
 .button--secondary:hover,.button--secondary[data-ui-state="hover"]{background:var(--color-paper);border-color:rgba(16,18,22,.34)}
 .button--ghost{background:transparent;border-color:var(--color-line)}
 .button--ghost:hover,.button--ghost[data-ui-state="hover"]{background:rgba(16,18,22,.05);border-color:rgba(16,18,22,.3)}
+.button--signal{background:var(--color-signal);color:var(--color-ink);border-color:var(--color-signal)}
+.button--signal:hover,.button--signal[data-ui-state="hover"]{background:#ff7352;border-color:#ff7352}
 .button--primary.button--inverse{background:var(--color-white);color:var(--color-ink);border-color:var(--color-white)}
 .button--primary.button--inverse:hover,.button--primary.button--inverse[data-ui-state="hover"]{background:var(--color-paper);border-color:var(--color-paper)}
 .button--ghost.button--inverse{background:transparent;color:var(--color-white);border-color:var(--color-line-inverse)}
@@ -234,6 +236,12 @@ body.modal-open{overflow:hidden}
 .toast--error{border-left:3px solid #b83c27}
 .toast--info{border-left:3px solid var(--color-steel)}
 .toast__close{position:absolute;right:.625rem;top:.5rem;width:2rem;height:2rem;border:0;background:transparent;font-size:1.25rem;border-radius:50%;transition:background-color var(--motion-fast) var(--ease-standard),color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard)}
+.toast__close:hover{background:rgba(16,18,22,.06)}
+.toast__close:active{transform:translateY(1px)}
+.toast-stack{position:fixed;top:max(1rem,env(safe-area-inset-top));right:max(1rem,env(safe-area-inset-right));z-index:120;width:min(26.25rem,calc(100vw - 2rem));display:grid;gap:.75rem;pointer-events:none}
+.toast-stack .toast{width:100%;min-width:0;max-width:none;pointer-events:auto;opacity:0;transform:translateX(calc(100% + 2rem));transition:transform 360ms cubic-bezier(.2,.7,.2,1),opacity 240ms ease;will-change:transform,opacity}
+.toast-stack .toast.is-visible{opacity:1;transform:translateX(0)}
+.toast-stack .toast.is-leaving{opacity:0;transform:translateX(calc(100% + 2rem))}
 
 /* 06 — COMPONENT STATES */
 .is-disabled{pointer-events:none;opacity:.45}

@@ -1739,37 +1739,6 @@
   line-height:1.45;
 }
 .configurator__summary-note strong{color:#f8f7f4}
-.configurator__toasts{
-  position:fixed;
-  top:max(1rem,env(safe-area-inset-top));
-  right:max(1rem,env(safe-area-inset-right));
-  z-index:120;
-  width:min(26.25rem,calc(100vw - 2rem));
-  display:grid;
-  gap:.75rem;
-  pointer-events:none;
-}
-.configurator__toasts .toast{
-  width:100%;
-  min-width:0;
-  max-width:none;
-  pointer-events:auto;
-  opacity:0;
-  transform:translateX(calc(100% + 2rem));
-  transition:
-    transform 360ms cubic-bezier(.2,.7,.2,1),
-    opacity 240ms ease;
-  will-change:transform,opacity;
-}
-.configurator__toasts .toast.is-visible{
-  opacity:1;
-  transform:translateX(0);
-}
-.configurator__toasts .toast.is-leaving{
-  opacity:0;
-  transform:translateX(calc(100% + 2rem));
-}
-
 @media(max-width:64rem){
   .configurator{padding:5.5rem 0}
   .configurator__layout{grid-template-columns:1fr}
@@ -3211,3 +3180,177 @@
   }
 }
 
+
+/* FINAL CTA + FORM */
+.final-cta{
+  padding:var(--space-section) 0;
+  background:var(--color-ink);
+  color:var(--color-white);
+}
+.final-cta__layout{
+  display:grid;
+  grid-template-columns:minmax(22rem,.86fr) minmax(30rem,1.14fr);
+  gap:clamp(4rem,8vw,9rem);
+  align-items:start;
+}
+.final-cta__intro{
+  max-width:42rem;
+}
+.final-cta__eyebrow{
+  margin-bottom:var(--space-4);
+  color:var(--color-signal);
+}
+.final-cta__eyebrow::before{
+  content:"";
+  display:inline-block;
+  width:2.2rem;
+  height:1px;
+  margin-right:.85rem;
+  vertical-align:middle;
+  background:currentColor;
+}
+.final-cta__title{
+  max-width:11.5ch;
+  color:var(--color-white);
+}
+.final-cta__lead{
+  max-width:36rem;
+  margin-top:var(--space-5);
+  color:rgba(252,251,248,.82);
+}
+.final-cta__note{
+  position:relative;
+  max-width:34rem;
+  margin-top:var(--space-6);
+  padding-top:var(--space-3);
+  color:rgba(252,251,248,.5);
+}
+.final-cta__note::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:2.25rem;
+  height:1px;
+  background:rgba(252,251,248,.56);
+}
+.final-cta__form-wrap{
+  min-width:0;
+}
+.final-cta__form{
+  display:grid;
+  gap:var(--space-4);
+}
+.final-cta__form .field{
+  gap:var(--space-1);
+}
+.final-cta__form .field__control{
+  min-height:3.75rem;
+}
+.final-cta__form .field__control--textarea{
+  min-height:7rem;
+}
+.final-cta__optional{
+  margin-left:.35rem;
+  color:rgba(252,251,248,.42);
+  font-weight:400;
+}
+.final-cta__submit{
+  width:100%;
+  min-height:3.75rem;
+  margin-top:var(--space-1);
+  font-weight:600;
+}
+.final-cta__consent{
+  color:rgba(252,251,248,.46);
+}
+.final-cta__success{
+  min-height:31rem;
+  border-top:1px solid var(--color-line-inverse);
+  border-bottom:1px solid var(--color-line-inverse);
+  padding:var(--space-6) 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+}
+.final-cta__success-eyebrow{
+  margin-bottom:var(--space-4);
+  color:var(--color-signal);
+}
+.final-cta__success h3{
+  color:var(--color-white);
+}
+.final-cta__success .type-body{
+  max-width:34rem;
+  margin-top:var(--space-4);
+  color:rgba(252,251,248,.72);
+}
+.final-cta__edit{
+  margin-top:var(--space-5);
+}
+@media(max-width:72rem){
+  .final-cta{
+    padding:var(--space-8) 0;
+  }
+  .final-cta__layout{
+    grid-template-columns:1fr;
+    gap:var(--space-7);
+  }
+  .final-cta__intro{
+    max-width:46rem;
+  }
+  .final-cta__title{
+    max-width:13ch;
+  }
+  .final-cta__lead{
+    max-width:42rem;
+  }
+  .final-cta__note{
+    margin-top:var(--space-5);
+  }
+  .final-cta__form-wrap{
+    max-width:46rem;
+  }
+}
+@media(max-width:48rem){
+  .final-cta{
+    padding:var(--space-7) 0;
+  }
+  .final-cta__layout{
+    gap:var(--space-6);
+  }
+  .final-cta__eyebrow{
+    margin-bottom:var(--space-3);
+  }
+  .final-cta__title{
+    max-width:100%;
+  }
+  .final-cta__lead{
+    margin-top:var(--space-4);
+  }
+  .final-cta__note{
+    margin-top:var(--space-4);
+  }
+  .final-cta__form{
+    gap:var(--space-3);
+  }
+  .final-cta__form .field__control{
+    min-height:3.5rem;
+  }
+  .final-cta__form .field__control--textarea{
+    min-height:6.5rem;
+  }
+  .final-cta__submit{
+    min-height:3.5rem;
+  }
+  .final-cta__success{
+    min-height:24rem;
+    padding:var(--space-5) 0;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .toast-stack .toast{
+    transition:none;
+  }
+}

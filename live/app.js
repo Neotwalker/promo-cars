@@ -1,4 +1,61 @@
 (() => {
+  const stack = document.querySelector('[data-site-toasts]');
+  if (!stack) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let dismissTimer = 0;
+  let removeTimer = 0;
+
+  const removeToast = (toast) => {
+    if (!toast?.isConnected) return;
+
+    if (reduceMotion.matches) {
+      toast.remove();
+      return;
+    }
+
+    toast.classList.remove('is-visible');
+    toast.classList.add('is-leaving');
+
+    clearTimeout(removeTimer);
+    removeTimer = window.setTimeout(() => {
+      if (toast.isConnected) toast.remove();
+    }, 380);
+  };
+
+  document.addEventListener('nexroute:toast', (event) => {
+    const detail = event.detail || {};
+    const title = detail.title || 'Готово';
+    const message = detail.message || '';
+    const type = detail.type || 'success';
+
+    clearTimeout(dismissTimer);
+    clearTimeout(removeTimer);
+
+    const existing = stack.querySelector('[data-toast-item]');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = 'toast toast--' + type;
+    toast.dataset.toastItem = '';
+    toast.setAttribute('role',type === 'error' ? 'alert' : 'status');
+    toast.innerHTML = '<strong></strong><span></span><button class="toast__close" type="button" aria-label="Закрыть уведомление">×</button>';
+    toast.querySelector('strong').textContent = title;
+    toast.querySelector('span').textContent = message;
+    toast.querySelector('[data-toast-close],.toast__close')?.addEventListener('click', () => removeToast(toast));
+    stack.append(toast);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => toast.classList.add('is-visible'));
+    });
+
+    dismissTimer = window.setTimeout(() => {
+      removeToast(toast);
+    }, type === 'error' ? 6500 : 4200);
+  });
+})();
+
+(() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const video = document.querySelector('[data-hero-video]');
@@ -440,8 +497,7 @@
       summaryNote:configurator.querySelector('[data-summary-note]'),
       regional:configurator.querySelector('[data-summary-regional]'),
       regionalLabel:configurator.querySelector('[data-summary-regional-label]'),
-      breakdown:configurator.querySelector('[data-summary-breakdown]'),
-      toasts:document.querySelector('[data-config-toasts]')
+      breakdown:configurator.querySelector('[data-summary-breakdown]')
     };
 
     Object.values(pricing).forEach((item) => {
@@ -767,55 +823,6 @@
       return true;
     };
 
-    let toastTimer = 0;
-    let toastRemoveTimer = 0;
-
-    const removeToast = (toast) => {
-      if (!toast?.isConnected) return;
-
-      if (reduceMotion.matches) {
-        toast.remove();
-        return;
-      }
-
-      toast.classList.remove('is-visible');
-      toast.classList.add('is-leaving');
-
-      clearTimeout(toastRemoveTimer);
-      toastRemoveTimer = window.setTimeout(() => {
-        if (toast.isConnected) toast.remove();
-      }, 380);
-    };
-
-    const showToast = (title, message, type = 'success') => {
-      if (!refs.toasts) return;
-
-      clearTimeout(toastTimer);
-      clearTimeout(toastRemoveTimer);
-
-      const existing = refs.toasts.querySelector('[data-toast-item]');
-      if (existing) existing.remove();
-
-      const toast = document.createElement('div');
-      toast.className = 'toast toast--' + type;
-      toast.dataset.toastItem = '';
-      toast.setAttribute('role',type === 'error' ? 'alert' : 'status');
-      toast.innerHTML = '<strong></strong><span></span>';
-      toast.querySelector('strong').textContent = title;
-      toast.querySelector('span').textContent = message;
-      refs.toasts.append(toast);
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          toast.classList.add('is-visible');
-        });
-      });
-
-      toastTimer = window.setTimeout(() => {
-        removeToast(toast);
-      }, type === 'error' ? 6500 : 4200);
-    };
-
     configurator.querySelectorAll('[data-config-choice]').forEach((group) => {
       group.addEventListener('click', (event) => {
         const button = event.target.closest('[data-value]');
@@ -927,7 +934,26 @@
       }
 
       clearFieldError(refs.contact,'Контакт нужен только для отправки расчёта.');
-      showToast('Заявка отправлена.','Параметры расчёта сохранены — свяжемся выбранным способом.');
+
+      document.dispatchEvent(new CustomEvent('nexroute:prefill-final',{
+        detail:{
+          model:state.model === 'Нужен подбор' ? 'Пока не определился — нужен подбор' : state.model,
+          city:state.city,
+          contact:refs.contact.value.trim()
+        }
+      }));
+
+      document.dispatchEvent(new CustomEvent('nexroute:toast',{
+        detail:{
+          title:'Расчёт собран.',
+          message:'Перенесли параметры в финальную форму — осталось указать имя и отправить запрос.'
+        }
+      }));
+
+      document.querySelector('#final-calculation')?.scrollIntoView({
+        behavior:reduceMotion.matches ? 'auto' : 'smooth',
+        block:'start'
+      });
     });
 
     const selectCar = (model) => {
@@ -1448,5 +1474,129 @@
     if (!state) return;
     state.toggle.addEventListener('click',() => setOpen(card,true,{focus:true}));
     state.back.addEventListener('click',() => setOpen(card,false,{focus:true}));
+  });
+})();
+
+
+(() => {
+  const section = document.querySelector('#final-calculation');
+  const form = section?.querySelector('[data-final-form]');
+  if (!section || !form) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const success = section.querySelector('[data-final-success]');
+  const edit = section.querySelector('[data-final-edit]');
+  const submit = section.querySelector('[data-final-submit]');
+
+  const inputs = {
+    model:form.querySelector('[data-final-input="model"]'),
+    city:form.querySelector('[data-final-input="city"]'),
+    name:form.querySelector('[data-final-input="name"]'),
+    contact:form.querySelector('[data-final-input="contact"]'),
+    comment:form.querySelector('[data-final-input="comment"]')
+  };
+
+  const fieldFor = (input) => input?.closest('[data-final-field]');
+
+  const restoreMessage = (input) => {
+    const field = fieldFor(input);
+    const message = field?.querySelector('[data-final-message]');
+    if (!field || !message) return;
+    field.classList.remove('field--error');
+    input.removeAttribute('aria-invalid');
+    message.textContent = message.dataset.defaultMessage || '';
+  };
+
+  const fieldError = (input, messageText) => {
+    const field = fieldFor(input);
+    const message = field?.querySelector('[data-final-message]');
+    if (!field || !message) return false;
+    field.classList.add('field--error');
+    input.setAttribute('aria-invalid','true');
+    message.textContent = messageText;
+    return false;
+  };
+
+  const validContact = (value) => {
+    const trimmed = value.trim();
+    const digits = trimmed.replace(/\D/g,'');
+    const telegram = trimmed.replace(/^@/,'');
+    return digits.length >= 10 || /^[a-zA-Z0-9_]{5,32}$/.test(telegram);
+  };
+
+  Object.values(inputs).forEach((input) => {
+    input?.addEventListener('input', () => restoreMessage(input));
+  });
+
+  document.addEventListener('nexroute:prefill-final', (event) => {
+    const detail = event.detail || {};
+    if (detail.model) inputs.model.value = detail.model;
+    if (detail.city) inputs.city.value = detail.city;
+    if (detail.contact) inputs.contact.value = detail.contact;
+
+    [inputs.model,inputs.city,inputs.contact].forEach((input) => restoreMessage(input));
+  });
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    let firstInvalid = null;
+
+    if (!inputs.model.value.trim()) {
+      fieldError(inputs.model,'Укажите модель или напишите «пока не определился».');
+      firstInvalid ||= inputs.model;
+    }
+    if (!inputs.city.value.trim()) {
+      fieldError(inputs.city,'Укажите город получения автомобиля.');
+      firstInvalid ||= inputs.city;
+    }
+    if (!inputs.name.value.trim()) {
+      fieldError(inputs.name,'Укажите имя, чтобы мы знали, как к вам обратиться.');
+      firstInvalid ||= inputs.name;
+    }
+    if (!inputs.contact.value.trim()) {
+      fieldError(inputs.contact,'Укажите телефон или Telegram для ответа.');
+      firstInvalid ||= inputs.contact;
+    } else if (!validContact(inputs.contact.value)) {
+      fieldError(inputs.contact,'Проверьте номер телефона или Telegram username.');
+      firstInvalid ||= inputs.contact;
+    }
+
+    if (firstInvalid) {
+      firstInvalid.focus();
+      document.dispatchEvent(new CustomEvent('nexroute:toast',{
+        detail:{
+          title:'Проверьте форму.',
+          message:'Не хватает нескольких данных для отправки запроса.',
+          type:'error'
+        }
+      }));
+      return;
+    }
+
+    submit.disabled = true;
+    form.hidden = true;
+    success.hidden = false;
+    success.focus({preventScroll:true});
+    submit.disabled = false;
+
+    document.dispatchEvent(new CustomEvent('nexroute:toast',{
+      detail:{
+        title:'Запрос отправлен.',
+        message:'Данные сохранены — вернёмся с предметным расчётом по указанному контакту.'
+      }
+    }));
+  });
+
+  edit?.addEventListener('click', () => {
+    success.hidden = true;
+    form.hidden = false;
+    requestAnimationFrame(() => {
+      inputs.model.focus({preventScroll:true});
+      section.scrollIntoView({
+        behavior:reduceMotion.matches ? 'auto' : 'smooth',
+        block:'start'
+      });
+    });
   });
 })();
