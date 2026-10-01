@@ -1522,17 +1522,44 @@
     return false;
   };
 
-  const syncContactMode = ({clearValue = false} = {}) => {
+  const phoneDigits = (value = '') => {
+    let digits = value.replace(/\D/g,'');
+    if (digits.startsWith('7') || digits.startsWith('8')) digits = digits.slice(1);
+    return digits.slice(0,10);
+  };
+
+  const formatPhone = (value = '') => {
+    const digits = phoneDigits(value);
+    if (!digits) return '';
+
+    let result = '+7 (' + digits.slice(0,3);
+    if (digits.length > 3) result += ') ' + digits.slice(3,6);
+    if (digits.length > 6) result += '-' + digits.slice(6,8);
+    if (digits.length > 8) result += '-' + digits.slice(8,10);
+    return result;
+  };
+
+  const contactValues = {
+    'Телефон':'',
+    'Telegram':''
+  };
+
+  const syncContactMode = () => {
     const channel = activeChannel();
     const isPhone = channel === 'Телефон';
     const message = fieldFor(inputs.contact)?.querySelector('[data-final-message]');
 
-    contactLabel.textContent = channel;
-    inputs.contact.placeholder = isPhone ? '+7 915 123-45-67' : '@username';
+    contactLabel.textContent = isPhone ? 'Телефон' : 'Username в Telegram';
+    inputs.contact.placeholder = isPhone ? '+7 (___) ___-__-__' : '@username';
     inputs.contact.autocomplete = isPhone ? 'tel' : 'off';
     inputs.contact.inputMode = isPhone ? 'tel' : 'text';
+    inputs.contact.maxLength = isPhone ? 18 : 64;
 
-    if (clearValue) inputs.contact.value = '';
+    if (isPhone) {
+      inputs.contact.value = formatPhone(contactValues['Телефон']);
+    } else {
+      inputs.contact.value = contactValues['Telegram'];
+    }
 
     if (message) {
       const helper = isPhone
@@ -1545,27 +1572,28 @@
     restoreMessage(inputs.contact);
   };
 
-  const validContact = (value) => {
-    const trimmed = value.trim();
-
-    if (activeChannel() === 'Телефон') {
-      const digits = trimmed.replace(/\D/g,'');
-      return digits.length === 10 || (digits.length === 11 && /^[78]/.test(digits));
-    }
-
-    return /^@[a-zA-Z0-9_]{5,32}$/.test(trimmed);
-  };
-
   const syncConsent = () => {
     submit.disabled = !consent.checked;
   };
 
-  Object.values(inputs).forEach((input) => {
+  [inputs.model,inputs.city,inputs.name,inputs.comment].forEach((input) => {
     input?.addEventListener('input', () => restoreMessage(input));
   });
 
+  inputs.contact.addEventListener('input', () => {
+    if (activeChannel() === 'Телефон') {
+      const digits = phoneDigits(inputs.contact.value);
+      contactValues['Телефон'] = digits;
+      inputs.contact.value = formatPhone(digits);
+    } else {
+      contactValues['Telegram'] = inputs.contact.value;
+    }
+
+    restoreMessage(inputs.contact);
+  });
+
   channels.forEach((radio) => {
-    radio.addEventListener('change', () => syncContactMode({clearValue:true}));
+    radio.addEventListener('change', syncContactMode);
   });
 
   consent.addEventListener('change', syncConsent);
@@ -1581,10 +1609,15 @@
       if (matchingChannel) matchingChannel.checked = true;
     }
 
+    if (detail.contact) {
+      if (activeChannel() === 'Телефон') {
+        contactValues['Телефон'] = phoneDigits(detail.contact);
+      } else {
+        contactValues['Telegram'] = detail.contact.trim();
+      }
+    }
+
     syncContactMode();
-
-    if (detail.contact) inputs.contact.value = detail.contact;
-
     [inputs.model,inputs.city,inputs.contact].forEach((input) => restoreMessage(input));
   });
 
@@ -1611,22 +1644,18 @@
       fieldError(inputs.name,'Укажите имя, чтобы мы знали, как к вам обратиться.');
       firstInvalid ||= inputs.name;
     }
-    if (!inputs.contact.value.trim()) {
-      fieldError(
-        inputs.contact,
-        activeChannel() === 'Телефон'
-          ? 'Укажите номер телефона для ответа.'
-          : 'Укажите Telegram username для ответа.'
-      );
-      firstInvalid ||= inputs.contact;
-    } else if (!validContact(inputs.contact.value)) {
-      fieldError(
-        inputs.contact,
-        activeChannel() === 'Телефон'
-          ? 'Проверьте номер телефона.'
-          : 'Укажите Telegram username в формате @username.'
-      );
-      firstInvalid ||= inputs.contact;
+
+    if (activeChannel() === 'Телефон') {
+      if (phoneDigits(inputs.contact.value).length !== 10) {
+        fieldError(inputs.contact,'Введите номер полностью: +7 (___) ___-__-__.');
+        firstInvalid ||= inputs.contact;
+      }
+    } else {
+      const username = inputs.contact.value.trim();
+      if (!/^@[a-zA-Z0-9_]{5,32}$/.test(username)) {
+        fieldError(inputs.contact,'Укажите Telegram username в формате @username.');
+        firstInvalid ||= inputs.contact;
+      }
     }
 
     if (firstInvalid) {

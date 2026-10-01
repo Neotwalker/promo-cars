@@ -939,7 +939,7 @@
 
             <label class="field field--inverse" data-final-field="contact">
               <span class="field__label" data-final-contact-label>Телефон</span>
-              <input class="field__control" type="text" name="contact" placeholder="+7 915 123-45-67" autocomplete="tel" inputmode="tel" aria-describedby="final-contact-message" data-final-input="contact">
+              <input class="field__control" type="text" name="contact" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="18" aria-describedby="final-contact-message" data-final-input="contact">
               <small class="field__message" id="final-contact-message" data-final-message data-default-message="Укажите номер телефона — только для ответа по расчёту.">Укажите номер телефона — только для ответа по расчёту.</small>
             </label>
 
@@ -950,10 +950,10 @@
             </label>
 
             <div class="final-cta__consent-wrap">
-              <label class="selection-control selection-control--inverse final-cta__consent">
-                <input type="checkbox" name="consent" data-final-consent>
-                <span>Согласен на обработку персональных данных.</span>
-              </label>
+              <div class="selection-control selection-control--inverse final-cta__consent">
+                <input id="final-consent" type="checkbox" name="consent" data-final-consent>
+                <span><label for="final-consent">Даю согласие на </label><a class="link link--inverse final-cta__policy-link" href="./privacy-policy.html">обработку персональных данных</a>.</span>
+              </div>
             </div>
             <button class="button button--signal final-cta__submit" type="submit" data-final-submit disabled>
               <span>Получить расчёт</span><span aria-hidden="true">→</span>
