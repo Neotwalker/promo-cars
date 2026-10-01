@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1584" viewBox="0 0 1120 1584">
+<style>
+  .brand{font:700 24px Arial,sans-serif;fill:#ff5b35;letter-spacing:2px}
+  .eyebrow{font:700 13px Arial,sans-serif;fill:#7c7c78;letter-spacing:1.5px}
+  .title{font:700 42px Arial,sans-serif;fill:#171b1f}
+  .subtitle{font:400 18px Arial,sans-serif;fill:#686a68}
+  .section{font:700 21px Arial,sans-serif;fill:#171b1f}
+  .label{font:400 15px Arial,sans-serif;fill:#747774}
+  .value{font:700 15px Arial,sans-serif;fill:#272a28}
+  .body{font:400 15px Arial,sans-serif;fill:#3d403d}
+  .small{font:400 13px Arial,sans-serif;fill:#777a77}
+  .num{font:700 13px Arial,sans-serif;fill:#ff5b35}
+</style>
+<rect width="1120" height="1584" fill="#fdfdfb"/>
+<rect width="1120" height="12" fill="#ff5b35"/>
+<text x="80" y="76" class="brand">NEXROUTE AUTO</text>
+<text x="80" y="114" class="eyebrow">УСЛОВИЯ СОПРОВОЖДЕНИЯ СДЕЛКИ</text>
+<text x="80" y="180" class="title">Договор на сопровождение сделки</text>
+<text x="80" y="218" class="subtitle">Ключевые условия, которые фиксируются до первого платежа</text>
+<line x1="80" y1="246" x2="1040" y2="246" stroke="#cfd1ce" stroke-width="2"/>
+
+<text x="80" y="302" class="section">1. Что фиксируется в договоре</text>
+<rect x="80" y="326" width="960" height="210" fill="#f6f6f4" stroke="#ddddda"/>
+<text x="104" y="366" class="num">01</text><text x="154" y="366" class="value">Сценарий покупки и выбранный автомобиль</text>
+<text x="104" y="408" class="num">02</text><text x="154" y="408" class="value">Стоимость услуг NEXROUTE и порядок платежей</text>
+<text x="104" y="450" class="num">03</text><text x="154" y="450" class="value">Действия при неуспешной проверке</text>
+<text x="104" y="492" class="num">04</text><text x="154" y="492" class="value">Ответственность на маршруте и страхование</text>
+<text x="104" y="522" class="num">05</text><text x="154" y="522" class="value">Комплект документов на выдаче</text>
+
+<text x="80" y="604" class="section">2. Оплата по этапам</text>
+<rect x="80" y="628" width="960" height="190" fill="#fff" stroke="#ddddda"/>
+<text x="104" y="670" class="label">После проверки</text><text x="430" y="670" class="value">Стоимость автомобиля по инвойсу</text>
+<line x1="104" y1="692" x2="1016" y2="692" stroke="#e4e4e1"/>
+<text x="104" y="728" class="label">Перед отправкой</text><text x="430" y="728" class="value">Логистика и страхование</text>
+<line x1="104" y1="750" x2="1016" y2="750" stroke="#e4e4e1"/>
+<text x="104" y="786" class="label">Перед таможней</text><text x="430" y="786" class="value">Таможенные платежи и утильсбор</text>
+
+<text x="80" y="884" class="section">3. Если проверка не пройдена</text>
+<text x="80" y="922" class="body">Автомобиль не выкупается. Замечания по состоянию или комплектации фиксируются</text>
+<text x="80" y="950" class="body">в отчёте, после чего подбор продолжается по условиям договора.</text>
+
+<text x="80" y="1028" class="section">4. Ответственность в перевозке</text>
+<text x="80" y="1066" class="body">Состояние автомобиля фиксируется до отправки. При повреждении составляется акт</text>
+<text x="80" y="1094" class="body">и запускается страховой сценарий с фиксацией дальнейших действий.</text>
+
+<text x="80" y="1172" class="section">5. Документы на выдаче</text>
+<text x="80" y="1212" class="body">Инвойс / документы покупки · таможенные документы · выписка из ЭПТС</text>
+<text x="80" y="1240" class="body">документы по оплатам · акт выдачи автомобиля</text>
+
+<rect x="80" y="1324" width="960" height="88" rx="8" fill="#faf8f5" stroke="#e2ddd7"/>
+<text x="104" y="1360" class="body">Каждый платёж привязан к конкретному этапу и документу.</text>
+<text x="104" y="1388" class="body">Условия сделки видны до оплаты и не появляются «по ходу сделки» без объяснения.</text>
+
+<line x1="80" y1="1470" x2="1040" y2="1470" stroke="#d9d9d6"/>
+<text x="80" y="1510" class="small">NEXROUTE AUTO · сопровождение покупки и доставки автомобиля из Китая</text>
+</svg>
