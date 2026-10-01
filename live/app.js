@@ -1484,9 +1484,6 @@
   const form = section?.querySelector('[data-final-form]');
   if (!section || !form) return;
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const success = section.querySelector('[data-final-success]');
-  const edit = section.querySelector('[data-final-edit]');
   const submit = section.querySelector('[data-final-submit]');
   const consent = form.querySelector('[data-final-consent]');
   const channels = [...form.querySelectorAll('[data-final-channel]')];
@@ -1670,31 +1667,12 @@
       return;
     }
 
-    submit.disabled = true;
-    form.hidden = true;
-    success.hidden = false;
-    success.focus({preventScroll:true});
-
     document.dispatchEvent(new CustomEvent('nexroute:toast',{
       detail:{
         title:'Запрос отправлен.',
         message:'Данные сохранены — вернёмся с предметным расчётом по указанному контакту.'
       }
     }));
-  });
-
-  edit?.addEventListener('click', () => {
-    success.hidden = true;
-    form.hidden = false;
-    syncConsent();
-
-    requestAnimationFrame(() => {
-      inputs.model.focus({preventScroll:true});
-      section.scrollIntoView({
-        behavior:reduceMotion.matches ? 'auto' : 'smooth',
-        block:'start'
-      });
-    });
   });
 
   syncContactMode();
