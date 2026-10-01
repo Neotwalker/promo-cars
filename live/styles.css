@@ -2954,6 +2954,12 @@
   max-width:46rem;
   color:#6b7075;
 }
+.security__scenario:last-child{
+  padding-bottom:0;
+}
+.security__content>.security__chapter:last-child{
+  padding-bottom:0;
+}
 
 @media(max-width:64rem){
   .security__header-grid,
@@ -3105,8 +3111,8 @@
 }
 .faq__trigger{
   display:grid;
-  grid-template-columns:3rem minmax(0,1fr);
-  gap:var(--space-4);
+  grid-template-columns:2.25rem minmax(0,1fr);
+  gap:var(--space-2);
   align-items:start;
   padding-top:calc(var(--space-5) + .35rem);
   padding-bottom:calc(var(--space-5) + .35rem);
@@ -3118,7 +3124,7 @@
 }
 .faq__answer{
   max-width:none;
-  padding-left:calc(3rem + var(--space-4));
+  padding-left:calc(2.25rem + var(--space-2));
   padding-right:clamp(3rem,7vw,7rem);
   padding-bottom:var(--space-5);
 }
@@ -3178,8 +3184,8 @@
     margin-top:var(--space-3);
   }
   .faq__trigger{
-    grid-template-columns:2rem minmax(0,1fr);
-    gap:var(--space-2);
+    grid-template-columns:1.5rem minmax(0,1fr);
+    gap:var(--space-1);
     padding-top:var(--space-3);
     padding-right:calc(var(--space-4) + 1rem);
     padding-bottom:var(--space-3);
@@ -3188,7 +3194,7 @@
     padding-top:.08rem;
   }
   .faq__answer{
-    padding-left:calc(2rem + var(--space-2));
+    padding-left:calc(1.5rem + var(--space-1));
     padding-right:var(--space-3);
     padding-bottom:var(--space-3);
   }
