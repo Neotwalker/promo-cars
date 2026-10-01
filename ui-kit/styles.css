@@ -120,13 +120,13 @@ html [hidden]{display:none}
 .grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
 
 /* 05 — REUSABLE UI COMPONENTS */
-.link{display:inline-flex;align-items:center;width:max-content;color:var(--color-ink);text-decoration-line:underline;text-decoration-color:rgba(16,18,22,.35);transition:color var(--motion-fast) var(--ease-standard),text-decoration-color var(--motion-fast) var(--ease-standard),opacity var(--motion-fast) var(--ease-standard)}
-.link:hover,.link[data-ui-state="hover"]{color:var(--color-signal);text-decoration-color:currentColor}
+.link{display:inline-flex;align-items:center;width:max-content;color:var(--color-ink);text-decoration:none;transition:color var(--motion-fast) var(--ease-standard),opacity var(--motion-fast) var(--ease-standard)}
+.link:hover,.link[data-ui-state="hover"]{color:var(--color-signal)}
 .link:active,.link[data-ui-state="active"]{opacity:.62}
-.link:focus-visible,.link[data-ui-state="focus"]{outline:2px solid var(--color-signal);outline-offset:.25rem;text-decoration-color:currentColor}
-.link[aria-disabled="true"]{opacity:.4;pointer-events:none;text-decoration-color:transparent}
-.link--nav{text-decoration:none;font-weight:500}
-.link--inverse{color:var(--color-white);text-decoration-color:rgba(252,251,248,.42)}
+.link:focus-visible,.link[data-ui-state="focus"]{outline:2px solid var(--color-signal);outline-offset:.25rem}
+.link[aria-disabled="true"]{opacity:.4;pointer-events:none}
+.link--nav{font-weight:500}
+.link--inverse{color:var(--color-white)}
 .link--inverse:hover,.link--inverse[data-ui-state="hover"]{color:var(--color-signal)}
 
 .button{min-height:var(--control-h);padding:0 var(--space-4);border:1px solid transparent;border-radius:var(--radius-md);display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);font-size:var(--type-body);line-height:1.25rem;font-weight:500;text-decoration:none;transition:background-color var(--motion-fast) var(--ease-standard),color var(--motion-fast) var(--ease-standard),border-color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard)}
