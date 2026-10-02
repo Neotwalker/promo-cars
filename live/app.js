@@ -423,7 +423,7 @@ const nexrouteFormatPhone = (value = '') => {
 
       resetJourney({ refreshViewportHeight:true });
 
-      addEventListener('scroll', () => {
+      window.addEventListener('scroll', () => {
         if (!resizing && !reduceMotion.matches) scheduleJourney();
       }, { passive:true });
 
@@ -436,7 +436,7 @@ const nexrouteFormatPhone = (value = '') => {
 
       resizeObserver?.observe(scene);
 
-      addEventListener('resize', () => {
+      window.addEventListener('resize', () => {
         const nextWidth = window.innerWidth;
         const widthChanged = Math.abs(nextWidth - layoutWidth) > 1;
 
@@ -1167,9 +1167,7 @@ const nexrouteFormatPhone = (value = '') => {
     };
     materialModal.addEventListener('click',stopVideoOnDismiss);
     document.addEventListener('keydown',stopVideoOnDismiss);
-    new MutationObserver(() => {
-      if (materialModal.getAttribute('aria-hidden') === 'true') clearProofVideo();
-    }).observe(materialModal,{attributes:true,attributeFilter:['aria-hidden']});
+    materialModal.addEventListener('nexroute:modal-close',clearProofVideo);
 
     window.addEventListener('message',(event) => {
       const iframe = modalVideo?.querySelector('iframe');
@@ -1689,7 +1687,7 @@ const nexrouteFormatPhone = (value = '') => {
       }
     }));
 
-    modal.querySelector('[data-modal-close]')?.click();
+    modal.dispatchEvent(new CustomEvent('nexroute:modal-close'));
 
     window.setTimeout(() => {
       const model = inputs.model.value;
