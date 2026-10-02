@@ -49,6 +49,14 @@
   window.addEventListener('scroll',scheduleHeader,{passive:true});
 })();
 
+const nexrouteMotionMs = (name, fallback) => {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  if (!value) return fallback;
+  if (value.endsWith('ms')) return Number.parseFloat(value);
+  if (value.endsWith('s')) return Number.parseFloat(value) * 1000;
+  return fallback;
+};
+
 const nexroutePhoneDigits = (value = '') => {
   let digits = value.replace(/\D/g,'');
   if (digits.startsWith('7') || digits.startsWith('8')) digits = digits.slice(1);
@@ -88,7 +96,7 @@ const nexrouteFormatPhone = (value = '') => {
     clearTimeout(removeTimer);
     removeTimer = window.setTimeout(() => {
       if (toast.isConnected) toast.remove();
-    }, 380);
+    }, nexrouteMotionMs('--motion-fast',300) + 80);
   };
 
   document.addEventListener('nexroute:toast', (event) => {
@@ -204,13 +212,7 @@ const nexrouteFormatPhone = (value = '') => {
       const lastIndex = Math.max(0, panels.length - 1);
       const rootStyle = getComputedStyle(document.documentElement);
       const rootSize = Number.parseFloat(rootStyle.fontSize) || 16;
-      const motionValue = rootStyle.getPropertyValue('--motion-normal').trim();
-      const motionMs = motionValue.endsWith('ms')
-        ? Number.parseFloat(motionValue)
-        : motionValue.endsWith('s')
-          ? Number.parseFloat(motionValue) * 1000
-          : 520;
-      const motionResponse = Math.max(90, motionMs * .3);
+      const motionResponse = Math.max(90, nexrouteMotionMs('--motion-normal',520) * .3);
       const compactStepScroll = rootSize * 20;
 
       let current = -1;
@@ -774,7 +776,7 @@ const nexrouteFormatPhone = (value = '') => {
 
         window.setTimeout(() => {
           finishSummaryImageSwap(incoming, nextSrc, swapId);
-        }, 520);
+        }, nexrouteMotionMs('--motion-fast',300) + 80);
       };
 
       incoming.decode().then(reveal).catch(reveal);
@@ -1698,7 +1700,7 @@ const nexrouteFormatPhone = (value = '') => {
       syncContactMode();
       syncConsent();
       [inputs.city,inputs.name,inputs.contact].forEach((input) => restoreMessage(input));
-    },550);
+    },nexrouteMotionMs('--motion-fast',300) + 80);
   });
 
   syncContactMode();
