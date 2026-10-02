@@ -96,7 +96,14 @@ const nexrouteFormatPhone = (value = '') => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const video = document.querySelector('[data-hero-video]');
+  const hero = video?.closest('.hero');
   const desktopMedia = window.matchMedia('(min-width: 48rem)');
+  let heroVisible = true;
+
+  if (hero) {
+    const rect = hero.getBoundingClientRect();
+    heroVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+  }
 
   const unloadVideo = () => {
     if (!video) return;
@@ -120,8 +127,18 @@ const nexrouteFormatPhone = (value = '') => {
       video.load();
     }
 
-    if (!document.hidden) video.play().catch(() => {});
+    if (heroVisible && !document.hidden) video.play().catch(() => {});
+    else video.pause();
   };
+
+  const heroObserver = hero && 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries) => {
+        heroVisible = entries[0]?.isIntersecting ?? false;
+        syncVideo();
+      },{threshold:.02})
+    : null;
+
+  heroObserver?.observe(hero);
 
   syncVideo();
   reduceMotion.addEventListener?.('change', syncVideo);
@@ -132,6 +149,8 @@ const nexrouteFormatPhone = (value = '') => {
     if (document.hidden) video.pause();
     else syncVideo();
   });
+
+  window.addEventListener('pagehide',() => heroObserver?.disconnect(),{once:true});
 
   const journey = document.querySelector('[data-journey]');
 

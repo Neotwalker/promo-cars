@@ -8,9 +8,9 @@
   border-bottom:1px solid transparent;
   background:transparent;
   transition:
-    background-color var(--motion-normal) var(--ease-standard),
-    border-color var(--motion-normal) var(--ease-standard),
-    backdrop-filter var(--motion-normal) var(--ease-standard);
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    backdrop-filter var(--motion-fast) var(--ease-standard);
 }
 
 .site-header--hero.site-header--scrolled,
@@ -28,7 +28,7 @@
   align-items:center;
   justify-content:space-between;
   gap:var(--space-5);
-  transition:min-height var(--motion-normal) var(--ease-emphasized);
+  transition:min-height var(--motion-fast) var(--ease-emphasized);
 }
 
 .site-header--hero.site-header--scrolled .site-header__inner,
@@ -45,8 +45,8 @@
   width:4.25rem;
   height:4.25rem;
   transition:
-    width var(--motion-normal) var(--ease-emphasized),
-    height var(--motion-normal) var(--ease-emphasized);
+    width var(--motion-fast) var(--ease-emphasized),
+    height var(--motion-fast) var(--ease-emphasized);
 }
 
 .site-header--hero.site-header--scrolled .menu-toggle,
