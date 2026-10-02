@@ -1598,31 +1598,10 @@ main>section[id]{
 }
 .configurator__actions .button{
   width:100%;
-  min-height:3.25rem;
-  padding-inline:1.15rem;
-  border-radius:var(--radius-sm);
-  font-size:.95rem;
-}
-.configurator__back{
-  background:#fff;
-  border-color:#d7d8d4;
-  color:#666a70;
-}
-.configurator__back:hover:not(:disabled){
-  background:#f6f5f2;
-  border-color:#b8bab6;
 }
 .configurator__next,
 .configurator__submit{
   justify-content:space-between;
-  background:var(--color-signal);
-  border-color:var(--color-signal);
-  color:#fff;
-}
-.configurator__next:hover,
-.configurator__submit:hover{
-  background:#e7551b;
-  border-color:#e7551b;
 }
 .configurator__summary{
   min-width:0;
