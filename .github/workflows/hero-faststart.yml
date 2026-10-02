@@ -1,0 +1,127 @@
+name: One-time hero MP4 faststart
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  faststart:
+    if: github.event.head_commit.message == 'run one-time hero faststart'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure ffmpeg is available
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Faststart hero MP4 without re-encoding
+        shell: bash
+        run: |
+          set -euo pipefail
+          input="live/assets/hero/hero-loop-template.mp4"
+          output="live/assets/hero/hero-loop-template.faststart.mp4"
+
+          ffprobe -v error             -show_entries stream=index,codec_type,codec_name,width,height,r_frame_rate,avg_frame_rate,bit_rate             -show_entries format=duration,size,bit_rate             -of json "$input" > /tmp/before.json
+
+          ffmpeg -hide_banner -loglevel error -y             -i "$input"             -map 0             -c copy             -movflags +faststart             "$output"
+
+          ffprobe -v error             -show_entries stream=index,codec_type,codec_name,width,height,r_frame_rate,avg_frame_rate,bit_rate             -show_entries format=duration,size,bit_rate             -of json "$output" > /tmp/after.json
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          before = json.loads(Path('/tmp/before.json').read_text())
+          after = json.loads(Path('/tmp/after.json').read_text())
+
+          def normalized(data):
+              return {
+                  'streams': [
+                      {
+                          k: stream.get(k)
+                          for k in (
+                              'index','codec_type','codec_name','width','height',
+                              'r_frame_rate','avg_frame_rate','bit_rate'
+                          )
+                      }
+                      for stream in data.get('streams', [])
+                  ],
+                  'duration': data.get('format', {}).get('duration'),
+                  'bit_rate': data.get('format', {}).get('bit_rate'),
+              }
+
+          if normalized(before) != normalized(after):
+              raise SystemExit(
+                  'Stream metadata changed during faststart.\n'
+                  f'Before: {normalized(before)}\n'
+                  f'After:  {normalized(after)}'
+              )
+
+          def top_level_boxes(path):
+              data = Path(path).read_bytes()
+              boxes = []
+              pos = 0
+              length = len(data)
+              while pos + 8 <= length:
+                  size = int.from_bytes(data[pos:pos+4], 'big')
+                  typ = data[pos+4:pos+8].decode('latin-1')
+                  header = 8
+                  if size == 1:
+                      if pos + 16 > length:
+                          break
+                      size = int.from_bytes(data[pos+8:pos+16], 'big')
+                      header = 16
+                  elif size == 0:
+                      size = length - pos
+                  if size < header or pos + size > length:
+                      break
+                  boxes.append((typ, pos, size))
+                  pos += size
+              return boxes
+
+          before_boxes = top_level_boxes('live/assets/hero/hero-loop-template.mp4')
+          after_boxes = top_level_boxes('live/assets/hero/hero-loop-template.faststart.mp4')
+
+          before_pos = {typ: pos for typ, pos, _ in before_boxes}
+          after_pos = {typ: pos for typ, pos, _ in after_boxes}
+
+          if 'moov' not in after_pos or 'mdat' not in after_pos:
+              raise SystemExit(f'Missing moov/mdat after remux: {after_boxes}')
+          if not after_pos['moov'] < after_pos['mdat']:
+              raise SystemExit(f'moov is not before mdat after faststart: {after_boxes}')
+
+          print('Before top-level boxes:', before_boxes)
+          print('After top-level boxes:', after_boxes)
+          print('Stream metadata unchanged; no re-encoding performed.')
+          PY
+
+          mv "$output" "$input"
+
+      - name: Commit optimized MP4
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add live/assets/hero/hero-loop-template.mp4
+          if git diff --cached --quiet; then
+            echo "No MP4 change produced."
+            exit 0
+          fi
+          git commit -m "optimize hero MP4 for fast start"
+          git push origin HEAD:main
