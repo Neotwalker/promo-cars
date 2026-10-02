@@ -3192,16 +3192,30 @@
 }
 .final-cta__gradient-wrap{
   position:absolute;
-  inset:0;
+  inset:-10%;
   z-index:0;
   overflow:hidden;
   opacity:0;
-  transition:opacity 420ms ease;
+  transition:opacity 480ms ease;
   pointer-events:none;
   background:#0b0e12;
 }
 .final-cta__gradient-wrap.is-loaded{
   opacity:1;
+}
+.final-cta__gradient-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(
+    0deg,
+    rgba(11,14,18,.96) 0%,
+    rgba(11,14,18,.72) 34%,
+    rgba(16,18,22,.46) 100%
+  );
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
 }
 .final-cta__gradient{
   position:absolute;
