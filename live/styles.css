@@ -3592,6 +3592,10 @@ main>section[id]{
 .not-found-page__inner{
   position:relative;
   z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
 }
 .not-found-page__eyebrow{
   color:var(--color-signal);
