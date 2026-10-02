@@ -3573,7 +3573,6 @@ main>section[id]{
 }
 .policy-page__section table{
   width:100%;
-  max-width:none;
 }
 .standalone-page--dark{
   background:#0b0e12;
