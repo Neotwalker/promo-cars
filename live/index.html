@@ -471,7 +471,7 @@
                   <input class="configurator__field-control" name="model" value="Zeekr 001 AWD" autocomplete="off" data-config-model aria-describedby="config-model-message">
                 </span>
               </label>
-              <small class="configurator__message" id="config-model-message" data-field-message>Можно указать любую марку или модель.</small>
+              <small class="configurator__message" id="config-model-message" data-field-message aria-live="polite">Можно указать любую марку или модель.</small>
 
               <div class="configurator__choices configurator__choices--cars" data-config-choice="model" aria-label="Быстрый выбор автомобиля">
                 <button class="configurator__choice configurator__choice--car" type="button" data-value="Zeekr 001 AWD" aria-pressed="true">
@@ -505,7 +505,7 @@
                 <button class="configurator__choice" type="button" data-value="Новый" aria-pressed="true"><span>Новый</span><i aria-hidden="true"></i></button>
                 <button class="configurator__choice" type="button" data-value="С пробегом" aria-pressed="false"><span>С пробегом</span><i aria-hidden="true"></i></button>
               </div>
-              <small class="configurator__choice-message" data-choice-message="condition"></small>
+              <small class="configurator__choice-message" data-choice-message="condition" aria-live="polite"></small>
             </section>
 
             <section class="configurator__step" data-config-step="power" aria-labelledby="config-power-title" hidden>
@@ -515,7 +515,7 @@
                 <button class="configurator__choice" type="button" data-value="Гибрид / EREV" aria-pressed="false"><span>Гибрид / EREV</span><i aria-hidden="true"></i></button>
                 <button class="configurator__choice" type="button" data-value="Не принципиально" aria-pressed="false"><span>Не принципиально</span><i aria-hidden="true"></i></button>
               </div>
-              <small class="configurator__choice-message" data-choice-message="power"></small>
+              <small class="configurator__choice-message" data-choice-message="power" aria-live="polite"></small>
             </section>
 
             <section class="configurator__step" data-config-step="budget" aria-labelledby="config-budget-title" hidden>
@@ -526,7 +526,7 @@
                 <button class="configurator__choice" type="button" data-value="От 6 500 000 ₽" aria-pressed="false"><span>От 6 500 000 ₽</span><i aria-hidden="true"></i></button>
                 <button class="configurator__choice" type="button" data-value="Нужен ориентир" aria-pressed="false"><span>Нужен ориентир</span><i aria-hidden="true"></i></button>
               </div>
-              <small class="configurator__choice-message" data-choice-message="budget"></small>
+              <small class="configurator__choice-message" data-choice-message="budget" aria-live="polite"></small>
             </section>
 
             <section class="configurator__step" data-config-step="city" aria-labelledby="config-city-title" hidden>
@@ -540,7 +540,7 @@
                   <input class="configurator__field-control" name="city" value="Москва" autocomplete="off" data-config-city aria-describedby="config-city-message" aria-controls="config-city-options">
                 </span>
               </label>
-              <small class="configurator__message" id="config-city-message" data-field-message>Доставка доступна в города-миллионники. Начните вводить название или выберите город из списка.</small>
+              <small class="configurator__message" id="config-city-message" data-field-message aria-live="polite">Доставка доступна в города-миллионники. Начните вводить название или выберите город из списка.</small>
 
               <div class="configurator__choices configurator__choices--cities" id="config-city-options" data-config-choice="city" aria-label="Доступные города доставки">
                 <button class="configurator__choice" type="button" data-value="Москва" aria-pressed="true"><span>Москва</span><i aria-hidden="true"></i></button>
@@ -560,7 +560,7 @@
                 <button class="configurator__choice" type="button" data-value="Пермь" aria-pressed="false"><span>Пермь</span><i aria-hidden="true"></i></button>
                 <button class="configurator__choice" type="button" data-value="Волгоград" aria-pressed="false"><span>Волгоград</span><i aria-hidden="true"></i></button>
               </div>
-              <small class="configurator__choice-message" data-choice-message="city"></small>
+              <small class="configurator__choice-message" data-choice-message="city" aria-live="polite"></small>
             </section>
 
             <section class="configurator__step" data-config-step="contact" aria-labelledby="config-contact-title" hidden>
@@ -574,7 +574,7 @@
                   <span>Telegram</span><i aria-hidden="true"></i>
                 </button>
               </div>
-              <small class="configurator__choice-message" data-choice-message="channel"></small>
+              <small class="configurator__choice-message" data-choice-message="channel" aria-live="polite"></small>
 
               <label class="configurator__field" data-field>
                 <span class="configurator__field-icon" aria-hidden="true">
@@ -585,7 +585,7 @@
                   <input class="configurator__field-control" name="contact" placeholder="@username" autocomplete="off" inputmode="text" data-config-contact aria-describedby="config-contact-message">
                 </span>
               </label>
-              <small class="configurator__message" id="config-contact-message" data-field-message>Контакт нужен только для отправки расчёта.</small>
+              <small class="configurator__message" id="config-contact-message" data-field-message aria-live="polite">Контакт нужен только для отправки расчёта.</small>
             </section>
 
             <div class="configurator__actions">
@@ -916,19 +916,19 @@
             <label class="field field--inverse" data-final-field="model">
               <span class="field__label">Автомобиль</span>
               <input class="field__control" type="text" name="model" placeholder="Zeekr 001 / пока не определился" autocomplete="off" required aria-describedby="final-model-message" data-final-input="model">
-              <small class="field__message" id="final-model-message" data-final-message data-default-message="Укажите интересующую модель или напишите «пока не определился».">Укажите интересующую модель или напишите «пока не определился».</small>
+              <small class="field__message" id="final-model-message" data-final-message data-default-message="Укажите интересующую модель или напишите «пока не определился»." aria-live="polite">Укажите интересующую модель или напишите «пока не определился».</small>
             </label>
 
             <label class="field field--inverse" data-final-field="city">
               <span class="field__label">Город получения</span>
               <input class="field__control" type="text" name="city" placeholder="Например, Москва" autocomplete="address-level2" required aria-describedby="final-city-message" data-final-input="city">
-              <small class="field__message" id="final-city-message" data-final-message data-default-message=""></small>
+              <small class="field__message" id="final-city-message" data-final-message data-default-message="" aria-live="polite"></small>
             </label>
 
             <label class="field field--inverse" data-final-field="name">
               <span class="field__label">Имя</span>
               <input class="field__control" type="text" name="name" placeholder="Иван" autocomplete="name" required aria-describedby="final-name-message" data-final-input="name">
-              <small class="field__message" id="final-name-message" data-final-message data-default-message=""></small>
+              <small class="field__message" id="final-name-message" data-final-message data-default-message="" aria-live="polite"></small>
             </label>
 
             <fieldset class="final-cta__contact-mode">
@@ -946,22 +946,23 @@
             <label class="field field--inverse" data-final-field="contact">
               <span class="field__label" data-final-contact-label>Телефон</span>
               <input class="field__control" type="text" name="contact" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="18" required aria-describedby="final-contact-message" data-final-input="contact">
-              <small class="field__message" id="final-contact-message" data-final-message data-default-message="Укажите номер телефона — только для ответа по расчёту.">Укажите номер телефона — только для ответа по расчёту.</small>
+              <small class="field__message" id="final-contact-message" data-final-message data-default-message="Укажите номер телефона — только для ответа по расчёту." aria-live="polite">Укажите номер телефона — только для ответа по расчёту.</small>
             </label>
 
             <label class="field field--inverse" data-final-field="comment">
               <span class="field__label">Комментарий <span class="final-cta__optional">необязательно</span></span>
               <textarea class="field__control field__control--textarea" name="comment" placeholder="Например, интересует определённая комплектация, цвет или бюджет" aria-describedby="final-comment-message" data-final-input="comment"></textarea>
-              <small class="field__message" id="final-comment-message" data-final-message data-default-message=""></small>
+              <small class="field__message" id="final-comment-message" data-final-message data-default-message="" aria-live="polite"></small>
             </label>
 
             <div class="final-cta__consent-wrap">
               <div class="selection-control selection-control--inverse final-cta__consent">
-                <input id="final-consent" type="checkbox" name="consent" required data-final-consent>
+                <input id="final-consent" type="checkbox" name="consent" required aria-describedby="final-consent-message" data-final-consent>
                 <span><label for="final-consent">Даю согласие на </label><a class="link link--inverse final-cta__policy-link" href="./privacy-policy.html">обработку персональных данных</a>.</span>
               </div>
+              <small class="final-cta__consent-message" id="final-consent-message" data-final-consent-message aria-live="polite"></small>
             </div>
-            <button class="button button--signal final-cta__submit" type="submit" data-final-submit disabled>
+            <button class="button button--signal final-cta__submit" type="submit" data-final-submit>
               <span>Получить расчёт</span><span aria-hidden="true">→</span>
             </button>
           </form>
@@ -990,19 +991,19 @@
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label">Автомобиль</span>
           <input class="field__control" type="text" name="model" placeholder="Например, Zeekr 001 или нужен подбор" autocomplete="off" required aria-describedby="car-lead-model-message" data-car-lead-input="model">
-          <small class="field__message" id="car-lead-model-message" data-car-lead-message data-default-message="Укажите модель или напишите «нужен подбор».">Укажите модель или напишите «нужен подбор».</small>
+          <small class="field__message" id="car-lead-model-message" data-car-lead-message data-default-message="Укажите модель или напишите «нужен подбор»." aria-live="polite">Укажите модель или напишите «нужен подбор».</small>
         </label>
 
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label">Город получения</span>
           <input class="field__control" type="text" name="city" placeholder="Например, Москва" autocomplete="address-level2" required aria-describedby="car-lead-city-message" data-car-lead-input="city">
-          <small class="field__message" id="car-lead-city-message" data-car-lead-message data-default-message=""></small>
+          <small class="field__message" id="car-lead-city-message" data-car-lead-message data-default-message="" aria-live="polite"></small>
         </label>
 
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label">Имя</span>
           <input class="field__control" type="text" name="name" placeholder="Иван" autocomplete="name" required aria-describedby="car-lead-name-message" data-car-lead-input="name">
-          <small class="field__message" id="car-lead-name-message" data-car-lead-message data-default-message=""></small>
+          <small class="field__message" id="car-lead-name-message" data-car-lead-message data-default-message="" aria-live="polite"></small>
         </label>
 
         <fieldset class="lead-form__channel">
@@ -1020,7 +1021,7 @@
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label" data-car-lead-contact-label>Телефон</span>
           <input class="field__control" type="text" name="contact" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="18" required aria-describedby="car-lead-contact-message" data-car-lead-input="contact">
-          <small class="field__message" id="car-lead-contact-message" data-car-lead-message data-default-message="Укажите номер телефона — только для ответа по заявке.">Укажите номер телефона — только для ответа по заявке.</small>
+          <small class="field__message" id="car-lead-contact-message" data-car-lead-message data-default-message="Укажите номер телефона — только для ответа по заявке." aria-live="polite">Укажите номер телефона — только для ответа по заявке.</small>
         </label>
 
         <div class="lead-form__consent-wrap">
@@ -1028,10 +1029,10 @@
             <input id="car-lead-consent" type="checkbox" name="consent" required aria-describedby="car-lead-consent-message" data-car-lead-consent>
             <span><label for="car-lead-consent">Даю согласие на </label><a class="link link--inverse" href="./privacy-policy.html">обработку персональных данных</a>.</span>
           </div>
-          <small class="lead-form__consent-message" id="car-lead-consent-message" data-car-lead-consent-message></small>
+          <small class="lead-form__consent-message" id="car-lead-consent-message" data-car-lead-consent-message aria-live="polite"></small>
         </div>
 
-        <button class="button button--signal car-lead-modal__submit" type="submit" data-car-lead-submit disabled>
+        <button class="button button--signal car-lead-modal__submit" type="submit" data-car-lead-submit>
           <span>Оставить заявку</span><span aria-hidden="true">→</span>
         </button>
       </form>
