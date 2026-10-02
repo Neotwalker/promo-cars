@@ -1440,7 +1440,7 @@ const nexrouteFormatPhone = (value = '') => {
         documentView.dataset.modalOpen = 'proof-document-modal';
         documentView.setAttribute('aria-label','Открыть документ «' + title + '»');
         documentPreview.src = asset;
-        documentPreview.alt = 'Тестовый preview документа «' + title + '»';
+        documentPreview.alt = 'Предпросмотр документа «' + title + '»';
       } else {
         documentView.classList.remove('has-preview');
         documentView.disabled = true;
