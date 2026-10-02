@@ -3192,36 +3192,17 @@
 }
 .final-cta__gradient-wrap{
   position:absolute;
-  inset:-7%;
+  inset:0;
   z-index:0;
   overflow:hidden;
   opacity:0;
-  transition:opacity 520ms ease;
+  transition:opacity 420ms ease;
   pointer-events:none;
 }
 .final-cta__gradient-wrap.is-loaded{
   opacity:1;
 }
-.final-cta__gradient-wrap::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:linear-gradient(
-    0deg,
-    rgba(11,14,18,.98) 0%,
-    rgba(11,14,18,.80) 24%,
-    rgba(13,16,20,.57) 62%,
-    rgba(13,16,20,.50) 100%
-  );
-  -webkit-backdrop-filter:blur(10px);
-  backdrop-filter:blur(10px);
-}
 .final-cta__gradient{
-  --gradient-color-1:#0b0e12;
-  --gradient-color-2:#263039;
-  --gradient-color-3:#68747d;
-  --gradient-color-4:#6a3429;
   position:absolute;
   inset:0;
   z-index:0;
