@@ -1347,7 +1347,11 @@ const nexrouteFormatPhone = (value = '') => {
 
     const details = document.createElement('div');
     details.className = 'case-card__details';
-    details.id = toggle.getAttribute('aria-controls');
+    const detailsId = toggle.dataset.proofDetailsId;
+    if (detailsId) {
+      details.id = detailsId;
+      toggle.setAttribute('aria-controls',detailsId);
+    }
     details.setAttribute('aria-hidden','true');
     details.inert = true;
     details.innerHTML = '<div class="case-card__details-inner"><div class="case-card__active-material"><p class="case-card__active-type" data-active-material-type></p><h3 class="case-card__active-title" data-active-material-title></h3><p class="case-card__active-description" data-active-material-description></p><p class="case-card__active-hint" data-active-material-hint hidden>Нажмите на документ слева, чтобы открыть его крупнее.</p></div></div>';
