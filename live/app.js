@@ -132,24 +132,6 @@ const nexrouteFormatPhone = (value = '') => {
 })();
 
 (() => {
-  const links = [...document.querySelectorAll('[data-demo-policy]')];
-  if (!links.length) return;
-
-  links.forEach((link) => {
-    link.addEventListener('click',(event) => {
-      event.preventDefault();
-      document.dispatchEvent(new CustomEvent('nexroute:toast',{
-        detail:{
-          title:'Демонстрационная версия.',
-          message:'Политика обработки данных подключается при адаптации решения под конкретную компанию.',
-          type:'info'
-        }
-      }));
-    });
-  });
-})();
-
-(() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const video = document.querySelector('[data-hero-video]');
@@ -240,7 +222,7 @@ const nexrouteFormatPhone = (value = '') => {
         if (!entries.some((entry) => entry.isIntersecting)) return;
         imageObserver.disconnect();
         warmJourneyImages();
-      },{rootMargin:'1400px 0px',threshold:0});
+      },{rootMargin:'700px 0px',threshold:0});
 
       imageObserver.observe(journey);
     }
