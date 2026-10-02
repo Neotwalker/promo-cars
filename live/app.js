@@ -1489,15 +1489,9 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(pointer:fine)');
-  let visible = false;
   let pointerFrame = 0;
   let pointerX = 0;
   let pointerY = 0;
-
-  const syncPlayback = () => {
-    const active = visible && !document.hidden && !reduceMotion.matches;
-    section.classList.toggle('is-ambient-active',active);
-  };
 
   const resetParallax = () => {
     section.style.removeProperty('--ambient-neutral-x');
@@ -1542,20 +1536,7 @@
     scheduleParallax();
   },{passive:true});
 
-  const observer = new IntersectionObserver((entries) => {
-    visible = entries[0]?.isIntersecting ?? false;
-    syncPlayback();
-  },{rootMargin:'12% 0px',threshold:.02});
-
-  observer.observe(section);
-
-  document.addEventListener('visibilitychange',syncPlayback);
-
-  reduceMotion.addEventListener?.('change',() => {
-    resetParallax();
-    syncPlayback();
-  });
-
+  reduceMotion.addEventListener?.('change',resetParallax);
   finePointer.addEventListener?.('change',() => {
     if (!finePointer.matches) resetParallax();
   });
