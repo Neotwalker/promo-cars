@@ -3574,10 +3574,6 @@ main>section[id]{
 .policy-page__section table{
   width:100%;
 }
-.standalone-page--dark{
-  background:#0b0e12;
-  color:var(--color-white);
-}
 .not-found-page{
   position:relative;
   min-height:calc(100svh - var(--header-h));
