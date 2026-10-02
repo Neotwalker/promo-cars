@@ -341,7 +341,7 @@
         const overlayAnimation = backdrop.animate(
           [{ opacity:0 }, { opacity:1 }],
           {
-            duration:motionMs('--motion-normal', 520),
+            duration:motionMs('--motion-fast', 300),
             easing:motionEase('--ease-standard', 'ease'),
             fill:'both'
           }
@@ -352,7 +352,7 @@
             { opacity:1, transform:'translateY(0) scale(1)' }
           ],
           {
-            duration:motionMs('--motion-normal', 520),
+            duration:motionMs('--motion-fast', 300),
             easing:motionEase('--ease-emphasized', 'ease'),
             fill:'both'
           }
@@ -381,7 +381,7 @@
     const overlayAnimation = backdrop.animate(
       [{ opacity:1 }, { opacity:0 }],
       {
-        duration:motionMs('--motion-normal', 520),
+        duration:motionMs('--motion-fast', 300),
         easing:motionEase('--ease-standard', 'ease'),
         fill:'both'
       }
@@ -392,7 +392,7 @@
         { opacity:0, transform:'translateY(1rem) scale(.99)' }
       ],
       {
-        duration:motionMs('--motion-normal', 520),
+        duration:motionMs('--motion-fast', 300),
         easing:motionEase('--ease-standard', 'ease'),
         fill:'both'
       }

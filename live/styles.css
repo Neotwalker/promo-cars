@@ -1632,7 +1632,7 @@ main>section[id]{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:opacity 420ms var(--ease-standard);
+  transition:opacity var(--motion-fast) var(--ease-standard);
 }
 .configurator__summary-media.is-generic img{opacity:0}
 .configurator__summary-media .configurator__summary-image--incoming{
