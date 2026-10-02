@@ -1515,12 +1515,12 @@
       return;
     }
 
-    section.style.setProperty('--ambient-neutral-x',(pointerX * 5).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-neutral-y',(pointerY * 4).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-cool-x',(pointerX * -9).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-cool-y',(pointerY * -7).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-warm-x',(pointerX * 12).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-warm-y',(pointerY * 9).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-neutral-x',(pointerX * 8).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-neutral-y',(pointerY * 6).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-cool-x',(pointerX * -14).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-cool-y',(pointerY * -11).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-warm-x',(pointerX * 20).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-warm-y',(pointerY * 15).toFixed(2) + 'px');
   };
 
   const scheduleParallax = () => {
