@@ -1,5 +1,5 @@
 (() => {
-  const section = document.querySelector('#final-calculation');
+  const section = document.querySelector('[data-final-gradient-section], #final-calculation');
   const canvas = section?.querySelector('[data-final-gradient]');
   const wrap = section?.querySelector('[data-final-gradient-wrap]');
   if (!section || !canvas || !wrap) return;
