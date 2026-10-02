@@ -191,7 +191,7 @@
 .journey{
   --journey-progress:0;
   position:relative;
-  height:640vh;
+  height:560vh;
   overflow:clip;
   background:#f8f7f4;
   color:var(--color-ink);
@@ -1277,7 +1277,7 @@
 /* CONFIGURATOR */
 .configurator{
   padding:clamp(6rem,9vw,9rem) 0;
-  background:#f8f7f4;
+  background:var(--color-paper);
   color:var(--color-ink);
 }
 .configurator__inner{display:flex;flex-direction:column;gap:2.25rem}
@@ -3029,7 +3029,7 @@
 
 /* FAQ */
 .faq{
-  padding:var(--space-section) 0;
+  padding:clamp(3.25rem,5vw,6rem) 0 var(--space-section);
   background:var(--color-paper);
   color:var(--color-ink);
 }
