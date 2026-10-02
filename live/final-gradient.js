@@ -28,6 +28,7 @@
     uniform vec3 u_layerColor1;
     uniform vec3 u_layerColor2;
     uniform vec3 u_layerColor3;
+    uniform vec3 u_layerColor4;
 
     varying vec3 v_color;
 
@@ -188,10 +189,18 @@
         0.10,0.84
       );
 
+      float layer4 = waveLayer(
+        noiseCoord,time,
+        vec2(2.40,3.10),
+        6.2,10.8,47.0,
+        0.18,0.82
+      );
+
       vec3 color = u_baseColor;
       color = mix(color,u_layerColor1,layer1);
       color = mix(color,u_layerColor2,layer2);
       color = mix(color,u_layerColor3,layer3);
+      color = mix(color,u_layerColor4,layer4 * 0.14);
 
       v_color = color;
       gl_Position = vec4(clipPosition,0.0,1.0);
@@ -255,7 +264,8 @@
     baseColor:gl.getUniformLocation(program,'u_baseColor'),
     layerColor1:gl.getUniformLocation(program,'u_layerColor1'),
     layerColor2:gl.getUniformLocation(program,'u_layerColor2'),
-    layerColor3:gl.getUniformLocation(program,'u_layerColor3')
+    layerColor3:gl.getUniformLocation(program,'u_layerColor3'),
+    layerColor4:gl.getUniformLocation(program,'u_layerColor4')
   };
 
   const positionBuffer = gl.createBuffer();
@@ -266,13 +276,15 @@
     base:[16 / 255,18 / 255,22 / 255],
     night:[11 / 255,21 / 255,29 / 255],
     steel:[125 / 255,135 / 255,145 / 255],
-    softSteel:[54 / 255,62 / 255,69 / 255]
+    softSteel:[54 / 255,62 / 255,69 / 255],
+    signal:[255 / 255,91 / 255,53 / 255]
   };
 
   gl.uniform3fv(locations.baseColor,palette.base);
   gl.uniform3fv(locations.layerColor1,palette.night);
   gl.uniform3fv(locations.layerColor2,palette.steel);
   gl.uniform3fv(locations.layerColor3,palette.softSteel);
+  gl.uniform3fv(locations.layerColor4,palette.signal);
 
   let width = 1;
   let height = 1;
