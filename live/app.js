@@ -225,6 +225,25 @@ const nexrouteFormatPhone = (value = '') => {
     const mobileIndex = journey.querySelector('[data-journey-mobile-index]');
     const mobileTitle = journey.querySelector('[data-journey-mobile-title]');
     const mobileNext = journey.querySelector('[data-journey-mobile-next]');
+    const journeyImages = [...journey.querySelectorAll('.journey__visual img')];
+
+    const warmJourneyImages = () => {
+      journeyImages.forEach((image) => {
+        image.decode?.().catch(() => {});
+      });
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      warmJourneyImages();
+    } else {
+      const imageObserver = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        imageObserver.disconnect();
+        warmJourneyImages();
+      },{rootMargin:'1400px 0px',threshold:0});
+
+      imageObserver.observe(journey);
+    }
 
     if (sticky && shell && scene && track && panels.length) {
       const lastIndex = Math.max(0, panels.length - 1);
