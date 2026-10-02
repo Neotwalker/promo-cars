@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
   <header class="site-header site-header--inverse site-header--burger site-header--hero" data-menu>
     <div class="container site-header__inner">
       <a class="site-header__brand" href="#hero" aria-label="NEXROUTE AUTO — на первый экран">NEXROUTE AUTO</a>
@@ -58,7 +59,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="hero" id="hero">
       <div class="hero__media" aria-hidden="true">
         <video
@@ -914,19 +915,19 @@
           <form class="final-cta__form" novalidate data-final-form>
             <label class="field field--inverse" data-final-field="model">
               <span class="field__label">Автомобиль</span>
-              <input class="field__control" type="text" name="model" placeholder="Zeekr 001 / пока не определился" autocomplete="off" aria-describedby="final-model-message" data-final-input="model">
+              <input class="field__control" type="text" name="model" placeholder="Zeekr 001 / пока не определился" autocomplete="off" required aria-describedby="final-model-message" data-final-input="model">
               <small class="field__message" id="final-model-message" data-final-message data-default-message="Укажите интересующую модель или напишите «пока не определился».">Укажите интересующую модель или напишите «пока не определился».</small>
             </label>
 
             <label class="field field--inverse" data-final-field="city">
               <span class="field__label">Город получения</span>
-              <input class="field__control" type="text" name="city" placeholder="Например, Москва" autocomplete="address-level2" aria-describedby="final-city-message" data-final-input="city">
+              <input class="field__control" type="text" name="city" placeholder="Например, Москва" autocomplete="address-level2" required aria-describedby="final-city-message" data-final-input="city">
               <small class="field__message" id="final-city-message" data-final-message data-default-message=""></small>
             </label>
 
             <label class="field field--inverse" data-final-field="name">
               <span class="field__label">Имя</span>
-              <input class="field__control" type="text" name="name" placeholder="Иван" autocomplete="name" aria-describedby="final-name-message" data-final-input="name">
+              <input class="field__control" type="text" name="name" placeholder="Иван" autocomplete="name" required aria-describedby="final-name-message" data-final-input="name">
               <small class="field__message" id="final-name-message" data-final-message data-default-message=""></small>
             </label>
 
@@ -944,7 +945,7 @@
 
             <label class="field field--inverse" data-final-field="contact">
               <span class="field__label" data-final-contact-label>Телефон</span>
-              <input class="field__control" type="text" name="contact" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="18" aria-describedby="final-contact-message" data-final-input="contact">
+              <input class="field__control" type="text" name="contact" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="18" required aria-describedby="final-contact-message" data-final-input="contact">
               <small class="field__message" id="final-contact-message" data-final-message data-default-message="Укажите номер телефона — только для ответа по расчёту.">Укажите номер телефона — только для ответа по расчёту.</small>
             </label>
 
@@ -956,7 +957,7 @@
 
             <div class="final-cta__consent-wrap">
               <div class="selection-control selection-control--inverse final-cta__consent">
-                <input id="final-consent" type="checkbox" name="consent" data-final-consent>
+                <input id="final-consent" type="checkbox" name="consent" required data-final-consent>
                 <span><label for="final-consent">Даю согласие на </label><a class="link link--inverse final-cta__policy-link" href="./privacy-policy.html">обработку персональных данных</a>.</span>
               </div>
             </div>
@@ -988,20 +989,20 @@
       <form class="lead-form" novalidate data-car-lead-form>
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label">Автомобиль</span>
-          <input class="field__control" type="text" name="model" placeholder="Например, Zeekr 001 или нужен подбор" autocomplete="off" data-car-lead-input="model">
-          <small class="field__message" data-car-lead-message data-default-message="Укажите модель или напишите «нужен подбор».">Укажите модель или напишите «нужен подбор».</small>
+          <input class="field__control" type="text" name="model" placeholder="Например, Zeekr 001 или нужен подбор" autocomplete="off" required aria-describedby="car-lead-model-message" data-car-lead-input="model">
+          <small class="field__message" id="car-lead-model-message" data-car-lead-message data-default-message="Укажите модель или напишите «нужен подбор».">Укажите модель или напишите «нужен подбор».</small>
         </label>
 
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label">Город получения</span>
-          <input class="field__control" type="text" name="city" placeholder="Например, Москва" autocomplete="address-level2" data-car-lead-input="city">
-          <small class="field__message" data-car-lead-message data-default-message=""></small>
+          <input class="field__control" type="text" name="city" placeholder="Например, Москва" autocomplete="address-level2" required aria-describedby="car-lead-city-message" data-car-lead-input="city">
+          <small class="field__message" id="car-lead-city-message" data-car-lead-message data-default-message=""></small>
         </label>
 
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label">Имя</span>
-          <input class="field__control" type="text" name="name" placeholder="Иван" autocomplete="name" data-car-lead-input="name">
-          <small class="field__message" data-car-lead-message data-default-message=""></small>
+          <input class="field__control" type="text" name="name" placeholder="Иван" autocomplete="name" required aria-describedby="car-lead-name-message" data-car-lead-input="name">
+          <small class="field__message" id="car-lead-name-message" data-car-lead-message data-default-message=""></small>
         </label>
 
         <fieldset class="lead-form__channel">
@@ -1018,16 +1019,16 @@
 
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label" data-car-lead-contact-label>Телефон</span>
-          <input class="field__control" type="text" name="contact" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="18" data-car-lead-input="contact">
-          <small class="field__message" data-car-lead-message data-default-message="Укажите номер телефона — только для ответа по заявке.">Укажите номер телефона — только для ответа по заявке.</small>
+          <input class="field__control" type="text" name="contact" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="18" required aria-describedby="car-lead-contact-message" data-car-lead-input="contact">
+          <small class="field__message" id="car-lead-contact-message" data-car-lead-message data-default-message="Укажите номер телефона — только для ответа по заявке.">Укажите номер телефона — только для ответа по заявке.</small>
         </label>
 
         <div class="lead-form__consent-wrap">
           <div class="selection-control selection-control--inverse car-lead-modal__consent">
-            <input id="car-lead-consent" type="checkbox" name="consent" data-car-lead-consent>
+            <input id="car-lead-consent" type="checkbox" name="consent" required aria-describedby="car-lead-consent-message" data-car-lead-consent>
             <span><label for="car-lead-consent">Даю согласие на </label><a class="link link--inverse" href="./privacy-policy.html">обработку персональных данных</a>.</span>
           </div>
-          <small class="lead-form__consent-message" data-car-lead-consent-message></small>
+          <small class="lead-form__consent-message" id="car-lead-consent-message" data-car-lead-consent-message></small>
         </div>
 
         <button class="button button--signal car-lead-modal__submit" type="submit" data-car-lead-submit disabled>
