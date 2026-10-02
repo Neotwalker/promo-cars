@@ -242,6 +242,7 @@ body.modal-open{overflow:hidden}
 .toast-stack .toast{width:100%;min-width:0;max-width:none;pointer-events:auto;opacity:0;transform:translateX(calc(100% + 2rem));transition:transform 360ms cubic-bezier(.2,.7,.2,1),opacity 240ms ease;will-change:transform,opacity}
 .toast-stack .toast.is-visible{opacity:1;transform:translateX(0)}
 .toast-stack .toast.is-leaving{opacity:0;transform:translateX(calc(100% + 2rem))}
+@media(prefers-reduced-motion:reduce){.toast-stack .toast{transition:none}}
 
 /* 06 — COMPONENT STATES */
 .is-disabled{pointer-events:none;opacity:.45}

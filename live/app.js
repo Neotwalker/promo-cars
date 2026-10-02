@@ -1,3 +1,20 @@
+const nexroutePhoneDigits = (value = '') => {
+  let digits = value.replace(/\D/g,'');
+  if (digits.startsWith('7') || digits.startsWith('8')) digits = digits.slice(1);
+  return digits.slice(0,10);
+};
+
+const nexrouteFormatPhone = (value = '') => {
+  const digits = nexroutePhoneDigits(value);
+  if (!digits) return '';
+
+  let result = '+7 (' + digits.slice(0,3);
+  if (digits.length > 3) result += ') ' + digits.slice(3,6);
+  if (digits.length > 6) result += '-' + digits.slice(6,8);
+  if (digits.length > 8) result += '-' + digits.slice(8,10);
+  return result;
+};
+
 (() => {
   const stack = document.querySelector('[data-site-toasts]');
   if (!stack) return;
@@ -533,22 +550,6 @@
       });
     };
 
-    const phoneDigits = (value = '') => {
-      let digits = value.replace(/\D/g,'');
-      if (digits.startsWith('7') || digits.startsWith('8')) digits = digits.slice(1);
-      return digits.slice(0,10);
-    };
-
-    const formatPhone = (value = '') => {
-      const digits = phoneDigits(value);
-      if (!digits) return '';
-
-      let result = '+7 (' + digits.slice(0,3);
-      if (digits.length > 3) result += ') ' + digits.slice(3,6);
-      if (digits.length > 6) result += '-' + digits.slice(6,8);
-      if (digits.length > 8) result += '-' + digits.slice(8,10);
-      return result;
-    };
 
     const contactValues = {
       'Телефон':'',
@@ -564,8 +565,8 @@
       refs.contact.maxLength = isPhone ? 18 : 64;
 
       if (isPhone) {
-        refs.contact.value = formatPhone(contactValues['Телефон']);
-        state.contact = phoneDigits(contactValues['Телефон']);
+        refs.contact.value = nexrouteFormatPhone(contactValues['Телефон']);
+        state.contact = nexroutePhoneDigits(contactValues['Телефон']);
       } else {
         refs.contact.value = contactValues['Telegram'];
         state.contact = contactValues['Telegram'].trim();
@@ -892,9 +893,9 @@
 
     refs.contact.addEventListener('input', () => {
       if (state.channel === 'Телефон') {
-        const digits = phoneDigits(refs.contact.value);
+        const digits = nexroutePhoneDigits(refs.contact.value);
         contactValues['Телефон'] = digits;
-        refs.contact.value = formatPhone(digits);
+        refs.contact.value = nexrouteFormatPhone(digits);
         state.contact = digits;
       } else {
         contactValues['Telegram'] = refs.contact.value;
@@ -928,7 +929,7 @@
         fieldError(refs.contact,state.channel === 'Телефон' ? 'Укажите номер телефона.' : 'Укажите username в Telegram.');
         return;
       }
-      if (state.channel === 'Телефон' && phoneDigits(state.contact).length !== 10) {
+      if (state.channel === 'Телефон' && nexroutePhoneDigits(state.contact).length !== 10) {
         fieldError(refs.contact,'Введите номер полностью: +7 (___) ___-__-__.');
         return;
       }
@@ -1522,22 +1523,6 @@
     return false;
   };
 
-  const phoneDigits = (value = '') => {
-    let digits = value.replace(/\D/g,'');
-    if (digits.startsWith('7') || digits.startsWith('8')) digits = digits.slice(1);
-    return digits.slice(0,10);
-  };
-
-  const formatPhone = (value = '') => {
-    const digits = phoneDigits(value);
-    if (!digits) return '';
-
-    let result = '+7 (' + digits.slice(0,3);
-    if (digits.length > 3) result += ') ' + digits.slice(3,6);
-    if (digits.length > 6) result += '-' + digits.slice(6,8);
-    if (digits.length > 8) result += '-' + digits.slice(8,10);
-    return result;
-  };
 
   const contactValues = {
     'Телефон':'',
@@ -1556,7 +1541,7 @@
     inputs.contact.maxLength = isPhone ? 18 : 64;
 
     if (isPhone) {
-      inputs.contact.value = formatPhone(contactValues['Телефон']);
+      inputs.contact.value = nexrouteFormatPhone(contactValues['Телефон']);
     } else {
       inputs.contact.value = contactValues['Telegram'];
     }
@@ -1582,9 +1567,9 @@
 
   inputs.contact.addEventListener('input', () => {
     if (activeChannel() === 'Телефон') {
-      const digits = phoneDigits(inputs.contact.value);
+      const digits = nexroutePhoneDigits(inputs.contact.value);
       contactValues['Телефон'] = digits;
-      inputs.contact.value = formatPhone(digits);
+      inputs.contact.value = nexrouteFormatPhone(digits);
     } else {
       contactValues['Telegram'] = inputs.contact.value;
     }
@@ -1611,7 +1596,7 @@
 
     if (detail.contact) {
       if (activeChannel() === 'Телефон') {
-        contactValues['Телефон'] = phoneDigits(detail.contact);
+        contactValues['Телефон'] = nexroutePhoneDigits(detail.contact);
       } else {
         contactValues['Telegram'] = detail.contact.trim();
       }
@@ -1646,7 +1631,7 @@
     }
 
     if (activeChannel() === 'Телефон') {
-      if (phoneDigits(inputs.contact.value).length !== 10) {
+      if (nexroutePhoneDigits(inputs.contact.value).length !== 10) {
         fieldError(inputs.contact,'Введите номер полностью: +7 (___) ___-__-__.');
         firstInvalid ||= inputs.contact;
       }

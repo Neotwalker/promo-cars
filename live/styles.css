@@ -1846,16 +1846,8 @@
   .configurator__choice,
   .configurator__field,
   .configurator__summary-media img,
-  .configurator__summary-media .configurator__summary-image--incoming,
-  .configurator__toasts .toast{
+  .configurator__summary-media .configurator__summary-image--incoming{
     transition:none;
-  }
-
-  .configurator__toasts .toast,
-  .configurator__toasts .toast.is-visible,
-  .configurator__toasts .toast.is-leaving{
-    opacity:1;
-    transform:none;
   }
 
   .journey{
@@ -3407,9 +3399,6 @@
 }
 @media(prefers-reduced-motion:reduce){
   .final-cta__gradient-wrap{
-    transition:none;
-  }
-  .toast-stack .toast{
     transition:none;
   }
 }
