@@ -8,32 +8,104 @@
   <link rel="stylesheet" href="../ui-kit/styles.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body class="utility-page">
-  <header class="utility-header">
-    <div class="container utility-header__inner">
-      <a class="utility-header__brand" href="./index.html">NEXROUTE AUTO</a>
-      <a class="link utility-header__back" href="./index.html">← На главную</a>
+<body class="standalone-page">
+
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+  <header class="site-header site-header--burger" data-menu>
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="./index.html#hero" aria-label="NEXROUTE AUTO — на главную">NEXROUTE AUTO</a>
+      <button class="menu-toggle site-header__menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Открыть меню" data-menu-toggle>
+        <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+
+    <div class="menu-panel" id="site-menu" data-menu-panel hidden>
+      <div class="container menu-panel__inner">
+        <div class="menu-panel__layout">
+          <nav class="menu-panel__nav" aria-label="Навигация">
+            <a href="./index.html#hero"><span>01</span>Главная</a>
+            <a href="./index.html#cars"><span>02</span>Автомобили</a>
+            <a href="./index.html#journey"><span>03</span>Маршрут</a>
+            <a href="./index.html#configurator"><span>04</span>Расчёт</a>
+            <a href="./index.html#proof"><span>05</span>Кейсы</a>
+            <a href="./index.html#security"><span>06</span>Условия</a>
+            <a href="./index.html#faq"><span>07</span>FAQ</a>
+            <a href="./index.html#final-calculation"><span>08</span>Заявка</a>
+          </nav>
+
+          <aside class="menu-panel__contact" aria-label="Контакты">
+            <p class="menu-panel__eyebrow">Связь</p>
+            <div class="menu-panel__contacts contact-list contact-list--inverse">
+              <a class="contact-list__link" href="tel:+79990000000"><span class="contact-list__label">Телефон</span><strong>+7 (999) 000-00-00</strong></a>
+              <a class="contact-list__link" href="mailto:hello@nexroute.auto"><span class="contact-list__label">Почта</span><strong>hello@nexroute.auto</strong></a>
+            </div>
+            <div class="menu-panel__meta">
+              <span><small>Город</small>Москва</span>
+              <span><small>Время работы</small>10:00–20:00</span>
+            </div>
+            <div class="social-links social-links--inverse" aria-label="Соцсети и мессенджеры">
+              <a class="social-links__link" href="https://wa.me/79990000000" target="_blank" rel="noopener noreferrer" aria-label="Перейти в WhatsApp" data-tooltip="Перейти в WhatsApp"><img src="../ui-kit/assets/social/whatsapp.svg" alt="" aria-hidden="true"></a>
+              <a class="social-links__link" href="https://t.me/nexroute_auto" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Telegram" data-tooltip="Перейти в Telegram"><img src="../ui-kit/assets/social/telegram.svg" alt="" aria-hidden="true"></a>
+              <a class="social-links__link" href="https://max.ru/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в MAX" data-tooltip="Перейти в MAX"><img src="../ui-kit/assets/social/max.svg" alt="" aria-hidden="true"></a>
+              <a class="social-links__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Instagram" data-tooltip="Перейти в Instagram"><img src="../ui-kit/assets/social/instagram.svg" alt="" aria-hidden="true"></a>
+              <a class="social-links__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в VK" data-tooltip="Перейти в VK"><img src="../ui-kit/assets/social/vk.svg" alt="" aria-hidden="true"></a>
+            </div>
+          </aside>
+        </div>
+
+        <div class="menu-panel__footer">
+          <span>Китай → Россия</span>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main class="utility-main">
-    <section class="not-found">
-      <div class="container not-found__inner">
-        <p class="not-found__code">Ошибка 404</p>
-        <h1 class="type-h1 not-found__title">Страница не найдена.</h1>
-        <p class="type-body not-found__text">Адрес мог измениться или быть введён с ошибкой. Вернитесь на главную страницу и продолжите оттуда.</p>
-        <a class="button button--primary not-found__action" href="./index.html">
+  <main class="standalone-page__main" id="main-content" tabindex="-1">
+    <section class="not-found-page">
+      <div class="container not-found-page__inner">
+        <p class="eyebrow not-found-page__eyebrow">Ошибка 404</p>
+        <h1 class="type-h1 not-found-page__title">Страница не найдена.</h1>
+        <p class="type-body not-found-page__text">Адрес мог измениться или быть введён с ошибкой. Вернитесь на главную страницу и продолжите оттуда.</p>
+        <a class="button button--primary not-found-page__action" href="./index.html">
           <span>На главную</span><span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
   </main>
 
-  <footer class="utility-footer">
-    <div class="container utility-footer__inner">
-      <span>NEXROUTE AUTO</span>
-      <span>Китай → Россия</span>
+
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <strong>NEXROUTE AUTO</strong>
+        <p>Автомобили из Китая → Россия</p>
+        <p>Подбор · проверка · выкуп · логистика · оформление</p>
+      </div>
+      <nav class="site-footer__nav" aria-label="Навигация в подвале">
+        <span class="site-footer__nav-title">Навигация</span>
+        <a class="link link--nav link--inverse" href="./index.html#cars">Автомобили</a>
+        <a class="link link--nav link--inverse" href="./index.html#journey">Маршрут</a>
+        <a class="link link--nav link--inverse" href="./index.html#proof">Кейсы</a>
+        <a class="link link--nav link--inverse" href="./index.html#faq">Вопросы</a>
+      </nav>
+      <div class="site-footer__contacts contact-list contact-list--inverse">
+        <a class="contact-list__link site-footer__contact-link" href="mailto:hello@nexroute.auto"><span class="contact-list__label">Почта</span><strong>hello@nexroute.auto</strong></a>
+        <a class="contact-list__link site-footer__contact-link" href="tel:+79990000000"><span class="contact-list__label">Телефон</span><strong>+7 (999) 000-00-00</strong></a>
+        <div class="social-links social-links--inverse" aria-label="Соцсети и мессенджеры">
+          <a class="social-links__link" href="https://wa.me/79990000000" target="_blank" rel="noopener noreferrer" aria-label="Перейти в WhatsApp" data-tooltip="Перейти в WhatsApp"><img src="../ui-kit/assets/social/whatsapp.svg" alt="" aria-hidden="true"></a>
+          <a class="social-links__link" href="https://t.me/nexroute_auto" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Telegram" data-tooltip="Перейти в Telegram"><img src="../ui-kit/assets/social/telegram.svg" alt="" aria-hidden="true"></a>
+          <a class="social-links__link" href="https://max.ru/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в MAX" data-tooltip="Перейти в MAX"><img src="../ui-kit/assets/social/max.svg" alt="" aria-hidden="true"></a>
+          <a class="social-links__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Instagram" data-tooltip="Перейти в Instagram"><img src="../ui-kit/assets/social/instagram.svg" alt="" aria-hidden="true"></a>
+          <a class="social-links__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в VK" data-tooltip="Перейти в VK"><img src="../ui-kit/assets/social/vk.svg" alt="" aria-hidden="true"></a>
+        </div>
+      </div>
     </div>
+    <div class="container site-footer__legal">
+      <span class="site-footer__copyright">© 2026 NEXROUTE AUTO</span>
+      <a class="link link--inverse site-footer__legal-link" href="./privacy-policy.html">Политика обработки персональных данных</a>
+    </div>
+    <div class="container site-footer__demo">Демонстрационная версия сайта.</div>
   </footer>
+  <script src="../ui-kit/app.js"></script>
 </body>
 </html>
