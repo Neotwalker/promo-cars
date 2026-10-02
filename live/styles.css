@@ -3198,6 +3198,7 @@
   opacity:0;
   transition:opacity 420ms ease;
   pointer-events:none;
+  background:#0b0e12;
 }
 .final-cta__gradient-wrap.is-loaded{
   opacity:1;

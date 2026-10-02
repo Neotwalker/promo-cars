@@ -1489,154 +1489,259 @@
   if (!section || !canvas || !wrap) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const activeSpeed = 1.5;
-  let gradient = null;
-  let visible = false;
-
-  const config = {
-    colors:[
-      {color:'#101216',enabled:true},
-      {color:'#7D8791',enabled:true},
-      {color:'#D8D6D0',enabled:false},
-      {color:'#0B151D',enabled:true},
-      {color:'#0B151D',enabled:true},
-      {color:'#D8D6D0',enabled:false}
-    ],
-    speed:reduceMotion.matches ? 0 : activeSpeed,
-    horizontalPressure:4,
-    verticalPressure:3,
-    waveFrequencyX:0,
-    waveFrequencyY:0,
-    waveAmplitude:0,
-    secondaryWaveEnabled:false,
-    secondaryWaveFrequencyX:3,
-    secondaryWaveFrequencyY:3,
-    secondaryWaveAmplitude:5,
-    secondaryWaveSpeed:.6,
-    secondaryWaveAngle:1,
-    shadows:2,
-    highlights:7,
-    colorBrightness:1,
-    colorSaturation:8,
-    wireframe:false,
+  const gl = canvas.getContext('webgl',{
+    alpha:false,
     antialias:false,
-    colorBlending:6,
-    backgroundColor:'#000000',
-    backgroundAlpha:1,
-    grainScale:0,
-    grainSparsity:0,
-    grainIntensity:0,
-    grainSpeed:0,
-    resolution:.5,
-    yOffset:0,
-    yOffsetWaveMultiplier:0,
-    yOffsetColorMultiplier:0,
-    yOffsetFlowMultiplier:10.2,
-    flowDistortionA:5,
-    flowDistortionB:7.7,
-    flowScale:2.6,
-    flowEase:.36,
-    flowEnabled:false,
-    enableProceduralTexture:false,
-    transparentTextureVoid:false,
-    textureMode:'bitmap',
-    bakeEdgeSoftness:1,
-    textureVoidLikelihood:.22,
-    textureVoidWidthMin:120,
-    textureVoidWidthMax:150,
-    textureBandDensity:1.9,
-    textureColorBlending:.12,
-    textureSeed:333,
-    textureEase:.75,
-    proceduralBackgroundColor:'#D0DBFB',
-    textureShapeTriangles:20,
-    textureShapeCircles:15,
-    textureShapeBars:15,
-    textureShapeSquiggles:10,
-    domainWarpEnabled:false,
-    domainWarpIntensity:0,
-    domainWarpScale:3,
-    vignetteIntensity:0,
-    vignetteRadius:.8,
-    fresnelEnabled:false,
-    fresnelPower:2,
-    fresnelIntensity:.5,
-    fresnelColor:'#FFFFFF',
-    iridescenceEnabled:false,
-    iridescenceIntensity:.5,
-    iridescenceSpeed:1,
-    prismEdgeEnabled:false,
-    prismEdgeIntensity:.5,
-    prismEdgeThinness:3,
-    prismEdgeSpread:1,
-    prismEdgeSpeed:.5,
-    prismEdgeRipple:1,
-    bloomIntensity:0,
-    bloomThreshold:.7,
-    chromaticAberration:0,
-    shapeType:'plane',
-    shapeRotationX:.16,
-    shapeRotationY:Math.PI,
-    shapeRotationZ:-Math.PI,
-    shapeAutoRotateSpeedX:0,
-    shapeAutoRotateSpeedY:0,
-    sphereRadius:15,
-    torusRadius:15,
-    torusTube:5,
-    cylinderRadius:10,
-    cylinderHeight:40,
-    planeBend:0,
-    planeTwist:0,
-    silhouetteFade:.25,
-    cylinderFade:.08,
-    ribbonFade:.05,
-    flatShading:true,
-    cameraLock:true,
-    cameraX:0,
-    cameraY:0,
-    cameraZ:0,
-    cameraRotationX:0,
-    cameraRotationY:0,
-    cameraRotationZ:0,
-    cameraZoom:1
+    depth:false,
+    stencil:false,
+    powerPreference:'low-power'
+  });
+
+  if (!gl) return;
+
+  const vertexSource = `
+    attribute vec2 a_position;
+
+    void main() {
+      gl_Position = vec4(a_position,0.0,1.0);
+    }
+  `;
+
+  const fragmentSource = `
+    precision highp float;
+
+    uniform vec2 u_resolution;
+    uniform float u_time;
+
+    vec3 hex101216() { return vec3(16.0,18.0,22.0) / 255.0; }
+    vec3 hex7D8791() { return vec3(125.0,135.0,145.0) / 255.0; }
+    vec3 hex0B151D() { return vec3(11.0,21.0,29.0) / 255.0; }
+
+    float softField(vec2 uv,vec2 center,vec2 scale,float softness) {
+      vec2 p = (uv - center) / scale;
+      float d = dot(p,p);
+      return exp(-d * softness);
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+      float aspect = u_resolution.x / max(u_resolution.y,1.0);
+      vec2 p = vec2((uv.x - 0.5) * aspect,uv.y - 0.5);
+
+      float t = u_time * 0.055;
+
+      // Slow pressure-field drift. No waves, particles or procedural texture.
+      vec2 warp = vec2(
+        sin(p.y * 2.3 + t * 0.72) + sin(p.y * 4.1 - t * 0.41),
+        cos(p.x * 2.0 - t * 0.61) + sin(p.x * 3.4 + t * 0.33)
+      ) * 0.018;
+
+      vec2 q = p + warp;
+
+      vec2 c1 = vec2(
+        -0.28 * aspect + sin(t * 0.74) * 0.12 * aspect,
+         0.18 + cos(t * 0.61) * 0.10
+      );
+
+      vec2 c2 = vec2(
+         0.30 * aspect + cos(t * 0.53) * 0.14 * aspect,
+        -0.04 + sin(t * 0.67) * 0.11
+      );
+
+      vec2 c3 = vec2(
+         0.02 * aspect + sin(t * 0.38 + 1.7) * 0.20 * aspect,
+        -0.24 + cos(t * 0.47 + 0.8) * 0.08
+      );
+
+      float steel = softField(q,c1,vec2(0.62 * aspect,0.48),1.65);
+      float nightA = softField(q,c2,vec2(0.72 * aspect,0.58),1.35);
+      float nightB = softField(q,c3,vec2(0.78 * aspect,0.52),1.45);
+
+      // Secondary broad field keeps the whole surface moving as one composition.
+      float broad = 0.5 + 0.5 * sin(
+        q.x * 1.35 + q.y * 1.05 + t * 0.56
+      );
+      broad = smoothstep(0.18,0.88,broad);
+
+      vec3 color = hex101216();
+
+      // Steel is intentionally restrained: enough to read movement, never "acid".
+      color = mix(color,hex7D8791(),steel * 0.30);
+      color = mix(color,hex0B151D(),nightA * 0.72);
+      color = mix(color,hex0B151D() * 1.10,nightB * 0.48);
+
+      vec3 lifted = mix(hex101216(),hex7D8791(),0.18);
+      color = mix(color,lifted,broad * 0.12);
+
+      // Keep the form area readable while preserving a living field.
+      float centerCalm = smoothstep(0.65,0.05,length(vec2(p.x / max(aspect,1.0),p.y)));
+      color = mix(color,hex101216(),centerCalm * 0.10);
+
+      gl_FragColor = vec4(color,1.0);
+    }
+  `;
+
+  const compile = (type,source) => {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader,source);
+    gl.compileShader(shader);
+
+    if (!gl.getShaderParameter(shader,gl.COMPILE_STATUS)) {
+      console.warn('Final CTA gradient shader failed:',gl.getShaderInfoLog(shader));
+      gl.deleteShader(shader);
+      return null;
+    }
+
+    return shader;
   };
 
-  const syncMotion = () => {
-    if (!gradient) return;
-    gradient.speed = (!reduceMotion.matches && visible) ? activeSpeed : 0;
+  const vertexShader = compile(gl.VERTEX_SHADER,vertexSource);
+  const fragmentShader = compile(gl.FRAGMENT_SHADER,fragmentSource);
+  if (!vertexShader || !fragmentShader) return;
+
+  const program = gl.createProgram();
+  gl.attachShader(program,vertexShader);
+  gl.attachShader(program,fragmentShader);
+  gl.linkProgram(program);
+
+  if (!gl.getProgramParameter(program,gl.LINK_STATUS)) {
+    console.warn('Final CTA gradient program failed:',gl.getProgramInfoLog(program));
+    return;
+  }
+
+  gl.useProgram(program);
+
+  const positionLocation = gl.getAttribLocation(program,'a_position');
+  const resolutionLocation = gl.getUniformLocation(program,'u_resolution');
+  const timeLocation = gl.getUniformLocation(program,'u_time');
+
+  const buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+  gl.bufferData(
+    gl.ARRAY_BUFFER,
+    new Float32Array([
+      -1,-1,
+       1,-1,
+      -1, 1,
+      -1, 1,
+       1,-1,
+       1, 1
+    ]),
+    gl.STATIC_DRAW
+  );
+
+  gl.enableVertexAttribArray(positionLocation);
+  gl.vertexAttribPointer(positionLocation,2,gl.FLOAT,false,0,0);
+
+  let frame = 0;
+  let visible = false;
+  let loaded = false;
+  let elapsed = 17.0;
+  let lastTimestamp = 0;
+  let lastPaint = 0;
+
+  const resize = () => {
+    const rect = section.getBoundingClientRect();
+    const renderScale = 0.5;
+    const width = Math.max(1,Math.round(rect.width * renderScale));
+    const height = Math.max(1,Math.round(rect.height * renderScale));
+
+    if (canvas.width === width && canvas.height === height) return;
+
+    canvas.width = width;
+    canvas.height = height;
+    gl.viewport(0,0,width,height);
+    gl.uniform2f(resolutionLocation,width,height);
+  };
+
+  const render = () => {
+    gl.clearColor(11 / 255,14 / 255,18 / 255,1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform1f(timeLocation,elapsed);
+    gl.drawArrays(gl.TRIANGLES,0,6);
+
+    if (!loaded) {
+      loaded = true;
+      wrap.classList.add('is-loaded');
+    }
+  };
+
+  const canAnimate = () => visible && !document.hidden && !reduceMotion.matches;
+
+  const tick = (timestamp) => {
+    frame = 0;
+
+    const delta = lastTimestamp
+      ? Math.min(timestamp - lastTimestamp,50)
+      : 0;
+
+    lastTimestamp = timestamp;
+
+    // ~30 FPS is enough for a background field and keeps GPU use low.
+    if (timestamp - lastPaint >= 33) {
+      elapsed += delta * 0.001 * 1.5;
+      lastPaint = timestamp;
+      render();
+    }
+
+    if (canAnimate()) frame = requestAnimationFrame(tick);
+  };
+
+  const start = () => {
+    if (!canAnimate() || frame) return;
+    lastTimestamp = 0;
+    frame = requestAnimationFrame(tick);
+  };
+
+  const stop = () => {
+    if (!frame) return;
+    cancelAnimationFrame(frame);
+    frame = 0;
+    lastTimestamp = 0;
   };
 
   const observer = new IntersectionObserver((entries) => {
     visible = entries[0]?.isIntersecting ?? false;
-    syncMotion();
+    if (canAnimate()) start();
+    else stop();
   },{rootMargin:'10% 0px',threshold:.02});
 
   observer.observe(section);
 
-  reduceMotion.addEventListener?.('change',syncMotion);
+  const resizeObserver = new ResizeObserver(() => {
+    resize();
+    render();
+  });
 
-  import('https://cdn.jsdelivr.net/npm/@firecms/neat@1.1.0/+esm')
-    .then(({NeatGradient}) => {
-      gradient = new NeatGradient({
-        ref:canvas,
-        ...config
-      });
+  resizeObserver.observe(section);
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => wrap.classList.add('is-loaded'));
-      });
+  document.addEventListener('visibilitychange',() => {
+    if (canAnimate()) start();
+    else stop();
+  });
 
-      syncMotion();
-    })
-    .catch((error) => {
-      console.warn('Final CTA Neat gradient failed to load:',error);
-    });
+  reduceMotion.addEventListener?.('change',() => {
+    if (reduceMotion.matches) {
+      stop();
+      elapsed = 17.0;
+      render();
+    } else if (canAnimate()) {
+      start();
+    }
+  });
 
   window.addEventListener('pagehide',() => {
+    stop();
     observer.disconnect();
-    gradient?.destroy?.();
-    gradient = null;
+    resizeObserver.disconnect();
+    gl.deleteBuffer(buffer);
+    gl.deleteProgram(program);
+    gl.deleteShader(vertexShader);
+    gl.deleteShader(fragmentShader);
   },{once:true});
+
+  resize();
+  render();
 })();
 
 
