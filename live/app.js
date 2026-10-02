@@ -1,3 +1,23 @@
+(() => {
+  const header = document.querySelector('.site-header--hero');
+  if (!header) return;
+
+  let frame = 0;
+
+  const syncHeader = () => {
+    frame = 0;
+    header.classList.toggle('site-header--scrolled',window.scrollY > 24);
+  };
+
+  const scheduleHeader = () => {
+    if (frame) return;
+    frame = requestAnimationFrame(syncHeader);
+  };
+
+  syncHeader();
+  window.addEventListener('scroll',scheduleHeader,{passive:true});
+})();
+
 const nexroutePhoneDigits = (value = '') => {
   let digits = value.replace(/\D/g,'');
   if (digits.startsWith('7') || digits.startsWith('8')) digits = digits.slice(1);
