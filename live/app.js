@@ -545,7 +545,8 @@ const nexrouteFormatPhone = (value = '') => {
       'Волгоград'
     ];
 
-    const money = (value) => new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
+    const moneyFormatter = new Intl.NumberFormat('ru-RU');
+    const money = (value) => moneyFormatter.format(value) + ' ₽';
     const form = configurator.querySelector('[data-config-form]');
     const layout = configurator.querySelector('[data-config-layout]');
     const summary = configurator.querySelector('[data-config-summary]');
@@ -586,13 +587,9 @@ const nexrouteFormatPhone = (value = '') => {
       summaryNote:configurator.querySelector('[data-summary-note]'),
       regional:configurator.querySelector('[data-summary-regional]'),
       regionalLabel:configurator.querySelector('[data-summary-regional-label]'),
-      breakdown:configurator.querySelector('[data-summary-breakdown]')
+      breakdownValues:[...configurator.querySelectorAll('[data-summary-breakdown] > div:not(.configurator__regional) dd')],
+      contactStep:configurator.querySelector('[data-config-step="contact"]')
     };
-
-    Object.values(pricing).forEach((item) => {
-      const preload = new Image();
-      preload.src = item.image;
-    });
 
     const visibleOrder = () => pricing[state.model]
       ? ['model','condition','budget','city','contact']
@@ -789,7 +786,7 @@ const nexrouteFormatPhone = (value = '') => {
       const condition = state.condition || 'Состояние не выбрано';
       const budget = state.budget || 'Бюджет не выбран';
       const isMoscow = city.trim().toLowerCase() === 'москва';
-      const dds = [...refs.breakdown.querySelectorAll('div:not(.configurator__regional) dd')];
+      const dds = refs.breakdownValues;
 
       refs.summaryModel.textContent = state.model || 'Автомобиль не выбран';
       refs.summaryMeta.textContent = [condition,power,budget,city].join(' · ');
@@ -822,10 +819,8 @@ const nexrouteFormatPhone = (value = '') => {
     };
 
     const syncSummaryPlacement = () => {
-      const contactStep = configurator.querySelector('[data-config-step="contact"]');
-
       if (compactSummary.matches && activeName() === 'contact') {
-        if (summary.parentElement !== form) contactStep.before(summary);
+        if (summary.parentElement !== form) refs.contactStep.before(summary);
       } else if (summary.parentElement !== layout) {
         layout.append(summary);
       }
