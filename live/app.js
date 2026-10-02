@@ -132,6 +132,24 @@ const nexrouteFormatPhone = (value = '') => {
 })();
 
 (() => {
+  const links = [...document.querySelectorAll('[data-demo-policy]')];
+  if (!links.length) return;
+
+  links.forEach((link) => {
+    link.addEventListener('click',(event) => {
+      event.preventDefault();
+      document.dispatchEvent(new CustomEvent('nexroute:toast',{
+        detail:{
+          title:'Демонстрационная версия.',
+          message:'Политика обработки данных подключается при адаптации решения под конкретную компанию.',
+          type:'info'
+        }
+      }));
+    });
+  });
+})();
+
+(() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const video = document.querySelector('[data-hero-video]');
@@ -590,6 +608,25 @@ const nexrouteFormatPhone = (value = '') => {
       breakdownValues:[...configurator.querySelectorAll('[data-summary-breakdown] > div:not(.configurator__regional) dd')],
       contactStep:configurator.querySelector('[data-config-step="contact"]')
     };
+
+    const warmConfiguratorMedia = () => {
+      Object.values(pricing).forEach((item) => {
+        const image = new Image();
+        image.decoding = 'async';
+        image.src = item.image;
+      });
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      warmConfiguratorMedia();
+    } else {
+      const mediaObserver = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        mediaObserver.disconnect();
+        warmConfiguratorMedia();
+      },{rootMargin:'1000px 0px',threshold:0});
+      mediaObserver.observe(configurator);
+    }
 
     const visibleOrder = () => pricing[state.model]
       ? ['model','condition','budget','city','contact']
