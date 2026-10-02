@@ -1474,7 +1474,7 @@ const nexrouteFormatPhone = (value = '') => {
     return {toggle,back,details,thumbs,visual,storyState,viewerState};
   };
 
-  const states = new Map(cards.map((card) => [card,buildDetail(card)]));
+  const states = new Map();
 
   const setOpen = (card,open,{focus=false} = {}) => {
     const state = states.get(card);
@@ -1510,12 +1510,32 @@ const nexrouteFormatPhone = (value = '') => {
     }
   };
 
-  cards.forEach((card) => {
-    const state = states.get(card);
-    if (!state) return;
-    state.toggle.addEventListener('click',() => setOpen(card,true,{focus:true}));
-    state.back.addEventListener('click',() => setOpen(card,false,{focus:true}));
-  });
+  const initCases = () => {
+    if (states.size) return;
+
+    cards.forEach((card) => {
+      const state = buildDetail(card);
+      if (!state) return;
+
+      states.set(card,state);
+      state.toggle.addEventListener('click',() => setOpen(card,true,{focus:true}));
+      state.back.addEventListener('click',() => setOpen(card,false,{focus:true}));
+    });
+  };
+
+  const proofSection = cards[0]?.closest('.proof');
+
+  if (!proofSection || !('IntersectionObserver' in window)) {
+    initCases();
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      initCases();
+    },{rootMargin:'800px 0px',threshold:0});
+
+    observer.observe(proofSection);
+  }
 })();
 
 
