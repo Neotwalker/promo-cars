@@ -1501,7 +1501,6 @@ const nexrouteFormatPhone = (value = '') => {
   const form = modal?.querySelector('[data-car-lead-form]');
   if (!modal || !form) return;
 
-  const submit = form.querySelector('[data-car-lead-submit]');
   const consent = form.querySelector('[data-car-lead-consent]');
   const consentMessage = form.querySelector('[data-car-lead-consent-message]');
   const channels = [...form.querySelectorAll('[data-car-lead-channel]')];
@@ -1683,7 +1682,6 @@ const nexrouteFormatPhone = (value = '') => {
   const form = section?.querySelector('[data-final-form]');
   if (!section || !form) return;
 
-  const submit = section.querySelector('[data-final-submit]');
   const consent = form.querySelector('[data-final-consent]');
   const consentMessage = form.querySelector('[data-final-consent-message]');
   const channels = [...form.querySelectorAll('[data-final-channel]')];
