@@ -3214,8 +3214,18 @@ main>section[id]{
 }
 
 @media(max-width:47.9375rem){
+  .car-lead-modal{
+    place-items:stretch;
+    padding:0;
+  }
+
   .car-lead-modal .modal__dialog{
-    max-height:calc(100dvh - max(.5rem,env(safe-area-inset-top)));
+    width:100%;
+    height:100vh;
+    height:100dvh;
+    max-height:none;
+    border:0;
+    border-radius:0;
   }
 
   .car-lead-modal .modal__header{
