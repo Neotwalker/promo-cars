@@ -954,10 +954,6 @@ const nexrouteFormatPhone = (value = '') => {
 
     });
 
-    document.querySelector('[data-config-open]')?.addEventListener('click', () => {
-      configurator.scrollIntoView({behavior:reduceMotion.matches ? 'auto' : 'smooth',block:'start'});
-    });
-
     document.querySelector('[data-config-pick]')?.addEventListener('click', () => {
       state.model = 'Нужен подбор';
       state.power = '';
@@ -1539,14 +1535,14 @@ const nexrouteFormatPhone = (value = '') => {
   };
 
   document.addEventListener('click',(event) => {
-    const opener = event.target.closest('[data-modal-open="car-lead-modal"][data-car-request-model]');
+    const opener = event.target.closest('[data-modal-open="car-lead-modal"]');
     if (!opener) return;
 
     inputs.model.value = opener.dataset.carRequestModel || '';
     restoreMessage(inputs.model);
   });
 
-  [inputs.city,inputs.name].forEach((input) => {
+  [inputs.model,inputs.city,inputs.name].forEach((input) => {
     input?.addEventListener('input',() => restoreMessage(input));
   });
 
@@ -1577,7 +1573,7 @@ const nexrouteFormatPhone = (value = '') => {
     let firstInvalid = null;
 
     if (!inputs.model.value.trim()) {
-      fieldError(inputs.model,'Не удалось определить автомобиль. Закройте форму и выберите карточку ещё раз.');
+      fieldError(inputs.model,'Укажите модель или напишите «нужен подбор».');
       firstInvalid ||= inputs.model;
     }
     if (!inputs.city.value.trim()) {

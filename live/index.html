@@ -24,6 +24,11 @@
             <a href="#hero"><span>01</span>Главная</a>
             <a href="#cars"><span>02</span>Автомобили</a>
             <a href="#journey"><span>03</span>Маршрут</a>
+            <a href="#configurator"><span>04</span>Расчёт</a>
+            <a href="#proof"><span>05</span>Кейсы</a>
+            <a href="#security"><span>06</span>Условия</a>
+            <a href="#faq"><span>07</span>FAQ</a>
+            <a href="#final-calculation"><span>08</span>Заявка</a>
           </nav>
 
           <aside class="menu-panel__contact" aria-label="Контакты">
@@ -75,7 +80,7 @@
           <h1 class="hero__title">Вы выбираете<br>автомобиль.<br>Остальное —<br>маршрут.</h1>
           <p class="hero__lead">Подбор, проверка, выкуп, логистика и оформление — в одном маршруте. До старта фиксируем расчёт и показываем, из чего складывается цена.</p>
           <div class="hero__actions" aria-label="Основные действия">
-            <button class="button button--primary button--inverse hero__action" type="button" data-config-open>Получить расчёт <span class="hero__action-icon" aria-hidden="true">→</span></button>
+            <button class="button button--primary button--inverse hero__action" type="button" data-modal-open="car-lead-modal">Оставить заявку <span class="hero__action-icon" aria-hidden="true">→</span></button>
             <a class="button button--ghost button--inverse hero__action" href="#journey">Смотреть маршрут <span class="hero__action-icon" aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -977,7 +982,7 @@
         <div class="modal__header-copy">
           <p class="eyebrow">Заявка на автомобиль</p>
           <h2 class="type-h2" id="car-lead-modal-title">Оставить заявку</h2>
-          <p>Укажите город и удобный способ связи. Автомобиль уже подставили из карточки.</p>
+          <p>Укажите автомобиль, город и удобный способ связи.</p>
         </div>
         <button class="modal__close" type="button" data-modal-close aria-label="Закрыть форму заявки">×</button>
       </header>
@@ -985,8 +990,8 @@
       <form class="lead-form" novalidate data-car-lead-form>
         <label class="field field--inverse" data-car-lead-field>
           <span class="field__label">Автомобиль</span>
-          <input class="field__control" type="text" name="model" readonly aria-readonly="true" data-car-lead-input="model">
-          <small class="field__message" data-car-lead-message data-default-message=""></small>
+          <input class="field__control" type="text" name="model" placeholder="Например, Zeekr 001 или нужен подбор" autocomplete="off" data-car-lead-input="model">
+          <small class="field__message" data-car-lead-message data-default-message="Укажите модель или напишите «нужен подбор».">Укажите модель или напишите «нужен подбор».</small>
         </label>
 
         <label class="field field--inverse" data-car-lead-field>
