@@ -211,18 +211,21 @@ const nexrouteFormatPhone = (value = '') => {
 
     const warmJourneyImages = () => {
       journeyImages.forEach((image) => {
+        if (!image.src && image.dataset.src) {
+          image.src = image.dataset.src;
+        }
         image.decode?.().catch(() => {});
       });
     };
 
-    if (!('IntersectionObserver' in window)) {
+    if (!('IntersectionObserver' in window) || location.hash === '#journey') {
       warmJourneyImages();
     } else {
       const imageObserver = new IntersectionObserver((entries) => {
         if (!entries.some((entry) => entry.isIntersecting)) return;
         imageObserver.disconnect();
         warmJourneyImages();
-      },{rootMargin:'700px 0px',threshold:0});
+      },{rootMargin:'500px 0px',threshold:0});
 
       imageObserver.observe(journey);
     }
