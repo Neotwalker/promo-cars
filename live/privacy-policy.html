@@ -8,31 +8,79 @@
   <link rel="stylesheet" href="../ui-kit/styles.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body class="utility-page">
-  <header class="utility-header">
-    <div class="container utility-header__inner">
-      <a class="utility-header__brand" href="./index.html">NEXROUTE AUTO</a>
-      <a class="link utility-header__back" href="./index.html">← На главную</a>
+<body class="standalone-page">
+
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+  <header class="site-header site-header--burger" data-menu>
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="./index.html#hero" aria-label="NEXROUTE AUTO — на главную">NEXROUTE AUTO</a>
+      <button class="menu-toggle site-header__menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Открыть меню" data-menu-toggle>
+        <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+
+    <div class="menu-panel" id="site-menu" data-menu-panel hidden>
+      <div class="container menu-panel__inner">
+        <div class="menu-panel__layout">
+          <nav class="menu-panel__nav" aria-label="Навигация">
+            <a href="./index.html#hero"><span>01</span>Главная</a>
+            <a href="./index.html#cars"><span>02</span>Автомобили</a>
+            <a href="./index.html#journey"><span>03</span>Маршрут</a>
+            <a href="./index.html#configurator"><span>04</span>Расчёт</a>
+            <a href="./index.html#proof"><span>05</span>Кейсы</a>
+            <a href="./index.html#security"><span>06</span>Условия</a>
+            <a href="./index.html#faq"><span>07</span>FAQ</a>
+            <a href="./index.html#final-calculation"><span>08</span>Заявка</a>
+          </nav>
+
+          <aside class="menu-panel__contact" aria-label="Контакты">
+            <p class="menu-panel__eyebrow">Связь</p>
+            <div class="menu-panel__contacts contact-list contact-list--inverse">
+              <a class="contact-list__link" href="tel:+79990000000"><span class="contact-list__label">Телефон</span><strong>+7 (999) 000-00-00</strong></a>
+              <a class="contact-list__link" href="mailto:hello@nexroute.auto"><span class="contact-list__label">Почта</span><strong>hello@nexroute.auto</strong></a>
+            </div>
+            <div class="menu-panel__meta">
+              <span><small>Город</small>Москва</span>
+              <span><small>Время работы</small>10:00–20:00</span>
+            </div>
+            <div class="social-links social-links--inverse" aria-label="Соцсети и мессенджеры">
+              <a class="social-links__link" href="https://wa.me/79990000000" target="_blank" rel="noopener noreferrer" aria-label="Перейти в WhatsApp" data-tooltip="Перейти в WhatsApp"><img src="../ui-kit/assets/social/whatsapp.svg" alt="" aria-hidden="true"></a>
+              <a class="social-links__link" href="https://t.me/nexroute_auto" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Telegram" data-tooltip="Перейти в Telegram"><img src="../ui-kit/assets/social/telegram.svg" alt="" aria-hidden="true"></a>
+              <a class="social-links__link" href="https://max.ru/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в MAX" data-tooltip="Перейти в MAX"><img src="../ui-kit/assets/social/max.svg" alt="" aria-hidden="true"></a>
+              <a class="social-links__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Instagram" data-tooltip="Перейти в Instagram"><img src="../ui-kit/assets/social/instagram.svg" alt="" aria-hidden="true"></a>
+              <a class="social-links__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в VK" data-tooltip="Перейти в VK"><img src="../ui-kit/assets/social/vk.svg" alt="" aria-hidden="true"></a>
+            </div>
+          </aside>
+        </div>
+
+        <div class="menu-panel__footer">
+          <span>Китай → Россия</span>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main class="utility-main">
-    <section class="utility-hero" aria-labelledby="privacy-title">
-      <div class="container utility-hero__inner">
-        <p class="eyebrow utility-hero__eyebrow">Документы</p>
-        <h1 class="type-h1 utility-hero__title" id="privacy-title">Политика обработки персональных данных.</h1>
-        <p class="type-body utility-hero__lead">Страница показывает структуру политики для готового решения NEXROUTE AUTO. При адаптации сайта под конкретную компанию сюда подставляются её реквизиты, фактические сервисы, сроки хранения и контакт оператора.</p>
-        <div class="utility-note type-small">В демонстрационной версии реальный оператор персональных данных не назначен, а формы не подключены к CRM, почте или другому внешнему обработчику.</div>
+  <main class="standalone-page__main" id="main-content" tabindex="-1">
+    <section class="policy-page__hero" aria-labelledby="privacy-title">
+      <div class="container policy-page__hero-inner">
+        <p class="eyebrow">Документы</p>
+        <h1 class="type-h1 policy-page__title" id="privacy-title">Политика обработки персональных данных.</h1>
+        <p class="type-body policy-page__lead">Страница показывает структуру политики для готового решения NEXROUTE AUTO. При адаптации сайта под конкретную компанию сюда подставляются её реквизиты, фактические сервисы, сроки хранения и контакт оператора.</p>
+        <div class="surface-card policy-page__notice">
+          <div class="surface-card__body">
+            <p class="type-small">В демонстрационной версии реальный оператор персональных данных не назначен, а формы не подключены к CRM, почте или другому внешнему обработчику.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="container policy-content">
-      <section class="policy-content__section">
+    <div class="container policy-page__content">
+      <section class="policy-page__section">
         <h2 class="type-h3">1. Общие положения</h2>
         <p>Политика описывает логику обработки данных, которые посетитель может указать в формах сайта. После продажи и адаптации решения документ должен быть приведён в соответствие с фактической компанией-оператором, её процессами и используемыми сервисами.</p>
       </section>
 
-      <section class="policy-content__section">
+      <section class="policy-page__section">
         <h2 class="type-h3">2. Какие данные запрашивают формы</h2>
         <ul>
           <li>имя;</li>
@@ -43,38 +91,66 @@
         </ul>
       </section>
 
-      <section class="policy-content__section">
+      <section class="policy-page__section">
         <h2 class="type-h3">3. Цели обработки</h2>
         <p>Данные из форм предполагается использовать для ответа на запрос, подготовки расчёта стоимости и сроков, подбора автомобиля и последующей связи с пользователем по выбранному каналу.</p>
       </section>
 
-      <section class="policy-content__section">
+      <section class="policy-page__section">
         <h2 class="type-h3">4. Как обрабатываются данные</h2>
         <p>В рабочей версии сайта состав операций, место хранения, срок обработки и перечень подключённых сервисов определяет компания, которая использует готовое решение. В демонстрационной версии отправка формы имитируется интерфейсом и не передаёт введённые данные во внешнюю CRM.</p>
       </section>
 
-      <section class="policy-content__section">
+      <section class="policy-page__section">
         <h2 class="type-h3">5. Передача третьим лицам</h2>
         <p>До адаптации готового решения внешние получатели данных не настроены. Если после продажи подключаются CRM, почтовый сервис, аналитика, мессенджер или другой обработчик, соответствующая информация должна быть отражена в финальной редакции политики.</p>
       </section>
 
-      <section class="policy-content__section">
+      <section class="policy-page__section">
         <h2 class="type-h3">6. Срок хранения и удаление</h2>
         <p>Конкретные сроки хранения определяются реальным оператором после внедрения сайта. Они должны соответствовать назначению данных, внутренним процессам компании и применимым требованиям к обработке персональных данных.</p>
       </section>
 
-      <section class="policy-content__section">
+      <section class="policy-page__section">
         <h2 class="type-h3">7. Обращения по персональным данным</h2>
         <p>Контакт для запросов об уточнении, отзыве согласия или удалении данных указывается после адаптации сайта под конкретную компанию. В демонстрационной версии такой адрес намеренно не подставляется, чтобы не создавать фиктивные юридические реквизиты.</p>
       </section>
     </div>
   </main>
 
-  <footer class="utility-footer">
-    <div class="container utility-footer__inner">
-      <span>NEXROUTE AUTO</span>
-      <span>Демонстрационное готовое решение</span>
+
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <strong>NEXROUTE AUTO</strong>
+        <p>Автомобили из Китая → Россия</p>
+        <p>Подбор · проверка · выкуп · логистика · оформление</p>
+      </div>
+      <nav class="site-footer__nav" aria-label="Навигация в подвале">
+        <span class="site-footer__nav-title">Навигация</span>
+        <a class="link link--nav link--inverse" href="./index.html#cars">Автомобили</a>
+        <a class="link link--nav link--inverse" href="./index.html#journey">Маршрут</a>
+        <a class="link link--nav link--inverse" href="./index.html#proof">Кейсы</a>
+        <a class="link link--nav link--inverse" href="./index.html#faq">Вопросы</a>
+      </nav>
+      <div class="site-footer__contacts contact-list contact-list--inverse">
+        <a class="contact-list__link site-footer__contact-link" href="mailto:hello@nexroute.auto"><span class="contact-list__label">Почта</span><strong>hello@nexroute.auto</strong></a>
+        <a class="contact-list__link site-footer__contact-link" href="tel:+79990000000"><span class="contact-list__label">Телефон</span><strong>+7 (999) 000-00-00</strong></a>
+        <div class="social-links social-links--inverse" aria-label="Соцсети и мессенджеры">
+          <a class="social-links__link" href="https://wa.me/79990000000" target="_blank" rel="noopener noreferrer" aria-label="Перейти в WhatsApp" data-tooltip="Перейти в WhatsApp"><img src="../ui-kit/assets/social/whatsapp.svg" alt="" aria-hidden="true"></a>
+          <a class="social-links__link" href="https://t.me/nexroute_auto" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Telegram" data-tooltip="Перейти в Telegram"><img src="../ui-kit/assets/social/telegram.svg" alt="" aria-hidden="true"></a>
+          <a class="social-links__link" href="https://max.ru/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в MAX" data-tooltip="Перейти в MAX"><img src="../ui-kit/assets/social/max.svg" alt="" aria-hidden="true"></a>
+          <a class="social-links__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в Instagram" data-tooltip="Перейти в Instagram"><img src="../ui-kit/assets/social/instagram.svg" alt="" aria-hidden="true"></a>
+          <a class="social-links__link" href="https://vk.com/" target="_blank" rel="noopener noreferrer" aria-label="Перейти в VK" data-tooltip="Перейти в VK"><img src="../ui-kit/assets/social/vk.svg" alt="" aria-hidden="true"></a>
+        </div>
+      </div>
     </div>
+    <div class="container site-footer__legal">
+      <span class="site-footer__copyright">© 2026 NEXROUTE AUTO</span>
+      <a class="link link--inverse site-footer__legal-link" href="./privacy-policy.html">Политика обработки персональных данных</a>
+    </div>
+    <div class="container site-footer__demo">Демонстрационная версия сайта.</div>
   </footer>
+  <script src="../ui-kit/app.js"></script>
 </body>
 </html>
