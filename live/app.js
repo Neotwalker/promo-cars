@@ -1545,7 +1545,10 @@ const nexrouteFormatPhone = (value = '') => {
 
   const syncConsent = () => {
     submit.disabled = !consent.checked;
-    if (consent.checked && consentMessage) consentMessage.textContent = '';
+    if (consent.checked) {
+      consent.removeAttribute('aria-invalid');
+      if (consentMessage) consentMessage.textContent = '';
+    }
   };
 
   const syncContactMode = () => {
@@ -1604,6 +1607,7 @@ const nexrouteFormatPhone = (value = '') => {
     event.preventDefault();
 
     if (!consent.checked) {
+      consent.setAttribute('aria-invalid','true');
       if (consentMessage) consentMessage.textContent = 'Нужно согласие на обработку персональных данных.';
       consent.focus();
       return;
