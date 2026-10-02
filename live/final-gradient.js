@@ -196,11 +196,42 @@
         0.18,0.82
       );
 
+      float ridgeNoise = snoise(vec3(
+        noiseCoord.x * 1.20 + time * 2.1,
+        noiseCoord.y * 1.60,
+        time * 4.8 + 61.0
+      )) * 0.5 + 0.5;
+
+      float ridgeCenter =
+        -0.14
+        + sin(time * 5.4) * 0.22
+        + (ridgeNoise - 0.5) * 0.18;
+
+      float ridgeDistance = abs(
+        (a_uvNorm.y + a_uvNorm.x * 0.20) - ridgeCenter
+      );
+
+      float ridge = 1.0 - smoothstep(0.08,0.34,ridgeDistance);
+      float ridgeFocus = 1.0 - smoothstep(
+        0.34,
+        1.24,
+        abs(a_uvNorm.x + 0.12)
+      );
+
+      ridge *= ridgeFocus;
+
+      vec3 warmSteel = mix(u_layerColor2,u_layerColor4,0.11);
+
       vec3 color = u_baseColor;
       color = mix(color,u_layerColor1,layer1);
       color = mix(color,u_layerColor2,layer2);
       color = mix(color,u_layerColor3,layer3);
-      color = mix(color,u_layerColor4,layer4 * 0.14);
+
+      // The brand orange only warms the steel field; it never becomes an orange blob.
+      color = mix(color,warmSteel,layer4 * 0.08);
+
+      // One broad moving fold gives the background a recognisable light gesture.
+      color = mix(color,warmSteel,ridge * 0.30);
 
       v_color = color;
       gl_Position = vec4(clipPosition,0.0,1.0);

@@ -3210,9 +3210,9 @@
   z-index:1;
   background:linear-gradient(
     0deg,
-    rgba(11,14,18,.96) 0%,
-    rgba(11,14,18,.72) 34%,
-    rgba(16,18,22,.46) 100%
+    rgba(11,14,18,.91) 0%,
+    rgba(11,14,18,.64) 34%,
+    rgba(16,18,22,.40) 100%
   );
   -webkit-backdrop-filter:blur(10px);
   backdrop-filter:blur(10px);
