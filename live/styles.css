@@ -338,10 +338,10 @@ main>section[id]{
   display:grid;
   place-items:center;
   transition:
-    border-color 360ms cubic-bezier(.22,.61,.36,1),
-    background-color 360ms cubic-bezier(.22,.61,.36,1),
-    box-shadow 360ms cubic-bezier(.22,.61,.36,1),
-    transform 360ms cubic-bezier(.22,.61,.36,1);
+    border-color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-emphasized);
 }
 
 .journey__stage-dot::after{
@@ -355,8 +355,8 @@ main>section[id]{
   opacity:0;
   transform:translate(-50%,-50%) scale(.56);
   transition:
-    opacity 260ms var(--ease-standard),
-    transform 360ms cubic-bezier(.22,.61,.36,1);
+    opacity var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-emphasized);
 }
 
 .journey__stage-item--complete .journey__stage-dot::before{
@@ -1865,6 +1865,12 @@ main>section[id]{
 }
 
 @media(prefers-reduced-motion:reduce){
+  .site-header--hero,
+  .site-header--hero .site-header__inner,
+  .site-header--hero .menu-toggle{
+    transition:none;
+  }
+
   .configurator__progress span,
   .configurator__choice,
   .configurator__field,
@@ -3222,7 +3228,7 @@ main>section[id]{
   z-index:0;
   overflow:hidden;
   opacity:0;
-  transition:opacity 480ms ease;
+  transition:opacity var(--motion-normal) var(--ease-standard);
   pointer-events:none;
   background:#0b0e12;
 }

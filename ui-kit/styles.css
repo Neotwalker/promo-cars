@@ -239,7 +239,7 @@ body.modal-open{overflow:hidden}
 .toast__close:hover{background:rgba(16,18,22,.06)}
 .toast__close:active{transform:translateY(1px)}
 .toast-stack{position:fixed;top:max(1rem,env(safe-area-inset-top));right:max(1rem,env(safe-area-inset-right));z-index:120;width:min(26.25rem,calc(100vw - 2rem));display:grid;gap:.75rem;pointer-events:none}
-.toast-stack .toast{width:100%;min-width:0;max-width:none;pointer-events:auto;opacity:0;transform:translateX(calc(100% + 2rem));transition:transform 360ms cubic-bezier(.2,.7,.2,1),opacity 240ms ease;will-change:transform,opacity}
+.toast-stack .toast{width:100%;min-width:0;max-width:none;pointer-events:auto;opacity:0;transform:translateX(calc(100% + 2rem));transition:transform var(--motion-fast) var(--ease-emphasized),opacity var(--motion-fast) var(--ease-standard);will-change:transform,opacity}
 .toast-stack .toast.is-visible{opacity:1;transform:translateX(0)}
 .toast-stack .toast.is-leaving{opacity:0;transform:translateX(calc(100% + 2rem))}
 @media(prefers-reduced-motion:reduce){.toast-stack .toast{transition:none}}

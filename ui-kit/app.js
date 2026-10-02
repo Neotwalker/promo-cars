@@ -55,7 +55,7 @@
         animation = panel.animate(
           [from, { opacity:'1', transform:'translateY(0)' }],
           {
-            duration:motionMs('--motion-slow', 760),
+            duration:motionMs('--motion-normal', 520),
             easing:motionEase('--ease-standard', 'ease'),
             fill:'both'
           }
@@ -68,7 +68,7 @@
         animation = panel.animate(
           [from, { opacity:'0', transform:'translateY(-1rem)' }],
           {
-            duration:motionMs('--motion-slow', 760),
+            duration:motionMs('--motion-normal', 520),
             easing:motionEase('--ease-standard', 'ease'),
             fill:'both'
           }
