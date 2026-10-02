@@ -1521,6 +1521,22 @@ const nexrouteFormatPhone = (value = '') => {
 
   const states = new Map();
 
+  const hydrateProofImages = () => {
+    cards.forEach((card) => {
+      const image = card.querySelector('.case-card__media img[data-src]');
+      if (!image) return;
+
+      if (image.dataset.srcset) {
+        image.srcset = image.dataset.srcset;
+        delete image.dataset.srcset;
+      }
+
+      image.src = image.dataset.src;
+      delete image.dataset.src;
+      image.decode?.().catch(() => {});
+    });
+  };
+
   const setOpen = (card,open,{focus=false} = {}) => {
     const state = states.get(card);
     if (!state) return;
@@ -1570,14 +1586,19 @@ const nexrouteFormatPhone = (value = '') => {
 
   const proofSection = cards[0]?.closest('.proof');
 
-  if (!proofSection || !('IntersectionObserver' in window)) {
+  const initProof = () => {
+    hydrateProofImages();
     initCases();
+  };
+
+  if (!proofSection || !('IntersectionObserver' in window) || location.hash === '#proof') {
+    initProof();
   } else {
     const observer = new IntersectionObserver((entries) => {
       if (!entries.some((entry) => entry.isIntersecting)) return;
       observer.disconnect();
-      initCases();
-    },{rootMargin:'800px 0px',threshold:0});
+      initProof();
+    },{rootMargin:'700px 0px',threshold:0});
 
     observer.observe(proofSection);
   }
