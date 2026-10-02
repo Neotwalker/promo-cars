@@ -1479,207 +1479,86 @@
 })();
 
 
+
+
+
 (() => {
   const section = document.querySelector('#final-calculation');
-  const canvas = section?.querySelector('[data-final-cta-canvas]');
-  if (!section || !canvas) return;
-
-  const ctx = canvas.getContext('2d',{alpha:true,desynchronized:true});
-  if (!ctx) return;
+  const ambient = section?.querySelector('[data-final-cta-ambient]');
+  if (!section || !ambient) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  const lights = [
-    {
-      x:.24,y:.30,rx:.52,ry:.48,
-      ax:.31,ay:.11,
-      speed:.205,phase:.15,angle:-.10,
-      twist:.055,pulse:.07,
-      color:[252,251,248],alpha:.105
-    },
-    {
-      x:.74,y:.34,rx:.40,ry:.38,
-      ax:.25,ay:.19,
-      speed:.147,phase:2.05,angle:.18,
-      twist:.075,pulse:.09,
-      color:[168,188,204],alpha:.078
-    },
-    {
-      x:.78,y:.73,rx:.30,ry:.27,
-      ax:.10,ay:.12,
-      speed:.181,phase:4.35,angle:-.24,
-      twist:.06,pulse:.08,
-      color:[255,91,53],alpha:.050
-    }
-  ];
-
-  let width = 0;
-  let height = 0;
-  let frame = 0;
+  const finePointer = window.matchMedia('(pointer:fine)');
   let visible = false;
-  let lastPaint = 0;
-  let grainPattern = null;
+  let pointerFrame = 0;
+  let pointerX = 0;
+  let pointerY = 0;
 
-  const createGrain = () => {
-    const grain = document.createElement('canvas');
-    const size = 128;
-    grain.width = size;
-    grain.height = size;
-
-    const grainCtx = grain.getContext('2d',{alpha:true});
-    if (!grainCtx) return null;
-
-    const image = grainCtx.createImageData(size,size);
-    let seed = 0x2f6e2b1;
-
-    const random = () => {
-      seed ^= seed << 13;
-      seed ^= seed >>> 17;
-      seed ^= seed << 5;
-      return (seed >>> 0) / 4294967295;
-    };
-
-    for (let i = 0; i < image.data.length; i += 4) {
-      const light = random() > .5;
-      const alpha = 2 + Math.floor(random() * 4);
-      image.data[i] = light ? 255 : 0;
-      image.data[i + 1] = light ? 255 : 0;
-      image.data[i + 2] = light ? 255 : 0;
-      image.data[i + 3] = alpha;
-    }
-
-    grainCtx.putImageData(image,0,0);
-    return ctx.createPattern(grain,'repeat');
+  const syncPlayback = () => {
+    const active = visible && !document.hidden && !reduceMotion.matches;
+    section.classList.toggle('is-ambient-active',active);
   };
 
-  const resize = () => {
+  const resetParallax = () => {
+    section.style.removeProperty('--ambient-neutral-x');
+    section.style.removeProperty('--ambient-neutral-y');
+    section.style.removeProperty('--ambient-cool-x');
+    section.style.removeProperty('--ambient-cool-y');
+    section.style.removeProperty('--ambient-warm-x');
+    section.style.removeProperty('--ambient-warm-y');
+  };
+
+  const paintParallax = () => {
+    pointerFrame = 0;
+    if (reduceMotion.matches || !finePointer.matches) {
+      resetParallax();
+      return;
+    }
+
+    section.style.setProperty('--ambient-neutral-x',(pointerX * 5).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-neutral-y',(pointerY * 4).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-cool-x',(pointerX * -9).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-cool-y',(pointerY * -7).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-warm-x',(pointerX * 12).toFixed(2) + 'px');
+    section.style.setProperty('--ambient-warm-y',(pointerY * 9).toFixed(2) + 'px');
+  };
+
+  const scheduleParallax = () => {
+    if (pointerFrame) return;
+    pointerFrame = requestAnimationFrame(paintParallax);
+  };
+
+  section.addEventListener('pointermove',(event) => {
+    if (reduceMotion.matches || !finePointer.matches) return;
     const rect = section.getBoundingClientRect();
-    width = Math.max(1,Math.round(rect.width));
-    height = Math.max(1,Math.round(rect.height));
+    pointerX = ((event.clientX - rect.left) / rect.width - .5) * 2;
+    pointerY = ((event.clientY - rect.top) / rect.height - .5) * 2;
+    scheduleParallax();
+  },{passive:true});
 
-    const dprCap = width < 768 ? 1.25 : 1.5;
-    const dpr = Math.min(window.devicePixelRatio || 1,dprCap);
-
-    canvas.width = Math.max(1,Math.round(width * dpr));
-    canvas.height = Math.max(1,Math.round(height * dpr));
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    grainPattern = createGrain();
-  };
-
-  const drawLight = (light,time) => {
-    const driftX = Math.sin(time * light.speed + light.phase) * light.ax;
-    const driftY = Math.cos(time * light.speed * .71 + light.phase * 1.21) * light.ay;
-    const pulse = 1 + Math.sin(time * light.speed * .54 + light.phase) * light.pulse;
-    const angle = light.angle + Math.sin(time * light.speed * .43 + light.phase) * light.twist;
-
-    const x = width * (light.x + driftX);
-    const y = height * (light.y + driftY);
-    const sx = Math.max(1,width * light.rx * pulse);
-    const sy = Math.max(1,height * light.ry / pulse);
-    const [r,g,b] = light.color;
-
-    ctx.save();
-    ctx.translate(x,y);
-    ctx.rotate(angle);
-    ctx.scale(sx,sy);
-
-    const gradient = ctx.createRadialGradient(0,0,0,0,0,1);
-    gradient.addColorStop(0,`rgba(${r},${g},${b},${light.alpha})`);
-    gradient.addColorStop(.20,`rgba(${r},${g},${b},${light.alpha * .90})`);
-    gradient.addColorStop(.48,`rgba(${r},${g},${b},${light.alpha * .48})`);
-    gradient.addColorStop(.76,`rgba(${r},${g},${b},${light.alpha * .13})`);
-    gradient.addColorStop(1,`rgba(${r},${g},${b},0)`);
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(-1,-1,2,2);
-    ctx.restore();
-  };
-
-  const drawGrain = (time) => {
-    if (!grainPattern) return;
-
-    ctx.save();
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.globalAlpha = .30;
-    ctx.translate(
-      reduceMotion.matches ? 0 : (time * 1.4) % 128,
-      reduceMotion.matches ? 0 : (time * .9) % 128
-    );
-    ctx.fillStyle = grainPattern;
-    ctx.fillRect(-128,-128,width + 256,height + 256);
-    ctx.restore();
-  };
-
-  const draw = (timestamp = 0) => {
-    ctx.clearRect(0,0,width,height);
-
-    const time = reduceMotion.matches ? 0 : timestamp * .001;
-
-    ctx.globalCompositeOperation = 'lighter';
-    lights.forEach((light) => drawLight(light,time));
-
-    drawGrain(time);
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.globalAlpha = 1;
-  };
-
-  const canAnimate = () => visible && !document.hidden && !reduceMotion.matches;
-
-  const tick = (timestamp) => {
-    frame = 0;
-
-    if (timestamp - lastPaint >= 40) {
-      lastPaint = timestamp;
-      draw(timestamp);
-    }
-
-    if (canAnimate()) frame = requestAnimationFrame(tick);
-  };
-
-  const start = () => {
-    if (!canAnimate() || frame) return;
-    frame = requestAnimationFrame(tick);
-  };
-
-  const stop = () => {
-    if (!frame) return;
-    cancelAnimationFrame(frame);
-    frame = 0;
-  };
-
-  const refresh = () => {
-    resize();
-    draw(0);
-    if (canAnimate()) start();
-  };
+  section.addEventListener('pointerleave',() => {
+    pointerX = 0;
+    pointerY = 0;
+    scheduleParallax();
+  },{passive:true});
 
   const observer = new IntersectionObserver((entries) => {
     visible = entries[0]?.isIntersecting ?? false;
-    if (canAnimate()) start();
-    else stop();
+    syncPlayback();
   },{rootMargin:'12% 0px',threshold:.02});
 
   observer.observe(section);
 
-  const resizeObserver = 'ResizeObserver' in window
-    ? new ResizeObserver(refresh)
-    : null;
-
-  resizeObserver?.observe(section);
-  if (!resizeObserver) window.addEventListener('resize',refresh,{passive:true});
-
-  document.addEventListener('visibilitychange',() => {
-    if (canAnimate()) start();
-    else stop();
-  });
+  document.addEventListener('visibilitychange',syncPlayback);
 
   reduceMotion.addEventListener?.('change',() => {
-    stop();
-    draw(0);
-    if (canAnimate()) start();
+    resetParallax();
+    syncPlayback();
   });
 
-  refresh();
+  finePointer.addEventListener?.('change',() => {
+    if (!finePointer.matches) resetParallax();
+  });
 })();
 
 
