@@ -1,5 +1,24 @@
 /* /live/ adds only visual composition over the shared UI-kit foundation. */
 
+.skip-link{
+  position:fixed;
+  top:var(--space-3);
+  left:var(--space-3);
+  z-index:100;
+  padding:.7rem 1rem;
+  border-radius:var(--radius-sm);
+  background:var(--color-white);
+  color:var(--color-ink);
+  font-weight:600;
+  text-decoration:none;
+  transform:translateY(calc(-100% - var(--space-5)));
+  transition:transform var(--motion-fast) var(--ease-standard);
+}
+
+.skip-link:focus-visible{
+  transform:translateY(0);
+}
+
 .site-header--hero{
   --menu-offset:6.25rem;
   position:fixed;
