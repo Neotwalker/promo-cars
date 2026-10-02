@@ -1,4 +1,35 @@
 (() => {
+  const section = document.querySelector('#final-calculation');
+  if (!section) return;
+
+  let loaded = false;
+
+  const loadGradient = () => {
+    if (loaded || document.querySelector('script[data-final-gradient-script]')) return;
+    loaded = true;
+
+    const script = document.createElement('script');
+    script.src = './final-gradient.js';
+    script.async = true;
+    script.dataset.finalGradientScript = '';
+    document.body.append(script);
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    loadGradient();
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    observer.disconnect();
+    loadGradient();
+  },{rootMargin:'1000px 0px',threshold:0});
+
+  observer.observe(section);
+})();
+
+(() => {
   const header = document.querySelector('.site-header--hero');
   if (!header) return;
 
