@@ -1088,7 +1088,7 @@ main>section[id]{
   }
 
   .journey{
-    --journey-scene-top:1rem;
+    --journey-scene-top:5.25rem;
     height:auto;
   }
 
