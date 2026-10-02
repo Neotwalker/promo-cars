@@ -62,7 +62,6 @@ jobs:
                       for stream in data.get('streams', [])
                   ],
                   'duration': data.get('format', {}).get('duration'),
-                  'bit_rate': data.get('format', {}).get('bit_rate'),
               }
 
           if normalized(before) != normalized(after):
