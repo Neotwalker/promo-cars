@@ -1484,62 +1484,470 @@
 
 (() => {
   const section = document.querySelector('#final-calculation');
-  const ambient = section?.querySelector('[data-final-cta-ambient]');
-  if (!section || !ambient) return;
+  const canvas = section?.querySelector('[data-final-gradient]');
+  const wrap = section?.querySelector('[data-final-gradient-wrap]');
+  if (!section || !canvas || !wrap) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const finePointer = window.matchMedia('(pointer:fine)');
-  let pointerFrame = 0;
-  let pointerX = 0;
-  let pointerY = 0;
+  const gl = canvas.getContext('webgl',{
+    alpha:false,
+    antialias:true,
+    depth:false,
+    stencil:false,
+    powerPreference:'low-power'
+  });
 
-  const resetParallax = () => {
-    section.style.removeProperty('--ambient-neutral-x');
-    section.style.removeProperty('--ambient-neutral-y');
-    section.style.removeProperty('--ambient-cool-x');
-    section.style.removeProperty('--ambient-cool-y');
-    section.style.removeProperty('--ambient-warm-x');
-    section.style.removeProperty('--ambient-warm-y');
-  };
+  if (!gl) return;
 
-  const paintParallax = () => {
-    pointerFrame = 0;
-    if (reduceMotion.matches || !finePointer.matches) {
-      resetParallax();
-      return;
+  const vertexSource = `
+    precision highp float;
+
+    attribute vec2 a_position;
+
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform vec3 u_color0;
+    uniform vec3 u_color1;
+    uniform vec3 u_color2;
+    uniform vec3 u_color3;
+
+    varying vec3 v_color;
+
+    vec3 mod289(vec3 x) {
+      return x - floor(x * (1.0 / 289.0)) * 289.0;
     }
 
-    section.style.setProperty('--ambient-neutral-x',(pointerX * 8).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-neutral-y',(pointerY * 6).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-cool-x',(pointerX * -14).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-cool-y',(pointerY * -11).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-warm-x',(pointerX * 20).toFixed(2) + 'px');
-    section.style.setProperty('--ambient-warm-y',(pointerY * 15).toFixed(2) + 'px');
+    vec4 mod289(vec4 x) {
+      return x - floor(x * (1.0 / 289.0)) * 289.0;
+    }
+
+    vec4 permute(vec4 x) {
+      return mod289(((x * 34.0) + 1.0) * x);
+    }
+
+    vec4 taylorInvSqrt(vec4 r) {
+      return 1.79284291400159 - 0.85373472095314 * r;
+    }
+
+    float snoise(vec3 v) {
+      const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
+      const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+
+      vec3 i = floor(v + dot(v, C.yyy));
+      vec3 x0 = v - i + dot(i, C.xxx);
+
+      vec3 g = step(x0.yzx, x0.xyz);
+      vec3 l = 1.0 - g;
+      vec3 i1 = min(g.xyz, l.zxy);
+      vec3 i2 = max(g.xyz, l.zxy);
+
+      vec3 x1 = x0 - i1 + C.xxx;
+      vec3 x2 = x0 - i2 + C.yyy;
+      vec3 x3 = x0 - D.yyy;
+
+      i = mod289(i);
+      vec4 p = permute(permute(permute(
+        i.z + vec4(0.0, i1.z, i2.z, 1.0))
+        + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+        + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+
+      float n_ = 0.142857142857;
+      vec3 ns = n_ * D.wyz - D.xzx;
+
+      vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+      vec4 x_ = floor(j * ns.z);
+      vec4 y_ = floor(j - 7.0 * x_);
+
+      vec4 x = x_ * ns.x + ns.yyyy;
+      vec4 y = y_ * ns.x + ns.yyyy;
+      vec4 h = 1.0 - abs(x) - abs(y);
+
+      vec4 b0 = vec4(x.xy, y.xy);
+      vec4 b1 = vec4(x.zw, y.zw);
+
+      vec4 s0 = floor(b0) * 2.0 + 1.0;
+      vec4 s1 = floor(b1) * 2.0 + 1.0;
+      vec4 sh = -step(h, vec4(0.0));
+
+      vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
+      vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+
+      vec3 p0 = vec3(a0.xy, h.x);
+      vec3 p1 = vec3(a0.zw, h.y);
+      vec3 p2 = vec3(a1.xy, h.z);
+      vec3 p3 = vec3(a1.zw, h.w);
+
+      vec4 norm = taylorInvSqrt(vec4(
+        dot(p0,p0),
+        dot(p1,p1),
+        dot(p2,p2),
+        dot(p3,p3)
+      ));
+
+      p0 *= norm.x;
+      p1 *= norm.y;
+      p2 *= norm.z;
+      p3 *= norm.w;
+
+      vec4 m = max(
+        0.6 - vec4(
+          dot(x0,x0),
+          dot(x1,x1),
+          dot(x2,x2),
+          dot(x3,x3)
+        ),
+        0.0
+      );
+
+      m *= m;
+
+      return 42.0 * dot(
+        m * m,
+        vec4(
+          dot(p0,x0),
+          dot(p1,x1),
+          dot(p2,x2),
+          dot(p3,x3)
+        )
+      );
+    }
+
+    float waveMask(
+      vec2 coord,
+      float time,
+      vec2 freq,
+      float flow,
+      float speed,
+      float seed,
+      float floorValue,
+      float ceilValue
+    ) {
+      float noiseValue = snoise(vec3(
+        coord.x * freq.x + time * flow,
+        coord.y * freq.y,
+        time * speed + seed
+      )) * 0.5 + 0.5;
+
+      return pow(
+        smoothstep(floorValue, ceilValue, noiseValue),
+        4.0
+      );
+    }
+
+    void main() {
+      float time = u_time * 0.005;
+      vec2 uvNorm = a_position;
+      vec2 noiseCoord = u_resolution * uvNorm * vec2(0.00014,0.00029);
+
+      vec3 color = u_color0;
+
+      float layer1 = waveMask(
+        noiseCoord,time,
+        vec2(2.25,3.25),
+        6.8,11.3,15.0,
+        0.10,0.70
+      );
+
+      float layer2 = waveMask(
+        noiseCoord,time,
+        vec2(2.50,3.50),
+        7.1,11.6,25.0,
+        0.10,0.77
+      );
+
+      float layer3 = waveMask(
+        noiseCoord,time,
+        vec2(2.75,3.75),
+        7.4,11.9,35.0,
+        0.10,0.84
+      );
+
+      color = mix(color,u_color1,layer1);
+      color = mix(color,u_color2,layer2);
+      color = mix(color,u_color3,layer3);
+
+      float deform = snoise(vec3(
+        noiseCoord.x * 3.0 + time * 3.0,
+        noiseCoord.y * 4.0,
+        time * 10.0 + 5.0
+      ));
+
+      deform = max(0.0,deform);
+      deform *= 1.0 - pow(abs(uvNorm.y),2.0);
+
+      vec2 position = a_position;
+      position.y += deform * 0.055;
+
+      v_color = color;
+      gl_Position = vec4(position,0.0,1.0);
+    }
+  `;
+
+  const fragmentSource = `
+    precision highp float;
+
+    uniform vec2 u_resolution;
+    varying vec3 v_color;
+
+    void main() {
+      vec3 color = v_color;
+      vec2 st = gl_FragCoord.xy / u_resolution.xy;
+
+      float edgeShade = pow(st.y + 0.18 * st.x,5.5) * 0.12;
+      color -= edgeShade;
+
+      gl_FragColor = vec4(color,1.0);
+    }
+  `;
+
+  const compileShader = (type,source) => {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader,source);
+    gl.compileShader(shader);
+
+    if (!gl.getShaderParameter(shader,gl.COMPILE_STATUS)) {
+      console.warn('Final CTA gradient shader failed:',gl.getShaderInfoLog(shader));
+      gl.deleteShader(shader);
+      return null;
+    }
+
+    return shader;
   };
 
-  const scheduleParallax = () => {
-    if (pointerFrame) return;
-    pointerFrame = requestAnimationFrame(paintParallax);
+  const vertexShader = compileShader(gl.VERTEX_SHADER,vertexSource);
+  const fragmentShader = compileShader(gl.FRAGMENT_SHADER,fragmentSource);
+  if (!vertexShader || !fragmentShader) return;
+
+  const program = gl.createProgram();
+  gl.attachShader(program,vertexShader);
+  gl.attachShader(program,fragmentShader);
+  gl.linkProgram(program);
+
+  if (!gl.getProgramParameter(program,gl.LINK_STATUS)) {
+    console.warn('Final CTA gradient program failed:',gl.getProgramInfoLog(program));
+    return;
+  }
+
+  gl.useProgram(program);
+
+  const positionLocation = gl.getAttribLocation(program,'a_position');
+  const resolutionLocation = gl.getUniformLocation(program,'u_resolution');
+  const timeLocation = gl.getUniformLocation(program,'u_time');
+  const colorLocations = [0,1,2,3].map((index) => (
+    gl.getUniformLocation(program,'u_color' + index)
+  ));
+
+  const positionBuffer = gl.createBuffer();
+  const indexBuffer = gl.createBuffer();
+
+  let indexCount = 0;
+  let width = 1;
+  let height = 1;
+  let dpr = 1;
+  let frame = 0;
+  let lastPaint = 0;
+  let elapsed = 1253.106;
+  let previousTimestamp = 0;
+  let visible = false;
+  let scrolling = false;
+  let scrollTimer = 0;
+  let loaded = false;
+
+  const hexToRgb = (value,fallback) => {
+    const raw = (value || '').trim();
+    const match = raw.match(/^#([0-9a-f]{6})$/i);
+    if (!match) return fallback;
+
+    const hex = match[1];
+    return [
+      parseInt(hex.slice(0,2),16) / 255,
+      parseInt(hex.slice(2,4),16) / 255,
+      parseInt(hex.slice(4,6),16) / 255
+    ];
   };
 
-  section.addEventListener('pointermove',(event) => {
-    if (reduceMotion.matches || !finePointer.matches) return;
-    const rect = section.getBoundingClientRect();
-    pointerX = ((event.clientX - rect.left) / rect.width - .5) * 2;
-    pointerY = ((event.clientY - rect.top) / rect.height - .5) * 2;
-    scheduleParallax();
-  },{passive:true});
+  const syncColors = () => {
+    const style = getComputedStyle(canvas);
+    const colors = [
+      hexToRgb(style.getPropertyValue('--gradient-color-1'),[.043,.055,.071]),
+      hexToRgb(style.getPropertyValue('--gradient-color-2'),[.149,.188,.224]),
+      hexToRgb(style.getPropertyValue('--gradient-color-3'),[.408,.455,.490]),
+      hexToRgb(style.getPropertyValue('--gradient-color-4'),[.416,.204,.161])
+    ];
 
-  section.addEventListener('pointerleave',() => {
-    pointerX = 0;
-    pointerY = 0;
-    scheduleParallax();
-  },{passive:true});
+    colors.forEach((color,index) => {
+      gl.uniform3fv(colorLocations[index],color);
+    });
+  };
 
-  reduceMotion.addEventListener?.('change',resetParallax);
-  finePointer.addEventListener?.('change',() => {
-    if (!finePointer.matches) resetParallax();
+  const buildMesh = () => {
+    const xSegments = Math.min(112,Math.max(28,Math.ceil(width * .06)));
+    const ySegments = Math.min(96,Math.max(22,Math.ceil(height * .11)));
+    const vertexCount = (xSegments + 1) * (ySegments + 1);
+
+    const positions = new Float32Array(vertexCount * 2);
+    const indices = new Uint16Array(xSegments * ySegments * 6);
+
+    let vertexOffset = 0;
+
+    for (let y = 0; y <= ySegments; y += 1) {
+      for (let x = 0; x <= xSegments; x += 1) {
+        positions[vertexOffset++] = x / xSegments * 2 - 1;
+        positions[vertexOffset++] = 1 - y / ySegments * 2;
+      }
+    }
+
+    let indexOffset = 0;
+
+    for (let y = 0; y < ySegments; y += 1) {
+      for (let x = 0; x < xSegments; x += 1) {
+        const i = y * (xSegments + 1) + x;
+
+        indices[indexOffset++] = i;
+        indices[indexOffset++] = i + xSegments + 1;
+        indices[indexOffset++] = i + 1;
+
+        indices[indexOffset++] = i + 1;
+        indices[indexOffset++] = i + xSegments + 1;
+        indices[indexOffset++] = i + xSegments + 2;
+      }
+    }
+
+    gl.bindBuffer(gl.ARRAY_BUFFER,positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER,positions,gl.STATIC_DRAW);
+
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation,2,gl.FLOAT,false,0,0);
+
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,indexBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,indices,gl.STATIC_DRAW);
+
+    indexCount = indices.length;
+  };
+
+  const resize = () => {
+    const rect = wrap.getBoundingClientRect();
+
+    width = Math.max(1,Math.round(rect.width));
+    height = Math.max(1,Math.round(rect.height));
+    dpr = Math.min(window.devicePixelRatio || 1,width < 768 ? 1.15 : 1.35);
+
+    const renderWidth = Math.max(1,Math.round(width * dpr));
+    const renderHeight = Math.max(1,Math.round(height * dpr));
+
+    if (canvas.width !== renderWidth || canvas.height !== renderHeight) {
+      canvas.width = renderWidth;
+      canvas.height = renderHeight;
+      gl.viewport(0,0,renderWidth,renderHeight);
+      gl.uniform2f(resolutionLocation,renderWidth,renderHeight);
+      buildMesh();
+      syncColors();
+    }
+  };
+
+  const render = () => {
+    gl.clearColor(.043,.055,.071,1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform1f(timeLocation,elapsed);
+    gl.drawElements(gl.TRIANGLES,indexCount,gl.UNSIGNED_SHORT,0);
+
+    if (!loaded) {
+      loaded = true;
+      wrap.classList.add('is-loaded');
+    }
+  };
+
+  const shouldAnimate = () => (
+    visible &&
+    !document.hidden &&
+    !scrolling &&
+    !reduceMotion.matches
+  );
+
+  const tick = (timestamp) => {
+    frame = 0;
+
+    const delta = previousTimestamp
+      ? Math.min(timestamp - previousTimestamp,1000 / 15)
+      : 0;
+
+    previousTimestamp = timestamp;
+
+    if (timestamp - lastPaint >= 33) {
+      elapsed += delta;
+      lastPaint = timestamp;
+      render();
+    }
+
+    if (shouldAnimate()) {
+      frame = requestAnimationFrame(tick);
+    }
+  };
+
+  const start = () => {
+    if (!shouldAnimate() || frame) return;
+    previousTimestamp = 0;
+    frame = requestAnimationFrame(tick);
+  };
+
+  const stop = () => {
+    if (!frame) return;
+    cancelAnimationFrame(frame);
+    frame = 0;
+    previousTimestamp = 0;
+  };
+
+  const drawStatic = () => {
+    stop();
+    elapsed = 1253.106;
+    render();
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    visible = entries[0]?.isIntersecting ?? false;
+
+    if (shouldAnimate()) start();
+    else stop();
+  },{rootMargin:'10% 0px',threshold:.02});
+
+  observer.observe(section);
+
+  const resizeObserver = new ResizeObserver(() => {
+    resize();
+    render();
   });
+
+  resizeObserver.observe(section);
+
+  window.addEventListener('scroll',() => {
+    scrolling = true;
+    stop();
+    clearTimeout(scrollTimer);
+
+    scrollTimer = window.setTimeout(() => {
+      scrolling = false;
+      if (shouldAnimate()) start();
+    },200);
+  },{passive:true});
+
+  document.addEventListener('visibilitychange',() => {
+    if (shouldAnimate()) start();
+    else stop();
+  });
+
+  reduceMotion.addEventListener?.('change',() => {
+    if (reduceMotion.matches) drawStatic();
+    else if (shouldAnimate()) start();
+  });
+
+  resize();
+  syncColors();
+
+  if (reduceMotion.matches) {
+    drawStatic();
+  } else {
+    render();
+  }
 })();
 
 
