@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="../ui-kit/styles.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body class="standalone-page">
+<body class="standalone-page standalone-page--dark">
 
   <a class="skip-link" href="#main-content">Перейти к содержанию</a>
-  <header class="site-header site-header--burger" data-menu>
+  <header class="site-header site-header--inverse site-header--burger" data-menu>
     <div class="container site-header__inner">
       <a class="site-header__brand" href="./index.html#hero" aria-label="NEXROUTE AUTO — на главную">NEXROUTE AUTO</a>
       <button class="menu-toggle site-header__menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Открыть меню" data-menu-toggle>
@@ -61,12 +61,15 @@
   </header>
 
   <main class="standalone-page__main" id="main-content" tabindex="-1">
-    <section class="not-found-page">
+    <section class="not-found-page" data-final-gradient-section>
+      <div class="final-cta__gradient-wrap" data-final-gradient-wrap aria-hidden="true">
+        <canvas class="final-cta__gradient" data-final-gradient></canvas>
+      </div>
       <div class="container not-found-page__inner">
         <p class="eyebrow not-found-page__eyebrow">Ошибка 404</p>
         <h1 class="type-h1 not-found-page__title">Страница не найдена.</h1>
         <p class="type-body not-found-page__text">Адрес мог измениться или быть введён с ошибкой. Вернитесь на главную страницу и продолжите оттуда.</p>
-        <a class="button button--primary not-found-page__action" href="./index.html">
+        <a class="button button--primary button--inverse not-found-page__action" href="./index.html">
           <span>На главную</span><span aria-hidden="true">→</span>
         </a>
       </div>
@@ -107,5 +110,6 @@
     <div class="container site-footer__demo">Демонстрационная версия сайта.</div>
   </footer>
   <script src="../ui-kit/app.js"></script>
+  <script src="./final-gradient.js"></script>
 </body>
 </html>
