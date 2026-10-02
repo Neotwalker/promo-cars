@@ -1122,9 +1122,6 @@ main>section[id]{
     display:block;
   }
 
-  .journey__visual{
-    display:none;
-  }
 }
 @media(max-width:47.9375rem){
   .journey__mobile-progress-copy{
@@ -3034,10 +3031,6 @@ main>section[id]{
   }
   .security__terms-strip>div:first-child::before{
     background:var(--color-signal);
-  }
-  .security__scenario{
-    grid-template-columns:1fr;
-    gap:var(--space-1);
   }
   .security__scenario+.security__scenario{
     margin-top:var(--space-2);

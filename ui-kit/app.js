@@ -1,7 +1,5 @@
 (() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const pageLayers = () => [...document.querySelectorAll('main, footer')];
-
   const motionMs = (name, fallback) => {
     const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     if (!value) return fallback;
