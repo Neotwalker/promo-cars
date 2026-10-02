@@ -3415,7 +3415,18 @@ main>section[id]{
   color:rgba(252,251,248,.42);
   font-weight:400;
 }
-.final-cta__consent-wrap{margin-top:var(--space-1)}
+.final-cta__consent-wrap{
+  margin-top:var(--space-1);
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-1);
+}
+.final-cta__consent-message{
+  color:#ff9d87;
+  font-size:var(--type-small);
+  line-height:var(--type-small-lh);
+}
+.final-cta__consent-message:empty{display:none}
 .final-cta__consent{
   min-height:auto;
   align-items:flex-start;
