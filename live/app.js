@@ -948,32 +948,10 @@ const nexrouteFormatPhone = (value = '') => {
       document.dispatchEvent(new CustomEvent('nexroute:toast',{
         detail:{
           title:'Расчёт собран.',
-          message:'Перенесли параметры в финальную форму — осталось указать имя и отправить запрос.'
+          message:'Параметры сохранены в финальной форме. Можно продолжить просмотр страницы.'
         }
       }));
 
-      document.querySelector('#final-calculation')?.scrollIntoView({
-        behavior:reduceMotion.matches ? 'auto' : 'smooth',
-        block:'start'
-      });
-    });
-
-    const selectCar = (model) => {
-      if (!pricing[model]) return;
-      state.model = model;
-      state.condition = 'Новый';
-      state.power = pricing[model].power;
-      refs.model.value = model;
-      setPressed('model',model);
-      setPressed('condition','Новый');
-      setPressed('power',state.power);
-      current = 0;
-      renderStep();
-      configurator.scrollIntoView({behavior:reduceMotion.matches ? 'auto' : 'smooth',block:'start'});
-    };
-
-    document.querySelectorAll('[data-car-select]').forEach((button) => {
-      button.addEventListener('click', () => selectCar(button.dataset.carSelect));
     });
 
     document.querySelector('[data-config-open]')?.addEventListener('click', () => {
@@ -1481,6 +1459,185 @@ const nexrouteFormatPhone = (value = '') => {
 
 
 
+
+
+(() => {
+  const modal = document.querySelector('[data-modal="car-lead-modal"]');
+  const form = modal?.querySelector('[data-car-lead-form]');
+  if (!modal || !form) return;
+
+  const submit = form.querySelector('[data-car-lead-submit]');
+  const consent = form.querySelector('[data-car-lead-consent]');
+  const consentMessage = form.querySelector('[data-car-lead-consent-message]');
+  const channels = [...form.querySelectorAll('[data-car-lead-channel]')];
+  const contactLabel = form.querySelector('[data-car-lead-contact-label]');
+
+  const inputs = {
+    model:form.querySelector('[data-car-lead-input="model"]'),
+    city:form.querySelector('[data-car-lead-input="city"]'),
+    name:form.querySelector('[data-car-lead-input="name"]'),
+    contact:form.querySelector('[data-car-lead-input="contact"]')
+  };
+
+  const contactValues = {
+    'Телефон':'',
+    'Telegram':''
+  };
+
+  const activeChannel = () => channels.find((radio) => radio.checked)?.value || 'Телефон';
+  const fieldFor = (input) => input?.closest('[data-car-lead-field]');
+
+  const restoreMessage = (input) => {
+    const field = fieldFor(input);
+    const message = field?.querySelector('[data-car-lead-message]');
+    if (!field || !message) return;
+
+    field.classList.remove('field--error');
+    input.removeAttribute('aria-invalid');
+    message.textContent = message.dataset.defaultMessage || '';
+  };
+
+  const fieldError = (input,messageText) => {
+    const field = fieldFor(input);
+    const message = field?.querySelector('[data-car-lead-message]');
+    if (!field || !message) return false;
+
+    field.classList.add('field--error');
+    input.setAttribute('aria-invalid','true');
+    message.textContent = messageText;
+    return false;
+  };
+
+  const syncConsent = () => {
+    submit.disabled = !consent.checked;
+    if (consent.checked && consentMessage) consentMessage.textContent = '';
+  };
+
+  const syncContactMode = () => {
+    const channel = activeChannel();
+    const isPhone = channel === 'Телефон';
+    const message = fieldFor(inputs.contact)?.querySelector('[data-car-lead-message]');
+
+    contactLabel.textContent = isPhone ? 'Телефон' : 'Username в Telegram';
+    inputs.contact.placeholder = isPhone ? '+7 (___) ___-__-__' : '@username';
+    inputs.contact.autocomplete = isPhone ? 'tel' : 'off';
+    inputs.contact.inputMode = isPhone ? 'tel' : 'text';
+    inputs.contact.maxLength = isPhone ? 18 : 64;
+    inputs.contact.value = isPhone
+      ? nexrouteFormatPhone(contactValues['Телефон'])
+      : contactValues['Telegram'];
+
+    if (message) {
+      const helper = isPhone
+        ? 'Укажите номер телефона — только для ответа по заявке.'
+        : 'Укажите Telegram username — только для ответа по заявке.';
+      message.dataset.defaultMessage = helper;
+      message.textContent = helper;
+    }
+
+    restoreMessage(inputs.contact);
+  };
+
+  document.addEventListener('click',(event) => {
+    const opener = event.target.closest('[data-modal-open="car-lead-modal"][data-car-request-model]');
+    if (!opener) return;
+
+    inputs.model.value = opener.dataset.carRequestModel || '';
+    restoreMessage(inputs.model);
+  });
+
+  [inputs.city,inputs.name].forEach((input) => {
+    input?.addEventListener('input',() => restoreMessage(input));
+  });
+
+  inputs.contact.addEventListener('input',() => {
+    if (activeChannel() === 'Телефон') {
+      const digits = nexroutePhoneDigits(inputs.contact.value);
+      contactValues['Телефон'] = digits;
+      inputs.contact.value = nexrouteFormatPhone(digits);
+    } else {
+      contactValues['Telegram'] = inputs.contact.value;
+    }
+
+    restoreMessage(inputs.contact);
+  });
+
+  channels.forEach((radio) => radio.addEventListener('change',syncContactMode));
+  consent.addEventListener('change',syncConsent);
+
+  form.addEventListener('submit',(event) => {
+    event.preventDefault();
+
+    if (!consent.checked) {
+      if (consentMessage) consentMessage.textContent = 'Нужно согласие на обработку персональных данных.';
+      consent.focus();
+      return;
+    }
+
+    let firstInvalid = null;
+
+    if (!inputs.model.value.trim()) {
+      fieldError(inputs.model,'Не удалось определить автомобиль. Закройте форму и выберите карточку ещё раз.');
+      firstInvalid ||= inputs.model;
+    }
+    if (!inputs.city.value.trim()) {
+      fieldError(inputs.city,'Укажите город получения автомобиля.');
+      firstInvalid ||= inputs.city;
+    }
+    if (!inputs.name.value.trim()) {
+      fieldError(inputs.name,'Укажите имя, чтобы мы знали, как к вам обратиться.');
+      firstInvalid ||= inputs.name;
+    }
+
+    if (activeChannel() === 'Телефон') {
+      if (nexroutePhoneDigits(inputs.contact.value).length !== 10) {
+        fieldError(inputs.contact,'Введите номер полностью: +7 (___) ___-__-__.');
+        firstInvalid ||= inputs.contact;
+      }
+    } else {
+      const username = inputs.contact.value.trim();
+      if (!/^@[a-zA-Z0-9_]{5,32}$/.test(username)) {
+        fieldError(inputs.contact,'Укажите Telegram username в формате @username.');
+        firstInvalid ||= inputs.contact;
+      }
+    }
+
+    if (firstInvalid) {
+      firstInvalid.focus();
+      document.dispatchEvent(new CustomEvent('nexroute:toast',{
+        detail:{
+          title:'Проверьте форму.',
+          message:'Не хватает нескольких данных для отправки заявки.',
+          type:'error'
+        }
+      }));
+      return;
+    }
+
+    document.dispatchEvent(new CustomEvent('nexroute:toast',{
+      detail:{
+        title:'Заявка отправлена.',
+        message:inputs.model.value.trim() + ' — вернёмся по указанному контакту.'
+      }
+    }));
+
+    modal.querySelector('[data-modal-close]')?.click();
+
+    window.setTimeout(() => {
+      const model = inputs.model.value;
+      form.reset();
+      inputs.model.value = model;
+      contactValues['Телефон'] = '';
+      contactValues['Telegram'] = '';
+      syncContactMode();
+      syncConsent();
+      [inputs.city,inputs.name,inputs.contact].forEach((input) => restoreMessage(input));
+    },550);
+  });
+
+  syncContactMode();
+  syncConsent();
+})();
 
 
 (() => {

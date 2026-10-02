@@ -144,7 +144,7 @@
                 <span>под ключ · 30–38 дней</span>
               </div>
 
-              <button class="button button--primary car-card__cta" type="button" data-car-select="Zeekr 001 AWD">Получить расчёт <span aria-hidden="true">→</span></button>
+              <button class="button button--primary car-card__cta" type="button" data-modal-open="car-lead-modal" data-car-request-model="Zeekr 001 AWD">Оставить заявку <span aria-hidden="true">→</span></button>
             </div>
           </article>
 
@@ -171,7 +171,7 @@
                 <span>под ключ · 28–36 дней</span>
               </div>
 
-              <button class="button button--primary car-card__cta" type="button" data-car-select="Xiaomi SU7 Max">Получить расчёт <span aria-hidden="true">→</span></button>
+              <button class="button button--primary car-card__cta" type="button" data-modal-open="car-lead-modal" data-car-request-model="Xiaomi SU7 Max">Оставить заявку <span aria-hidden="true">→</span></button>
             </div>
           </article>
 
@@ -198,7 +198,7 @@
                 <span>под ключ · 32–40 дней</span>
               </div>
 
-              <button class="button button--primary car-card__cta" type="button" data-car-select="Li Auto L6 Pro">Получить расчёт <span aria-hidden="true">→</span></button>
+              <button class="button button--primary car-card__cta" type="button" data-modal-open="car-lead-modal" data-car-request-model="Li Auto L6 Pro">Оставить заявку <span aria-hidden="true">→</span></button>
             </div>
           </article>
         </div>
@@ -969,6 +969,70 @@
 
     <div class="toast-stack" aria-live="polite" aria-atomic="true" data-site-toasts></div>
   </main>
+
+  <div class="modal car-lead-modal" id="car-lead-modal" data-modal="car-lead-modal" aria-hidden="true" hidden>
+    <div class="modal__backdrop" data-modal-backdrop></div>
+    <section class="modal__dialog" data-modal-dialog role="dialog" aria-modal="true" aria-labelledby="car-lead-modal-title" tabindex="-1">
+      <header class="modal__header">
+        <div class="modal__header-copy">
+          <p class="eyebrow">Заявка на автомобиль</p>
+          <h2 class="type-h2" id="car-lead-modal-title">Оставить заявку</h2>
+          <p>Укажите город и удобный способ связи. Автомобиль уже подставили из карточки.</p>
+        </div>
+        <button class="modal__close" type="button" data-modal-close aria-label="Закрыть форму заявки">×</button>
+      </header>
+
+      <form class="lead-form" novalidate data-car-lead-form>
+        <label class="field field--inverse" data-car-lead-field>
+          <span class="field__label">Автомобиль</span>
+          <input class="field__control" type="text" name="model" readonly aria-readonly="true" data-car-lead-input="model">
+          <small class="field__message" data-car-lead-message data-default-message=""></small>
+        </label>
+
+        <label class="field field--inverse" data-car-lead-field>
+          <span class="field__label">Город получения</span>
+          <input class="field__control" type="text" name="city" placeholder="Например, Москва" autocomplete="address-level2" data-car-lead-input="city">
+          <small class="field__message" data-car-lead-message data-default-message=""></small>
+        </label>
+
+        <label class="field field--inverse" data-car-lead-field>
+          <span class="field__label">Имя</span>
+          <input class="field__control" type="text" name="name" placeholder="Иван" autocomplete="name" data-car-lead-input="name">
+          <small class="field__message" data-car-lead-message data-default-message=""></small>
+        </label>
+
+        <fieldset class="lead-form__channel">
+          <legend>Как удобнее связаться?</legend>
+          <label class="selection-control selection-control--inverse">
+            <input type="radio" name="car-lead-channel" value="Телефон" checked data-car-lead-channel>
+            <span>Телефон</span>
+          </label>
+          <label class="selection-control selection-control--inverse">
+            <input type="radio" name="car-lead-channel" value="Telegram" data-car-lead-channel>
+            <span>Telegram</span>
+          </label>
+        </fieldset>
+
+        <label class="field field--inverse" data-car-lead-field>
+          <span class="field__label" data-car-lead-contact-label>Телефон</span>
+          <input class="field__control" type="text" name="contact" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="18" data-car-lead-input="contact">
+          <small class="field__message" data-car-lead-message data-default-message="Укажите номер телефона — только для ответа по заявке.">Укажите номер телефона — только для ответа по заявке.</small>
+        </label>
+
+        <div class="lead-form__consent-wrap">
+          <div class="selection-control selection-control--inverse car-lead-modal__consent">
+            <input id="car-lead-consent" type="checkbox" name="consent" data-car-lead-consent>
+            <span><label for="car-lead-consent">Даю согласие на </label><a class="link link--inverse" href="./privacy-policy.html">обработку персональных данных</a>.</span>
+          </div>
+          <small class="lead-form__consent-message" data-car-lead-consent-message></small>
+        </div>
+
+        <button class="button button--signal car-lead-modal__submit" type="submit" data-car-lead-submit disabled>
+          <span>Оставить заявку</span><span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </section>
+  </div>
 
   <div class="modal proof-document-modal" id="proof-document-modal" data-modal="proof-document-modal" aria-hidden="true" hidden>
     <div class="modal__backdrop" data-modal-backdrop></div>

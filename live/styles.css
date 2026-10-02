@@ -3173,6 +3173,21 @@
 }
 
 
+/* CAR LEAD MODAL */
+.car-lead-modal__consent{
+  min-height:auto;
+  align-items:flex-start;
+}
+.car-lead-modal__consent>span{
+  min-width:0;
+}
+.car-lead-modal__consent label{
+  cursor:pointer;
+}
+.car-lead-modal__submit{
+  width:100%;
+}
+
 /* FINAL CTA + FORM */
 .final-cta{
   position:relative;
