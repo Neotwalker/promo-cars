@@ -1544,7 +1544,6 @@ const nexrouteFormatPhone = (value = '') => {
   };
 
   const syncConsent = () => {
-    submit.disabled = !consent.checked;
     if (consent.checked) {
       consent.removeAttribute('aria-invalid');
       if (consentMessage) consentMessage.textContent = '';
@@ -1686,6 +1685,7 @@ const nexrouteFormatPhone = (value = '') => {
 
   const submit = section.querySelector('[data-final-submit]');
   const consent = form.querySelector('[data-final-consent]');
+  const consentMessage = form.querySelector('[data-final-consent-message]');
   const channels = [...form.querySelectorAll('[data-final-channel]')];
   const contactLabel = form.querySelector('[data-final-contact-label]');
 
@@ -1754,7 +1754,10 @@ const nexrouteFormatPhone = (value = '') => {
   };
 
   const syncConsent = () => {
-    submit.disabled = !consent.checked;
+    if (consent.checked) {
+      consent.removeAttribute('aria-invalid');
+      if (consentMessage) consentMessage.textContent = '';
+    }
   };
 
   [inputs.model,inputs.city,inputs.name,inputs.comment].forEach((input) => {
@@ -1806,7 +1809,8 @@ const nexrouteFormatPhone = (value = '') => {
     event.preventDefault();
 
     if (!consent.checked) {
-      syncConsent();
+      consent.setAttribute('aria-invalid','true');
+      if (consentMessage) consentMessage.textContent = 'Нужно согласие на обработку персональных данных.';
       consent.focus();
       return;
     }
