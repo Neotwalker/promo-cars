@@ -210,9 +210,26 @@
       });
 
       trigger.addEventListener('keydown', (event) => {
-        if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+        const open = trigger.getAttribute('aria-expanded') === 'true';
+
+        if (event.key === 'Escape' && open) {
+          event.preventDefault();
+          setOpen(false);
+          return;
+        }
+
+        if (!['ArrowDown','ArrowUp','Home','End'].includes(event.key)) return;
         event.preventDefault();
-        setOpen(true, true);
+        setOpen(true);
+
+        const selected = Math.max(0, options.findIndex((option) => option.getAttribute('aria-selected') === 'true'));
+        const target = event.key === 'Home'
+          ? options[0]
+          : event.key === 'End'
+            ? options[options.length - 1]
+            : options[selected];
+
+        requestAnimationFrame(() => target?.focus());
       });
 
       options.forEach((option) => {
