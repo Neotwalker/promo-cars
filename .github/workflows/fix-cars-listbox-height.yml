@@ -21,7 +21,6 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
 
           path = Path('ui-kit/styles.css')
           css = path.read_text()
@@ -58,7 +57,7 @@ jobs:
           npm install --no-save playwright-core
           python3 -m http.server 8080 >/tmp/server.log 2>&1 &
           sleep 1
-          cat > /tmp/listbox-test.mjs <<'JS'
+          cat > listbox-test.mjs <<'JS'
           import { chromium } from 'playwright-core';
           import fs from 'node:fs';
 
@@ -88,7 +87,7 @@ jobs:
           }
           await browser.close();
           JS
-          node /tmp/listbox-test.mjs
+          node listbox-test.mjs
 
       - name: Commit fix
         shell: bash
