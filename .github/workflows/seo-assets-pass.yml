@@ -1,0 +1,182 @@
+name: One-time SEO assets pass
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  seo-assets:
+    if: github.event.head_commit.message == 'run one-time SEO assets pass'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add image discovery, favicon and root 404
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import struct
+          import zlib
+
+          # 48x48 PNG favicon, supersampled 4x for smooth edges.
+          scale = 4
+          w = h = 48
+          W = H = w * scale
+          bg = (16, 18, 22, 255)
+          signal = (255, 91, 53, 255)
+          transparent = (0, 0, 0, 0)
+          pixels = [[transparent for _ in range(W)] for _ in range(H)]
+
+          radius = 10 * scale
+          for y in range(H):
+              for x in range(W):
+                  inside = True
+                  if x < radius and y < radius:
+                      inside = (x-radius)**2 + (y-radius)**2 <= radius**2
+                  elif x >= W-radius and y < radius:
+                      inside = (x-(W-radius-1))**2 + (y-radius)**2 <= radius**2
+                  elif x < radius and y >= H-radius:
+                      inside = (x-radius)**2 + (y-(H-radius-1))**2 <= radius**2
+                  elif x >= W-radius and y >= H-radius:
+                      inside = (x-(W-radius-1))**2 + (y-(H-radius-1))**2 <= radius**2
+                  if inside:
+                      pixels[y][x] = bg
+
+          def dist_to_segment(px, py, ax, ay, bx, by):
+              vx, vy = bx-ax, by-ay
+              wx, wy = px-ax, py-ay
+              vv = vx*vx + vy*vy
+              if vv == 0:
+                  return ((px-ax)**2 + (py-ay)**2) ** 0.5
+              t = max(0.0, min(1.0, (wx*vx + wy*vy) / vv))
+              qx, qy = ax + t*vx, ay + t*vy
+              return ((px-qx)**2 + (py-qy)**2) ** 0.5
+
+          segments = [
+              (12*scale, 24*scale, 34*scale, 24*scale),
+              (27*scale, 16*scale, 35*scale, 24*scale),
+              (35*scale, 24*scale, 27*scale, 32*scale),
+          ]
+          half = 2.25 * scale
+          for y in range(H):
+              for x in range(W):
+                  if any(dist_to_segment(x+.5, y+.5, *seg) <= half for seg in segments):
+                      if pixels[y][x][3]:
+                          pixels[y][x] = signal
+
+          rows = []
+          for oy in range(h):
+              row = bytearray([0])
+              for ox in range(w):
+                  samples = []
+                  for sy in range(scale):
+                      for sx in range(scale):
+                          samples.append(pixels[oy*scale+sy][ox*scale+sx])
+                  rgba = tuple(sum(s[i] for s in samples)//len(samples) for i in range(4))
+                  row.extend(rgba)
+              rows.append(bytes(row))
+          raw = b''.join(rows)
+
+          def chunk(kind, data):
+              return struct.pack('>I', len(data)) + kind + data + struct.pack('>I', zlib.crc32(kind + data) & 0xffffffff)
+
+          png = b'\x89PNG\r\n\x1a\n'
+          png += chunk(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 6, 0, 0, 0))
+          png += chunk(b'IDAT', zlib.compress(raw, 9))
+          png += chunk(b'IEND', b'')
+          Path('live/favicon.png').write_bytes(png)
+
+          # Keep SVG for browsers, but add a 48x48 PNG favicon that is broadly supported by search engines.
+          for filename in [
+              'live/index.html',
+              'live/privacy-policy.html',
+              'live/personal-data-consent.html',
+              'live/404.html',
+          ]:
+              path = Path(filename)
+              text = path.read_text()
+              svg = '  <link rel="icon" href="./favicon.svg" type="image/svg+xml">\n'
+              png_link = '  <link rel="icon" href="./favicon.png" type="image/png" sizes="48x48">\n'
+              if png_link not in text:
+                  if svg not in text:
+                      raise SystemExit(f'Favicon marker missing in {filename}')
+                  text = text.replace(svg, png_link + svg, 1)
+              path.write_text(text)
+
+          base = 'https://neotwalker.github.io/promo-cars/live/'
+          images = [
+              'assets/hero/hero-poster.webp',
+              'assets/hero/cars/zeekr-001.webp',
+              'assets/hero/cars/xiaomi-su7.webp',
+              'assets/hero/cars/li-auto-l6.webp',
+              *[f'assets/img/journey/journey-{i}.webp' for i in range(1, 9)],
+              'assets/img/proof/proof-zeekr-001-1752.webp',
+              'assets/img/proof/proof-xiaomi-su7-1752.webp',
+              'assets/img/proof/proof-li-auto-l6-1752.webp',
+          ]
+          missing = [item for item in images if not Path('live', item).exists()]
+          if missing:
+              raise SystemExit(f'Missing sitemap images: {missing}')
+
+          image_xml = '\n'.join(
+              f'    <image:image><image:loc>{base}{item}</image:loc></image:image>'
+              for item in images
+          )
+          sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n  <url>\n    <loc>{base}</loc>\n    <lastmod>2026-10-03</lastmod>\n{image_xml}\n  </url>\n</urlset>\n'''
+          Path('sitemap.xml').write_text(sitemap)
+
+          # GitHub Pages resolves project-site errors through /promo-cars/404.html,
+          # so mirror the live 404 shell at the repository root with adjusted paths.
+          root_404 = Path('live/404.html').read_text()
+          replacements = [
+              ('href="./favicon.png"', 'href="./live/favicon.png"'),
+              ('href="./favicon.svg"', 'href="./live/favicon.svg"'),
+              ('href="../ui-kit/styles.css"', 'href="./ui-kit/styles.css"'),
+              ('href="./styles.css"', 'href="./live/styles.css"'),
+              ('href="./index.html', 'href="./live/index.html'),
+              ('src="../ui-kit/assets/', 'src="./ui-kit/assets/'),
+              ('href="./privacy-policy.html"', 'href="./live/privacy-policy.html"'),
+              ('href="./personal-data-consent.html"', 'href="./live/personal-data-consent.html"'),
+              ('src="../ui-kit/app.js"', 'src="./ui-kit/app.js"'),
+              ('src="./final-gradient.js"', 'src="./live/final-gradient.js"'),
+          ]
+          for old, new in replacements:
+              root_404 = root_404.replace(old, new)
+          Path('404.html').write_text(root_404)
+
+          # Validate local references in root 404.
+          refs = re.findall(r'(?:href|src)="([^"#]+)', root_404)
+          for ref in refs:
+              if ref.startswith(('http://', 'https://', 'mailto:', 'tel:')):
+                  continue
+              clean = ref.split('?', 1)[0]
+              if not Path(clean).exists():
+                  raise SystemExit(f'Broken root 404 reference: {ref}')
+
+          if Path('live/favicon.png').stat().st_size <= 0:
+              raise SystemExit('favicon.png was not generated')
+          if sitemap.count('<image:image>') != len(images):
+              raise SystemExit('Image sitemap count mismatch')
+
+          print(f'Generated favicon.png and sitemap with {len(images)} images; root 404 validated.')
+          PY
+
+      - name: Commit SEO assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add live/index.html live/privacy-policy.html live/personal-data-consent.html live/404.html live/favicon.png sitemap.xml 404.html
+          git commit -m "improve image SEO and project 404"
+          git push origin HEAD:main
