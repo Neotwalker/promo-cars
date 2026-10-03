@@ -2,8 +2,7 @@ name: One-time Journey compact fix
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
   contents: write
@@ -13,8 +12,7 @@ jobs:
     if: github.event.head_commit.message == 'fix journey visual at compact breakpoint'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -30,7 +28,10 @@ jobs:
           new_css = '''  .journey__workspace{\n    grid-template-columns:1fr;\n    min-height:0;\n  }\n\n  .journey__visual{\n    display:none;\n  }\n\n  .journey__detail-card{\n    min-height:25rem;\n  }'''
           if old_css not in css:
               raise SystemExit('Journey compact CSS block not found')
-          css_path.write_text(css.replace(old_css, new_css, 1))
+          css = css.replace(old_css, new_css, 1)
+          css_path.write_text(css)
+          if '@media(max-width:64rem)' not in css or '.journey__visual{\n    display:none;' not in css:
+              raise SystemExit('Journey visual hide rule missing')
 
           js_path = Path('live/app.js')
           js = js_path.read_text()
@@ -40,43 +41,32 @@ jobs:
               raise SystemExit('Journey image warmup JS block not found')
           js_path.write_text(js.replace(old_js, new_js, 1))
           PY
-
           node --check live/app.js
-          grep -A15 '@media(max-width:64rem)' live/styles.css | grep -q 'journey__visual'
 
       - name: Test 1024 and 1025 breakpoints
         shell: bash
         run: |
           npm install --no-save playwright-core
-          python3 -m http.server 8080 > /tmp/promo-cars-server.log 2>&1 &
+          python3 -m http.server 8080 >/tmp/server.log 2>&1 &
           sleep 1
           cat > journey-breakpoint-test.mjs <<'JS'
           import { chromium } from 'playwright-core';
           import fs from 'node:fs';
-
-          const candidates = ['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium','/usr/bin/chromium-browser'];
-          const executablePath = candidates.find((p) => fs.existsSync(p));
+          const executablePath = ['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium','/usr/bin/chromium-browser'].find(fs.existsSync);
           if (!executablePath) throw new Error('System Chrome/Chromium not found');
-
           const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox','--disable-dev-shm-usage']});
 
           async function check(width, expectedDisplay, expectRequests) {
             const context = await browser.newContext({viewport:{width,height:900}});
             const page = await context.newPage();
-            const journeyRequests = [];
-            page.on('request', request => {
-              if (/\/journey\/journey-[1-8]\.webp(?:\?|$)/.test(request.url())) journeyRequests.push(request.url());
-            });
+            const requests = [];
+            page.on('request', r => { if (/\/journey\/journey-[1-8]\.webp(?:\?|$)/.test(r.url())) requests.push(r.url()); });
             await page.goto('http://127.0.0.1:8080/live/#journey', {waitUntil:'load'});
             await page.waitForTimeout(1200);
-            const displays = await page.locator('.journey__visual').evaluateAll(nodes => nodes.map(node => getComputedStyle(node).display));
-            if (!displays.length) throw new Error('No Journey visuals found');
-            if (!displays.every(display => display === expectedDisplay)) {
-              throw new Error(`${width}px display mismatch: ${JSON.stringify(displays)}`);
-            }
-            if (expectRequests && journeyRequests.length === 0) throw new Error(`${width}px: Journey images did not load on desktop`);
-            if (!expectRequests && journeyRequests.length !== 0) throw new Error(`${width}px: Journey images loaded in compact mode: ${journeyRequests.length}`);
-            console.log(JSON.stringify({width, displays:[...new Set(displays)], journeyRequests:journeyRequests.length}));
+            const displays = await page.locator('.journey__visual').evaluateAll(nodes => nodes.map(n => getComputedStyle(n).display));
+            if (!displays.length || !displays.every(d => d === expectedDisplay)) throw new Error(`${width}px displays: ${JSON.stringify(displays)}`);
+            if (expectRequests !== (requests.length > 0)) throw new Error(`${width}px journey requests: ${requests.length}`);
+            console.log(JSON.stringify({width, display:[...new Set(displays)], journeyRequests:requests.length}));
             await context.close();
           }
 
