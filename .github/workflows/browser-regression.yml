@@ -1,0 +1,142 @@
+name: One-time browser regression
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    if: github.event.head_commit.message == 'run browser regression'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Browser checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save playwright-core
+          python3 -m http.server 8080 >/tmp/server.log 2>&1 &
+          sleep 1
+          cat > final-regression.mjs <<'JS'
+          import { chromium } from 'playwright-core';
+          import fs from 'node:fs';
+
+          const executablePath = ['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium','/usr/bin/chromium-browser'].find(fs.existsSync);
+          if (!executablePath) throw new Error('System Chrome/Chromium not found');
+          const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox','--disable-dev-shm-usage']});
+          const base='http://127.0.0.1:8080';
+          const assert=(cond,msg)=>{if(!cond) throw new Error(msg)};
+
+          async function setup(width,height){
+            const context=await browser.newContext({viewport:{width,height}});
+            const page=await context.newPage();
+            const errors=[];
+            const bad=[];
+            page.on('console',m=>{if(m.type()==='error') errors.push(m.text())});
+            page.on('pageerror',e=>errors.push(String(e)));
+            page.on('response',r=>{if(r.status()>=400) bad.push(`${r.status()} ${r.url()}`)});
+            return {context,page,errors,bad};
+          }
+
+          {
+            const {context,page,errors,bad}=await setup(1440,900);
+            const requests=[]; page.on('request',r=>requests.push(r.url()));
+            await page.goto(base+'/live/',{waitUntil:'load'});
+            await page.waitForTimeout(600);
+            assert(!requests.some(u=>/\/journey\/journey-[1-8]\.webp/.test(u)),'Journey loaded in Hero');
+            assert(!requests.some(u=>/\/proof\/proof-(zeekr-001|xiaomi-su7|li-auto-l6)-/.test(u)),'Proof loaded in Hero');
+            const dims=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
+            assert(dims.sw<=dims.cw+1,'Desktop horizontal overflow');
+
+            const menu=page.locator('[data-menu-toggle]');
+            await menu.click(); assert(await menu.getAttribute('aria-expanded')==='true','Menu open failed');
+            await menu.click(); assert(await menu.getAttribute('aria-expanded')==='false','Menu close failed');
+
+            await page.locator('[data-car-filter-trigger]').click();
+            await page.locator('[data-car-filter="electric"]').click();
+            assert((await page.locator('[data-car-filter-label]').textContent())?.trim()==='Электромобили','Filter failed');
+            assert(await page.locator('[data-car-card]:visible').count()>=1,'Filter leaves no cars');
+            await page.locator('[data-car-sort-trigger]').click();
+            await page.locator('[data-car-sort-option="price-asc"]').click();
+            assert((await page.locator('[data-car-sort-label]').textContent())?.trim()==='Сначала дешевле','Sort failed');
+
+            await page.locator('#journey').scrollIntoViewIfNeeded(); await page.waitForTimeout(400);
+            assert(await page.locator('.journey__visual').first().evaluate(el=>getComputedStyle(el).display)!=='none','Journey visual hidden desktop');
+            await page.waitForFunction(()=>document.querySelector('.journey__visual img')?.getAttribute('src'));
+
+            await page.locator('#configurator').scrollIntoViewIfNeeded();
+            const before=await page.locator('.configurator__step--active').getAttribute('data-config-step');
+            await page.locator('[data-config-next]').click(); await page.waitForTimeout(100);
+            const after=await page.locator('.configurator__step--active').getAttribute('data-config-step');
+            assert(before!==after,'Configurator next failed');
+            await page.locator('[data-config-back]').click(); await page.waitForTimeout(100);
+            assert(await page.locator('.configurator__step--active').getAttribute('data-config-step')===before,'Configurator back failed');
+
+            await page.locator('#proof').scrollIntoViewIfNeeded(); await page.waitForTimeout(900);
+            const toggle=page.locator('[data-proof-case]').first().locator('[data-case-toggle]');
+            await toggle.click(); await page.waitForTimeout(120);
+            assert(await toggle.getAttribute('aria-expanded')==='true','Proof expand failed');
+            const controls=await toggle.getAttribute('aria-controls');
+            assert(controls && await page.locator('#'+controls).count()===1,'Proof ARIA controls invalid');
+            await toggle.click();
+
+            await page.locator('[data-modal-open="security-document-modal"]').click();
+            const sm=page.locator('#security-document-modal');
+            assert(await sm.getAttribute('aria-hidden')==='false','Security modal open failed');
+            await sm.locator('[data-modal-close]').click();
+            assert(await sm.getAttribute('aria-hidden')==='true','Security modal close failed');
+
+            await page.locator('[data-modal-open="car-lead-modal"]').first().click();
+            const lm=page.locator('#car-lead-modal');
+            await lm.locator('button[type="submit"]').click(); await page.waitForTimeout(100);
+            assert(await lm.locator('[aria-invalid="true"]').count()>=1,'Lead validation failed');
+            await lm.locator('[data-modal-close]').click();
+
+            const faq=page.locator('[data-accordion]').nth(1);
+            await faq.locator('[data-accordion-trigger]').click(); assert(await faq.getAttribute('open')!==null,'FAQ open failed');
+            await faq.locator('[data-accordion-trigger]').click(); assert(await faq.getAttribute('open')===null,'FAQ close failed');
+
+            const fc=page.locator('#final-calculation'); await fc.scrollIntoViewIfNeeded();
+            await page.locator('[data-final-form] button[type="submit"]').click(); await page.waitForTimeout(100);
+            assert(await page.locator('[data-final-form] [aria-invalid="true"]').count()>=1,'Final validation failed');
+            assert((await page.locator('[data-final-consent-message]').textContent())?.trim(),'Final consent message missing');
+            const top=await fc.evaluate(el=>el.getBoundingClientRect().top+window.scrollY);
+            await page.evaluate(y=>window.scrollTo(0,y),top+220); await page.waitForTimeout(100);
+            const sticky=await page.locator('.final-cta__intro').evaluate(el=>({p:getComputedStyle(el).position,t:el.getBoundingClientRect().top}));
+            assert(sticky.p==='sticky' && Math.abs(sticky.t-96)<=4,`Final sticky failed ${JSON.stringify(sticky)}`);
+            assert(!errors.length,'Desktop console errors: '+errors.join(' | '));
+            assert(!bad.length,'Desktop HTTP errors: '+bad.join(' | '));
+            console.log('DESKTOP_OK');
+            await context.close();
+          }
+
+          {
+            const {context,page,errors,bad}=await setup(1024,900); const req=[]; page.on('request',r=>req.push(r.url()));
+            await page.goto(base+'/live/',{waitUntil:'load'}); await page.locator('#journey').scrollIntoViewIfNeeded(); await page.waitForTimeout(600);
+            assert(await page.locator('.journey__visual').first().evaluate(el=>getComputedStyle(el).display)==='none','Journey visible at 1024');
+            assert(!req.some(u=>/\/journey\/journey-[1-8]\.webp/.test(u)),'Journey loaded at 1024');
+            assert(!errors.length,'1024 console errors: '+errors.join(' | ')); assert(!bad.length,'1024 HTTP errors: '+bad.join(' | '));
+            console.log('TABLET_OK'); await context.close();
+          }
+
+          {
+            const {context,page,errors,bad}=await setup(390,844); await page.goto(base+'/live/',{waitUntil:'load'});
+            const dims=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth})); assert(dims.sw<=dims.cw+1,'Mobile horizontal overflow');
+            await page.locator('[data-menu-toggle]').click(); assert(await page.locator('[data-menu-toggle]').getAttribute('aria-expanded')==='true','Mobile menu failed'); await page.locator('[data-menu-toggle]').click();
+            await page.locator('[data-modal-open="car-lead-modal"]').first().click(); const box=await page.locator('#car-lead-modal [data-modal-dialog]').boundingBox(); assert(box && Math.abs(box.width-390)<=2,'Mobile modal width failed'); await page.locator('#car-lead-modal [data-modal-close]').click();
+            await page.locator('#final-calculation').scrollIntoViewIfNeeded(); assert(await page.locator('.final-cta__intro').evaluate(el=>getComputedStyle(el).position)==='static','Mobile final intro not static');
+            assert(!errors.length,'Mobile console errors: '+errors.join(' | ')); assert(!bad.length,'Mobile HTTP errors: '+bad.join(' | ')); console.log('MOBILE_OK'); await context.close();
+          }
+
+          for(const path of ['/live/privacy-policy.html','/live/personal-data-consent.html','/live/404.html','/404.html']){
+            const {context,page,errors,bad}=await setup(390,844); const r=await page.goto(base+path,{waitUntil:'load'}); assert(r?.status()===200,`${path} status ${r?.status()}`);
+            const dims=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth})); assert(dims.sw<=dims.cw+1,`${path} horizontal overflow`);
+            assert(!errors.length,`${path} console errors: ${errors.join(' | ')}`); assert(!bad.length,`${path} HTTP errors: ${bad.join(' | ')}`); console.log('PAGE_OK',path); await context.close();
+          }
+
+          await browser.close(); console.log('FINAL_BROWSER_REGRESSION_OK');
+          JS
+          node final-regression.mjs
