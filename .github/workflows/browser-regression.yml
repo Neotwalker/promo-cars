@@ -90,6 +90,7 @@ jobs:
             const sm=page.locator('#security-document-modal');
             assert(await sm.getAttribute('aria-hidden')==='false','Security modal open failed');
             await sm.locator('[data-modal-close]').click();
+            await page.waitForTimeout(420);
             assert(await sm.getAttribute('aria-hidden')==='true','Security modal close failed');
 
             await page.locator('[data-modal-open="car-lead-modal"]').first().click();
@@ -97,6 +98,8 @@ jobs:
             await lm.locator('button[type="submit"]').click(); await page.waitForTimeout(100);
             assert(await lm.locator('[aria-invalid="true"]').count()>=1,'Lead validation failed');
             await lm.locator('[data-modal-close]').click();
+            await page.waitForTimeout(420);
+            assert(await lm.getAttribute('aria-hidden')==='true','Lead modal close failed');
 
             const faq=page.locator('[data-accordion]').nth(1);
             await faq.locator('[data-accordion-trigger]').click(); assert(await faq.getAttribute('open')!==null,'FAQ open failed');
@@ -129,7 +132,7 @@ jobs:
             const {context,page,errors,bad}=await setup(390,844); await page.goto(base+'/live/',{waitUntil:'load'});
             const dims=await page.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth})); assert(dims.sw<=dims.cw+1,'Mobile horizontal overflow');
             await page.locator('[data-menu-toggle]').click(); assert(await page.locator('[data-menu-toggle]').getAttribute('aria-expanded')==='true','Mobile menu failed'); await page.locator('[data-menu-toggle]').click();
-            await page.locator('[data-modal-open="car-lead-modal"]').first().click(); const box=await page.locator('#car-lead-modal [data-modal-dialog]').boundingBox(); assert(box && Math.abs(box.width-390)<=2,'Mobile modal width failed'); await page.locator('#car-lead-modal [data-modal-close]').click();
+            await page.locator('[data-modal-open="car-lead-modal"]').first().click(); const box=await page.locator('#car-lead-modal [data-modal-dialog]').boundingBox(); assert(box && Math.abs(box.width-390)<=2,'Mobile modal width failed'); await page.locator('#car-lead-modal [data-modal-close]').click(); await page.waitForTimeout(420);
             await page.locator('#final-calculation').scrollIntoViewIfNeeded(); assert(await page.locator('.final-cta__intro').evaluate(el=>getComputedStyle(el).position)==='static','Mobile final intro not static');
             assert(!errors.length,'Mobile console errors: '+errors.join(' | ')); assert(!bad.length,'Mobile HTTP errors: '+bad.join(' | ')); console.log('MOBILE_OK'); await context.close();
           }
