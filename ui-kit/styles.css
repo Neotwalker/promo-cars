@@ -419,6 +419,34 @@ body.menu-open{overflow:hidden}
   max-height:min(20rem,calc(100dvh - 7rem));
   overflow-y:auto;
   overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(16,18,22,.42) transparent;
+}
+
+.cars__filter-menu::-webkit-scrollbar,
+.cars__sort-menu::-webkit-scrollbar{
+  width:.5rem;
+}
+.cars__filter-menu::-webkit-scrollbar-track,
+.cars__sort-menu::-webkit-scrollbar-track{
+  background:transparent;
+}
+.cars__filter-menu::-webkit-scrollbar-thumb,
+.cars__sort-menu::-webkit-scrollbar-thumb{
+  min-height:2.5rem;
+  border:2px solid var(--color-white);
+  border-radius:999px;
+  background:rgba(16,18,22,.42);
+}
+.cars__filter-menu::-webkit-scrollbar-thumb:hover,
+.cars__sort-menu::-webkit-scrollbar-thumb:hover{
+  background:rgba(16,18,22,.62);
+}
+.cars__filter-menu::-webkit-scrollbar-button,
+.cars__sort-menu::-webkit-scrollbar-button{
+  width:0;
+  height:0;
+  display:none;
 }
 
 .cars__filter-menu{
