@@ -76,12 +76,15 @@ jobs:
             assert(await page.locator('.configurator__step--active').getAttribute('data-config-step')===before,'Configurator back failed');
 
             await page.locator('#proof').scrollIntoViewIfNeeded(); await page.waitForTimeout(900);
-            const toggle=page.locator('[data-proof-case]').first().locator('[data-case-toggle]');
-            await toggle.click(); await page.waitForTimeout(120);
+            const firstCase=page.locator('[data-proof-case]').first();
+            const toggle=firstCase.locator('[data-case-toggle]');
+            await toggle.click(); await page.waitForTimeout(650);
             assert(await toggle.getAttribute('aria-expanded')==='true','Proof expand failed');
             const controls=await toggle.getAttribute('aria-controls');
             assert(controls && await page.locator('#'+controls).count()===1,'Proof ARIA controls invalid');
-            await toggle.click();
+            const back=firstCase.locator('[data-case-close]');
+            await back.click(); await page.waitForTimeout(650);
+            assert(await toggle.getAttribute('aria-expanded')==='false','Proof collapse failed');
 
             await page.locator('[data-modal-open="security-document-modal"]').click();
             const sm=page.locator('#security-document-modal');
