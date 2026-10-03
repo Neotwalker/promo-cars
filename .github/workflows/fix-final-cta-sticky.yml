@@ -21,33 +21,35 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
 
           path = Path('live/styles.css')
           css = path.read_text()
 
-          old = '.final-cta__intro{max-width:42rem}'
-          new = '''.final-cta__intro{
-            position:sticky;
-            top:calc(var(--header-h) + var(--space-4));
-            align-self:start;
-            max-width:42rem;
-          }'''
-          if old not in css:
-              raise SystemExit('Base final CTA intro rule not found')
-          css = css.replace(old, new, 1)
+          css, base_count = re.subn(
+              r'\.final-cta__intro\{max-width:42rem\}',
+              '.final-cta__intro{\n  position:sticky;\n  top:calc(var(--header-h) + var(--space-4));\n  align-self:start;\n  max-width:42rem;\n}',
+              css,
+              count=1
+          )
+          if base_count != 1:
+              raise SystemExit(f'Expected one base final CTA intro rule, changed {base_count}')
 
-          old_mobile = '''  .final-cta__intro{
-            max-width:46rem;
-          }'''
-          new_mobile = '''  .final-cta__intro{
-            position:static;
-            top:auto;
-            align-self:auto;
-            max-width:46rem;
-          }'''
-          if old_mobile not in css:
-              raise SystemExit('Responsive final CTA intro rule not found')
-          css = css.replace(old_mobile, new_mobile, 1)
+          media_start = css.find('@media(max-width:72rem){')
+          media_end = css.find('@media(max-width:48rem){', media_start)
+          if media_start < 0 or media_end < 0:
+              raise SystemExit('Final CTA responsive media block not found')
+
+          media = css[media_start:media_end]
+          media, responsive_count = re.subn(
+              r'  \.final-cta__intro\{\s*max-width:46rem;\s*\}',
+              '  .final-cta__intro{\n    position:static;\n    top:auto;\n    align-self:auto;\n    max-width:46rem;\n  }',
+              media,
+              count=1
+          )
+          if responsive_count != 1:
+              raise SystemExit(f'Expected one responsive final CTA intro rule, changed {responsive_count}')
+          css = css[:media_start] + media + css[media_end:]
 
           depth = 0
           minimum = 0
@@ -59,17 +61,6 @@ jobs:
                   minimum = min(minimum, depth)
           if depth != 0 or minimum < 0:
               raise SystemExit(f'CSS braces invalid: depth={depth}, minimum={minimum}')
-
-          required = [
-              'position:sticky;',
-              'top:calc(var(--header-h) + var(--space-4));',
-              'align-self:start;',
-              'position:static;',
-              'top:auto;'
-          ]
-          missing = [item for item in required if item not in css]
-          if missing:
-              raise SystemExit(f'Missing sticky rules: {missing}')
 
           path.write_text(css)
           PY
