@@ -35,9 +35,10 @@ jobs:
           if base_count != 1:
               raise SystemExit(f'Expected one base final CTA intro rule, changed {base_count}')
 
-          media_start = css.find('@media(max-width:72rem){')
+          final_start = css.find('.final-cta__intro{')
+          media_start = css.find('@media(max-width:72rem){', final_start)
           media_end = css.find('@media(max-width:48rem){', media_start)
-          if media_start < 0 or media_end < 0:
+          if final_start < 0 or media_start < 0 or media_end < 0:
               raise SystemExit('Final CTA responsive media block not found')
 
           media = css[media_start:media_end]
