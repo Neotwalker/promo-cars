@@ -1,0 +1,84 @@
+name: One-time final CTA sticky intro
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.event.head_commit.message == 'make final CTA intro sticky'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Make final CTA intro sticky
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('live/styles.css')
+          css = path.read_text()
+
+          old = '.final-cta__intro{max-width:42rem}'
+          new = '''.final-cta__intro{
+            position:sticky;
+            top:calc(var(--header-h) + var(--space-4));
+            align-self:start;
+            max-width:42rem;
+          }'''
+          if old not in css:
+              raise SystemExit('Base final CTA intro rule not found')
+          css = css.replace(old, new, 1)
+
+          old_mobile = '''  .final-cta__intro{
+            max-width:46rem;
+          }'''
+          new_mobile = '''  .final-cta__intro{
+            position:static;
+            top:auto;
+            align-self:auto;
+            max-width:46rem;
+          }'''
+          if old_mobile not in css:
+              raise SystemExit('Responsive final CTA intro rule not found')
+          css = css.replace(old_mobile, new_mobile, 1)
+
+          depth = 0
+          minimum = 0
+          for ch in css:
+              if ch == '{':
+                  depth += 1
+              elif ch == '}':
+                  depth -= 1
+                  minimum = min(minimum, depth)
+          if depth != 0 or minimum < 0:
+              raise SystemExit(f'CSS braces invalid: depth={depth}, minimum={minimum}')
+
+          required = [
+              'position:sticky;',
+              'top:calc(var(--header-h) + var(--space-4));',
+              'align-self:start;',
+              'position:static;',
+              'top:auto;'
+          ]
+          missing = [item for item in required if item not in css]
+          if missing:
+              raise SystemExit(f'Missing sticky rules: {missing}')
+
+          path.write_text(css)
+          PY
+
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add live/styles.css
+          git commit -m "make final CTA intro sticky on desktop"
+          git push origin HEAD:main
