@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p qa-2k/screens
-          cat > /tmp/qa-2k.mjs <<'JS'
+          cat > qa-2k.mjs <<'JS'
           import { chromium } from 'playwright-core';
           import fs from 'node:fs';
 
@@ -174,7 +174,7 @@ jobs:
           await browser.close();
           JS
 
-          node /tmp/qa-2k.mjs
+          node qa-2k.mjs
 
       - name: Upload QA artifact
         uses: actions/upload-artifact@v4
