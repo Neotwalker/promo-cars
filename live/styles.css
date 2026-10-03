@@ -3341,7 +3341,12 @@ main>section[id]{
   gap:clamp(4rem,8vw,9rem);
   align-items:start;
 }
-.final-cta__intro{max-width:42rem}
+.final-cta__intro{
+  position:sticky;
+  top:calc(var(--header-h) + var(--space-4));
+  align-self:start;
+  max-width:42rem;
+}
 .final-cta__eyebrow{margin-bottom:var(--space-4);color:var(--color-signal)}
 .final-cta__eyebrow::before{
   content:"";
@@ -3464,6 +3469,9 @@ main>section[id]{
     gap:var(--space-7);
   }
   .final-cta__intro{
+    position:static;
+    top:auto;
+    align-self:auto;
     max-width:46rem;
   }
   .final-cta__title{
