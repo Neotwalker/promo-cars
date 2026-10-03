@@ -3292,7 +3292,7 @@ main>section[id]{
 /* FINAL CTA + FORM */
 .final-cta{
   position:relative;
-  overflow:hidden;
+  overflow:clip;
   padding:var(--space-section) 0;
   background:#0b0e12;
   color:var(--color-white);
