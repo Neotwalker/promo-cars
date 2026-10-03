@@ -416,6 +416,9 @@ body.menu-open{overflow:hidden}
   border-radius:var(--radius-md);
   background:var(--color-white);
   box-shadow:0 1rem 2.5rem rgba(16,18,22,.12);
+  max-height:min(20rem,calc(100dvh - 7rem));
+  overflow-y:auto;
+  overscroll-behavior:contain;
 }
 
 .cars__filter-menu{
