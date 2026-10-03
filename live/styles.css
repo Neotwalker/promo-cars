@@ -1102,6 +1102,10 @@ main>section[id]{
     min-height:0;
   }
 
+  .journey__visual{
+    display:none;
+  }
+
   .journey__detail-card{
     min-height:25rem;
   }

@@ -208,27 +208,48 @@ const nexrouteFormatPhone = (value = '') => {
     const mobileTitle = journey.querySelector('[data-journey-mobile-title]');
     const mobileNext = journey.querySelector('[data-journey-mobile-next]');
     const journeyImages = [...journey.querySelectorAll('.journey__visual img')];
+    let journeyImagesLoaded = false;
+    let journeyImageObserver = null;
 
     const warmJourneyImages = () => {
+      if (compactJourney.matches || journeyImagesLoaded) return false;
+
       journeyImages.forEach((image) => {
         if (!image.src && image.dataset.src) {
           image.src = image.dataset.src;
         }
         image.decode?.().catch(() => {});
       });
+
+      journeyImagesLoaded = true;
+      return true;
     };
 
-    if (!('IntersectionObserver' in window) || location.hash === '#journey') {
+    const journeyIsNearViewport = () => {
+      const rect = journey.getBoundingClientRect();
+      return rect.bottom >= -500 && rect.top <= window.innerHeight + 500;
+    };
+
+    if (!('IntersectionObserver' in window)) {
       warmJourneyImages();
     } else {
-      const imageObserver = new IntersectionObserver((entries) => {
+      journeyImageObserver = new IntersectionObserver((entries) => {
         if (!entries.some((entry) => entry.isIntersecting)) return;
-        imageObserver.disconnect();
-        warmJourneyImages();
+        if (warmJourneyImages()) journeyImageObserver.disconnect();
       },{rootMargin:'500px 0px',threshold:0});
 
-      imageObserver.observe(journey);
+      journeyImageObserver.observe(journey);
+
+      if (location.hash === '#journey' && warmJourneyImages()) {
+        journeyImageObserver.disconnect();
+      }
     }
+
+    compactJourney.addEventListener?.('change', (event) => {
+      if (event.matches || journeyImagesLoaded) return;
+      if (location.hash !== '#journey' && !journeyIsNearViewport()) return;
+      if (warmJourneyImages()) journeyImageObserver?.disconnect();
+    });
 
     if (sticky && shell && scene && track && panels.length) {
       const lastIndex = Math.max(0, panels.length - 1);
