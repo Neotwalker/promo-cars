@@ -1,0 +1,96 @@
+name: One-time Journey compact fix
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.event.head_commit.message == 'fix journey visual at compact breakpoint'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch Journey compact behavior
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          css_path = Path('live/styles.css')
+          css = css_path.read_text()
+          old_css = '''  .journey__workspace{\n    grid-template-columns:1fr;\n    min-height:0;\n  }\n\n  .journey__detail-card{\n    min-height:25rem;\n  }'''
+          new_css = '''  .journey__workspace{\n    grid-template-columns:1fr;\n    min-height:0;\n  }\n\n  .journey__visual{\n    display:none;\n  }\n\n  .journey__detail-card{\n    min-height:25rem;\n  }'''
+          if old_css not in css:
+              raise SystemExit('Journey compact CSS block not found')
+          css_path.write_text(css.replace(old_css, new_css, 1))
+
+          js_path = Path('live/app.js')
+          js = js_path.read_text()
+          old_js = '''    const journeyImages = [...journey.querySelectorAll('.journey__visual img')];\n\n    const warmJourneyImages = () => {\n      journeyImages.forEach((image) => {\n        if (!image.src && image.dataset.src) {\n          image.src = image.dataset.src;\n        }\n        image.decode?.().catch(() => {});\n      });\n    };\n\n    if (!('IntersectionObserver' in window) || location.hash === '#journey') {\n      warmJourneyImages();\n    } else {\n      const imageObserver = new IntersectionObserver((entries) => {\n        if (!entries.some((entry) => entry.isIntersecting)) return;\n        imageObserver.disconnect();\n        warmJourneyImages();\n      },{rootMargin:'500px 0px',threshold:0});\n\n      imageObserver.observe(journey);\n    }'''
+          new_js = '''    const journeyImages = [...journey.querySelectorAll('.journey__visual img')];\n    let journeyImagesLoaded = false;\n    let journeyImageObserver = null;\n\n    const warmJourneyImages = () => {\n      if (compactJourney.matches || journeyImagesLoaded) return false;\n\n      journeyImages.forEach((image) => {\n        if (!image.src && image.dataset.src) {\n          image.src = image.dataset.src;\n        }\n        image.decode?.().catch(() => {});\n      });\n\n      journeyImagesLoaded = true;\n      return true;\n    };\n\n    const journeyIsNearViewport = () => {\n      const rect = journey.getBoundingClientRect();\n      return rect.bottom >= -500 && rect.top <= window.innerHeight + 500;\n    };\n\n    if (!('IntersectionObserver' in window)) {\n      warmJourneyImages();\n    } else {\n      journeyImageObserver = new IntersectionObserver((entries) => {\n        if (!entries.some((entry) => entry.isIntersecting)) return;\n        if (warmJourneyImages()) journeyImageObserver.disconnect();\n      },{rootMargin:'500px 0px',threshold:0});\n\n      journeyImageObserver.observe(journey);\n\n      if (location.hash === '#journey' && warmJourneyImages()) {\n        journeyImageObserver.disconnect();\n      }\n    }\n\n    compactJourney.addEventListener?.('change', (event) => {\n      if (event.matches || journeyImagesLoaded) return;\n      if (location.hash !== '#journey' && !journeyIsNearViewport()) return;\n      if (warmJourneyImages()) journeyImageObserver?.disconnect();\n    });'''
+          if old_js not in js:
+              raise SystemExit('Journey image warmup JS block not found')
+          js_path.write_text(js.replace(old_js, new_js, 1))
+          PY
+
+          node --check live/app.js
+          grep -A15 '@media(max-width:64rem)' live/styles.css | grep -q 'journey__visual'
+
+      - name: Test 1024 and 1025 breakpoints
+        shell: bash
+        run: |
+          npm install --no-save playwright-core
+          python3 -m http.server 8080 > /tmp/promo-cars-server.log 2>&1 &
+          sleep 1
+          cat > journey-breakpoint-test.mjs <<'JS'
+          import { chromium } from 'playwright-core';
+          import fs from 'node:fs';
+
+          const candidates = ['/usr/bin/google-chrome','/usr/bin/google-chrome-stable','/usr/bin/chromium','/usr/bin/chromium-browser'];
+          const executablePath = candidates.find((p) => fs.existsSync(p));
+          if (!executablePath) throw new Error('System Chrome/Chromium not found');
+
+          const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox','--disable-dev-shm-usage']});
+
+          async function check(width, expectedDisplay, expectRequests) {
+            const context = await browser.newContext({viewport:{width,height:900}});
+            const page = await context.newPage();
+            const journeyRequests = [];
+            page.on('request', request => {
+              if (/\/journey\/journey-[1-8]\.webp(?:\?|$)/.test(request.url())) journeyRequests.push(request.url());
+            });
+            await page.goto('http://127.0.0.1:8080/live/#journey', {waitUntil:'load'});
+            await page.waitForTimeout(1200);
+            const displays = await page.locator('.journey__visual').evaluateAll(nodes => nodes.map(node => getComputedStyle(node).display));
+            if (!displays.length) throw new Error('No Journey visuals found');
+            if (!displays.every(display => display === expectedDisplay)) {
+              throw new Error(`${width}px display mismatch: ${JSON.stringify(displays)}`);
+            }
+            if (expectRequests && journeyRequests.length === 0) throw new Error(`${width}px: Journey images did not load on desktop`);
+            if (!expectRequests && journeyRequests.length !== 0) throw new Error(`${width}px: Journey images loaded in compact mode: ${journeyRequests.length}`);
+            console.log(JSON.stringify({width, displays:[...new Set(displays)], journeyRequests:journeyRequests.length}));
+            await context.close();
+          }
+
+          await check(1024, 'none', false);
+          await check(1025, 'block', true);
+          await browser.close();
+          JS
+          node journey-breakpoint-test.mjs
+
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add live/styles.css live/app.js
+          git commit -m "hide Journey visuals on compact layouts"
+          git push origin HEAD:main
