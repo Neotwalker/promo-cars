@@ -1,0 +1,117 @@
+name: One-time SEO meta pass
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  seo:
+    if: github.event.head_commit.message == 'run one-time seo meta pass'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply SEO metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+
+          base = 'https://neotwalker.github.io/promo-cars/live/'
+          title = 'Доставка автомобилей из Китая под ключ — NEXROUTE AUTO'
+          description = 'Подбор, проверка, выкуп, логистика и оформление автомобилей из Китая в Россию. Прозрачный расчёт стоимости и маршрут доставки.'
+          image = base + 'assets/hero/hero-poster.webp'
+
+          index_path = Path('live/index.html')
+          index = index_path.read_text()
+          old = '''  <link rel="icon" href="./favicon.svg" type="image/svg+xml">\n  <meta name="description" content="NEXROUTE AUTO — подбор и доставка автомобилей из Китая в Россию">\n  <title>NEXROUTE AUTO — автомобили из Китая</title>\n'''
+          new = f'''  <link rel="icon" href="./favicon.svg" type="image/svg+xml">\n  <title>{title}</title>\n  <meta name="description" content="{description}">\n  <link rel="canonical" href="{base}">\n  <meta property="og:locale" content="ru_RU">\n  <meta property="og:type" content="website">\n  <meta property="og:site_name" content="NEXROUTE AUTO">\n  <meta property="og:title" content="{title}">\n  <meta property="og:description" content="{description}">\n  <meta property="og:url" content="{base}">\n  <meta property="og:image" content="{image}">\n  <meta property="og:image:alt" content="NEXROUTE AUTO — автомобили из Китая">\n  <meta name="twitter:card" content="summary_large_image">\n  <meta name="twitter:title" content="{title}">\n  <meta name="twitter:description" content="{description}">\n  <meta name="twitter:image" content="{image}">\n  <script type="application/ld+json">\n  {{\n    "@context": "https://schema.org",\n    "@graph": [\n      {{\n        "@type": "WebSite",\n        "@id": "{base}#website",\n        "url": "{base}",\n        "name": "NEXROUTE AUTO",\n        "inLanguage": "ru-RU"\n      }},\n      {{\n        "@type": "WebPage",\n        "@id": "{base}#webpage",\n        "url": "{base}",\n        "name": "{title}",\n        "description": "{description}",\n        "inLanguage": "ru-RU",\n        "isPartOf": {{\n          "@id": "{base}#website"\n        }},\n        "primaryImageOfPage": {{\n          "@type": "ImageObject",\n          "url": "{image}"\n        }}\n      }}\n    ]\n  }}\n  </script>\n'''
+          if old not in index:
+              raise SystemExit('Main head marker changed')
+          index = index.replace(old, new, 1)
+          index_path.write_text(index)
+
+          legal_pages = {
+              'live/privacy-policy.html': {
+                  'description': 'Политика обработки персональных данных демонстрационного решения NEXROUTE AUTO.',
+                  'url': base + 'privacy-policy.html',
+              },
+              'live/personal-data-consent.html': {
+                  'description': 'Согласие на обработку персональных данных демонстрационного решения NEXROUTE AUTO.',
+                  'url': base + 'personal-data-consent.html',
+              },
+          }
+
+          for filename, meta in legal_pages.items():
+              path = Path(filename)
+              text = path.read_text()
+              description_pattern = re.compile(r'  <meta name="description" content="[^"]+">\n')
+              if len(description_pattern.findall(text)) != 1:
+                  raise SystemExit(f'Unexpected description count in {filename}')
+              text = description_pattern.sub(
+                  f'  <meta name="description" content="{meta["description"]}">\n'
+                  f'  <meta name="robots" content="noindex,follow">\n'
+                  f'  <link rel="canonical" href="{meta["url"]}">\n',
+                  text,
+                  count=1,
+              )
+              path.write_text(text)
+
+          error_path = Path('live/404.html')
+          error = error_path.read_text()
+          error = error.replace(
+              '  <meta name="robots" content="noindex">',
+              '  <meta name="robots" content="noindex,follow">',
+              1,
+          )
+          error_path.write_text(error)
+
+          sitemap = '''<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>https://neotwalker.github.io/promo-cars/live/</loc>\n    <lastmod>2026-10-03</lastmod>\n  </url>\n</urlset>\n'''
+          Path('sitemap.xml').write_text(sitemap)
+
+          # Static validation.
+          index = index_path.read_text()
+          if index.count('rel="canonical"') != 1:
+              raise SystemExit('Main canonical count is not 1')
+          if index.count('property="og:title"') != 1:
+              raise SystemExit('Main og:title count is not 1')
+          if index.count('name="twitter:card"') != 1:
+              raise SystemExit('Main twitter:card count is not 1')
+
+          match = re.search(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>', index, re.S)
+          if not match:
+              raise SystemExit('JSON-LD not found')
+          json.loads(match.group(1))
+
+          for filename in legal_pages:
+              text = Path(filename).read_text()
+              if text.count('name="robots" content="noindex,follow"') != 1:
+                  raise SystemExit(f'Invalid robots meta in {filename}')
+              if text.count('rel="canonical"') != 1:
+                  raise SystemExit(f'Invalid canonical count in {filename}')
+
+          if 'name="robots" content="noindex,follow"' not in error_path.read_text():
+              raise SystemExit('404 robots meta not updated')
+
+          print('SEO metadata and sitemap validated.')
+          PY
+
+      - name: Commit SEO metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add live/index.html live/privacy-policy.html live/personal-data-consent.html live/404.html sitemap.xml
+          git commit -m "add technical SEO metadata"
+          git push origin HEAD:main
